@@ -1,0 +1,47 @@
+                       		<div class="row">
+                       			<div class="col-xs-12">
+                       				<div class="items item-w2">
+			                           <div class="row">
+		                               <div class="col-xs-12">
+		                                   <h4 class="option-title text-green text-uppercase">Notifikasi <span>({$jmlnotifikasi})</span></h4>
+		                               </div>
+		                               <div class="clearfix"></div>
+		                           </div>
+		                           <!-- /.row -->
+		                           </div>
+		                            <!-- /.items item-w2 -->
+                       			</div>
+                       		</div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="panel panel-default e-squared p-0">
+                                        <div class="panel-body p-0">
+                                            <div class="mail-box">
+
+                                                <table class="table table-hover table-mail">
+                                                <tbody>
+                                                    {foreach from=$datanotifikasi key=id item=i}
+                                                    <tr class="read">
+                                                        <td class="mail-subject"><i class="icon-{$i.icon}"></i> {$i.pesan}</td>
+                                                        <td class="text-right mail-date">{$i.tgltampil}</td>
+                                                    </tr>
+                                                    {/foreach}
+                                                </tbody>
+                                                </table>
+                                                
+                                                <ul class="pagination m-0 ml-15">
+                                                  {foreach from=$stringpage key=pageid item=a}
+                                                    <li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+                                                  {/foreach}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- /.panel-body -->
+                                    </div>
+                                    <!-- /.panel .panel-default -->
+                                </div>
+                                <!-- /.col-xs-12 -->
+                            </div>
+                            <!-- /.row -->
+

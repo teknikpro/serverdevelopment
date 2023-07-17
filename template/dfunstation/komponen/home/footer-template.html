@@ -1,0 +1,131 @@
+{strip}
+
+<!-- footer -->
+<section class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <h1 class="footer-penjelasan">
+          Butuh Konsultasi...?
+          <br>
+          Silahkan Kontak kami
+          <br>
+          Kami Siap Membantu
+        </h1>
+        <p class="kontak">Kontak</p>
+        <div class="row">
+          <div class="col-1">
+            <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/icon-alamat.png" class=" kontak-icon" alt="Dfunstation">
+          </div>
+          <div class="col-10 kontak-detail ">
+            Ruko Istana Pasteur Regency CRA 51
+            <br>
+            Gunung Batu - Kota Bandung
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1">
+            <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/icon-telepon.png" class=" kontak-icon" alt="Dfunstation">
+          </div>
+          <div class="col-10 kontak-detail ">
+            +62 859 5600 0087
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1">
+            <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/icon-email.png" class=" kontak-icon" alt="Dfunstation">
+          </div>
+          <div class="col-10 kontak-detail ">
+            d.funstation@gmail.com
+          </div>
+        </div>
+        <p class="sosial-media">Sosial Media</p>
+        <div class="d-flek sosial-media-link">
+          <a href="#" >
+            <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/icon-instagram.png" class=" kontak-icon" alt="Dfunstation">
+          </a>
+          <a href="#">
+            <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/icon-tiktok.png" class=" kontak-icon" alt="Dfunstation">
+          </a>
+          <a href="#">
+            <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/icon-facebook.png" class=" kontak-icon" alt="Dfunstation">
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 card-footer-menu">
+        <a class="footer-menu" href="{$fulldomain}/blog">Artikel / Blog</a>
+        <a class="footer-menu" href="{$fulldomain}/corner">Event</a>
+        <a class="footer-menu" href="{$fulldomain}/corner">Tiket</a>
+        <a class="footer-menu" href="{$fulldomain}/galeri">Galeri Foto</a>
+        <a class="footer-menu" href="{$fulldomain}/termometer">Self Assesment</a>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 card-footer-menu">
+        <a class="footer-menu" href="{$fulldomain}/faq">F.A.Q</a>
+        <a class="footer-menu" href="{$fulldomain}/term">Syarat dan Ketentuan</a>
+        <a class="footer-menu" href="{$fulldomain}/privacy">Kebijakan Privasi</a>
+        <a class="footer-menu" href="{$fulldomain}/menjadi-mitra">Menjadi Mitra</a>
+        <a class="footer-menu" href="{$fulldomain}/promo">Promo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+
+<!-- <script src="bootsrap/js/bootstrap.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/js/script.js"></script>
+<script src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/jslive/script.js"></script>
+<script src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/js/home.js"></script>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+  <div class="modal-header" style="border-bottom: none;">
+    <button type="button" class="btn-close z-3" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">Yu, Masuk Ke Akunmu Dulu!</h1>
+    <form role="form" action="{$fulldomain}/user/login/{$urllogin}" method="post" name="login">
+      <div class="mb-3 mt-4">
+        <input type="text" class="form-control" id="email" name="user" placeholder="Masukan Email">
+      </div>
+      <div class="mb-4">
+        <input type="password" class="form-control" name="pass" id="password" placeholder="Password">
+        <div class="input-group-icon mb-2">
+          <i class="password-icon fas fa-eye-slash"></i>
+        </div>
+        <a href="lupapassword.html" for="password" class="form-label text-decoration-none text-black fw-bold ">Lupa Password?</a>
+      </div>
+      <div class="button-submit text-center">
+        <button type="submit" class="btn btn-success mb-2">Masuk Sekarang</button>
+        <br>
+        <span class="text-black">Kamu belum terdaftar? <a href="daftar-akun.html" class="text-black fw-bold text-decoration-none">Daftar Disini</a></span>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- google analitic -->
+{literal}
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S34CV0V98C"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-S34CV0V98C');
+</script>
+
+{/literal}
+
+
+</html>
+
+
+{/strip}

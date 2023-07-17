@@ -1,0 +1,389 @@
+{include file="`$lokasitemplate`/komponen/home/header.html"}
+
+
+{if $aksi eq 'daftar' or $aksi eq 'daftaranggota'}
+
+
+<section id="pagemember">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <br><br>
+        <div class="sign-form single">
+          <div class="sign-inner">
+            {if $daftaravatar neq '' }
+            <div class="daftar-avatar"><img src="{$daftaravatar}" alt="" border="0" /></div>
+            {/if}
+            {if $daftarname neq ''} Hai <strong>{$daftarname}</strong>, {/if}
+            <h3 class="first-child">Buat Keanggotaan Bar</h3>
+            <hr>
+
+            {if $pesanhasil neq ''}
+            <div class="alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible"
+              role="alert">
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                  class="sr-only">Close</span></button>
+              {$pesanhasil}.
+              <ul>
+                {foreach from=$pesan key=id item=a}
+                <li>{$a.pesan}</li>
+                {/foreach}
+              </ul>
+            </div>
+            {else}
+            Masukan informasi diri anda melalui form yang disediakan dibawah ini untuk
+            bergabung ke {$title}.<br /><br />
+            {/if}
+
+            {if $berhasil neq '1'}
+            <form role="form" action="{$fulldomain}/user/daftaranggota" method="post" name="login">
+              <input type="hidden" name="fbid" value="{$fbid}" />
+              <input type="hidden" name="twid" value="{$twid}" />
+              <input type="hidden" name="gpid" value="{$gpid}" />
+
+              <div class="form-group">
+                <label>Username</label>
+                <input type="text" data-original-title="Username" name="username" value="{$daftarusername}"
+                  data-content="Silahkan masukan username disini, hanya diperbolehkan huruf dan angka saja"
+                  data-trigger="focus" data-placement="left" data-toggle="popover"
+                  placeholder="Masukan username anda disini" id="username" class="form-control" required="required">
+              </div>
+              <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input type="text" data-original-title="Name" name="userfullname" value="{$daftarname}"
+                  data-content="Silahkan masukan nama lengkap anda disini." data-trigger="focus" data-placement="left"
+                  data-toggle="popover" placeholder="Masukan Nama Lengkap" id="name" class="form-control"
+                  required="required">
+              </div>
+              <div class="form-group">
+                <label>Alamat Email</label>
+                <input type="email" data-original-title="Email" name="useremail" value="{$daftaremail}"
+                  data-content="Silahkan masukan alamat email." data-trigger="focus" data-placement="left"
+                  data-toggle="popover" placeholder="Masukan alamat Email" id="email" class="form-control"
+                  required="required">
+              </div>
+              <div class="form-group">
+                <label>Nomor Handphone</label>
+                <input type="tel" data-original-title="Handphone" name="userphonegsm" value="{$daftaruserphonegsm}"
+                  data-content="Silahkan masukan nomor handphone anda ." data-trigger="focus" data-placement="left"
+                  data-toggle="popover" placeholder="Masukan Nomor Handphone anda" id="userphonegsm"
+                  class="form-control" required="required">
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" data-original-title="Password" name="userpassword"
+                  data-content="Masukan password yang aman." data-trigger="focus" data-placement="left"
+                  data-toggle="popover" placeholder="Masukan Password" id="password"
+                  class="form-control margin-bottom-xs" required="required">
+              </div>
+              <div class="form-group">
+                <label>Nama Kota/ Kabupaten</label>
+                <input type="text" data-original-title="Kota Tinggal / Kota Pengiriman" name="cityname"
+                  value="{$cityname}" data-content="Silahkan masukan kota tinggal atau kota barang dikirimkan."
+                  data-trigger="focus" data-placement="left" data-toggle="popover"
+                  placeholder="Masukan kota tinggal atau kota barang dikirimkan" id="cityname" class="form-control"
+                  required="required">
+              </div>
+              <script src='https://www.google.com/recaptcha/api.js'></script>
+              <div class="form-group">
+                <label>Anti Spam</label>
+                <div class="g-recaptcha" data-sitekey="{$sitekey}"></div>
+              </div>
+
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" required="required"> Saya telah menyetujui
+                  <a href="#" id="klikkodeetik" title="Klik Untuk membaca Kode Etik"><strong>Syarat dan Ketentuan yang
+                      berlaku</strong></a>
+                </label>
+              </div>
+              <hr />
+              <button class="btn btn-lg btn-success" type="submit">Bergabung Sekarang</button>
+
+
+            </form>
+            {/if}
+            <br clear="all" /><br clear="all" />
+          </div>
+        </div>
+      </div>
+      <!-- /.col-xs-12 -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container --><br clear="all" /><br clear="all" />
+</section>
+<!-- /#page -->
+{elseif $aksi eq 'cart'}
+
+<section id="pagemember">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+
+
+
+        <br><br>
+        <div class="sign-form1 single1">
+
+          <div class="sign1-inner">
+
+            <div class="cart-container">
+              <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" data-target="#daftar">Anggota BARU</a></li>
+                <li><a data-toggle="tab" data-target="#loginbaru">LOGIN</a></li>
+              </ul>
+              <div class="tab-content">
+                <div id="daftar" class="tab-pane fade in  active">
+
+
+                  {if $daftarname neq ''} Hai <strong>{$daftarname}</strong>, {/if}
+                  <h3 class="first-child">Menjadi Anggota Baru</h3>
+                  Untuk melanjutkan pembelian saat ini kami merekomendasikan anda untuk mendaftar terlebih
+                  dahulu sebagai Anggota, atau bila anda sudah pernah mendaftar anda bisa login terlebih dahulu.
+                  <hr>
+
+                  {if $pesanhasil neq ''}
+                  <div class="alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible"
+                    role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span
+                        aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    {$pesanhasil}.
+                    <ul>
+                      {foreach from=$pesan key=id item=a}
+                      <li>{$a.pesan}</li>
+                      {/foreach}
+                    </ul>
+                  </div>
+                  {/if}
+
+                  {if $berhasil neq '1'}
+                  <form role="form" action="{$fulldomain}/user/daftaranggota" method="post" name="login">
+                    <input type="hidden" name="fromcart" value="1" />
+                    <div class="form-group">
+                      <div class="form-group">
+                        <label>Alamat Email</label>
+                        <input type="email" data-original-title="Email" name="useremail" value="{$daftaremail}"
+                          data-content="Silahkan masukan alamat email." data-trigger="focus" data-placement="left"
+                          data-toggle="popover" placeholder="Masukan alamat Email" id="email" class="form-control"
+                          required="required">
+                      </div>
+                      <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" data-original-title="Name" name="userfullname" value="{$daftarname}"
+                          data-content="Silahkan masukan nama lengkap anda disini." data-trigger="focus"
+                          data-placement="left" data-toggle="popover" placeholder="Masukan Nama Lengkap" id="name"
+                          class="form-control" required="required">
+                      </div>
+
+                      <div class="form-group">
+                        <label>Nomor Handphone</label>
+                        <input type="tel" data-original-title="Handphone" name="userphonegsm"
+                          value="{$daftaruserphonegsm}" data-content="Silahkan masukan nomor handphone anda ."
+                          data-trigger="focus" data-placement="left" data-toggle="popover"
+                          placeholder="Masukan Nomor Handphone anda" id="userphonegsm" class="form-control"
+                          required="required">
+                      </div>
+                      <div class="form-group">
+                        <label>Nama Kota/ Kabupaten</label>
+                        <input type="text" data-original-title="Kota Tinggal / Kota Pengiriman" name="cityname"
+                          value="{$cityname}" data-content="Silahkan masukan kota tinggal atau kota barang dikirimkan."
+                          data-trigger="focus" data-placement="left" data-toggle="popover"
+                          placeholder="Masukan kota tinggal atau kota barang dikirimkan" id="cityname"
+                          class="form-control" required="required">
+                      </div>
+                      <script src='https://www.google.com/recaptcha/api.js'></script>
+                      <div class="form-group">
+                        <label>Anti Spam</label>
+                        < <div class="g-recaptcha" data-sitekey="{$sitekey}">
+                      </div>
+                    </div>
+
+                    <br clear="all" />
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" required="required"> Saya telah menyetujui
+                        <a href="#" id="klikkodeetik" title="Klik Untuk membaca Kode Etik"><strong>Syarat dan Ketentuan
+                            yang berlaku</strong></a>
+                      </label>
+                    </div>
+                    <button class="btn btn-success" type="submit">Bergabung Sekarang</button>
+
+
+                  </form>
+                  {/if}
+                </div>
+              </div>
+              <div id="loginbaru" class="tab-pane  fade">
+
+                {if $pesanhasil neq ''}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                      class="sr-only">Close</span></button>
+                  {$pesanhasil}
+                </div>
+                <hr>
+                {/if}
+
+                {if $login eq ''}
+                <h3 class="first-child">Login</h3>
+                Untuk melanjutkan pembelian saat ini kami merekomendasikan anda login terlebih dahulu, atau
+                ana juga dapat menghubugi kami melalui Website.
+                <hr>
+
+                <form role="form" action="{$fulldomain}/user/login" method="post" name="login">
+                  <input type="hidden" name="fromcart" value="1" />
+                  {if $last neq ''}<input type="hidden" name="uri" value="{$last}" />{/if}
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fal fa-user icon"></i></span>
+                    <input type="text" title="" data-original-title="" placeholder="Masukan Username atau Email"
+                      value="{$cookname}" id="email" name="user" class="form-control" required>
+                  </div>
+                  <br>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fal fa-lock icon"></i></span>
+                    <input type="password" title="" data-original-title="" placeholder="Masukan Password"
+                      value="{$cookpass}" name="pass" id="password" class="form-control" required>
+                  </div>
+                  <br>
+                  <button class="btn btn-success" type="submit">Login Sekarang</button>
+
+                  <hr>
+                </form>
+                {/if}
+              </div>
+            </div>
+
+
+
+            <br clear="all" /><br clear="all" />
+          </div>
+        </div>
+      </div>
+      <!-- /.col-xs-12 -->
+
+
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container --><br clear="all" /><br clear="all" />
+</section>
+<!-- /#page -->
+
+{elseif $aksi eq 'lupapassword'}
+{include file="`$lokasitemplate`komponen/user/lupapassword.html"}
+{else}
+
+<section id="pagemember">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <br><br>
+        <div class="sign-form single">
+          <div class="sign-inner">
+            <h3 class="first-child">Masuk Ke dalam Akun </h3>
+
+
+            {if $pesanhasil neq ''}
+            <hr>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                  class="sr-only">Close</span></button>
+              {$pesanhasil}
+            </div>
+            {/if}
+            <hr>
+            {if $login eq ''}
+
+            <form role="form" action="{$fulldomain}/user/login" method="post" name="login">
+              {if $last neq ''}<input type="hidden" name="uri" value="{$last}" />{/if}
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fal fa-user icon"></i></span>
+                <input type="text" title="" data-original-title="" placeholder="Masukan Username atau Email"
+                  value="{$cookname}" id="email" name="user" class="form-control" required>
+              </div>
+              <br>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fal fa-lock icon"></i></span>
+                <input type="password" title="" data-original-title="" placeholder="Masukan Password"
+                  value="{$cookpass}" name="pass" id="password" class="form-control" required>
+              </div>
+              <br>
+              <button class="btn btn-success" type="submit">Login Sekarang</button>
+
+              <hr>
+            </form>
+            {/if}
+            <p>Belum terdaftar? <a href="{$fulldomain}/user/daftar"> <strong style="color: red;">Buat
+                  Keanggotaan.</strong></a></p>
+            <div class="pwd-lost">
+              <div class="pwd-lost-q show">Lupa Password? <a href="#">Klik disini untuk mengembalikannya.</a></div>
+              <div class="pwd-lost-f hidden">
+                <p class="text-muted">Enter your email address below and we will send you a link to reset your password.
+                </p>
+                <form role="form" class="form-inline" method="post" action="{$fulldomain}/user/lupapassword">
+                  <div class="form-group">
+                    <label for="email-pwd" class="sr-only">Email address</label>
+                    <input type="email" placeholder="Enter email" id="email-pwd" name="useremail" required
+                      class="form-control">
+                  </div>
+                  <button class="btn btn-success" type="submit">Send</button>
+                </form>
+              </div>
+            </div> <!-- / .pwd-lost -->
+          </div>
+        </div>
+      </div>
+      <!-- /.col-xs-12 -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+  <br clear="all" />
+</section>
+<!-- /#page -->
+
+{/if}
+
+<script type="text/javascript">
+
+  $(document).ready(function () {
+    var $height = $(window).height();
+    var $hiframe = $height - 150;
+    $('#pagemember').css('min-height', $hiframe + 'px');
+  });
+</script>
+
+{if $kanal eq 'user' and $aksi eq 'daftar'}
+<!-- Start modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  data-keyboard="false">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-info">
+          <h2>{$detailnama}</h2>
+          {$detaillengkap} <br clear="all" />
+          <center><button type="button" class="btn btn-default" data-dismiss="modal">Selesai Baca dan Lanjutkan</button>
+          </center>
+        </div>
+      </div>
+      <br clear="all" />
+    </div>
+  </div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    $("#klikkodeetik").click(function () {
+      $('#myModal2').modal('show');
+    });
+  });
+</script>
+
+{/if}
+
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

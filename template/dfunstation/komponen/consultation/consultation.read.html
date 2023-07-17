@@ -1,0 +1,100 @@
+{strip}
+
+<link rel="stylesheet" href="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/css/profile-ahli.css">
+
+<!-- profile ahli -->
+<section class="profile-dekstop mb-5" >
+
+  {foreach from=$datadetail key=id item=ch}
+    <div class="container profile-ahli ">
+      <div class="row">
+        <div class="izin-praktik ">Izin Praktik :</div>
+        <div class="nomor-izin mb-5">{$ch.no_izin}</div>
+        <div class="col-lg-6 col-md-6 col-sm-12 penanganan-destop">
+          <div class="pengalaman">Pengalaman Penanganan Kasus</div>
+          <ul>
+            {foreach from=$ch.isipenanganan key=idpenanganan item=ip1}
+              <li>{$ip1.penanganan}</li>
+            {/foreach}
+          </ul>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="pengalaman">Pengalaman Bekerja</div>
+          <ul>
+            {foreach from=$ch.isipengalaman key=idpengalaman item=ip2}
+              <li>{$ip2.pengalaman}</li>
+            {/foreach}
+          </ul>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-lg-7 col-md-7 col-sm-12 penanganan-destop">
+          <div class="profile-nama">
+            {$ch.nama_depan}
+            <br>
+            {$ch.nama_belakang}
+          </div>
+          <div class="profile-gelar">
+            {$ch.gelar}
+          </div>
+          <div class="profile-deskripsi">
+            “{$ch.kutipan}”
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-12">
+          <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/konsultan-profile.png" class="img-fluid profile-foto" alt="{$ch.nama}">
+        </div>
+      </div>
+    </div>
+  {/foreach}
+
+</section>
+
+<!-- profile ahli mobile -->
+<section class="profile-mobile mb-5" >
+  {foreach from=$datadetail key=id item=ch}
+    <div class="container profile-ahli ">
+      <div class="row ">
+        <div class="col-12">
+          <div class="profile-nama">
+            {$ch.nama_depan}
+            <br>
+            {$ch.nama_belakang}
+          </div>
+          <div class="profile-gelar">
+            {$ch.gelar}
+          </div>
+          <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/konsultan-profile.png" class="img-fluid profile-foto mb-3" alt="{$ch.nama}">
+          <div class="profile-deskripsi">
+            “{$ch.kutipan}”
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="izin-praktik ">Izin Praktik :</div>
+        <div class="nomor-izin mb-5">{$ch.no_izin}</div>
+        <div class="col-lg-6 col-md-6 col-sm-12 penanganan-destop">
+          <div class="pengalaman">Pengalaman Penanganan Kasus</div>
+          <ul>
+            <li>Masalah berkaitan kecemasan, stres & adaptasi</li>
+            <li>Masalah relasi dalam hubungan romantis, pernikahan & keluarga</li>
+            <li>Suicide ideation pada dewasa</li>
+            <li>Non-Suicide Self Injury</li>
+            <li>Fobia</li>
+            <li>Permasalah emosi & mood pada dewasa</li>
+          </ul>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="pengalaman">Pengalaman Bekerja</div>
+          <ul>
+            <li>Psikolog klinis dewasa d’Fun Station</li>
+            <li>Psikolog klinis dewasa alodokter</li>
+            <li>Psikolog klinis dewasa kalm</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  {/foreach}
+</section>
+
+{/strip}

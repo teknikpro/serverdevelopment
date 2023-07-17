@@ -1,0 +1,31 @@
+body {
+    background: #E8FBE5;
+    box-sizing: border-box;
+}
+
+/* buttons tabs */
+
+.active {
+    background: #025214 !important;
+    color: #fff !important;
+}
+
+
+.isi-pane {
+    background-color: #fff !important;
+    padding: 20px;
+    color: #000 !important;
+    text-align: justify;
+    border-radius: 6px;
+}
+
+.informasi-judul {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    color: #000;
+}
+
+.informasi-isi {
+    margin-bottom: 10px;
+}

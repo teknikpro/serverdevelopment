@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="items item-w2">
+           <div class="row">
+           <div class="col-xs-12">
+               <h4 class="option-title text-green text-uppercase">{$namaaksi}</h4>
+           </div>
+           <div class="clearfix"></div>
+       </div>
+       <!-- /.row -->
+       </div>
+        <!-- /.items item-w2 -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+            
+            {foreach from=$datadetail key=id item=a}
+            	<h3>{$a.nama}</h3>
+                {$a.lengkap}
+                <hr />
+            {/foreach}
+            <div class="paginate pull-right">
+                <ul class="pagination">
+                    {foreach from=$stringpage key=pageid item=a}
+                        {if $a.link neq ''}
+                            <li><a href="{$a.link}">{$a.nama}</a></li>
+                        {else}
+                            <li><a href="javascript:void(0)">{$a.nama}</a></li>
+                        {/if}
+                    {/foreach}
+                </ul>
+            </div>
+
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel .panel-default -->
+    </div>
+    <!-- /.col-xs-12 -->
+</div>
+<!-- /.row -->
+

@@ -1,0 +1,116 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="items item-w2">
+           <div class="row">
+           <div class="col-xs-6">
+               <h4 class="option-title text-green text-uppercase">{$namaaksi}</h4>
+           </div>
+            
+           <div class="clearfix"></div>
+       </div>
+       <!-- /.row -->
+       </div>
+        <!-- /.items item-w2 -->
+    </div>
+</div>
+
+
+{if $subaksi eq 'read'}
+  
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+             
+              <div class="title-headline">
+                    <span>{$detailnama}</span>
+                </div><br clear="all" />
+                 <div class="content-info">
+                    <span>{if $detailcreator neq ''}Oleh {$detailcreator} | {/if} {$detailtanggal} | {$detailstats} Views</span>
+                 </div>
+        
+                {if $detailgambar neq ''}
+                <div class="thumbDetail">
+                    <img src="{$detailgambar}" alt="{$detailnama}" class="img-responsive" />
+                </div>
+                {/if}
+                <p>{$detaillengkap}</p>
+                     
+            </div>
+        </div>
+    </div>
+</div>
+
+{else}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+
+            {if $jml_post eq '0'}
+              <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+       
+                   Saat ini anda tidak mempunyai satupun produk yang akan ditawarkan. Pasang
+                   produk anda sekarang juga dan temukan pembeli anda segera.
+                  
+              </div> 
+              <br clear="all" />
+		          <center><a href="{$fulldomain}/konsultan/produk/add" class="btn btn-md btn-warning">Pasang Produk</a></center>
+              <div class="clearfix"></div>
+            {else}
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="20%">&nbsp;</th>
+                    <th width="65%">Keterangan</th>
+                    <th width="15%">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {foreach from=$datadetail item=i key=produkid name=list}
+                  <tr>
+                    <td >
+                      <img src="{$i.gambar}" alt="" class="img-resp">
+                    </td>
+                    <td>
+                      <span class="pull-right"><small><b>Rp. {$i.harga}</b></small></span>
+                      <b>{$i.nama}</b> {$i.published}<br>
+                      <em>{$i.tanggal}</em><br>
+                      <small>{$i.ringkas}</small>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu
+                          <span class="caret"></span>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li><a href="{$i.link}">Detail Produk</a></li>
+                          <li><a href="{$fulldomain}/konsultan/produk/edit/{$i.id}/{$i.alias}">Edit</a></li>
+                          <li><a href="{$fulldomain}/konsultan/produk/publish/{$i.id}/{$i.alias}">{$i.publish}</a></li>
+                          {if $i.published1 eq '1' and $i.status_tayang eq '1'}
+                          <li role="separator" class="divider"></li>
+                          <li><a class="" href="{$fulldomain}/konsultan/produk/terjual/{$i.id}/{$i.alias}">Tandai Terjual</a></li>
+                          {/if}
+                          <li><a href="{$fulldomain}/konsultan/produk/hapus/{$i.id}/{$i.alias}" onclick="return confirm('Apakah anda yakin akan menghapus produk ini, data produk tidak bisa dikembalikan?')">Hapus Produk</a></li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                  {/foreach}
+                </tbody>
+              </table>
+            {/if}
+            </div>
+        </div>
+           <!-- /.col-xs-12 -->
+     		<ul class="pagination m-0">
+          {foreach from=$stringpage key=pageid item=a}
+            <li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+          {/foreach}
+        </ul>
+    </div>
+</div>
+
+{/if}

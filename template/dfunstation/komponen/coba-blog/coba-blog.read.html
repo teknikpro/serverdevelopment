@@ -1,0 +1,117 @@
+{strip}
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"{$uri}"
+    },
+    "headline": "{$detailnama}",
+    "image": {
+      "@type": "ImageObject",
+      "url": "{$detailgambar}",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "{$detaildate}",
+    "dateModified": "{$detaildate}",
+    "author": {
+      "@type": "Person",
+      "name": "{$detailcreator}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "{$title}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{$fulldomain}{$lokasiwebtemplate}images/img.logo.png",
+        "width": 381,
+        "height": 60
+      }
+    },{
+      "description": "{$detaillengkap}"
+    }
+    "infogambar": "{$infogambar}"
+  }
+  </script>
+
+<div class="box-content">
+  <div class="large-content">
+    {if $detailgambar neq ''}
+    <div style="margin-bottom: -4px ;" class="thumbDetail">
+      <img src="{$detailgambar}" alt="{$detailnama}" class="img-responsive" />
+    </div>
+    {/if}
+    <span style="font-size: small; color: #b1b5b2;">{$detailsumber}</span>
+    <div class="title-headline">
+      <span>{$detailnama} </span>
+    </div><br clear="all" />
+    <div class="content-info">
+      <span>
+        {if $detailcreator neq ''} Oleh {$detailcreator} | {/if} {$detailtanggal} | {$detailstats} Views
+        <br>
+        Disunting Oleh : {$penyunting}
+      </span>
+    </div>
+
+    <p>{$detaillengkap}</p>
+    <br clear="all" />
+    {if $jmltags > 0 }
+    <br clear="all" />
+    <div class="tagsbox">
+      <div class="tags-label">Tags</div>
+      <div class="tags-isi">
+        {foreach from=$tags key=id item=a}
+        <a href="{$a.url}" class="tags">#{$a.tag}</a>
+        {/foreach}
+      </div>
+    </div>
+    {/if}
+    <br clear="all" />
+
+
+    <div id="share"></div>
+
+    <script src="{$lokasiwebtemplate}js/jssocials.min.js"></script>
+    <script>
+      $("#share").jsSocials({
+        shares: ["facebook", "twitter", "googleplus", "whatsapp"]
+      });
+    </script>
+    <br clear="all" />
+    <p>konsultasi Onsite
+    </p>
+    <p style="color: #b1b5b2;">
+      Telepon : 085725340688
+      <br>
+      Ruko Istana Pasteur Regency Blok CRA 51 Pasteur, Sukaraja, Kec. Cicendo, Kota Bandung, Jawa Barat 40175
+    </p>
+    <br clear="all" />
+    <div class="bg-divider"></div>
+
+    {include file="`$lokasitemplate`/komponen/home/komentar.html"}
+  </div>
+
+
+  <br clear="all" />
+  <div class="infodetail"><span class="infodetail-1"><strong>{$rubrik} Lainnya</strong></span></div>
+  {foreach from=$terkait key=id item=a}
+  <div class="col-md-12">
+    <div class="boxnewspilihan">
+      <div class="boxnewspilihan-isi">
+
+        <div class="box-boxnewspilihan">
+          <a href="{$a.link}" class="judul1"><img src="{$a.gambar}" alt="{$a.nama}" border="0" /></a>
+          <p>{$a.infogambar}</p>
+        </div>
+        <span><a href="{$a.link}" class="judul1">{$a.nama}</a></span><br />
+        <span class="tgl">{$a.tanggal}</span><br />
+        {$a.ringkas}
+      </div>
+    </div>
+  </div>
+  {/foreach}
+
+</div>
+{/strip}

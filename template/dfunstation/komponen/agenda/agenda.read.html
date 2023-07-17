@@ -1,0 +1,33 @@
+<div class="box-content">
+    <div class="large-content">
+        <div class="title-headline">
+            <span>{$detailnama}</span>
+        </div><br clear="all" />
+         <div class="content-info">
+         	<span>{if $detailcreator neq ''}Oleh {$detailcreator} | {/if} {$detailtanggal} | {$detailstats} Views</span>
+         </div>
+
+        {if $detailgambar neq ''}
+        <div class="thumbDetail">
+            <img src="{$detailgambar}" alt="{$detailnama}" class="img-responsive" />
+        </div>
+        {/if}
+        <div class="ringkas">{$detailringkas}</div>
+        <p>{$detaillengkap}</p>
+	 <br clear="all" />
+
+
+                     <div id="share"></div>
+
+					<script src="{$lokasiwebtemplate}js/jssocials.min.js"></script>
+                    <script>
+                        $("#share").jsSocials({
+                            shares: ["facebook", "twitter", "googleplus", "whatsapp"]
+                        });
+                    </script>
+                    <br clear="all" />   
+      
+
+     </div>
+    
+</div>

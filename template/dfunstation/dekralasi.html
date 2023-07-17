@@ -1,0 +1,128 @@
+{include file="`$lokasitemplate`komponen/home/header_simposium.html"}
+<div style="border: 1px solid #7155ed;;"></div>
+
+<div class="box-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="large-content">
+                    <div style="margin-bottom: -4px ;" class="thumbDetail">
+                        <img src="https://www.dfunstation.com/gambar/blog/deklarasi.png" alt="Dekralasi"
+                            class="img-responsive" />
+                    </div>
+                    <!-- <div class="title-headline">
+                        <span>Wkwkw </span>
+                    </div><br clear="all" /> -->
+                    <div class="content-info">
+                        <span>
+                            DEKLARASI &quot;EKSPRESI SPESIAL BAGI NUSANTARA&quot;
+                        </span>
+                    </div>
+
+                    <p>Tujuan :
+                        Penguatan peran serta individu spesial dalam pembangunan nasional dan pernyataan dukungan dalam
+                        Pelaksanaan Undang-Undang Nomor 8 Tahun 2016 tentang Penyandang Disabilitas.
+
+                    </p>
+                    <br clear="all" />
+
+                    <strong>Bagikan Dekralasi Ini</strong>
+                    <div id="share"></div>
+                    <script src="{$lokasiwebtemplate}js/jssocials.min.js"></script>
+                    <script type="text/javascript">
+                        $("#share").jsSocials({
+                            shares: ["facebook", "twitter", "googleplus", "whatsapp"]
+                        });
+
+                        function copy_text() {
+                            let copyText = document.getElementById("pilih");
+                            copyText.select();
+                            document.execCommand("copy");
+                            alert("Text berhasil dicopy");
+                        }
+
+                    </script>
+                    <div>
+                        <button type="button" class="btn btn-primary" onclick="copy_text()"><i class="fal fa-link"></i>
+                            Salin Tautan</button>
+                        <input style="border: #fff; color: #fff; outline: none;" type="text"
+                            value="https://www.dfunstation.com/dekralasi" id="pilih" readonly />
+                    </div>
+                    <br clear="all" />
+                    <div class="bg-divider"></div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <strong>Alasan Menyetujui</strong>
+                    <ol class="expanded-conversation ">
+                        {if $list_post}
+                        {foreach from=$list_post key=id_dekralasi item=c}
+                        <li class="simple-sapa-container">
+                            <div class="row">
+                                <div class="col-xs-1">
+                                    <a href="#" class="inline-reply-user-image">
+                                        <img src="https://www.dfunstation.com/images/no_pic.jpg" alt="{$c.nama}">
+                                    </a>
+                                </div>
+                                <div class="col-xs-11">
+                                    <div class="stream-item-header">
+                                        <a href="#"><strong>{$c.nama}</strong></a>
+                                        <i class="fal fa-time"></i> <small>{$c.update_date}</small>
+                                    </div>
+                                    <div class="stream-item-content">
+                                        <p class="komentar-item">
+                                            {$c.pesan}<br>
+                                        </p>
+                                    </div>
+                                    <div class="stream-item-footer">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {/foreach}
+                        {else}
+                        <p>Belum ada yang menyetujui</p>
+                        {/if}
+
+                    </ol>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div style="padding-left: 20px;" class="col-md-12">
+                    <strong>Setujui Dekralasi Ini</strong>
+                    <p>Dekralasi ini sudah disetujui oleh <strong>{$jumlahsetuju}</strong> orang</p>
+                    <form class="form-contact1" style="height:auto;" method="post" action="{$fulldomain}/dekralasi">
+                        <input type="hidden" name="save" value="1" />
+                        <br />Nama Lengkap<br /><input type="text" name="nama" id="nama"
+                            placeholder="Tulis  Nama lengkap anda" required class="form-control" />
+                        <br />Alamat Email<br /><input type="email" name="email" id="email"
+                            placeholder="Tulis Email anda" required class="form-control" />
+                        <br />Nomor Handphone<br /><input type="number" name="handphone" id="handphone"
+                            placeholder="Tulis Nomor Handphone" required class="form-control" />
+                        <br />Isi Pesan<br />
+                        <textarea placeholder="Tuliskan pesan anda untuk kami" name="pesan" id="pesan" rows="10"
+                            class="form-control" required></textarea>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" required="required">
+                                <a href="#" id="klikkodeetik" title="Klik Untuk menyetujui dekralasi"><strong>Saya
+                                        menyetujui Dekralasi Ini</strong></a>
+                            </label>
+                        </div>
+                        <script src='https://www.google.com/recaptcha/api.js'></script>
+                        <div class="input-group mb-10">
+                            <div class="col-md-4" style="margin-bottom:0px; margin-top:10px;">
+                                <div class="g-recaptcha" data-sitekey="{$sitekey}"></div>
+                            </div>
+                        </div>
+                        <br clear="all" /><input type="submit" name="submit" value="Kirim"
+                            class="btn btn-warning btn-lg" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br clear="all" /><br clear="all" />
+{include file="`$lokasitemplate`/komponen/home/footer_simposium.html"}

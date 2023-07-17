@@ -1,0 +1,39 @@
+<div class="box-content">
+    <div class="large-content">
+    
+    {if $berhasil eq '1'}
+    <div class="success">{$pesanhasil}</div><br clear="all" />
+    <a href="{$fulldomain}/konsultasi"  class="btn btn-warning">Kembali</strong></a>
+{elseif $berhasil eq '0'}
+    <div class="error">{$pesanhasil}</div>
+    <ul>
+        {foreach from=$pesan key=id item=i}
+        <li>{$i.pesan}</li>
+        {/foreach}
+    </ul><br clear="all" />
+    <a href="{$fulldomain}" class="btn btn-warning"> Kembali</a>
+{/if}
+
+{if $berhasil neq '1'}    
+<p>Silahkan gunakan form di bawah ini untuk mengirimkan pertanyaan anda seputar mainan anak, kami akan memberitahu anda melalui email bila pertanyaan anda sudah
+dijawab dan ditampilkan dihalaman website ini.</p>
+<form role="form" action="{$fulldomain}/konsultasi/create" method="post" name="login">
+    <input type="hidden" name="action" value="savepesan" />
+    <div class="form-group">
+    	<label>Judul Pertanyaan</label>
+        <input type="text" data-original-title="Nama Lengkap" name="nama" placeholder="Masukkan judul pertanyaan anda" id="name" class="form-control" required value="{$message_userfullname}" />
+    </div>
+    <div class="form-group">
+        <label>Pertanyaan</label>
+        <textarea data-original-title="Pesan" rows="10" name="pesan" data-content="Masukkan pesan disini." data-trigger="focus" data-placement="left" data-toggle="popover" placeholder="Masukkan Pesan atau pertanyaan anda" id="username" class="form-control" required>{$message_isi}</textarea>
+    </div>
+      <div class="form-group">
+        <input type="checkbox" value="1" name="tampilkan" checked="checked" /> Tampilkan nama dan kota asal saya.
+    </div>
+   
+
+  <button class="btn btn-success" type="submit">Kirimkan Pertanyaan</button>
+</form>
+{/if}
+</div>
+</div>

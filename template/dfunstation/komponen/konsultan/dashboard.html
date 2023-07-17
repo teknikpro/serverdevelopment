@@ -1,0 +1,105 @@
+                <meta http-equiv="refresh" content="30">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="items item-w2">
+                           <div class="row">
+                           <div class="col-xs-6">
+                                <h4 class="option-title text-green text-uppercase">Dashboard Konsultan</h4>
+                           </div>
+                        
+                           <div class="clearfix"></div>
+                       </div>
+                       <!-- /.row -->
+                       </div>
+                        <!-- /.items item-w2 -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default e-squared p-0">
+                            <div class="panel-body p-10">
+                                 <div class="col-md-8">
+                                 	Selamat datang {$userfullname}.
+                                    <br />
+                                 </div>
+                                  <div class="col-md-4">
+                                 	<span class="pull-right">
+                                    	{if $online eq '1'}
+                                        	Saat ini sedang <a href="{$fulldomain}/konsultan/dashboard/setonline/online" class="btn btn-success">Online</a>
+                                        {else}
+                                        	Saat ini sedang <a href="{$fulldomain}/konsultan/dashboard/setonline/offline" class="btn btn-danger">Offline</a>
+                                        {/if}
+                                    </span>
+                                    <br />
+                                 </div>
+                            </div>
+                        </div>
+                        <!-- /.panel .panel-default -->
+                    </div>
+                    <!-- /.col-xs-12 -->
+                </div>
+                <!-- /.row -->
+          
+            
+            <div class="row">
+        	<div class="col-md-12">
+            <div class="panel panel-default e-squared">
+                <div class="panel-body">
+
+                {if !$datadetail}
+                    <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                    <center>
+                    Saat ini <strong>tidak ada chat aktif</strong> yang berkonsultasi dengan anda.<br />Anda akan mendapatkan pemberitahun melalui aplikasi
+                    bila ada chat konsultasi masuk.<br /><br />
+                    <a href="{$fulldomain}/konsultan/chat" class="btn btn-default">Lihat Histori Chat</a>
+                    </center>
+                   </div>
+                    <div class="clearfix"></div>
+                {else}
+                {foreach from=$datadetail key=id item=i name=list}
+    
+                    <div class="items item-content">
+                       
+                            <div class="media">
+                                <div class="col-md-10">
+                                <a href="{$i.user.url}"  class="avatar">
+                                    <img src="{$i.user.avatar}" alt="" class="img-responsive">
+                                </a>
+                                    <h4>{$i.user.userfullname} </h4>
+                                    <p>
+                                     <small class="tanggal">{$i.tanggal}</small><br />
+                                     Silahkan klik button masuk chat untuk
+                                     memulai percakapan<br />
+                                    
+                                    </p>
+                                 </div>
+                              
+                             <div class="col-md-2"><br />
+                                 <a href="{$i.link}" class="btn btn-success">Masuk Chat  {if $i.jmlnoread > 0 } <span class="label label-danger">{$i.jmlnoread}</span> {/if}</a>
+                             </div>
+                             </div>
+                    </div>
+                    <!-- /.items -->
+                    <hr />
+                {/foreach}
+                {/if}
+                    </div>
+                  
+    
+               </div>
+              {if $datadetail}
+               <!-- /.col-xs-12 -->
+                    <ul class="pagination m-0 ml-15">
+                      {foreach from=$stringpage key=pageid item=a}
+                        <li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+                      {/foreach}
+                    </ul>
+               {/if}
+               </div>
+
+</div>
+</div>
+</div>
+
+     

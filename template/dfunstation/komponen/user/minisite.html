@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="items item-w2">
+           <div class="row">
+           <div class="col-xs-12">
+               <h4 class="option-title text-green text-uppercase">{$namaaksi}</h4>
+           </div>
+           <div class="clearfix"></div>
+       </div>
+       <!-- /.row -->
+       </div>
+        <!-- /.items item-w2 -->
+    </div>
+</div>
+
+{if $jmldomain neq '1' and $subaksi neq 'setting'}
+    <div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+                Saat ini anda belum memiliki Minisite di Detox Your Body - SentraDetox, untuk membuatnya anda harus menjadi Member terlebih
+                dahulu dan kami akan memvalidasi keanggotaan Detox Your Body - SentraDetox anda.<br /><br />
+                <a href="{$fulldomain}/member/minisite/setting" class="btn btn-primary">Buat Website Replika</a>
+            </div>
+         </div>
+    </div>
+{else}
+
+	<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+            {if $berhasil neq ''}
+             <div class="alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                     {$pesanhasil}.
+                     {if $berhasil eq '0'}
+                         <ul>
+                         {foreach from=$pesan key=id item=a}
+                            <li>{$a.pesan}</li>
+                         {/foreach}
+                         </ul>
+                     {/if}
+            </div>
+            {/if}
+      
+        {if $subaksi eq 'avatar'}
+            {include file="`$lokasitemplate`komponen/member/setting.avatar.html"}
+        {elseif $subaksi eq 'setting'}
+            {include file="`$lokasitemplate`komponen/member/minisite.setting.html"}
+        {elseif $subaksi eq 'gantipassword'}
+            {include file="`$lokasitemplate`komponen/member/gantipassword.html"}
+        {elseif $subaksi eq 'profile'}
+            {include file="`$lokasitemplate`komponen/member/setting.profile.html"}
+        {elseif $subaksi eq 'tampilan'}
+            {include file="`$lokasitemplate`komponen/member/setting.tampilan.html"}
+        {elseif $subaksi eq 'privacy'}
+            {include file="`$lokasitemplate`komponen/member/setting.privacy.html"}
+        {elseif $subaksi eq 'notifikasiemail'}
+            {include file="`$lokasitemplate`komponen/member/setting.notifikasiemail.html"}
+        {else}
+
+               Saat ini anda memiliki sebuah website replika dengan alamat di {$namadomain}, lakukan update secara berkala
+               untuk mengoptimalisasi website replika anda.<br />
+               <a href="http://{$namadomain}" target="_blank" class="btn btn-primary">Buka Web Replika</a>
+        {/if}
+
+{/if}
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel .panel-default -->
+    </div>
+    <!-- /.col-xs-12 -->
+</div>
+<!-- /.row -->
+

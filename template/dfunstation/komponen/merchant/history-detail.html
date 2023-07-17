@@ -1,0 +1,88 @@
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="items item-w2">
+                           <div class="row">
+                           <div class="col-xs-6">
+                                <h4 class="option-title text-green text-uppercase">Detail Tiket</h4>
+                           </div>
+                           <div class="col-xs-6">
+                                
+                           </div>
+                           <div class="clearfix"></div>
+                       </div>
+                       <!-- /.row -->
+                       </div>
+                        <!-- /.items item-w2 -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default e-squared p-0">
+                            <div class="panel-body p-5">
+
+                                {if $otoritas}
+
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                Anda tidak mempunyai hak menandai tiket ini 
+                                </div>
+
+                                {/if}
+
+                                <table class="table">
+                                    
+                                    <tr>
+                                        <td width="20%">Nama Pembeli</td>
+                                        <td>{$namapembeli}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal Pembelian</td>
+                                        <td>{$create_date}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Invoice</td>
+                                        <td>{$invoiceid}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jenis Tiket</td>
+                                        <td>{$nama}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jumlah</td>
+                                        <td>{$jumlahtiket}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Tagihan</td>
+                                        <td>{$totaltagihan}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kadaluarsa</td>
+                                        <td>{$namapembeli}</td>
+                                    </tr>
+
+                                </table>
+
+                                <form style="margin-bottom: 20px ;" class="form-horizontal " role="form" name="profile" method="post" enctype="multipart/form-data" action="{$fulldomain}/merchant/history-detail">
+                                    <div class="form-group">
+                                      <div class="col-sm-9">
+                                      <input type="hidden" class="form-control" name="transaksiid"  value="{$transaksiid}">
+                                      </div>
+                                    </div>
+                          
+                                    <button type="submit" class="btn btn-primary">
+                                      Tandai Sudah Digunakan
+                                    </button>
+                                </form> 
+
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel .panel-default -->
+                    </div>
+                    <!-- /.col-xs-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+
+     

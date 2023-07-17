@@ -1,0 +1,101 @@
+
+       <form method="post"  class="form-horizontal" role="form" name="profile" enctype="multipart/form-data" action="{$fulldomain}/member/setting/tampilan">
+       
+          <div class="form-group">
+            <label for="Profile" class="col-sm-3 control-label">Profile</label>
+            <div class="col-sm-9">
+            {if $backgroundprofile neq ''}
+                   <img src="{$backgroundprofile}" alt="{$userName}" border="0" width="70" style="border:5px solid #fff;outline:1px solid #ddd" />
+                   <input type="hidden"  class="form-control" name="gambarthumb1" value="{$backgroundprofile}" />
+                   <input type="hidden" class="form-control"  name="gambar1" value="{$backgroundbesar}" />
+            {else}
+            Saat ini Anda belum memilih gambar latar belakang
+            {/if}
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="Profile" class="col-sm-3 control-label">Pilihan latar belakang :</label>
+            <div class="col-sm-9">
+             {foreach from=$bgData key=backgroundId item=b}
+                <div class="box-background">
+                    <div class="box-background-image">
+                    <label for="radioimg-{$b.namabackground}">
+                    <img src="{$b.lokasibackground}" alt="{$b.namabackground}" border="0" width="70" />
+                    </label>
+                    </div>
+                    <input type="hidden" id="gambar"  class="form-control"  name="gambar" value="{$b.lokasibackground2}" />
+                    <input type="radio" id="radioimg-{$b.namabackground}"  name="gambarthumb" value="{$b.lokasibackground}" />&nbsp;&nbsp;{$b.namabackground}
+                </div>
+            {/foreach}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="unggah" class="col-sm-3 control-label">Unggah Gambar :</label>
+            <div class="col-sm-9">
+                 <input type="file" name="userfiles"  />
+            </div>
+          </div>
+          
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel .panel-default -->
+        </div>
+        <!-- /.col-xs-12 -->
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.col-xs-8 -->          
+
+<div class="col-xs-8">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="items item-w2">
+                   <div class="row">
+                   <div class="col-xs-12">
+                       <h4 class="option-title text-green text-uppercase">Ganti Gambar Header Profile</h4>
+                   </div>
+                   <div class="clearfix"></div>
+               </div>
+               <!-- /.row -->
+               </div>
+                <!-- /.items item-w2 -->
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default e-squared">
+                <div class="panel-body">
+
+          <div class="form-group">
+            <label for="Profile" class="col-sm-12 control-label">Gambar header saat ini :</label>
+            <div class="col-sm-9">
+                    {if $backgroundheader neq ''}
+                   		<img src="{$backgroundheader}" alt="{$userName}" border="0" width="250" style="border:5px solid #fff;outline:1px solid #ddd" />
+                   		<input type="hidden" name="headerthumb1" class="form-control"  value="{$backgroundheader}" />
+                        <input type="hidden" name="header1"  class="form-control" value="{$headerbesar}" />
+                   {else}
+                    Saat ini Anda belum memilih gambar header profile{/if}
+                    
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="Profile" class="col-sm-12 control-label">Unggah Gambar :</label>
+            <div class="col-sm-9">
+                    <input type="file"   name="header"/>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <div class="col-xs-offset-3 col-xs-9">
+               <input type="submit"  class="btn btn-success" name="submit" value="Simpan" />
+            </div>
+          </div>
+ 
+        </form>

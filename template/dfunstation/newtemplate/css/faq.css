@@ -1,0 +1,31 @@
+.card-faq {
+    background: linear-gradient(180deg, #E8FBE5 0%, #FFFFFF 100%);
+    margin-top: 20px;
+    height: 1000px;
+}
+
+
+.card-faq a {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    color: #000;
+    line-height: 40px;
+    border: none !important;
+    border-bottom: none !important;
+}
+
+
+.accordion-body {
+    color: #000 !important;
+}
+
+.active {
+    color: #025214 !important;
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.accordion-item, .accordion-button {
+    background-color: transparent !important;
+}

@@ -1,0 +1,1125 @@
+{include file="`$lokasitemplate`komponen/home/header.html"}
+<div class="topkanal">
+	<div class="container">
+    	<div class="topkanal-inner">
+           <div class="topkanal-inner-1"><span>{$rubrik}</span></div>
+        </div>
+    </div>
+</div>
+<div id="header-kanal">
+	 <div class="container">
+            <div class="row">
+					<span>&nbsp;</span> 
+			</div>
+	 </div>
+</div>
+
+  <section class="main-container col1-layout">
+    <div class="main container">
+      <div class="col-main">
+      	<div class="col-main-body">
+          {if $kanal eq 'cart' and ($aksi eq 'buy' or $aksi eq '')}
+           
+           {if $jumlah_keranjang neq '0'}
+           {literal}
+          <script type="text/javascript">
+            function submitform()
+            {
+              document.myform.submit();
+            }
+            function number_format(num,dig,dec,sep) {
+                x=new Array();
+                s=(num<0?"-":"");
+                num=Math.abs(num).toFixed(dig).split(".");
+                r=num[0].split("").reverse();
+                for(var i=1;i<=r.length;i++){x.unshift(r[i-1]);if(i%3==0&&i!=r.length)x.unshift(sep);}
+                return s+x.join("")+(num[1]?dec+num[1]:"");
+              }
+
+            function getVoucher(kodevoucher,total_subtotal,orderid)
+            {
+                //alert ("ok " + total_subtotal)
+                $("#hasilvoucher").innerHTML = "";
+                jQuery.ajax({
+                   type: "POST",
+                   url: "{/literal}{$fulldomain}{literal}/komponen/cart/diskon.php",
+                   data: 'kodevoucher='+ kodevoucher +'&&total_subtotal=' + total_subtotal +'&&orderid=' + orderid,
+                   cache: false,
+                   success: function(responsecek)
+                   {
+                        if(responsecek)
+                        {
+                            /*$('#inline1').show();
+                            $('#inline1').html("Add as Friend Succes.");
+                            $('#various1').hide();*/
+                            var des3    = responsecek.split('||');
+                            var htmlnya3  = des3[0];
+                            var subtotal  = des3[1];
+
+                            var subtotal2 = "Rp " + number_format ( subtotal, 0, ".", "." );
+
+                            $("#hasilvoucher").html(htmlnya3);
+                            $("#total_subtotal").val(subtotal);
+                            $("#totalpembelian").html("<strong>"+subtotal2+"</strong>");
+
+                            $.session.set("totalHarga", subtotal);
+                            alert($.session.get("totalHarga"));
+                            return false;
+                        }
+                        else
+                        {
+                            /*alert ("not ok " + kodevoucher + responsecek)
+                            $('#inline1').show();
+                            $('#inline1').html("Add as Friend Failed.");
+                            return false;*/
+                        }
+                    }
+                });
+
+            };
+
+        </script>
+        {/literal}
+
+          <div class="col-md-12">
+          <div class="table-responsive">
+            <form name="myform" enctype="multipart/form-data" method="post" action="{$fulldomain}/cart/buy">
+              <input type="hidden" value="1" name="update">
+              <input type="hidden" value="{$transaksiid}" name="transaksiid">
+              <fieldset>
+                <table class="data-table cart-table" id="shopping-cart-table">
+                  <colgroup>
+                  <col width="1">
+                  <col>
+                  <col width="1">
+                  <col width="1">
+                  <col width="1">
+                  <col width="1">
+                  <col width="1">
+                  </colgroup>
+                  <thead>
+                    <tr class="first last">
+                      <th rowspan="1">&nbsp;</th>
+                      <th rowspan="1"><span class="nobr">Nama Produk</span></th>
+                      <th colspan="1" class="a-center" width="20%"><span class="nobr">Harga</span></th>
+                      <th class="a-center" rowspan="1" width="5%">Jumlah</th>
+                      <th colspan="1" class="a-center" width="20%">Subtotal</th>
+                      <th class="a-center" rowspan="1" width="10%">Action</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                  </tfoot>
+                  <tbody>
+                     {foreach from=$dt_keranjang key=id item=a}
+                    <tr class="first odd cart-item">
+                      <td class="image">
+                        <a class="product-image" title="Sample Product" href="{$a.link_produk}">
+                          <img width="75" alt="{$a.nama}" src="{$a.image_s}">
+                        </a>
+                      </td>
+                      <td>
+                        <h4 class="product-name">
+                          <a href="{$a.link_produk}">{$a.nama}</a>
+                        </h4>
+                        <div class="brand">{$a.ringkas}</div>
+                      </td>
+                      <td class="a-right">
+                        <span class="cart-price"> <span class="price"> {$a.harga}</span> </span>
+                      </td>
+                      <td class="a-center movewishlist">
+                          <input type="hidden" value="{$a.id}" name="id_qty" size="10">
+                          <input type="hidden" value="{$a.produkpostid}" name="kode_qty_{$a.id}">
+                          <div class="quantity qty-cart">
+                              <div class="le-quantity">
+                                  <input type="text" value="{$a.qty}"  size="10" name="qty_{$a.id}" size="2" onkeyup="submitform();" />
+                              </div>
+                          </div>
+                      </td>
+                       
+                      <td class="a-right movewishlist">
+                         {$a.subtotal}
+                      </td>
+                      <td class="a-center last">
+                        <a class="btn btn-default btn-sm" title="Remove item" href="{$fulldomain}/cart/delete-buy/{$a.id}"><span><span>hapus</span></span></a> 
+                        <a class="btn btn-default btn-sm" title="Update item" onclick="submitform();"><span><span>update</span></span></a>
+                      </td>
+                    </tr>
+
+                     {/foreach}
+                  </tbody>
+                </table>
+              </fieldset>
+            </form>
+          </div>
+          </div>
+         <div class="totals col-md-4 pull-right" style="border: 1px solid rgb(238, 238, 238);">
+         <form method="post" action="{$fulldomain}/cart/checkout">
+            <input type="hidden" value="{$orderid}" id="orderid" name="orderid">
+            <input type="hidden" value="{$total_subtotalxx}" id="total_subtotal" name="total_subtotal">
+            
+                <div class="voucher" style="margin-bottom:20px;">
+
+              </div>
+               {if $kodevoucher neq ''}
+              <div class='alert alert-success'>{$namavoucher} (<strong>{$kodevoucher}</strong>) {$totaldiskon}</div>
+              {/if}
+              <div class="inner">
+                <table class="table shopping-cart-table-total" id="shopping-cart-totals-table">
+                    <tr>
+                      <td class="a-left" style=""><strong>Total</strong></td>
+                      <td class="a-right" style=""><strong><span id="totalpembelian" class="price">{$totaltagihanakhir}</span></strong></td>
+                    </tr>
+                </table>
+                <br />
+                <a  href="{$fulldomain}/product" class="btn btn-default btn-lg">Pilih Barang Lagi</a>
+                <button class="btn btn-default btn-lg"  type="submit"><span><b>Lanjutkan Belanja</b></span></button>
+                
+                
+              </div>
+            </form>
+             </div>
+            
+           {else}
+	          <br clear="all" /> <br clear="all" />
+               <br clear="all" />
+               <div style="margin:20px; text-align:center"> Data keranjang Anda saat ini masih kosong. Silahkan pilih produk terbaik dari Kami yang dihadirkan special untuk anda.
+               Jika anda kesulitan untuk berbelanja atau membutuhkan informasi lebih lengkap jangan sungkan untuk menghubungi kami segera.
+               <br clear="all" /> <br clear="all" /><a href="{$fulldomain}/product" class="btn btn-warning btn-lg">Pilih Product</a><br /></div>
+                <br clear="all" /> <br clear="all" />
+	        {/if}
+            
+            
+          <div class="cart-collaterals row">
+           {elseif $kanal eq 'cart' and $aksi eq 'checkout'}
+                {if $salah neq ''}
+                      <div class="alert {$style}">{$salah}<a href="{$fulldomain}/cart" class="btn btn-default">Kembali</a><br /><br /></div>
+                {else}
+                {literal}
+                <script type="text/javascript">
+          function tampil(data) {
+            if(data=="Pickup Point")
+            {
+              $("#diambil").show();
+              $("#dikirim").hide();
+            }
+            else if(data!="Pickup Point")
+                        {
+              $("#diambil").hide();
+              $("#dikirim").show();
+            }
+            else
+            {
+              $("#diambil").hide();
+              $("#dikirim").hide();
+            }
+          }
+
+          function tampil2(data) {
+            if(data=="Transfer")
+            {
+              $("#transfer").show();
+            }
+            else if(data!="Transfer")
+                        {
+              $("#transfer").hide();
+            }
+            else
+            {
+              $("#transfer").hide();
+            }
+          }
+
+          function tampildrop(data) {
+				if(data.checked)
+				{
+					$("#dropship").show();
+				}
+				else
+				{
+					$("#dropship").hide();
+				}
+			}
+			
+			function tampilbtn(data) {
+				if(data.checked)
+				{
+					$("#btn-notif").removeAttr("disabled");
+				}
+				else
+				{
+					$("#btn-notif").attr("disable",true);
+				}
+			}
+        </script>
+                <style>
+                    #dikirim { display:none; }
+                    #diambil { display:none; }
+					  #transfer { display:none; }
+					  #dropship { display:none; }
+                </style>
+                {/literal}
+
+                <div class="col-md-6 no-margin">
+
+                    <form method="post" id="checkout-form" action="{$fulldomain}/cart/invoice">
+                    <input type="hidden" name="email" id="email" value="{$email}">
+                    <input type="hidden" name="domain" id="domain" value="{$fulldomain}">
+                    <input type="hidden" name="transaksiid" id="transaksiid" value="{$transaksiid}">
+                    <input type="hidden" value="{$orderid}" id="orderid" name="orderid">
+                    <div class="billing-address">
+                        <h3 class="border">Alamat Pengiriman</h3>
+                        <script type="text/javascript" src="{$fulldomain}/librari/ajax/ajax_kota.js.php"></script>
+                        <script type="text/javascript" src="{$fulldomain}/librari/ajax/ajax_kec.js.php"></script>
+                        <script type="text/javascript" src="{$fulldomain}/librari/ajax/ajax_agen.js.php"></script>
+                        <script type="text/javascript" src="{$fulldomain}/librari/ajax/ajax_ongkos.js.php"></script>
+                        <script type="text/javascript" src="{$fulldomain}/librari/ajax/ajax_total.js.php"></script>
+
+                        <div class="row field-row">
+                        <div class="col-xs-12 col-md-12">
+                        {if $login eq '1'}
+                         
+                           <div class="well">
+                              <div class="form-group">
+                                <div class="col-md-6">
+                                    <label for="nama-penerima">Nama Penerima</label><br />
+                                      <input type="text" name="userfullname" class="form-control" value="{$namapenerima}" id="nama-penerima" required="required">
+                                </div>
+                                  <div class="col-md-6">
+                                    <label for="no-hp">Handphone Penerima</label><br />
+                                    <input type="text" name="userphonegsm" class="form-control" value="{$hp}" id="no-hp" required="required">
+                                </div>
+                              </div>
+                               <div class="form-group">
+                                <div class="col-md-6">
+                                    <label for="nama-penerima">Email Address</label><br />
+                                      <input type="text" name="email" class="form-control" value="{$email}" id="email" required="required">
+                                </div>
+                                 <div class="col-md-6">
+                                  <label for="provinsi">Negara</label><br />
+                                  <select name="negaraid" id="negaraid" class="form-control" required="required">
+                                    <option value=""> -- Pilih Negara -- </option>
+                                                          {foreach from=$datanegara key=id item=p}
+                                                          <option value="{$p.id}" {$p.select}>{$p.namanegara}</option>
+                                                          {/foreach}
+                                                      </select>
+                                </div>
+                              </div>
+                              <br>
+                              <div class="form-group">
+                                <div class="col-md-6">
+                                  <label for="provinsi">Provinsi</label><br />
+                                  <select name="propinsiid" id="propinsiid" class="form-control" onChange="getKota(this.value);" required="required">
+                                    <option value=""> -- Pilih Propinsi -- </option>
+                                                          {foreach from=$datapropinsi key=id item=p}
+                                                          <option value="{$p.id}" {$p.select}>{$p.namapropinsi}</option>
+                                                          {/foreach}
+                                                      </select>
+                                </div>
+                                                  <div class="col-md-6">
+                                                      <label for="kabupaten">Kota / Kabupaten</label><br />
+                                                      <select name="kotaid" id="kotaid" class="form-control" onChange="getKec(this.value);" required="required">
+                                                          <option value=""> -- Pilih Kota -- </option>
+                                                          {foreach from=$datakota key=kotaid item=p}
+                                                          <option value="{$p.kotaid}" {$p.select}>{$p.namakota}</option>
+                                                          {/foreach}
+                                                      </select>
+                                                  </div>
+                              </div>
+                              <div class="col-md-12">
+                                  <div class="col-md-6">
+                                      <label for="kabupaten">Kecamatan</label><br />
+                                      <select name="kecid" id="kecid" class="form-control" onChange="getAgen(this.value,orderid.value);" required="required">
+                                          <option value=""> -- Pilih Kecamatan -- </option>
+                                          {foreach from=$datakecamatan key=kotaid item=p}
+                                          <option value="{$p.kecid}" {$p.select}>{$p.namakecamatan}</option>
+                                          {/foreach}
+                                      </select>
+                                  </div>
+                                   <div class="col-md-6">
+                                      <label for="kabupaten">Kode POS</label><br />
+                                      <input type="text" name="userpostcode" class="form-control" value="{$kodepos}" id="kode-pos" required="required">
+                                  </div>
+                              </div>
+                              <br>
+                              <div class="form-group">
+                                                  <div class="col-md-12">
+                                                      <label for="alamat">Alamat Lengkap</label><br />
+                                                      <textarea name="useraddress" id="alamat" class="form-control" rows="5">{$useraddress}</textarea>
+                                                  </div>
+                                                  
+                              </div>
+                              <div class="clearfix"></div>
+                          </div>
+                        {else}
+                          <div class="well">
+                                <div class="form-group">
+                                  <div class="col-md-4">
+                                      <label for="nama-penerima">Nama Penerima</label><br />
+                                        <input type="text" name="userfullname" class="form-control" value="{$namapenerima}" id="nama-penerima" required="required">
+                                  </div>
+                                    <div class="col-md-4">
+                                      <label for="no-hp">No. Hp Penerima</label><br />
+                                      <input type="text" name="userphonegsm" class="form-control" value="{$hp}" id="no-hp" required="required">
+                                  </div>
+                                    <div class="col-md-4">
+                                  <label for="kode-pos">Kode Pos</label><br />
+                                                      <input type="text" name="userpostcode" class="form-control" value="{$kodepos}" id="kode-pos" required="required">
+                                </div>
+                              </div>
+                              <br>
+                              <div class="form-group">
+                                <div class="col-md-4">
+                                  <label for="provinsi">Provinsi</label><br />
+                                  <select name="propinsiid" id="propinsiid" class="form-control" onChange="getKota(this.value);" required="required">
+                                    <option value=""> -- Pilih Propinsi -- </option>
+                                                          {foreach from=$datapropinsi key=id item=p}
+                                                          <option value="{$p.id}" {$p.select}>{$p.namapropinsi}</option>
+                                                          {/foreach}
+                                                      </select>
+                                </div>
+                                                  <div class="col-md-4">
+                                                      <label for="kabupaten">Kotamadya/Kabupaten</label><br />
+                                                      <select name="kotaid" id="kotaId2" class="form-control" onChange="getAgen(this.value);" required="required">
+                                                          <option value=""> -- Pilih Kota -- </option>
+                                                          {foreach from=$datakota key=kotaid item=p}
+                                                          <option value="{$p.kotaid}" {$p.select}>{$p.namakota}</option>
+                                                          {/foreach}
+                                                      </select>
+                                                  </div>
+                                                  <div class="col-md-4">
+                                                      <label for="kecamatan">Email</label><br />
+                                                      <input type="text" class="form-control" name="email" id="email" value="{$email}" required="required">
+                                                  </div>
+                              </div>
+                              <br>
+                              <div class="form-group">
+                                                  <div class="col-md-12">
+                                                      <label for="alamat">Alamat</label><br />
+                                                      <textarea name="useraddress" id="alamat" class="form-control" id=""rows="5">{$useraddress}</textarea>
+                                                  </div>
+                              </div>
+                              <div class="clearfix"></div>
+                            </div>
+                        {/if}
+					</div>
+                    </div><!-- /.field-row -->
+                    
+                    
+                        <div class="row field-row">
+                            <div class="col-md-12">
+                                <label>Pilih Jasa Kurir Pengiriman*</label><br />
+                                <select name="pengiriman" id="pengiriman" class="form-control" onChange="getOngkir(kecid.value,orderid.value,this.value);tampil(this.value);" required="required">
+                                    <option value="">Pilih Pengiriman</option>
+                                    {foreach from=$dataagen key=agenid item=p}
+                                    <option value="{$p.agenid}" {$p.select}>{$p.namaagen}</option>
+                                    {/foreach}
+                                </select>
+                                <!-- <div id="dikirim"> -->
+                                <div>
+                                	<label>Service Ongkir*</label><br />
+                                    <select name="ongkiridnya" id="ongkirid" class="form-control" onChange="getTotal(orderid.value,this.value);"  required="required">
+                                        <option value=""> -- Pilih Ongkir -- </option>
+                                        {foreach from=$dataongkir key=ongkirid item=p}
+                                        <option value="{$p.ongkirid}" {$p.select}>{$p.ongkir}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </div>
+                          
+                            
+                            
+                        </div><!-- /.field-row -->
+                        
+
+                          
+                    <div class="row field-row">
+                            <div class="col-xs-12 col-md-12">
+                                <label>Pesan</label><br />
+                                <textarea name="pesan" class="form-control" cols="50" rows="5" style="width:100%"></textarea>
+                            </div>
+                        </div><!-- /.field-row -->
+                        <div class="row field-row" id="dropship">
+                            <div class="col-xs-6 col-md-6">
+                                <label>Nama Pengirim*</label><br />
+                                <input type="text" name="namapengirim" class="form-control" value="" id="namapengirim">
+                            </div>
+                            <div class="col-xs-6 col-md-6">
+                                <label>No Telp*</label><br />
+                                <input type="text" name="telppengirim" class="form-control" value="" id="telppengirim">
+                            </div>
+                        </div><!-- /.field-row -->
+                        <div class="row field-row">
+                            <div class="col-md-12">
+                                <input type="checkbox" name="notif" onclick="tampilbtn(this)" required="required" />
+                                dengan memilih opsi ini berarti anda telah menyetujui <a href="{$fulldomain}/terms.html" target="_blank">syarat dan ketentuan</a> di {$title}
+                                </label>
+                            </div>
+                      </div>
+                      </div>
+                      </div>
+
+                    
+                    <div class="col-md-6"> 
+                        <div class="content-isi"><br clear="all" /><br clear="all" />
+                        <h4><strong>Detail Pemesanan</strong></h4>
+                        
+                <table class="data-table cart-table" id="shopping-cart-table">
+                  <thead>
+                    <tr class="first last">
+                      <th rowspan="1"><span class="nobr">Nama Produk</span></th>
+                      <th colspan="1" class="a-center" width="10%"><span class="nobr">Jumlah</span></th>
+                       <th class="a-center" rowspan="1" width="10%">Berat (Gram)</th>
+                      <th class="a-center" rowspan="1" width="20%">Harga</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                  </tfoot>
+                  <tbody>
+                     {foreach from=$dt_keranjang key=id item=a}
+                    <tr class="first odd cart-item">
+                      <td>
+                        <h4 class="product-name">
+                          <a href="{$a.link_produk}">{$a.nama}</a>
+                        </h4>
+                        <div class="brand">{$a.ringkas}</div>
+                      </td>
+                      <td class="a-right movewishlist">
+                          {$a.qty}
+                      </td>
+                       
+                       <td class="a-right movewishlist">
+                          {$a.berat}
+                      </td>
+                      <td class="a-right movewishlist">
+                        <span class="cart-price"> <span class="price">   {$a.subtotal}</span> </span>
+                      </td>
+                    </tr>
+
+                     {/foreach}
+                  </tbody>
+                </table>
+
+
+                    <div id="total-area" class="row no-margin">
+                        <div class="col-md-12 no-margin-right">
+                            <div id="subtotal-holder">
+                                <ul class="tabled-data inverse-bold no-border">
+                                    <li>
+                                        <label>Total Berat</label>
+                                        <div class="value pull-right">{$totalberat} gram</div>
+                                        <input type="hidden" value="totalberat" value="{$totalberat}" id="totalberat" /> 
+                                    </li>
+                                   
+                                    <li>
+                                        <label>Ongkos Kirim</label>
+                                        <div class="value pull-right" id="ongkoskirim_text">0</div>
+                                        <input type="hidden" value="ongkoskirim" value="{$ongkoskirim}" id="ongkoskirim" /> 
+                                    </li>
+                                  
+                                    <li>
+                                        <label>Total Order</label>
+                                        <div class="value pull-right" id="totalsubtotal">{$total_subtotal}</div>
+                                    </li>
+                                    {if $totaldiskonn neq '0'}
+                                    <li>
+                                        <label>Diskon ({$kodevoucher})</label>
+                                        <div class="value pull-right">
+                                            (-) {$totaldiskon}
+                                        </div>
+                                    </li>
+                                    {/if}
+                                    {if $ongkoskirim neq ''}
+                                    <li>
+                                        <label>Ongkos Kirim</label>
+                                        <div class="value">
+                                            {$ongkoskirim}
+                                        </div>
+                                    </li>
+                                    {/if}
+                                    <li class="hidden ongkir">
+                                        <label>Ongkos Kirim <strong>(<span>1</span> Kg)</strong></label>
+                                        <div class="value pull-right">
+                                            
+                                        </div>
+                                    </li>
+                                </ul><!-- /.tabled-data -->
+
+                                <ul id="total-field" class="tabled-data inverse-bold ">
+                                    <li>
+                                        <label>Total Harus Dibayar</label>
+                                        <div class="value pull-right" id="totalpembelian">{$totaltagihanakhir}</div>
+                                    </li>
+                                </ul>
+
+                            </div><!-- /#subtotal-holder -->
+                        </div><!-- /.col -->
+                    </div><!-- /#total-area -->
+                    <br clear="all" />
+                    <div class="pembayaran">
+                    	<strong>Pilih Metode Pembayaran</strong>
+                         <br clear="all" />
+                         <div class="col-md-12">
+                            <div class="col-md-3">
+                                 <div class="payment-item">
+                                     <span class="payment-logo">
+                                     <img src="{$lokasiwebtemplate}images/payment/cash.png" alt="">
+                                     </span>
+                                    <input type="radio" checked="checked" name="pembayaran" value="Transfer" /> Manual Bank Transfer <a href="javascript:void(0);" title="Anda harus melakukan konfirmasi pembayaran setelah transfer">*</a>
+                                 </div>
+                            </div>
+                            <div class="col-md-9">
+                               <div class="p-20">
+                               	<b>Pilihan Nomor Rekening:</b><br />
+                                {foreach from=$databank key=id item=a}
+                                	Bank {$a.nama} a.n {$a.atasnama}<br />
+                                {/foreach}
+                                <br />
+                                Pembayaran ini mengharuskan anda untuk mengkonfirmasi manual melalui
+                                link konfirmasi yang kami kirimkan diemail. 
+                               </div>
+                            </div>
+
+                        </div>
+                        
+                        <!-- <div class="col-xs-3">
+                        	 <div class="payment-item">
+                                 <span class="payment-logo">
+                                 <img src="{$lokasiwebtemplate}images/payment/atm-bersama.png" alt="">
+                                 </span>
+                             	<input type="radio"  name="pembayaran" value="ATMTransfer" /> ATM Transfer<br /> (Prima/Alto/Bersama)
+                             </div>
+                        </div>
+                          <div class="col-xs-3">
+                        	 <div class="payment-item">
+                                 <span class="payment-logo">
+                                 <img src="{$lokasiwebtemplate}images/payment/visa.png" alt="">
+                                 </span>
+                             	<input type="radio" name="pembayaran" value="CreditCard"/> Credit Card <br /> (Visa)
+                             </div>
+                        </div>
+                        <div class="col-xs-3">
+                        	 <div class="payment-item">
+                                 <span class="payment-logo">
+                                 <img src="{$lokasiwebtemplate}images/payment/master-card.png" alt="">
+                                 </span>
+                             	<input type="radio" name="pembayaran" value="CreditCard"/> Credit Card <br />(Master)
+                             </div>
+                        </div>
+						-->
+                       
+
+                        
+                        
+                    </div> <br clear="all" />
+					<hr />
+                    <div class="place-order-button">
+                        <!-- <button class="btn btn-default" disabled="disabled" id="btn-notif" type="submit">Lanjutkan</button> -->
+                        <button class="btn btn-default btn-lg pull-right" id="btn-notif" type="submit">Selesaikan Belanja</button>
+                    </div><!-- /.place-order-button -->
+                    </form>
+                </div><br><br>
+
+                </div>
+
+              {/if}
+              {else if $aksi eq 'invoice' or $aksi eq 'response'}
+                  <div class="alert {$style} checkout-alert">{$salah}</div>
+                  
+                  {if $style neq 'alert-danger'}
+
+                  <div class="col-md-12">
+                        <div class="panel panel-default panel-sidebar-1">
+                            <div class="panel-heading">
+                                <h4>Rincian Pesanan</h4>
+                            </div>
+                            <table class="table table-cart table-responsive">
+                                <tbody>
+                                    <tr>
+                                        <td>No.</td>
+                                        <th>Gambar</th>
+                                        <th>Produk</th>
+                                        <th>Harga</th>
+                                        <th>Kuantitas</th>
+                                        <th>SubTotal</th>
+                                    </tr>
+                                     {foreach from=$detailproduk key=id item=a}
+                                    <tr>
+                                        <td>{$a.xx}</td>
+                                        <td><img width="80" src="{$a.image_s}" alt=""></td>
+                                        <td><a href="#">{$a.nama}</a></td>
+                                        <td>{$a.harga}</td>
+                                        <td>{$a.qty}</td>
+                                        <td>{$a.totalharga}</td>
+                                    </tr>
+                                    {/foreach}
+
+                                    {if $ongkos_kirim > 0 }
+                                    <tr>
+                                        <td colspan="5" align="right">Ongkos Kirim ({$totberat} Gram)</td>
+                                        <td align="right">{$ongkos_kirim2}</td>
+                                    </tr>
+                                    {/if}
+                                  
+                                    <tr>
+                                        <td colspan="5" align="right">Subtotal</td>
+                                        <td align="right">{$totaltagihan}</td>
+                                    </tr>
+                                    {if $total_diskon > 0 }
+                                    <tr>
+                                        <td colspan="5" align="right">Diskon {$namadiskon} {$diskonnya} ({$kode_voucher})</td>
+                                        <td align="right">(-) {$total_diskon2}</td>
+                                    </tr>
+                                    {/if}
+                                    <tr>
+                                        <td colspan="5" align="right">Grand Total</td>
+                                        <td align="right">{$totaltagihanakhird}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    {/if}
+
+                {else if $aksi eq 'pembayaran'}
+                <div class="col-xs-12 no-margin">
+
+                    {if $salah neq ''}<div class="alert {$style}">{$salah}</div>{/if}
+
+                    {literal}
+                  <script type="text/javascript">
+                        function tampil2(data) {
+                            if(data=="Transfer")
+                            {
+                                $("#transfer").show();
+                            }
+                            else if(data!="Transfer")
+                            {
+                                $("#transfer").hide();
+                            }
+                            else
+                            {
+                                $("#transfer").hide();
+                            }
+                        }
+                    </script>
+                    <style>
+                        #transfer { display:none; }
+                    </style>
+                    {/literal}
+
+                    <form method="post" action="{$fulldomain}/cart/pembayaran">
+                    <input type="hidden" value="{$invoiceid}" id="invoiceid" name="invoiceid">
+                    <div class="billing-address">
+                        <h2 class="border h1">Metode Pembayaran</h2>
+                        <script type="text/javascript" src="{$fulldomain}/librari/ajax/ajax_kota.js"></script>
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-md-6">
+                                <label>Pembayaran*</label>
+                                <select name="pembayaran" id="pembayaran" class="form-control" required="required" onChange="tampil2(this.value);">
+                                  <option value="">Pilih Metode Pembayaran</option>
+                                    <option value="Transfer">Transfer</option>
+                                    {foreach from=$datapayment key=id item=p}
+                                    <option value="{$p.paymentid}">{$p.namapayment}</option>
+                                    {/foreach}
+                                    <option value="klikbca">KlikBCA</option>
+                                </select>
+                            </div>
+                        </div><!-- /.field-row -->
+
+                        <div class="row field-row" id="transfer">
+                            <div class="col-xs-12 col-md-6">
+                                <label>Pilih Bank*</label>
+                                <select name="bank" id="bankid" class="form-control">
+                                    <option value=""> -- Pilih Bank -- </option>
+                                    {foreach from=$databank key=bankid item=p}
+                                    <option value="{$p.id}" {$p.select}>{$p.nama}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div><!-- /.field-row -->
+
+                    </div><!-- /.billing-address -->
+                    <div class="place-order-button">
+                        <button class="btn btn-default" type="submit">Kirim Data</button>
+                    </div><!-- /.place-order-button -->
+                    </form>
+
+                </div><!-- /.col -->
+                {else if $aksi eq 'tamu'}
+                <div class="col-xs-12 no-margin">
+
+                    <form method="post" action="{$fulldomain}/cart/tamu">
+                    <input type="hidden" value="{$orderid}" id="orderid" name="orderid">
+                    <input type="hidden" name="jenis" value="1" />
+                    <input type="hidden" name="kontak" value="1" />
+                    <div class="billing-address">
+                        <h2 class="border h1">Informasi Konsumen</h2>
+                        <script type="text/javascript" src="{$fulldomain}/librari/ajax/ajax_kota.js"></script>
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-md-6">
+                                <label>Nama Lengkap*</label>
+                                <input name="userfullname" id="userfullname" value="{$userfullname}" class="form-control" required="required" >
+                            </div>
+                        </div><!-- /.field-row -->
+
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-md-12">
+                                <label>Alamat*</label>
+                                <textarea name="useraddress" id="useraddress" class="form-control" data-placeholder="Masukan Alamat lengkap dan jelas" required="required">{$useraddress}</textarea>
+                            </div>
+                        </div><!-- /.field-row -->
+
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-md-6">
+                                <label>Propinsi*</label>
+                                <select name="propinsiid" id="propinsiid" class="form-control" onChange="getKota(this.value);" required="required">
+                                    <option value=""> -- Pilih Propinsi -- </option>
+                                    {foreach from=$datapropinsi key=id item=p}
+                                    <option value="{$p.id}" {$p.select}>{$p.namapropinsi}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <label>Kota*</label>
+                                <select name="kotaid" id="kotaId2" class="form-control" required="required">
+                                    <option value=""> -- Pilih Kota -- </option>
+                                    {foreach from=$datakota key=kotaid item=p}
+                                    <option value="{$p.kotaid}" {$p.select}>{$p.namakota}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div><!-- /.field-row -->
+
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-md-12">
+                                <label>Negara*</label>
+                                <select name="negaraid" id="negaraid" class="form-control" required="required">
+                                    <option value=""> -- Pilih Negara -- </option>
+                                    {foreach from=$datanegara key=id item=p}
+                                    <option value="{$p.id}" {$p.select}>{$p.namanegara}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div><!-- /.field-row -->
+
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-md-4">
+                                <label>Kode Pos*</label>
+                                <input name="userpostcode" id="userpostcode" class="form-control" value="{$kodepos}" required="required">
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                <label>Email*</label>
+                                <input name="useremail" id="email" class="form-control" value="{$email}" required="required">
+                            </div>
+
+                            <div class="col-xs-12 col-md-4">
+                                <label>Telepon*</label>
+                                <input name="userphonegsm" id="userphonegsm" value="{$hp}" class="form-control" required="required">
+                            </div>
+                        </div><!-- /.field-row -->
+
+                    </div><!-- /.billing-address -->
+                    <div class="place-order-button">
+                        <button class="btn btn-default" type="submit">Kirim Data</button>
+                    </div><!-- /.place-order-button -->
+                    </form>
+
+                </div><!-- /.col -->
+              {elseif $kanal eq 'cart' and $aksi eq 'detailinvoice'}
+                 <br clear="all" />
+                <div class="title-red">
+                    <h3>Detail Order #{$orderid}, Invoice #{$invoiceid}</h3>
+                </div><br clear="all" /><br />
+                <a href="{$urldownload}" target="_blank" class="btn btn-default">Print Invoice</a><br clear="all" /><br />
+                <span class='infodetail'>Tanggal </span>: {$tanggaltransaksi}<br>
+                <span class='infodetail'>Metode Pembayaran</span> : {$pembayaran}<br>
+                <span class='infodetail'>Metode Pengiriman</span> : {$pengiriman}<br>
+                <span class='infodetail'>Status</span> : <strong>{$stats}</strong><br><br>
+
+                    {if $status eq '1' and $pembayaran eq 'Transfer'}<a href="{$urlconfirm}" class="btn btn-default">Lakukan Konfirmasi Pembayaran</a><br /><br />{/if}
+
+                <div class="boxTable">
+                        <table class="table table-striped table-bordered" width="100%">
+                            <tbody align="top">
+                                <tr>
+                                    <th align="center">Nomor</th>
+                                    <th align="center">Nama Produk</th>
+                                    <th align="center">Kode Produk</th>
+                                    <th align="center">Qty</th>
+                                    <th align="center">Harga</th>
+                                    <th align="center">SubTotal</th>
+                                </tr>
+                            </tbody>
+                            {foreach from=$detailproduk key=id item=a}
+                            <tbody align="top">
+                                <tr>
+                                    <td class="sub_spec_cart" align="center">{$a.xx}</td>
+                                    <td class="sub_spec_cart" align="left">
+                                      {$a.namaprod}
+                                    </td>
+                                    <td class="sub_spec_cart" align="left">{$a.kodeproduk}</td>
+                                    <td class="sub_spec_cart" align="center">{$a.qty}</td>
+                                    <td class="sub_spec_cart" align="center">{$a.harga}</td>
+                                    <td class="sub_spec_cart" align="right">{$a.total}</td>
+                                </tr>
+                            </tbody>
+                            {/foreach}
+                            <tbody align="top">
+                              <tr>
+                                    <td valign='top' colspan='5' align='right' class="totals"><strong>Subtotal : </strong></td>
+                                    <td align='right' class="totals">{$totaltagihan}</td>
+                              </tr>
+                           </tbody>
+                           
+                         
+
+                        {if $total_diskon > 0 }
+                            <tbody align="top">
+                                <tr>
+                                    <td class="sub_spec_cart" valign='top' colspan='5' align='right'>Diskon {$namadiskon} {$diskonnya} ({$kodevoucher})</td>
+                                    <td class="sub_spec_cart" align='right'>(-) {$total_diskon2}</td>
+                                </tr>
+                            </tbody>
+                            {/if}
+
+                         {if $ongkos_kirim > 0 }
+                            <tbody align="top">
+                                <tr>
+                                    <td class="sub_spec_cart" valign='top' colspan='5' align='right'>{$totberat} grams</td>
+                                    <td class="sub_spec_cart" align='right'>{$ongkos_kirim2}</td>
+                                </tr>
+                            </tbody>
+                            {/if}
+                          
+                        
+
+                        <tbody align="top">
+                        <tr>
+                            <td class="totals" valign='top' colspan='5' align='right'><strong>Grand Total : </strong></td>
+                            <td class="totals" align='right'><strong>{$totaltagihanakhird}</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br clear="all" /><br />
+
+                    <table border="0" width="100%">
+                        <tbody align="top">
+                            <tr>
+                                <th width="50%">Informasi Pembayaran</th>
+                                <th width="50%" colspan="2">Informasi Tagihan</th>
+                            </tr>
+                        </tbody>
+
+                        <tbody align="top">
+                            <tr>
+                                <td rowspan="4" scope="row" class="sub_spec">
+                                  Pembayaran dilakukan secara <strong>{$pembayaran}</strong><br />
+                                    {if $pembayaran eq 'Transfer'}
+                                        Untuk menyelesaikan pembayaran transaksi ini, silahkan transfer ke : <br />
+                                        <ol>
+                                        {foreach from=$rekening key=id item=a}
+                                        <li>{$a.bank} ({$a.akun} a.n {$a.namaak})</li>
+                                        {/foreach}
+                                        </ol>
+                                    {/if}
+                                </td>
+                                <td class="info_spec" width="20%">Nama</td>
+                                <td class="sub_spec">{$billingnama}</td>
+                            </tr>
+                            <tr>
+                                <td class="info_spec">Email</td>
+                                <td class="sub_spec">{$billingemail}</td>
+                            </tr>
+                            <tr>
+                                <td class="info_spec">Alamat</td>
+                                <td class="sub_spec">{$billingalamat}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br clear="all" /><br />
+                    <table border="0" width="100%">
+                        {if $pengiriman neq 'Pickup Point'}
+                        <tr>
+                            <th colspan="2">Informasi Pengiriman</th>
+                        </tr>
+                        <tr>
+                            <td width="30%" class="info_spec">Agen Pengiriman</td>
+                            <td class="sub_spec">{$namaagen} - {$services}</td>
+                        </tr>
+                        {if $no_resi neq ''}
+                        <tr>
+                            <td class="info_spec">Nomor Resi Pengiriman</td>
+                            <td class="sub_spec">{$no_resi}</td>
+                        </tr>
+                        {/if}
+                        <tr>
+                            <td class="info_spec">Nama Lengkap</td>
+                            <td class="sub_spec">{$namalengkap}</td>
+                        </tr>
+                        <tr>
+                            <td class="info_spec">Alamat Pengiriman</td>
+                            <td class="sub_spec">{$alamatpengiriman}</td>
+                        </tr>
+                        {else}
+                        <tr>
+                            <th colspan="2">Informasi Pengambilan Barang</th>
+                        </tr>
+                        <tr>
+                            <td width="30%" class="info_spec">Nama Toko</td>
+                            <td class="sub_spec">{$warehouse}</td>
+                        </tr>
+                        <tr>
+                            <td class="info_spec">Alamat</td>
+                            <td class="sub_spec">{$almttk}</td>
+                        </tr>
+                        <tr>
+                            <td class="info_spec">Telp</td>
+                            <td class="sub_spec">{$telptk}</td>
+                        </tr>
+                        {/if}
+                    </table>
+                    
+                    {if $dropship eq '1'}
+                    <br clear="all" /><br />
+                        <table border="0" width="100%">
+                            <tr>
+                                <th colspan="2">Informasi Dropship</th>
+                            </tr>
+                            <tr>
+                                <td width="30%" class="info_spec">Nama Pengirim</td>
+                                <td class="sub_spec">{$namapengirim}</td>
+                            </tr>
+                            <tr>
+                                <td class="info_spec">Telp Pengirim</td>
+                                <td class="sub_spec">{$telppengirim}</td>
+                            </tr>
+                        </table>
+                    {/if}
+                </div>
+             {else if $aksi eq 'confirm'}
+          <!--cart-collaterals-->
+          <section id="cart-page" style="margin-bottom:30px;">
+
+                <div class="col-xs-12 no-margin" style="padding-left: 0px;">
+
+                    <form method="post" action="{$fulldomain}/cart/save-confirm">
+                    <input type="hidden" name="total" id="total" value="{$subtotalnya}" >
+                    <div class="billing-address">
+                    <h3>Konfirmasi Pembayaran</h3>
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-md-6">
+                                <label>Kode Invoice*</label>
+                                <input name="invoiceid" id="invoiceid" value="{$invoicenya}" class="form-control" required="required" >
+                            </div>
+
+                        	{if $subtotalnya neq ''}
+                        	<div class="col-xs-12 col-md-6">
+                                <label>Total Tagihan*</label>
+                                <input name="total" id="total" value=" {$subtotal2}" class="form-control" disabled="disabled" >
+                           	</div>
+                        	{/if}
+                        </div>
+
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-md-6">
+                                <label>Nama Pengirim*</label>
+                                <input type="text" id="userfullname" class="form-control" name="name" value="{$userfullname}" />
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <label>Jumlah Transfer*</label>
+                                <input name="jumlah_bayar" id="jumlah_bayar" class="form-control" value="{$subtotalnya}" required="required">
+                            </div>
+
+                        </div><!-- /.field-row -->
+
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-md-6" id="inputDate">
+                            <label>Tanggal *</label>
+                                <div class="input-group date">
+                                  <input type="text" name="date" value="{$now}" class="form-control" title="Tanggal">
+                                  <span class="input-group-addon"><i class="fal fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <label>Bank Tujuan*</label>
+                                <select name="bank" id="banktujuan" class="form-control">
+                                    {foreach from=$bank key=id item=b}
+                                    <option value="{$b.id}">{$b.nama}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div><!-- /.field-row -->
+
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-md-6">
+                                <label>Bank Pengirim*</label>
+                                <input name="bankdari" id="bankdari" class="form-control" value="{$namabank}" required="required">
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <label>Nomor Rekening Pengirim*</label>
+                                <input name="norek" id="norek" class="form-control" value="{$norek}" required="required">
+                            </div>
+                        </div><!-- /.field-row -->
+
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-md-12">
+                                <label>Pesan</label>
+                                <textarea name="pesan" id="pesan" class="form-control" rows="5" data-placeholder="Masukan Pesan Anda"></textarea>
+                            </div>
+                        </div>
+                        <button class="btn btn-default btn-lg" type="submit" style="margin-top: 20px;"><span>Kirim Konfirmasi Pembayaran</span></button>
+
+                    </div><!-- /.billing-address -->
+            {else if $aksi eq 'save-confirm'}
+                    {if $salah neq ''}
+                        <div class="alert {$style}">{$salah}</div>
+                    {/if}
+                {else if $aksi eq 'transaction'}
+                <div class="col-xs-12 col-md-12 no-margin wide sidebar blog-sidebar">
+                    <div class="widget">
+                    <h4>Histori Transaksi</h4>
+                    <div class="body table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Invoice</th>
+                                    <th>Metode Pembayaran</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {foreach from=$listtransaksi key=transaksiid item=t}
+                                <tr>
+                                    <td class="sub_spec_cart"><a href="{$t.urldetail}"><strong>{$t.invoiceid}</strong></a></td>
+                                    <td class="sub_spec_cart" align="center">{$t.pembayaran}</td>
+                                    <td class="sub_spec_cart" align="center">{$t.stat} {if $t.status eq '1' and $t.pembayaran eq 'Transfer'}<br /><a href="{$t.link}">Lakukan Konfirmasi Pembayaran</a>{/if}</td>
+                                </tr>
+                                {/foreach}
+
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+
+            </div><!-- /.col -->
+                 {else if $aksi eq 'finish'}
+               		{if $sukses eq '1'}
+                    	<center>
+                        	<div class="alert alert-success"><center>{$message}</center></div>
+                        <a href="{$fulldomain}/user/history" class="btn btn-warning">Lihat Riwayat Transaksi</a> </center>
+                    {else}
+                    	<center>
+                        	<div class="alert alert-danger"><center>{$message}</center></div>
+                        <a href="{$fulldomain}/user/history" class="btn btn-warning">Lihat Riwayat Transaksi</a> </center>
+                     {/if}
+                {/if}
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+    <!--End main-container -->
+      <!--End main-container -->
+  {include file="`$lokasitemplate`komponen/home/footer.html"}

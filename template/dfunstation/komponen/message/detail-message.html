@@ -1,0 +1,80 @@
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="items item-w2">
+                           <div class="row">
+                           <div class="col-xs-10">
+                               <h4 class="option-title text-green text-uppercase">
+                               Message <span> - {$kirimnama} ({$jumlahpesan})</span></h4>
+                           </div>
+                           <div class="col-xs-2">
+                           <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-default tooltips" data-original-title="Kembali ke Message" data-placement="top" onClick="window.location=('{$fulldomain}/member/message')">
+                                    <i class="icon-envelope-alt"></i></button>
+                                <button type="button" id="btn-remove" class="btn btn-default tooltips" data-original-title="Hapus" data-placement="top">
+                                    <i class="icon-trash"></i></button>
+                            </div>
+                           </div>
+                           
+                           <div class="clearfix"></div>
+                       </div>
+                       <!-- /.row -->
+                       </div>
+                        <!-- /.items item-w2 -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default e-squared p-0">
+                            <div class="panel-body p-0">
+                            
+                                <form action="{$fulldomain}/member/delete-message" method="post" name="deleteall" id="deleteallform">
+                                    <input type="hidden" name="aksi" value="delete">
+                                    <div class="mail-reply mscroller">
+                                        {foreach from=$listpesan key=id item=i}
+                                        <div class="media media-reply remove-icheck">
+                                        <div class="media-reply-date">{$i.tanggal}</div>
+                                            <input type="checkbox" class="i-checks" name="id[]" value="{$i.id}" style="float:right" />
+                                            <a href="{$i.urlfriend}" class="pull-left media-img32">
+                                                <img src="{$i.avatar}" alt="{$i.pengirim}" border="0" />
+                                            </a>
+                                            <div class="media-body">
+                                                <div class="media-heading"><a href="{$i.urlfriend}">{$i.from}</a></div>
+                                                <p>{$i.pesan}</p>
+                                            </div>
+                                        </div>
+                                        {/foreach}
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    
+
+                                </form>
+                                
+                                <div class="mail-compose">
+                                    <div class="mail-textarea">
+                                        <form action="{$fulldomain}/member/send-reply/{$kirimuntuk}" method="post" onsubmit="return validsendreply()">
+                                        	<input type="hidden" name="untuk" value="{$kirimuntuk}" />
+                                        	<textarea name="pesan" id="pesanreply" placeholder="Write a reply .." rows="5" ></textarea>
+                                        	<div class="mail-textarea-tools">
+                                                <!-- <div class="btn-group">
+                                                  <button class="btn btn-default" type="button"><i class="icon-paper-clip"></i> Add Files</button>
+                                                  <button class="btn btn-default" type="button"><i class="icon-camera"></i> Add Photos</button>
+                                                </div> -->
+                                                <button type="submit" class="btn btn-success pull-right">Send</button>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel .panel-default -->
+                    </div>
+                    <!-- /.col-xs-12 -->
+                </div>
+                <!-- /.row -->
+
+      
+       

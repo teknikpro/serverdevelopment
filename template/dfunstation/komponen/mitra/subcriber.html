@@ -1,0 +1,180 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="items item-w2">
+           <div class="row">
+           <div class="col-xs-12">
+                 <h4 class="option-title text-green text-uppercase col-md-6">Daftar Followup</h4>
+                        {if $login eq '1' and $kanal eq 'member'}
+                        <div class="form1-group pull-right">
+                               <a href="{$fulldomain}/member/subcribertambah" class="btn btn-success"> Tambahkan Data</a>
+                        </div>
+
+                        {/if}
+           </div>
+           <div class="clearfix"></div>
+       </div>
+       <!-- /.row -->
+       </div>
+        <!-- /.items item-w2 -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+            
+            {if $childaksi eq 'detail'}
+            	{if $msg neq ''}
+                	<div class="alert alert-success alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <strong>Perubahan status berhasil</strong> satu daftar followup sudah anda lakukan, terima kasih dan sukses selalu untuk anda.
+                    </div>
+                {/if}
+                {foreach from=$datadetail key=id item=a}
+            	 <form method="post" class="form-horizontal" role="form" name="profile" enctype="multipart/form-data" action="">
+                    <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Tanggal Subscribe</label>
+                        <div class="col-sm-8">
+                          {$a.tanggal}
+                      </div>
+                   </div>
+                   <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Nama Lengkap</label>
+                        <div class="col-sm-8">
+                          {$a.userfullname}
+                      </div>
+                   </div>
+                   <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Alamat Email</label>
+                        <div class="col-sm-8">
+                          {$a.useremail}
+                      </div>
+                   </div>
+                   <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Nomor Handphone</label>
+                        <div class="col-sm-8">
+                          {$a.userhandphone}
+                      </div>
+                   </div>
+                   <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Kota</label>
+                        <div class="col-sm-8">
+                          {$a.kota}
+                      </div>
+                   </div>
+                   <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Status</label>
+                        <div class="col-sm-8">
+                          {if $a.status eq '1'}
+                        <span class="label label-success label-md">Sudah difollowup</span>
+                        {else}
+                        <span class="label label-danger label-md">Belum difollowup</span>
+                        {/if}
+                      </div>
+                   </div>
+                	
+                    
+                    {if $a.status eq '1'}
+                     <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Keterangan</label>
+                        <div class="col-sm-8">
+                        {$a.info}<br />
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Tanggal Followup</label>
+                        <div class="col-sm-8">
+                         {$a.tanggalfollow}
+                        </div>
+                    </div>
+                    {else}
+                    <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Informasi Followup</label>
+                        <div class="col-sm-8">
+                        <textarea class="form-control" name="info"  placeholder="Tuliskan apa yang anda lakukan dan bagaimana respon subcriber" rows="10" required="required"></textarea><br />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">&nbsp;</label>
+                        <div class="col-sm-8">
+                    <input type="submit" class="btn btn-primary" value="Simpan Telah Di Followup" />&nbsp;<a href="{$fulldomain}/member/subcriber"class="btn btn-primary">Kembali</a>
+                    </div>
+                    </div>
+                    {/if}
+                    
+            	</form>
+                 <a href="{$fulldomain}/member/subcriberhapus/{$a.id}" class="btn btn-default tooltips pull-right" data-original-title="Hapus Data Ini" data-placement="top" onclick="return confirmDelete();">Hapus</a>
+                <a href="{$fulldomain}/member/subcriberedit/{$a.id}" class="btn btn-default tooltips pull-right" data-original-title="Ubah Data Ini" data-placement="top">Ubah Data</a>
+                {/foreach}
+            {else} 
+            
+             {if $jml_post eq '0'}
+                <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                     Saat ini anda belum memiliki daftar Subscriber yang harus di followup, silahkan promosikan website replika anca
+                     supaya semakin banyak member baru yang dapat diajak untuk bergabung kedalam Detox Your Body - SentraDetox
+               </div>
+                <div class="clearfix"></div>
+            {else}
+            	Berikut ini adalah daftar subscriber yang harus anda followup dalam upaya menjaring member member baru dimana
+                anda adalah sebagai referensinya.<br /><br />
+                <div class="panel panel-default">
+                  <table class="table">
+                    <thead>
+                      <tr class="active">
+                        <th>No</th>
+                        <th>Jenis</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Detail</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     
+                    
+              {foreach from=$datadetail key=id item=a}
+                	<tr>
+                        <td>{$a.no}</td>
+                        <td>{$a.jenis}</td>
+                       	<td>{$a.userfullname}</td>
+                        <td>{$a.useremail}</td>
+                        <td>
+                        {if $a.status eq '1'}
+                        <span class="label label-success">Sudah difollowup</span>
+                        {else}
+                        <span class="label label-danger">Belum difollowup</span>
+                        {/if}</td>
+                        <td>
+                        <a href="{$fulldomain}/member/subcriber/detail/{$a.id}">Detail</a>
+                        </td>
+                     </tr>
+                  
+                {/foreach}
+                </tbody>
+                  </table>
+                </div>
+                <div class="paginate pull-right">
+                    <ul class="pagination">
+                        {foreach from=$stringpage key=pageid item=a}
+                            {if $a.link neq ''}
+                                <li><a href="{$a.link}">{$a.nama}</a></li>
+                            {else}
+                                <li><a href="javascript:void(0)">{$a.nama}</a></li>
+                            {/if}
+                        {/foreach}
+                    </ul>
+                </div>
+            {/if}
+            
+            {/if}
+
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel .panel-default -->
+    </div>
+    <!-- /.col-xs-12 -->
+</div>
+<!-- /.row -->
+

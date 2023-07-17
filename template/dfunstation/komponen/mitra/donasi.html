@@ -1,0 +1,66 @@
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="items item-w2">
+                           <div class="row">
+                           <div class="col-xs-6">
+                                <h4 class="option-title text-green text-uppercase">{$namarubrik}</h4>
+                           </div>
+                           <div class="col-xs-6">
+                                <div class="btn-group pull-right">
+                                    <a href="{$fulldomain}/donasimain" class="le-button post-comment-button">
+                                    <button type="button" class="btn btn-default tooltips" data-original-title="Buat Ticket" data-placement="top" >
+                                        <i class="icon-trash"></i> Kirimkan Donasi Mainan</button></a>
+                                </div>
+                           </div>
+                           <div class="clearfix"></div>
+                       </div>
+                       <!-- /.row -->
+                       </div>
+                        <!-- /.items item-w2 -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default e-squared p-0">
+                            <div class="panel-body p-0">
+                                 {if $jmldonasi neq '0'}
+                                    <div class="mail-box">
+                                        <table class="table table-hover table-mail" width="100%" >
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Mainan</th>
+                                                <th>File Pendukung</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {foreach from=$listdonasi key=ticketingid item=k}
+                                            <tr>
+                                                <td>{$k.no}</td>
+                                                <td><strong>{$k.nama}</strong><br />{$k.ringkas}</td>
+                                                <td>{if $k.file neq ''}<a href="{$k.linkfile}" target="_blank" class="btn btn-info">download</a>{else}kosong{/if}</td>
+                                              
+                                            </tr>
+                                            {/foreach}
+
+                                        </tbody>
+                                        </table>
+                                        
+                                       
+                                    </div>
+                                {else}
+                                    <div class="alert warning">Saat ini anda belum memiliki ide atau donasi mainan yang dikirimkan</div>
+                                {/if}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel .panel-default -->
+                    </div>
+                    <!-- /.col-xs-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+
+     

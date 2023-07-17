@@ -1,0 +1,25 @@
+
+<br clear="all" />
+<div class="insight-headlin1e">
+{foreach from=$datadetail key=id item=ch}
+    <div class="col-md-4">
+    	<div class="redeem-item">
+        {if $ch.gambar neq ''}
+        <div class="redeem-item-img">
+            <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}" /></a>
+        </div>
+        {/if}
+            <div class="redeem-item-poin">{$ch.poin} poin</div>
+            <div class="redeem-item-isi">
+            <a class="list-link" href="{$ch.link}">{$ch.nama}</a>
+            <br />
+            <p>{$ch.ringkas}</p>
+            <span class="text-gray">Periode {$ch.startdate} -  {$ch.enddate}</span><br /><br />
+             <div class="col-xs-6"><a class="btn btn-block btn-primary" href="{$ch.link}">Selengkapnya</a></div>
+             <div class="col-xs-6"><a class="btn btn-block btn-warning" href="{$fulldomain}/user/redeem/create/{$ch.id}/{$ch.alias}">Tukarkan</a></div>
+            </div>
+        </div>
+    </div>
+{/foreach}
+<br clear="all" />
+</div>

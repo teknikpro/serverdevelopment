@@ -1,0 +1,40 @@
+<div class="boxcontent">
+<div class="box-content">
+    <div class="large-content">
+    	
+        {if $msg neq ''}
+        	<div class="col-md-12">{$msg}</div>
+           
+           
+        </div>
+        {else}
+       <div class="col-md-12">
+       		 <div class="thumbDetail">
+                <img src="{$detailgambar}" alt="{$detailnama}" class="img-responsive" />
+            </div>
+       </div>
+       <div class="col-md-12">
+        <div class="title-headline">
+            <span>{$detailnama}</span>
+        </div><br clear="all" />
+         <div class="content-info">
+         	<span>{if $detailcreator neq ''}Oleh {$detailcreator} | {/if} {$detailtanggal} | {$detailstats} Views</span>
+         </div>
+        <p>{$detaillengkap}</p>
+       {if $namafile1 neq ''}
+        {if $namafile1 neq ''}
+        <div class="lampiran">
+            <div class="lampiran-info"><a href="{$urldownload}" class="btn btn-lg btn-warning" target="_blank">Download File</a></div>
+        </div>
+        {/if}
+      
+        {/if}
+      	<br clear="all" /><br clear="all" />
+       <div id="share1"></div> 
+               <div class="bg-divider"></div>
+    	</div>  
+        {/if}  
+	
+   </div>   
+</div>
+</div>

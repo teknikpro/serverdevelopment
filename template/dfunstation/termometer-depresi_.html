@@ -1,0 +1,600 @@
+{include file="`$lokasitemplate`/komponen/home/header_termometer.html"}
+
+{if $aksi eq 'tes'}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <br><br>
+                <div class="sign-form single">
+                    <div class="tesmandiri-intro">
+                        <img src="{$lokasiwebtemplate}images/img.tesdepresi.jpg" />
+                        <h2>Termometer Depresi</h2>
+                        <strong>BDI-II versi Bahasa Indonesia</strong><br />
+                        <br />Pengembangan tes ini merupakan kerjasama antara
+                        IPK Jabar dan SBM ITB.
+                        <br /><br />
+                        <strong>Konsultan Ahli:</strong><br />
+                        Dr. Henndy Ginting, S.Psi., M.Si., Psikolog<br />
+                        Robert O. Rajagukguk, Ph.D., Psikolog<br />
+                    </div>
+                    <div class="sign-inner">
+
+                        <div class="col-md-12">
+                            <div class="row form-group">
+                                <div class="col-xs-12">
+                                    <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                                        <li class="disabled"><a href="#step-1">
+                                                <h4 class="list-group-item-heading">Daftar</h4>
+                                            </a></li>
+                                        <li class="active"><a href="#step-2">
+                                                <h4 class="list-group-item-heading">Tes</h4>
+                                            </a></li>
+                                        <li class="disabled"><a href="#step-3">
+                                                <h4 class="list-group-item-heading">Hasil</h4>
+                                            </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                            {if $pesanhasil neq ''}
+                            <div class="alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible"
+                                role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span
+                                        aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                {$pesanhasil}.
+                                <ul>
+                                    {foreach from=$pesan key=id item=a}
+                                    <li>{$a.pesan}</li>
+                                    {/foreach}
+                                </ul>
+                            </div>
+                            {else}
+                            <strong> Petunjuk:</strong><br />
+                            <p>Kuesioner berikut ini terdiri dari 21 kelompok pernyataan. Mohon setiap kelompok
+                                pernyataan dibaca dengan cermat, setelah itu di dalam setiap kelompok <strong>pilih satu
+                                    dari pernyataan yang paling menggambarkan perasaan anda selama 2 minggu terakhir,
+                                    termasuk hari ini.</strong> Klik lingkaran di samping pernyataan yang Anda pilih.
+                                Apabila di dalam satu kelompok terdapat beberapa pernyataan yang terasa sama, Klik
+                                lingkaran yang paling tinggi dari pernyataan-pernyataan yang terasa sama tersebut.
+                                Pastikan bahwa anda tidak memilih lebih dari satu pernyataan di dalam setiap kelompok,
+                                termasuk pernyataan 16 (Perubahan pola tidur) dan pernyataan 18 (Perubahan selera
+                                makan).</p>
+
+
+                            {/if}
+
+                            {if $pesanhasil eq ''}
+                            <div class="p-10">
+                                <form method="post" name="ptform" id="ptform">
+                                    <input type="hidden" value="1" name="sikap" />
+                                    {foreach from=$soalsikap key=soalid item=a}
+                                    <input type="hidden" name="no[{$a.no}]" value="{$a.ptsoalid}" />
+                                    <input type="hidden" name="soal[{$a.no}]" value="{$a.soalid}" />
+                                    <br clear="all" />
+                                    <div class="soal-pt-item">
+                                        <div class="p-10">
+                                            <div class="soal-pt-pertanyaan" id="sikap-{$a.soalid}">
+                                                <div class="col-md-12">
+                                                    <div class=" btn-warning soal-item-nomor">{$a.nomor}</div>
+                                                    <span>{$a.pertanyaan}</span>
+                                                </div><br clear="all" />
+
+                                                {foreach from=$a.jawaban key=jawabanid item=b}
+                                                <div class="col-md-12"><input
+                                                        style="padding:5px; width:25px; height:25px"
+                                                        onclick="pilih('{$a.soalid}')" type="radio" name="j-{$a.soalid}"
+                                                        value="{$b.nilai}" required> {$b.jawaban}</div>
+                                                {/foreach}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/foreach}
+
+                                    <br clear="all" />
+
+                                    <script>
+                                        function pilih(data) {
+                                            $("#sikap-" + data).addClass("soal-pilih");
+                                        }
+                                    </script>
+
+                                    <br clear="all" />
+
+                                    <div class="alert alert-default"><strong>Pastikan semua jawaban terisi
+                                            penuh.</strong> Jika telah selesai menjawab semua pertanyaan, silahkan klik
+                                        tombol di bawah ini untuk mengirimkan jawaban anda.
+                                        <br clear="all" /><br />
+                                        <input type="hidden" name="aksi" value="simpan" />
+                                        <input type="submit" value="Lihat Hasil " class="btn btn-success btn-lg" />
+                                    </div>
+
+
+                                </form>
+                                {/if}
+                                <br clear="all" />
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+    </div>
+    <!-- /.col-xs-12 -->
+    </div>
+    <!-- /.row -->
+    </div>
+    <!-- /.container -->
+    <br clear="all" />
+</section>
+<!-- /#page -->
+
+{elseif $aksi eq 'hasil'}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="sign-form single">
+                    <div class="tesmandiri-intro">
+                        <img src="{$lokasiwebtemplate}images/img.tesdepresi.jpg" />
+                        <h2>Termometer Depresi </h2>
+                        <strong>BDI-II versi Bahasa Indonesia</strong><br />
+                        <br />Pengembangan tes ini merupakan kerjasama antara
+                        IPK Jabar dan SBM ITB.
+                        <br /><br />
+                        <strong>Konsultan Ahli:</strong><br />
+                        Dr. Henndy Ginting, S.Psi., M.Si., Psikolog<br />
+                        Robert O. Rajagukguk, Ph.D., Psikolog<br />
+                    </div>
+                    <div class="sign-inner">
+
+                        <div class="col-md-12">
+                            <div class="row form-group">
+                                <div class="col-xs-12">
+                                    <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                                        <li class="disabled"><a href="#step-1">
+                                                <h4 class="list-group-item-heading">Daftar</h4>
+                                            </a></li>
+                                        <li class="disabled"><a href="#step-2">
+                                                <h4 class="list-group-item-heading">Tes</h4>
+                                            </a></li>
+                                        <li class="active"><a href="#step-3">
+                                                <h4 class="list-group-item-heading">Hasil</h4>
+                                            </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div>
+                                <center>
+
+                                    {$sikapdesc.keterangan}
+                                    <br />
+                                    <br /><br />
+                                    <!-- <a href="https://play.google.com/store/apps/details?id=com.dfunstation.apps"
+                                        class="btn btn-success btn-lg">Download Aplikasi</a> -->
+                                    <a href="https://www.dfunstation.com/termometer"
+                                        class="btn btn-warning btn-lg">Kembali Ke Home</a>
+                                </center>
+
+
+
+
+
+
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+            <!-- /.col-xs-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+    <br clear="all" />
+</section>
+<!-- /#page -->
+
+
+
+{else}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <br><br>
+                <div class="sign-form single">
+                    <div class="tesmandiri-intro">
+                        <img src="{$lokasiwebtemplate}images/img.tesdepresi.jpg" />
+                        <h2>Termometer Depresi</h2>
+                        <strong>BDI-II versi Bahasa Indonesia</strong><br />
+                        <br />Pengembangan tes ini merupakan kerjasama antara
+                        IPK Jabar dan SBM ITB.
+                        <br /><br />
+                        <strong>Konsultan Ahli:</strong><br />
+                        Dr. Henndy Ginting, S.Psi., M.Si., Psikolog<br />
+                        Robert O. Rajagukguk, Ph.D., Psikolog<br />
+                    </div>
+                    <div class="sign-inner">
+
+                        <div class="col-md-12">
+                            <div class="row form-group">
+                                <div class="col-xs-12">
+                                    <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                                        <li class="active"><a href="#step-1">
+                                                <h4 class="list-group-item-heading">Daftar</h4>
+                                            </a></li>
+                                        <li class="disabled"><a href="#step-2">
+                                                <h4 class="list-group-item-heading">Tes</h4>
+                                            </a></li>
+                                        <li class="disabled"><a href="#step-3">
+                                                <h4 class="list-group-item-heading">Hasil</h4>
+                                            </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="t">
+                                <div id="home" class="tab-pane {if $aksi eq ''}fade in active{/if}">
+
+                                    {if $pesanhasil neq ''}
+                                    <div class="alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible"
+                                        role="alert">
+                                        <button type="button" class="close" data-dismiss="alert"><span
+                                                aria-hidden="true">&times;</span><span
+                                                class="sr-only">Close</span></button>
+                                        {$pesanhasil}.
+                                        <ul>
+                                            {foreach from=$pesan key=id item=a}
+                                            <li>{$a.pesan}</li>
+                                            {/foreach}
+                                        </ul>
+                                    </div>
+                                    {else}
+                                    Sebelum melakukan tes mandiri, mohon untuk melengkapi informasi dibawah ini
+                                    dengan lengkap
+                                    dan benar terlebih dahulu.<br /><br />
+                                    {/if}
+
+                                    {if $berhasil neq '1'}
+                                    <script src="{$fulldomain}/librari/ajax/ajax_kota.js.php"></script>
+                                    <script src="{$fulldomain}/librari/ajax/ajax_kec.js.php"></script>
+                                    <form role="form" action="{$fulldomain}/termometer-depresi/daftaranggota"
+                                        method="post" name="login">
+                                        <input type="hidden" name="fbid" value="{$fbid}" />
+                                        <input type="hidden" name="twid" value="{$twid}" />
+                                        <input type="hidden" name="gpid" value="{$gpid}" />
+
+                                        <div class="form-group">
+                                            <label>Nama Lengkap</label>
+                                            <input type="text" data-original-title="Name" name="userfullname"
+                                                value="{$daftarname}"
+                                                data-content="Silahkan masukan nama lengkap anda disini."
+                                                data-trigger="focus" data-placement="left" data-toggle="popover"
+                                                placeholder="Masukan Nama Lengkap" id="name" class="form-control"
+                                                required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="text" data-original-title="email" name="useremail"
+                                                value="{$daftarname}"
+                                                data-content="Silahkan masukan nama email anda disini."
+                                                data-trigger="focus" data-placement="left" data-toggle="popover"
+                                                placeholder="Masukan Email" id="name" class="form-control"
+                                                required="required">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nomor Induk Mahasiswa</label>
+                                            <input type="text" data-original-title="userphonegsm" name="userphonegsm"
+                                                value="{$daftarname}"
+                                                data-content="Silahkan masukan nomor handphone anda disini."
+                                                data-trigger="focus" data-placement="left" data-toggle="popover"
+                                                placeholder="Masukan Nomor Induk Mahasiswa" id="name"
+                                                class="form-control" required="required">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Jenis Kelamin</label><br clear="all" />
+                                            <div class="col-sm-4">
+                                                <input type="radio" style="padding:5px; width:25px; height:25px"
+                                                    class="i-checks" name="usergender" value="laki-laki" {if $usergender
+                                                    eq 'laki-laki' }checked{/if} required> Laki-laki
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="radio" style="padding:5px; width:25px; height:25px"
+                                                    class="i-checks" name="usergender" value="perempuan" {if $usergender
+                                                    eq 'perempuan' }checked{/if} required> Perempuan
+                                            </div>
+                                        </div>
+                                        <br clear="all" />
+
+                                        <div class="form-group mt-10">
+                                            <label>Tanggal Lahir</label><br clear="all" />
+                                            <div class="col-xs-4">
+                                                <select name="date" class="form-control" required>
+                                                    <option value="" selected>--Hari--</option>
+                                                    {html_options values=$dateloop output=$dateloop
+                                                    selected=$dateselected}
+                                                </select>
+                                            </div>
+                                            <div class="col-xs-4 ">
+                                                <select name="month" class="form-control" required>
+                                                    <option value="" selected>--Bulan--</option>
+                                                    {html_options values=$monthloop output=$monthloop
+                                                    selected=$monthselected}
+                                                </select>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <select name="year" class="form-control" required>
+                                                    <option value="" selected>--Tahun--</option>
+                                                    {html_options values=$yearloop output=$yearloop
+                                                    selected=$yearselected}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <br clear="all" />
+                                        <div class="form-group mt-10">
+                                            <label>Status</label><br clear="all" />
+                                            <div class="col-sm-9">
+                                                <select name="marriagestatusid" class="form-control" required>
+                                                    <option value="">-- pilih --</option>
+                                                    <option value="belum menikah" {if $marriagestatusid
+                                                        eq 'belum menikah' }selected{/if}>belum menikah</option>
+                                                    <option value="menikah" {if $marriagestatusid eq 'menikah'
+                                                        }selected{/if}>menikah</option>
+                                                    <option value="duda" {if $marriagestatusid eq 'duda' }selected{/if}>
+                                                        duda</option>
+                                                    <option value="janda" {if $marriagestatusid eq 'janda'
+                                                        }selected{/if}>janda</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br clear="all" />
+                                        <div class="form-group mt-10">
+                                            <label for="KodePos" class="col-md-123 control-label">Propinsi</label><br />
+                                            <div class="col-sm-12">
+                                                <select name="propinsiid" class="form-control"
+                                                    onchange="getKota(this.value);" required>
+                                                    <option value=""> -- Pilih Propinsi -- </option>
+                                                    {foreach from=$datapropinsi key=id item=u}
+                                                    <option value="{$u.id}" {if $propinsiid==$u.id}selected{/if}>
+                                                        {$u.namapropinsi}</option>
+                                                    {/foreach}
+                                                </select>
+                                            </div>
+                                        </div><br clear="all" />
+                                        <div class="form-group mt-10">
+                                            <label for="dob" class="col-sm-12 control-label">Kota /
+                                                Kabupaten</label><br />
+                                            <div class="col-sm-12">
+                                                <select name="kotaid" id="kotaid" class="form-control" required
+                                                    onchange="getKec(this.value);">
+                                                    <option value=""> -- Pilih Kota -- </option>
+                                                    {foreach from=$datakota key=kotaid item=a}
+                                                    <option value="{$a.kotaid}" {if $a.kotaid eq $kotaids}
+                                                        selected="selected" {/if}>{$a.nama}</option>
+                                                    {/foreach}
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+
+                                        <br clear="all" />
+                                        <div class="form-group">
+                                            <label>Pendidikan</label>
+                                            <select name="pendidikan" class="form-control" required>
+                                                <option value="">-- pilih --</option>
+                                                <option value="S1 Manajemen" {if $marriagestatusid eq 'S1-manajemen'
+                                                    }selected{/if}>S1 Manajemen
+                                                </option>
+                                                <option value="S1 Kewirausahaan" {if $marriagestatusid
+                                                    eq 'S1-Kewirausahaan' }selected{/if}>S1 Kewirausahaan
+                                                </option>
+                                                <option value="S2 MBA Bandung" {if $marriagestatusid eq 'S2-MBA-Bandung'
+                                                    }selected{/if}>S2 MBA Bandung
+                                                </option>
+                                                <option value="S2 MBA Jakarta" {if $marriagestatusid eq 'S2-MBA-Jakarta'
+                                                    }selected{/if}>S2 MBA Jakarta
+                                                </option>
+                                                <option value="S2 MSM" {if $marriagestatusid eq 'S2-MSM' }selected{/if}>
+                                                    S2 MSM
+                                                </option>
+                                                <option value="S3 DSM" {if $marriagestatusid eq 'S3-DSM' }selected{/if}>
+                                                    S3 DSM
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <br clear="all" />
+                                        <label>Pekerjaan</label>
+                                        <input type="text" data-original-title="Name" name="pekerjaan"
+                                            value="{$daftarpekerjaan}"
+                                            data-content="Silahkan masukan pekerjaan anda disini." data-trigger="focus"
+                                            data-placement="left" data-toggle="popover"
+                                            placeholder="Masukan Nama Pekerjaan" id="name" class="form-control"
+                                            required="required">
+                                </div>
+
+
+                                <hr />
+                                <button class="btn btn-lg btn-success" type="submit">Pembayaran Tes Mandiri <i
+                                        class="fal fa-arrow-right"></i></button>
+                                <strong>Rp <strike style="color: red;"> 5.000 </strike>&nbsp; Diskon 100%</strong>
+
+
+                                </form>
+                                {/if}
+                                <br clear="all" />
+
+
+
+                            </div>
+
+                            <div id="menu1" class="tab-pane fade {if $aksi eq 'login'}fade in active{/if}">
+
+                                {if $pesanhasil neq ''}
+                                <hr>
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert"><span
+                                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    {$pesanhasil}
+                                </div>
+                                {/if}
+
+                            </div>
+
+
+
+
+
+                        </div>
+
+
+                    </div>
+                    <!-- /.col-xs-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+            <br clear="all" />
+</section>
+<!-- /#page -->
+
+{/if}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var $height = $(window).height();
+        var $hiframe = $height - 150;
+        $('#pagemember').css('min-height', $hiframe + 'px');
+    });
+</script>
+
+{if $kanal eq 'user' and $aksi eq 'daftar'}
+<!-- Start modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-keyboard="false">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-info">
+                    <h2>{$detailnama}</h2>
+                    {$detaillengkap} <br clear="all" />
+                    <center><button type="button" class="btn btn-default" data-dismiss="modal">Selesai Baca dan
+                            Lanjutkan</button></center>
+                </div>
+            </div>
+            <br clear="all" />
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#klikkodeetik").click(function () {
+            $('#myModal2').modal('show');
+        });
+    });
+</script>
+
+{/if}
+
+{strip}
+
+<footer id="footer">
+
+
+
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <center>IPK Jabar & SBM ITB &copy; 2021</center>
+                    </p>
+                </div>
+
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.footer-bottom -->
+</footer>
+</div>
+<!-- /#inner-wrapper -->
+<!-- /#wrapper -->
+
+
+
+<script src="{$lokasiwebtemplate}js/jquery.init.js"></script>
+<script src="{$lokasiwebtemplate}js/dev.js"></script>
+
+<script src="{$lokasiwebtemplate}js/bootstrap.min.js"></script>
+
+
+{literal}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-36866276-23"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-36866276-23');
+</script>
+
+{/literal}
+
+
+
+<!-- =========================================
+        CUSTOM AND CONFIGURATION JAVASCRIPT DONT PLACE SCRIPT INLINE
+        ========================================== -->
+
+
+</body>
+
+</html>
+{/strip}

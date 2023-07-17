@@ -1,0 +1,305 @@
+{strip}
+{include file="`$lokasitemplate`komponen/home/header2.html"}
+<div class="container">
+<div class="mainbanner-home">
+	<div class="col-md-8">
+        <div class="homeslide">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel"> 
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+               {foreach from=$slide key=id item=a}
+                <li data-target="#myCarousel" data-slide-to="{$a.no}"  {if $a.no eq '1'} class="active"{/if} ></li>
+               {/foreach}
+              </ol>
+              <div class="carousel-inner">
+                {foreach from=$slide key=id item=a}
+                <div class="item {if $a.no eq '1'} active {/if}">
+                  <a href="{$a.url}"><img src="{$a.gambar}" alt="{$a.nama}" border="0" /></a>
+                </div>
+                {/foreach}
+              </div>
+              <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+              <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+	</div>
+    <div class="col-md-4">
+    	<div class="banner-kanan-home">
+        	{$banner_homemain1}
+        </div>
+        <div class="banner-kanan-home-1">
+        	{$banner_homemain2}
+        </div>
+    </div>
+
+</div>
+</div>
+
+<div class="container">
+    	<div class="shortcut">
+    	<div class="shortcut-content">
+        	<div class="row">
+           
+            
+            <div class="col-md-3">
+            	<a href="{$fulldomain}/konsultasi">
+            	<div class="box-content-why">
+                	<img src="{$lokasiwebtemplate}images/img.icon.satu.png" />
+                    <strong >Konsultasi Parenting</strong> <br /> Tanya persoalan apapun tentang parenting disini
+                </div>
+                </a>
+            </div>
+            
+             <div class="col-md-3">
+            	<a href="{$fulldomain}/product">
+                <div class="box-content-why">
+                	<img src="{$lokasiwebtemplate}images/img.icon.dua.png" />
+                    <strong>Produk Terbaik</strong> <br />Dapatkan berbagai produk terbaik dari mitra kami
+                </div>
+                </a>
+            </div>
+            
+             <div class="col-md-3">
+            	<a href="{$fulldomain}/download">
+                <div class="box-content-why">
+                	<img src="{$lokasiwebtemplate}images/img.icon.tiga.png" />
+                    <strong>Download Permainan</strong> <br />Download berbagai permainan edukasi
+                </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+            	<a href="{$fulldomain}/event">
+                <div class="box-content-why">
+                	<img src="{$lokasiwebtemplate}images/img.icon.empat.png" />
+                    <strong>Fun Event</strong> <br />Lihat banyak event menarik untuk anda 
+                </div>
+                </a>
+            </div>
+
+          	
+        </div>
+        </div>
+        </div>
+    </div>
+</div>
+<br clear="all" />
+<section id="berita" class="homeBerita1">
+	
+	<div class="container">
+    
+    	   <div class="homevideo-title">Apa Yang Baru</div>
+             <div class="col-md-12">
+             	<div class="homeartikel">
+                
+                	<div class="homeartikel-isi">
+
+                {foreach from=$dataheadline key=id item=ch}
+                {if $ch.no eq '1'}
+                <div class="col-md-6">
+                <div class="artikel-home-item">
+                        
+                        {if $ch.gambar neq ''}
+                        <div class="artikel-home-item-img">
+                            <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}"  class="img-responsive"/></a>
+                        </div>
+                        {/if}
+                        <a href="{$ch.link}" class="judul-1">{$ch.nama}</a>
+                        <br />
+                        <div class="artikel-home-item-isi">
+                            <span class="date">{$ch.tanggal}</span> | <span class="artikel-home-section"><a href="{$ch.urlkanal}">{$ch.namasec}</a></span><br />
+                            <p>{$ch.ringkas}</p>
+                         </div>
+                </div>
+                </div>
+                {/if}
+                {/foreach}
+                
+               <div class="col-md-6"> 
+               {foreach from=$dataheadline key=id item=ch}
+                {if $ch.no neq '1'}
+                
+                <div class="artikel-home-item-right">
+                        
+                        {if $ch.gambar neq ''}
+                        <div class="artikel-home-item-right-img">
+                            <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}"  class="img-responsive"/></a>
+                        </div>
+                        {/if}
+                        <a href="{$ch.link}" class="judul-1">{$ch.nama}</a>
+                        <br />
+                        <div class="artikel-home-item-right-isi">
+                            <span class="date">{$ch.tanggal}</span> | <span class="artikel-home-section"><a href="{$ch.urlkanal}">{$ch.namasec}</a></span><br />
+                            <p>{$ch.ringkas}</p>
+                         </div>
+                </div>
+                
+                {/if}
+                {/foreach}
+                </div>
+                	</div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+    
+</section>
+{if $dataprodukdepan}
+<br clear="all" />
+<section id="berita1" class="homeBerita1">
+	
+	<div class="container">
+    
+    	   <div class="homevideo-title">Produk Pilihan</div>
+             <div class="col-md-12">
+             	<div class="homeartikel">
+                	
+                	<div class="homeartikel-isi">
+		 {foreach from=$dataprodukdepan key=produkpostid item=p}
+                    <div class="col-md-3">
+                          <div class="product-listitem">
+                     
+                      <div class="product-listitem-img">
+                          <a href="{$p.link_detail}"><img alt="{$p.namaprod}" src="{$p.image_m}" data-echo="{$p.image_m}" /></a>
+                      </div>
+                      <div class="product-listitem-body">
+                         
+                          <div class="title">
+                              <a href="{$p.link_detail}">{$p.namaprod}</a>
+                          </div>
+                          <div class="prices">
+                          {if $p.harga neq '0'}
+                              <div class="price-current">Rp. {$p.harga}</div>
+                          {/if}
+                          </div>
+                          <div class="prodoct-listitem-ringkas">
+                            {$p.ringkas}
+                          </div>
+
+                          {if $p.namabr neq ''}<div class="brand">{$p.namabr}</div>{/if}
+                      </div>
+                      
+                      <div class="hover-area">
+                          <div class="add-cart-button">
+                              <a href="{$p.link_detail}" class="btn btn-warning">Beli Sekarang</a>
+                              <a href="{$p.link_detail}" class="btn btn-primary">Detail</a>
+                          </div>
+                          </div>
+                       </div>
+                    </div><!-- /.product-item-holder -->
+                    {/foreach}
+                  
+    </div>
+</div>
+</div>
+</div>
+{/if}
+<br clear="all" />
+<div class="container">
+	{$banner_homebawah1}
+</div>
+<br clear="all" />
+<div class="container">
+<div class="col-md-6">
+<div class="homeBerita1" style="width:99%; float:left">
+    	   <div class="homevideo-title">Fun World</div>
+             <div class="col-md-12">
+             	<div class="homeartikel">
+                	<div class="homeartikel-isi">
+                           <div class="col-md-12"> 
+                           {foreach from=$datadepanworld key=id item=ch}
+                            <div class="artikel-home-item-right">
+                                        
+                                        {if $ch.gambar neq ''}
+                                        <div class="artikel-home-item-right-img">
+                                            <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}"  class="img-responsive"/></a>
+                                        </div>
+                                        {/if}
+                                        <a href="{$ch.link}" class="judul-1">{$ch.nama}</a>
+                                        <br />
+                                        <div class="artikel-home-item-right-isi">
+                                            <span class="artikel-home-section"><a href="{$ch.urlkanal}">{$ch.namasec}</a></span><br />
+                                            <p>{$ch.ringkas}</p>
+                                         </div>
+                                </div>
+                            
+                           
+                            {/foreach}
+                            </div>
+                    </div>
+                    </div>
+           </div>
+       </div>
+</div>
+
+       
+<div class="col-md-6">
+<div class="homeBerita1">
+    	   <div class="homevideo-title">Tips Parenting</div>
+             <div class="col-md-12">
+             	<div class="homeartikel">
+                	<div class="homeartikel-isi">
+
+                {foreach from=$datadepankonsultasi key=id item=ch}
+                {if $ch.no eq '1'}
+                <div class="col-md-12">
+                <div class="artikel-home-item">
+                        
+                        {if $ch.gambar neq ''}
+                        <div class="artikel-home-item-img">
+                            <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}"  class="img-responsive"/></a>
+                        </div>
+                        {/if}
+                        <a href="{$ch.link}" class="judul-1">{$ch.nama}</a>
+                        <br />
+                        <div class="artikel-home-item-isi">
+                            <span class="date">{$ch.tanggal}</span> | <span class="artikel-home-section"><a href="{$ch.urlkanal}">{$ch.namasec}</a></span><br />
+                            <p>{$ch.ringkas}</p>
+                         </div>
+                </div>
+                </div>
+                {/if}
+                {/foreach}
+                
+               <div class="col-md-12"> 
+               {foreach from=$datadepankonsultasi key=id item=ch}
+                {if $ch.no neq '1'}
+                
+                <div class="artikel-home-item-right">
+                        
+                        {if $ch.gambar neq ''}
+                        <div class="artikel-home-item-right-img">
+                            <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}"  class="img-responsive"/></a>
+                        </div>
+                        {/if}
+                        <a href="{$ch.link}" class="judul-1">{$ch.nama}</a>
+                        <br />
+                        <div class="artikel-home-item-right-isi">
+                            <span class="date">{$ch.tanggal}</span> | | <span class="artikel-home-section"><a href="{$ch.urlkanal}">{$ch.namasec}</a></span><br />
+                            <p>{$ch.ringkas}</p>
+                         </div>
+                </div>
+                
+                {/if}
+                {/foreach}
+                </div>
+                	</div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
+</div>
+
+</div>
+<br clear="all" />
+
+
+
+
+{include file="`$lokasitemplate`/komponen/home/footer.html"}
+{/strip}

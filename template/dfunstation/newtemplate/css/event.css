@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+
+.daftar-tiket {
+    background: linear-gradient(100.4deg, #025214 -0.11%, rgba(0, 97, 15, 0.58) 100%);
+}
+
+.tgl-berlaku {
+    color: #A5A4A4;
+    line-height: 35px;
+}
+
+.tiket-lokasi {
+    font-weight: 500;
+}
+
+.card {
+    cursor: pointer;
+}

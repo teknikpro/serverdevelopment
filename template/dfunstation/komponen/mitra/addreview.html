@@ -1,0 +1,77 @@
+		<div class="row">
+            <div class="col-xs-12">
+                <div class="items item-w2">
+                   <div class="row">
+                   <div class="col-xs-12">
+                       <h4 class="option-title text-green text-uppercase">{$namarubrik}</h4>
+                   </div>
+                   <div class="clearfix"></div>
+               </div>
+               <!-- /.row -->
+               </div>
+                <!-- /.items item-w2 -->
+            </div>
+        </div>
+		<div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default e-squared p-0">
+                    <div class="panel-body p-0">
+                    {if $error neq ''}
+                     <div class="alert {$style} alert-dismissible" role="alert">
+                            <!-- <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+                        <button type="button" class="close" data-dismiss="alert" onclick="window.location=('{$backlink}')">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                             {$error}
+                    </div>
+                    {/if}
+                    <section class="inner-bottom-xs" id="comments">
+            
+                        <h3>{$jml_review} Review pada Produk Ini</h3>
+                        
+                        {foreach from=$list_comment key=userid item=q}
+                        <div class="comment-item">
+                            <div class="row no-margin">
+                                <div class="col-lg-1 col-xs-12 col-sm-2 no-margin">
+                                    <div class="avatar">
+                                        <img alt="avatar" src="{$q.gambar}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-lg-11 col-sm-10 no-margin-right">
+                                    <div class="comment-body">
+                                        <div class="meta-info">
+                                            <header class="row no-margin">
+                                                <div class="pull-left">
+                                                    <h4 class="author"><a href="#">{$q.userfullname}</a></h4>
+                                                    <span class="date">{$q.create_date}</span>
+                                                </div>
+                                            </header>
+                                        </div>
+                                        <p class="comment-content">{$q.komentar}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/foreach}
+                    </section>
+                    <section class="leave-reply" id="reply-block">
+                        <h3>Kirim Review</h3>
+                        <p>Silahkan masukan review untuk produk {$namaproduk} yang sudah kamu beli.</p>
+            
+                        <form class="reply-form cf-style-1" role="form" method="post" action="" enctype="multipart/form-data">
+                        <input type="hidden" name="aksi" value="save">
+                        <input type="hidden" name="produkpostid" value="{$produkpostid}">
+                            <div class="row field-row">
+                                <div class="col-xs-12">
+                                    <label>Review</label>
+                                    <textarea name="komentar" class="form-control le-input" id="inputComment" rows="10"></textarea>
+                                </div>
+                            </div>
+            
+                            <button type="submit" class="le-button big post-comment-button">Post Review</button>
+                        </form>
+            
+                    </section>
+     			</div><!-- /.col -->
+        <!-- ========================================= CONTENT : END ========================================= -->
+        	</div><!-- /.container -->
+      	</div>

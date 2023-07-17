@@ -1,0 +1,75 @@
+    <div class="row">
+            <div class="col-xs-12">
+                <div class="items item-w2">
+                   <div class="row">
+                   <div class="col-xs-6">
+                       <h4 class="option-title text-green text-uppercase">Konsultasi Saya
+                       </h4>
+
+                   </div>
+                  
+                   <div class="clearfix"></div>
+               </div>
+               <!-- /.row -->
+               </div>
+                <!-- /.items item-w2 -->
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default e-squared">
+                <div class="panel-body">
+
+            {if $jml_post eq '0'}
+                <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    Saat ini anda belum pernah mengirimkan konsultasi parenting satupun kepada kami. Anda bisa mengirimkan
+                    konsultasi kepada kami tentang dunia anak dan parenting.
+
+               </div>
+                <div class="clearfix"></div>
+            {else}
+            {foreach from=$datadetail key=id item=i name=list}
+
+                <div class="items item-content">
+                <div class="media">
+                    <div class="col-md-3">
+                    <a href="{$i.link}">
+                        <img src="{$i.gambar}" alt="" class="img-responsive">
+                    </a>
+                    </div>
+                    <div class="col-md-9">
+                    <div class="media-body">
+                    <div class="media-date">
+                        {$i.tanggal} | {$i.status}
+                    </div>
+                    <div class="media-heading">
+                        {$i.nama} 
+                    </div>
+                        <p>
+                            {$i.ringkas}
+                        </p>
+                        <a href="{$i.link}" class="btn btn-sm btn-default">Detail Konsultasi</a>
+                        {if $usertipe eq '1' and $i.jawaban eq ''}<a href="{$fulldomain}/konsultan/konsultasi-jawab/{$i.id}" class="btn btn-sm btn-default">Jawab Pertanyaan</a>{/if}
+                        </div>
+                    </div>
+                </div>
+                </div>
+            {/foreach}
+            {/if}
+                </div>
+              
+
+           </div>
+           <!-- /.col-xs-12 -->
+           		<ul class="pagination m-0 ml-15">
+                  {foreach from=$stringpage key=pageid item=a}
+                    <li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+                  {/foreach}
+                </ul>
+           </div>
+
+</div>
+</div>
+</div>

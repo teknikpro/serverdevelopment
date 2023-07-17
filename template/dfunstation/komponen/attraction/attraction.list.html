@@ -1,0 +1,19 @@
+
+<div class="insight-headline">
+{foreach from=$datadetail key=id item=ch}
+    <div class="col-md-4">
+    	<div class="attraction-item">
+        {if $ch.gambar neq ''}
+        <div class="attraction-item-img">
+            <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}" /></a>
+        </div>
+        <div class="attraction-item-no">{$ch.no}</div>
+        {/if}
+        <a class="list-link" href="{$ch.link}">{$ch.nama}</a>
+        <br />
+        <p>{$ch.ringkas}</p>
+        </div>
+    </div>
+{/foreach}
+<br clear="all" />
+</div>

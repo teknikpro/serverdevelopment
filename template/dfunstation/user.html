@@ -1,0 +1,142 @@
+{include file="`$lokasitemplate`/komponen/home/header.html"}
+<div id="membersection">
+   <div class="container">
+   		   <div class="row">
+           <div class="col-md-3">
+                <div class="items p-0 bg-transparent bxsh-none item-profile">
+
+               <div class="profile-cover">
+                
+                <!-- /.small-cover -->
+                <div class="sm-cover-avatar media-img95">
+                   <a href="{$fulldomain}/profile/{$username}"><img src="{$linkphoto}" alt="{$FullNameuser}" border="0" /></a>
+                </div>
+                <!-- /.cover-avatar-sm -->
+
+                <div class="sm-cover-user">
+                   <h4 class="text-green">{$FullNameuser}</h4>
+                   Member ID : <strong>{$memberid}</strong><br />
+                   Poin : <a href="{$fulldomain}/user/poin"> <strong>{$totalpoin} Poin</strong></a>
+                </div>
+                <!-- /.sm-cover-user -->
+				</div>
+               
+
+               <div class="timeline-control">
+                   <ul class="timeline-control-nav">
+                     	{if $aksi eq 'setting' or $aksi eq 'syncs'}
+                        <li><a href="{$fulldomain}/user/setting"><i class="fal fa-cog icon"></i> &nbsp;Setting</a></li>
+                        <li><a href="{$fulldomain}/user/setting/avatar"><i class="fal fa-user icon"></i> &nbsp;Ganti Avatar</a></li>
+                        <li><a href="{$fulldomain}/user/setting/gantipassword"><i class="fal fa-key icon"></i> &nbsp;Ganti Password</a></li>
+                        <li><a href="{$fulldomain}/user/setting/profile"><i class="fal fa-users icon"></i> &nbsp;Pengaturan Profile</a></li>
+                        <li><a href="{$fulldomain}/user/setting/privacy"><i class="fal fa-lock icon"></i> &nbsp;Keamanan dan Privacy</a></li>
+                        <li><a href="{$fulldomain}/user/setting/notifikasiemail"><i class="fal fa-envelope icon"></i> &nbsp;Notifikasi Email</a></li>
+                        <li><a href="{$fulldomain}/user"><i class="fal fa-arrow-circle-left"></i> &nbsp;Kembali ke Dashboard</a></li>
+                        {else}
+                            <li><a href="{$fulldomain}/user"><i class="fal fa-home icon"></i> &nbsp;Dashboard</a></li>
+                            <li><a href="{$fulldomain}/user/notifikasi"><i class="fal fa-globe icon"></i> &nbsp;Notifikasi {if $jmlnotifikasi > 0 } <span class="label label-danger">{$jmlnotifikasi}</span> {/if}</a></li> 
+                            <li><a href="{$fulldomain}/user/konsultasi"><i class="fal fa-question icon"></i> &nbsp;Konsultasi Saya</a></li>
+                            {if $usertipe eq '2'}<li><a href="{$fulldomain}/user/produk"><i class="fal fa-database icon"></i> &nbsp;Produk Saya</a></li>{/if}
+                            <li><a href="{$fulldomain}/user/history"><i class="fal fa-list icon"></i> &nbsp;Histori Transaksi</a></li>
+                            <li><a href="{$fulldomain}/user/review"><i class="fal fa-comments icon"></i> &nbsp;Review Produk</a></li>
+                            <li><a href="{$fulldomain}/user/poin"><i class="fal fa-cube icon"></i> &nbsp;Member Poin</a></li>
+                            <li><a href="{$fulldomain}/user/setting"><i class="fal fa-cog icon"></i> &nbsp;Pengaturan Akun</a></li>
+                       {/if}
+                       <li><a href="{$fulldomain}/user/logout"><i class="fal fa-key icon"></i> &nbsp;Logout</a></li>
+                  </ul>
+                  
+               </div>
+
+               </div>
+             
+           </div>
+           <!-- /.col-xs-4 -->
+
+
+                
+                
+
+               	<div class="col-md-9">
+                
+                <div class="membertengah">
+                
+                {if $berhasilcek eq '1' and $aksi neq 'setting'}
+                	<div class="col-md-12">
+                    	<div class="row">
+                            <div class="col-xs-12">
+                            <div class="items item-w2">
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                {$pesanhasilcek}<br clear="all" />
+                                <a href="{$fulldomain}/user/setting" class="btn btn-success btn-sm tooltips"> Lengkapi Profile</a>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
+                 	</div>
+                {/if}
+                
+				
+                {if $aksi eq 'aktifasi' and $login neq '1'}
+                    {include file="`$lokasitemplate`komponen/user/aktivasi.html"}
+
+				<!--member-->
+                {elseif $aksi eq 'setting' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/setting.html"}
+                 {elseif $aksi eq 'testimoni' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/testimoni.html"} 
+                 {elseif $aksi eq 'knowlegemanagement' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/knowlegemanagement.html"} 
+                {elseif $aksi eq 'history' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/history.html"}
+                {elseif $aksi eq 'wishlist' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/wishlist.html"}
+                {elseif $aksi eq 'review' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/review.html"}
+                {elseif $aksi eq 'addreview' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/addreview.html"}
+                {elseif $aksi eq 'redeem' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/redeem.html"}
+                {elseif $aksi eq 'ticketing' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/ticketing.html"}
+                {elseif $aksi eq 'addticketing' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/addticketing.html"}
+                {elseif $aksi eq 'detailticketing' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/detailticketing.html"}
+                {elseif $aksi eq 'donasi' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/donasi.html"}
+                {elseif $aksi eq 'konsultasi' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/konsultasi.html"}
+                {elseif $aksi eq 'konsultasi-jawab' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/konsultasijawab.html"}
+                {elseif $aksi eq 'poin' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/poin.html"}
+                 {elseif $aksi eq 'untukmember' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/untukmember.html"}
+                {elseif $aksi eq 'notifikasi' and $login eq '1'}
+                    {include file="`$lokasitemplate`komponen/user/notifikasi.html"}
+                {elseif $aksi eq 'produk' and $login eq '1' and $berhasilcek neq '1'}
+                         {include file="`$lokasitemplate`komponen/user/produk.html"}   
+                  {elseif $aksi eq 'kirimotp' and $login eq '1' and $berhasilcek neq '1'}
+                         {include file="`$lokasitemplate`komponen/user/kirimotp.html"}  
+                 {elseif $login eq '1' and $kanal eq 'user' and $aksi eq 'post' and $berhasilcek neq '1'}
+                    {include file="`$lokasitemplate`komponen/user/dashboard_detail.html"}{elseif $login eq '1' and $kanal eq 'user' and $aksi eq 'post' and $berhasilcek neq '1'}
+                    {include file="`$lokasitemplate`komponen/user/dashboard_detail.html"}
+                    
+                {elseif $login eq '1' and $kanal eq 'user' and $berhasilcek neq '1'}
+                    {include file="`$lokasitemplate`komponen/user/dashboard.html"}
+				{/if}
+                
+                </div>
+
+             </div>  
+       </div>
+       <!-- /.row -->
+   </div>
+   <!-- /.container -->
+</div>
+<!-- /#isotope-element -->
+
+
+
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

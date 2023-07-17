@@ -1,0 +1,87 @@
+{strip}
+{include file="`$lokasitemplate`/komponen/home/header.html"}
+           
+            <div id="isotope-element">
+               <div class="container">
+                   <div class="row">
+                   
+                    <div class="col-md-3">
+                <div class="items p-0 bg-transparent bxsh-none item-profile">
+
+               <div class="profile-cover">
+                
+                <!-- /.small-cover -->
+                <div class="sm-cover-avatar media-img95">
+                   <a href="{$fulldomain}/user/profile/{$username}"><img src="{$photoAvatarB}" alt="{$FullNameuser}" border="0" /></a>
+                </div>
+                <!-- /.cover-avatar-sm -->
+
+                <div class="sm-cover-user">
+                   <h4 class="text-green">{$namefull}</h4>
+                   {$aboutme}
+                </div>
+                <!-- /.sm-cover-user -->
+				</div>
+               
+
+               <div class="timeline-control">
+                   <ul class="timeline-control-nav">
+                            <li><a href="{$fulldomain}/profile/{$unameteman}"><i class="fal fa-commenting icon"></i> &nbsp;Status Update</a></li>
+                            <li><a href="{$fulldomain}/profile/{$unameteman}/info"><i class="fal fa-user icon"></i> &nbsp;Profile</a></li>
+                        
+                  </ul>
+                  
+               </div>
+
+               </div>
+             
+           </div>
+                   
+                   <div class="col-md-9">
+                   
+                    {if $pvprofile eq '1' and $statusteman neq '2'}
+
+                        <div class="col-xs-12">
+                           <div class="alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                 Maaf Anda tidak bisa melihat profile {$namefull}.
+                            </div>
+                          </div>
+                    {elseif $pvprofile eq '2' and $statusteman neq '2'}
+                           {if $statusteman eq '0'}
+                            <div class="col-xs-12">
+                               <div class="alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                     Maaf Anda tidak bisa melihat profile {$namefull}. Untuk melihat profile dari {$namefull} anda harus memfollow {$namefull} terlebih dahulu.
+                                </div>
+                              </div>
+                            {else}
+
+                                {if $aksi eq 'info'}
+                                    {include file="`$lokasitemplate`komponen/profile/profile.info.html"}
+
+                                {else}
+                                    {include file="`$lokasitemplate`komponen/profile/dashboard.html"}
+                                {/if}
+
+                            {/if}
+                    {else}
+
+                        {if $aksi eq 'info'}
+                            {include file="`$lokasitemplate`komponen/profile/profile.info.html"}
+
+                        {else}
+                            {include file="`$lokasitemplate`komponen/profile/dashboard.html"}
+                        {/if}
+
+                	{/if}
+                    
+                    	</div>
+
+                   </div>
+                   <!-- /.row -->
+               </div>
+               <!-- /.container -->
+            </div>
+           <br clear="all" /><br clear="all" />
+{include file="`$lokasitemplate`/komponen/home/footer.html"} 

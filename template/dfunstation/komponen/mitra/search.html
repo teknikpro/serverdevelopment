@@ -1,0 +1,119 @@
+       <form method="post" class="form-horizontal" role="form"  name="profile" enctype="multipart/form-data" action="{$fulldomain}/member/search">
+       <input type="hidden" name="submit" value="submit" />
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="items item-w2">
+                   <div class="row">
+                   <div class="col-xs-3">
+                       <h4 class="option-title text-green text-uppercase">Cari Teman</h4>
+                   </div>
+                   <div class="col-xs-3">
+                       <select class="form-control" name="gender" id="gender">
+                            <option selected="">Jenis Kelamin</option>
+                            <option value="laki-laki" {if $searchgender eq 'laki-laki'}selected{/if}>Laki-laki</option>
+            				<option value="perempuan" {if $searchgender eq 'perempuan'}selected{/if}>Perempuan</option>
+                       </select>
+                   </div>
+                   <div class="col-xs-3">
+                       <select class="form-control" name="usia">
+                            <option selected="0">Usia</option>
+                            <option value="17-25" {if $searchusia eq '17-25'}selected{/if}>17 - 25 Tahun</option>
+                            <option value="26-30" {if $searchusia eq '26-30'}selected{/if}>26 - 30 Tahun</option>
+                            <option value="31-50" {if $searchusia eq '31-50'}selected{/if}>31 - 50 Tahun</option>
+                        </select>
+                   </div>
+                   <!-- /.col-xs-3 -->
+                   <div class="col-xs-3">
+                       <select class="form-control" name="status">
+                            <option selected="">Status</option>
+                            <option value="belum menikah" {if $searchstatus eq 'belum menikah'}selected{/if}>Belum Menikah</option>
+            				<option value="menikah" {if $searchstatus eq 'menikah'}selected{/if}>Menikah</option>
+                        </select>
+                   </div>
+                   <div class="clearfix"></div>
+               </div>
+               <!-- /.row -->
+               </div>
+                <!-- /.items item-w2 -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default e-squared">
+                    <div class="panel-body">
+                    {if $berhasil neq ''}
+                     <div class="alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                             {$pesanhasil}.
+                             {if $berhasil eq '0'}
+                                 <ul>
+                                 {foreach from=$pesan key=id item=a}
+                                    <li>{$a.pesan}</li>
+                                 {/foreach}
+                                 </ul>
+                             {/if}
+                    </div>
+                    {/if}
+						<div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Nama</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="inputNama3" placeholder="Nama" name="nama" value="{$searchnama}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Kota</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="inputPassword3" placeholder="Kota" name="kota" value="{$searchkota}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                              <input type="submit" name="submit" value="Temukan Teman Sekarang" class="btn btn-success" />
+                            </div>
+                          </div>
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel .panel-default -->
+            </div>
+            <!-- /.col-xs-12 -->
+            <div class="col-xs-12">
+                <div class="panel panel-default e-squared">
+                    <div class="panel-body">
+                    {if $tot neq '0'} 
+                    <p>Ditemukan {$tot} Member dari hasil pencarian</p>
+    				
+                    {foreach from=$datateman key=id item=x}
+                    <div class="media member-list">
+                      <a href="{$x.link}" class="pull-left media-img">
+                        <img alt="{$x.namateman}" class="media-object" src="{$x.avatar}" width="95">
+                      </a>
+                      <div class="media-body">
+                        <h4 class="media-heading"><a href="{$x.link}">{$x.namateman}</a></h4>
+                        <p>Terakhir Login: {$x.aktif}</p>
+                        <a href="{$x.link}" class="btn btn-success btn-sm">Lihat Profile</a>
+                      </div>
+                    </div>
+                    {/foreach}
+    
+                    <ul class="pagination">
+                      {foreach from=$stringpage key=pageid item=a}
+                       	<li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+                      {/foreach}
+                    </ul>
+                    {else}
+                    <p>Tidak ditemukan member</p>
+                    {/if}
+    
+                    </div>
+                </div>
+    
+            </div>
+            <!-- /.col-xs-12 -->
+
+        </div>
+        <!-- /.row -->
+        </form>
+

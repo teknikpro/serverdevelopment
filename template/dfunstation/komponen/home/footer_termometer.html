@@ -1,0 +1,80 @@
+{strip}
+<footer id="footer-simpo">
+
+    <div class="footer-area">
+        <div class="container">
+            <div class="col-md-3">
+                <div>
+                    <a href="#" target="_blank"><img src="{$lokasiwebtemplate}images/img.logo.png" alt=""></a>
+                </div>
+                <!-- <div>
+                    <a href="#" target="_blank"><img src="{$lokasiwebtemplate}images/img.logo.png" alt=""></a>
+                </div> -->
+            </div>
+
+            <div class="col-md-9">
+                <div class="col-md-6 ">
+                    <h3>Tentang Kami</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Latar Belakang</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 ">
+                    <h3>Hubungi Kami</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Informasi kegiatan</a></li>
+                        <li><a href="#">Pengajuan Kerja Sama</a> </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- /.footer-bottom -->
+</footer>
+</div>
+<!-- /#inner-wrapper -->
+<!-- /#wrapper -->
+
+
+
+<script src="{$lokasiwebtemplate}js/jquery.init.js"></script>
+<script src="{$lokasiwebtemplate}js/dev.js"></script>
+
+<script src="{$lokasiwebtemplate}js/bootstrap.min.js"></script>
+
+{if $kanal eq 'user' or $kanal eq 'profile'}
+<script src='{$lokasiwebtemplate}js/jquery.events.input.js' type='text/javascript'></script>
+<script src='{$lokasiwebtemplate}js/jquery.elastic.js' type='text/javascript'></script>
+{/if}
+{if $kanal eq 'store' and $aksi eq 'detail'}
+<script src="{$lokasiwebtemplate}js/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+<script type="text/javascript" src="{$lokasiwebtemplate}js/smooth-products/js/smoothproducts.min.js"></script>
+{/if}
+
+
+{literal}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-36866276-23"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-36866276-23');
+</script>
+
+{/literal}
+
+
+
+<!-- =========================================
+        CUSTOM AND CONFIGURATION JAVASCRIPT DONT PLACE SCRIPT INLINE
+        ========================================== -->
+
+
+</body>
+
+</html>
+{/strip}

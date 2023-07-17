@@ -1,0 +1,410 @@
+
+{if $aksi eq 'tes'}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dfunstation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- my css -->
+    <link rel="stylesheet" href="{$lokasiwebtemplate}test-psikologi/css/test.css">
+  </head>
+  <body>
+
+    <div class="container mt-5">
+        {if $soaltest}
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">{$bagian}</li>
+              <li class="breadcrumb-item">{$subbagian}</li>
+              <li class="breadcrumb-item active" aria-current="page">{$kategori}</li>
+            </ol>
+          </nav>
+
+        <form  method="POST" name="ptform" id="ptform">
+            <input type="hidden" value="1" name="sikap" />
+            {foreach from=$soaltest key=soalid item=a}
+            <div class="card mb-4 border-box ">
+                <div class="card-header">
+                {$a.soal}
+                </div>
+                <div class="card-body soal-{$a.id_tes_psikologi_soal} " id="soal-{$a.id_tes_psikologi_soal}">
+                        {if $a.lainhal}
+                        <div class="form-check">
+                            <input class="form-check-input " name="soal-{$a.id_tes_psikologi_soal}[]" type="checkbox" value="6" id="lainhal-{$a.id_tes_psikologi_soal}" onclick="lainhal({$a.id_tes_psikologi_soal});" required>
+                            <label class="form-check-label" for="soal-{$a.id_tes_psikologi_soal}">
+                                {$a.lainhal}
+                            </label>
+                            <span class="soal-{$a.id_tes_psikologi_soal}"></span>
+                        </div>
+                        <hr>
+                        {/if} 
+                        {if $a.catatan}
+                        <div class="form-check">
+                            <input class="form-check-input " name="soal-{$a.id_tes_psikologi_soal}[]" type="checkbox" value="nolpisan" id="catatan-{$a.id_tes_psikologi_soal}" onclick="lainhal({$a.id_tes_psikologi_soal});" required>
+                            <label class="form-check-label" for="soal-{$a.id_tes_psikologi_soal}">
+                                {$a.catatan}
+                            </label>
+                            <span class="soal-{$a.id_tes_psikologi_soal}"></span>
+                        </div>
+                        <hr>
+                        {/if}  
+                        {foreach from=$a.jawabantest key=jawabid item=b}
+                        {if $a.tipe_soal == "MC-KURANG"}
+                        <div class="form-check">
+                        <input class="form-check-input " name="soal-{$a.id_tes_psikologi_soal}[]" type="checkbox" value="{$b.nilai}" id="soal-{$a.id_tes_psikologi_soal}" onclick="removeREquired({$a.id_tes_psikologi_soal});" required>
+                        <label class="form-check-label" for="soal-{$a.id_tes_psikologi_soal}">
+                            {$b.jawaban}
+                        </label>
+                        <span class="soal-{$a.id_tes_psikologi_soal}"></span>
+                        </div>
+                        {else if $a.tipe_soal == "MC-TAMBAH" }
+                        <div class="form-check">
+                            <input class="form-check-input " name="soal-{$a.id_tes_psikologi_soal}[]" type="checkbox" value="{$b.nilai}" id="soal-{$a.id_tes_psikologi_soal}" onclick="removeREquired({$a.id_tes_psikologi_soal});" required>
+                            <label class="form-check-label" for="soal-{$a.id_tes_psikologi_soal}">
+                                {$b.jawaban}
+                            </label>
+                            <span class="soal-{$a.id_tes_psikologi_soal}"></span>
+                        </div>
+                        {else if $a.tipe_soal == "PILIHAN" }
+                        <div class="form-group">
+                            <label for="">{$b.jawaban}</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="olahraga" value="sering">
+                                <label class="form-check-label">Sering</label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="olahraga" value="jarang">
+                                <label class="form-check-label">Jarang</label>
+                              </div>
+                        </div>
+                        <hr>
+                        {else}
+                        <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" name="soal-{$a.id_tes_psikologi_soal}" id="jawaban-{$b.id_tes_psikologi_jawaban}"  value="{$b.nilai}" onclick="updatedJawaban();" required>
+                        <label class="form-check-label" for="jawaban-{$b.id_tes_psikologi_jawaban}">
+                            {$b.jawaban}
+                        </label>
+                        </div>
+                        {/if}
+                        {/foreach}
+                </div>
+            </div>
+            {/foreach}
+            <div class="d-grid gap-2">
+                <button class="btn " style="background-color: #4D17E2 ; color: #fff;" type="submit">{$button}</button>
+            </div>
+        </form>
+
+      {else}
+      <center>Soal Masih Kosong</center>
+      {/if}
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="{$lokasiwebtemplate}test-psikologi/js/test.js" ></script>
+  </body>
+</html>
+
+{elseif $aksi eq 'teskedua'}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dfunstation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- my css -->
+    <link rel="stylesheet" href="{$lokasiwebtemplate}test-psikologi/css/test.css">
+  </head>
+  <body>
+
+    <div class="container mt-5">
+        {if $soaltest}
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">{$bagian}</li>
+              <li class="breadcrumb-item">{$subbagian}</li>
+            </ol>
+          </nav>
+
+        <form  method="POST" name="ptform" id="ptform">
+            <input type="hidden" value="1" name="sikap" />
+            {foreach from=$soaltest key=soalid item=a}
+            <div class="card mb-4 border-box ">
+                <div class="card-header">
+                {$a.soal}
+                </div>
+                <div class="card-body soal-{$a.id_tes_psikologi_soal} " id="soal-{$a.id_tes_psikologi_soal}">
+                        {foreach from=$a.jawabantest key=jawabid item=b}
+                        {if $a.tipe_soal == "MC-KURANG"}
+                        <div class="form-check">
+                        <input class="form-check-input " name="soal-{$a.id_tes_psikologi_soal}[]" type="checkbox" value="{$b.nilai}" id="soal-{$a.id_tes_psikologi_soal}" onclick="removeREquired();" required>
+                        <label class="form-check-label" for="soal-{$a.id_tes_psikologi_soal}">
+                            {$b.jawaban}
+                        </label>
+                        <span class="soal-{$a.id_tes_psikologi_soal}"></span>
+                        </div>
+                        {else if $a.tipe_soal == "MC-TAMBAH" }
+                        <div class="form-check">
+                            <input class="form-check-input " name="soal-{$a.id_tes_psikologi_soal}[]" type="checkbox" value="{$b.nilai}" id="soal-{$a.id_tes_psikologi_soal}" onclick="removeREquired();" required>
+                            <label class="form-check-label" for="soal-{$a.id_tes_psikologi_soal}">
+                                {$b.jawaban}
+                            </label>
+                            <span class="soal-{$a.id_tes_psikologi_soal}"></span>
+                        </div>
+                        {else if $a.tipe_soal == "PILIHAN" }
+                        <div class="form-group " id="jawab-{$b.id_tes_psikologi_jawaban}">
+                            <label for="">{$b.jawaban} 
+                            {if $b.lain == 1 } 
+                                <span class="text-primary tulissoal" id="tulissoal-{$b.id_tes_psikologi_jawaban}" onclick="addForm({$b.id_tes_psikologi_jawaban})">Tulis Keterangan</span> 
+                            </label>
+                            {/if}
+                            <div id="formsoal-{$b.id_tes_psikologi_jawaban}" >
+                                
+                            </div>
+                            <div class="form-check ">
+                                <input class="form-check-input soal-{$a.id_tes_psikologi_soal}" type="radio" name="jawab-{$b.id_tes_psikologi_jawaban}" value="1" id="{$b.id_tes_psikologi_jawaban}" onclick="pilihDataKedua({$a.id_tes_psikologi_soal});" required >
+                                <label class="form-check-label">Jarang</label>
+                            </div>
+                            <div class="form-check ">
+                                <input class="form-check-input soal-{$a.id_tes_psikologi_soal}" type="radio" name="jawab-{$b.id_tes_psikologi_jawaban}" value="2" id="{$b.id_tes_psikologi_jawaban}" onclick="pilihDataKedua({$a.id_tes_psikologi_soal});" required>
+                                <label class="form-check-label">Sering</label>
+                            </div>
+                        </div>
+                        <hr>
+                        {else}
+                        <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" name="soal-{$a.id_tes_psikologi_soal}" id="jawaban-{$b.id_tes_psikologi_jawaban}"  value="{$b.nilai}" onclick="updatedJawaban();" required>
+                        <label class="form-check-label" for="jawaban-{$b.id_tes_psikologi_jawaban}">
+                            {$b.jawaban}
+                        </label>
+                        </div>
+                        {/if}
+                        {/foreach}
+                {if $a.catatan}
+                <hr>
+                <div class="form-check">
+                    <input class="form-check-input " name="soal-{$a.id_tes_psikologi_soal}[]" type="checkbox" value="nol" id="soal-{$a.id_tes_psikologi_soal}" onclick="removeREquired();" required>
+                    <label class="form-check-label" for="soal-{$a.id_tes_psikologi_soal}">
+                        {$a.catatan}
+                    </label>
+                    <span class="soal-{$a.id_tes_psikologi_soal}"></span>
+                </div>
+                {/if}
+                {if $bagian == "BAGIAN KEDUA"}
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="radio" name="jawab-{$b.id_tes_psikologi_jawaban}" id="{$a.id_tes_psikologi_soal}"  value="nol" onclick="removeRequiredKedua();" >
+                    <label class="form-check-label" for="jawaban-{$b.id_tes_psikologi_soal}">
+                        Tidak satupun dari yang tersebut di atas
+                    </label>
+                </div>
+                {/if}
+                    
+                </div>
+            </div>
+            {/foreach}
+            <div class="d-grid gap-2">
+                <button class="btn " style="background-color: #4D17E2 ; color: #fff;" type="submit">{$button}</button>
+            </div>
+        </form>
+
+      {else}
+      <center>Soal Masih Kosong</center>
+      {/if}
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="{$lokasiwebtemplate}test-psikologi/js/test.js" ></script>
+    <script src="{$lokasiwebtemplate}test-psikologi/js/add.js" ></script>
+      
+
+  </body>
+</html>
+
+{elseif $aksi eq 'selesai'}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tes Selesai</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  </head>
+  <body>
+
+    <div class="px-4 py-5 my-5 text-center">
+      <h1 class="display-5 fw-bold">Selamat</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Anda telah selesai melakukan tes</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <a href="https://www.dfunstation.com/tes-psikologi/daftaranggota" class="btn btn-primary btn-lg px-4 gap-3">Kembali Ke Home</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+{else}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{$lokasiwebtemplate}test-psikologi/css/utilities.css">
+    <link rel="stylesheet" href="{$lokasiwebtemplate}test-psikologi/css/sign-up.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        .form-test {
+            border: 1px solid #0C145A ; 
+            color: #0C145A; 
+            padding: 13px 0 13px 25px;
+        }
+    </style>
+
+    <title>Dfunstation</title>
+</head>
+
+<body>
+    <!-- Sign Up -->
+    <section class="sign-up mx-auto pt-lg-100 pb-lg-100 pt-30 pb-47">
+        <div class="container mx-auto">
+            <script src="{$fulldomain}/librari/ajax/ajax_kota.js.php"></script>
+            <script src="{$fulldomain}/librari/ajax/ajax_kec.js.php"></script>
+            <form role="form" action="{$fulldomain}/tes-psikologi/daftaranggota" method="post" name="login">
+                <input type="hidden" name="fbid" value="{$fbid}" />
+                <input type="hidden" name="twid" value="{$twid}" />
+                <input type="hidden" name="gpid" value="{$gpid}" />
+                <div class="pb-50">
+                    <a class="navbar-brand" href="../index.html">
+                        <img src="{$lokasiwebtemplate}test-psikologi/img/img.logo.png" alt="">
+                    </a>
+                </div>
+                <h2 class="text-4xl fw-bold color-palette-1 mb-10">Pendaftaran</h2>
+                <p class="text-lg color-palette-1 m-0">Silahkan daftar untuk memulai</p>
+
+                <div class="pt-50">
+                    <label for="userfullname" class="form-label text-lg fw-medium color-palette-1 mb-10">Nama Lengkap Anak</label>
+                    <input class="form-control rounded-pill text-lg"
+                    type="text"
+                    data-original-title="Name"
+                    name="userfullname"
+                    value="{$daftarname}" 
+                    data-content="Silahkan masukan nama lengkap anak disini."
+                    data-trigger="focus" 
+                    data-placement="left" 
+                    data-toggle="popover"
+                    placeholder="Masukan Nama Lengkap Anak" 
+                    id="name"
+                    required="required"
+                    >
+                </div>
+
+                <div class="pt-50">
+                    <label for="tanggallahir" class="form-label text-lg fw-medium color-palette-1 mb-10">Tanggal Lahir</label>
+                    <input class="form-control rounded-pill text-lg"
+                    type="date"
+                    data-original-title="Name"
+                    name="tanggallahir"
+                    value="{$daftarname}" 
+                    data-content="Silahkan masukan tanggal lahir anak."
+                    data-trigger="focus" 
+                    data-placement="left" 
+                    data-toggle="popover"
+                    placeholder="Masukan Tanggal Lahir Anak" 
+                    id="name"
+                    required="required"
+                    style="border: solid 1px #0C145A; padding:15px; "
+                    >
+                </div>
+
+                <div class="pt-50">
+                    <label for="userfullname" class="form-label text-lg fw-medium color-palette-1 mb-10">Kelas</label>
+                    <input class="form-control rounded-pill text-lg"
+                    type="text"
+                    data-original-title="Name"
+                    name="kelas"
+                    value="{$daftarname}" 
+                    data-content="Silahkan Masukan Kelas."
+                    data-trigger="focus" 
+                    data-placement="left" 
+                    data-toggle="popover"
+                    placeholder="Masukan Kelas" 
+                    id="name"
+                    required="required"
+                    >
+                </div>
+
+                <div class="pt-30">
+                    <label for="sekolah" class="form-label text-lg fw-medium color-palette-1 mb-10">Nama Sekolah </label>
+                    <input class="form-control rounded-pill text-lg"
+                    type="text" 
+                    data-original-title="Name" 
+                    name="sekolah"
+                    value="{$sekolah}"
+                    data-content="Sekolah"
+                    data-trigger="focus" 
+                    data-placement="left" 
+                    data-toggle="popover"
+                    placeholder="Nama Sekolah TK/RA" 
+                    id="sekolah"
+                    required="required"
+                     >
+                </div>
+
+                <div class="button-group d-flex flex-column mx-auto pt-50">
+                    <button class="btn btn-sign-up fw-medium text-lg text-white rounded-pill mb-16" type="submit">Lanjut Langkah Selanjutnya</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
+
+
+</body>
+
+</html>
+
+{/if}
+

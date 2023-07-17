@@ -1,0 +1,32 @@
+<div class="alert alert-success alert-dismissible" role="alert">
+<strong>Note :</strong><br />
+Untuk avatar yang kamu upload, minimal ukurannya <strong>300px x 300px</strong>.<br /><br /> 
+Klik <strong>Choose</strong>, jika avatar Kamu sudah tampil di kotak berarti avatar Kamu sudah berhasil diganti, 
+silahkan klik <strong>Dashboard</strong> untuk melihat perubahannya.
+</div>
+<form method="post" class="form-horizontal" role="form"  name="profileava">
+
+  	<div id="userpic" class="userpic">
+        <div class="js-preview userpic__preview"></div>
+        <div class="btn btn-rounded btn-success js-fileapi-wrapper">
+            <div class="js-browse">
+                <span class="btn-txt">Choose</span>
+                <input name="filedata" id="filedata" type="file">
+            </div>
+
+            <div class="js-upload" style="display: none;">
+                <div class="progress progress-success"><div class="js-progress bar"></div></div>
+                <span class="btn-txt">Uploading</span>
+            </div>
+        </div>
+    </div>
+</form>
+
+{if $error neq ''}
+    <div class="alert {$style} alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" onclick="window.location=('{$backlink}')">
+            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        {$error}
+    </div>
+    <div class="clearfix"></div>
+{/if}

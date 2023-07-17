@@ -1,0 +1,70 @@
+{include file="`$lokasitemplate`komponen/home/header.html"}
+<div id="header-kanal">
+	 <div class="container">
+            <div class="row">
+					<div class="judulkanal">{$rubrik}</div>
+			</div>
+	 </div>
+</div>
+<div class="insight">
+    <div class="container">
+        <div class="col-md-4" style="margin:10px 10px 0 -15px;">
+            <div class="box-kanan">
+                <div class="box-kanan-judul" style="background:#2c9bce"><span>Kategori Panduan</span></div>
+                <div class="box-kanan-isi">
+                    {foreach from=$datasec key=secid item=l}
+                    <div class="trending-item">
+                        <div class="trending-item-no" style="width:5px"></div>
+                        <div class="trending-item-nama"><a href="{$l.url}">{$l.nama}</a></div>
+                    </div>
+                    {/foreach}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 boxcontent">
+            <div class="box-content">
+            	{if $aksi eq 'detail'}
+                <!-- Detail -->
+                <div class="title-headline">
+                    <span>{$detailnama}</span>
+                </div><br clear="all" />
+        		<div class="content-info">
+                    <span>{$detailtanggal}</span>
+                 </div>
+                <p>{$detaillengkap}</p>
+        
+                <br clear="all" />
+                <iframe allowTransparency='true' frameborder='0' scrolling='no' src='/librari/share/index.php?url={$uri}&title={$detailnama}&media={$detailgambar}' style='border:none; margin:15px 0px 15px 0px; overflow:hidden; width:450px; height:70px;'></iframe> 
+                       <div class="bg-divider"></div>
+        
+                {else}
+                <div class="large-content">
+                    <ul class="quest-list">
+                        {foreach from=$list_post key=id item=d}
+                        <li class="quest-short">
+                            <h2><a href="{$d.link_detail}">{$d.nama}</a></h2>
+                            <p>{$d.ringkas}... &nbsp;<a href="{$d.link_detail}">Selengkapnya »</a></p>
+                        </li>
+                        {/foreach}
+                    </ul>
+                    <div class="pagination-holder">
+                        <div class="row">
+    
+                            <div class="col-xs-12 col-sm-6 text-left">
+                                <ul class="pagination ">
+                                    {foreach from=$stringpage key=pageid item=a}
+                                    <li class="{$a.class}"><a href="{$a.link}"> {$a.nama} </a></li>
+                                    {/foreach}
+                                </ul>
+                            </div>
+    
+                        </div><!-- /.row -->
+                    </div><!-- /.pagination-holder -->
+                    
+                </div>
+                {/if}
+			</div>
+        </div>
+    </div>
+</div>
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

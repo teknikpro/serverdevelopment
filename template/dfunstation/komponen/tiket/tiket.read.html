@@ -1,0 +1,225 @@
+<div class="container">
+    <div class="directory-read">
+    	<div class="directory-read-info">
+        	<h2>{$detailjudul}</h2>
+        </div>
+         <!-- <div class="homeslide slideworld"> -->
+            <!-- <div id="myCarousel" class="carousel slide" data-ride="carousel">  -->
+              <!-- Indicators -->
+              <!-- <ol class="carousel-indicators"> -->
+               <!-- {foreach from=$slide key=id item=a} -->
+                <!-- <li data-target="#myCarousel" data-slide-to="{$a.no}"  {if $a.no eq '1'} class="active"{/if} ></li> -->
+               <!-- {/foreach} -->
+              <!-- </ol> -->
+              <!-- <div class="carousel-inner"> -->
+                <!-- {foreach from=$slide key=id item=a} -->
+                <!-- <div class="item {if $a.no eq '1'} active {/if}"> -->
+                  <!-- <img src="{$a.gambar}" alt="{$a.nama}" border="0" /> -->
+                <!-- </div> -->
+                <!-- {/foreach} -->
+              <!-- </div> -->
+              <!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> -->
+              <!-- <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> -->
+            <!-- </div> -->
+        <!-- </div> -->
+    </div>  
+    <div class="directory-read-menu">
+    	<a href="{$fulldomain}/tiket/{$detailalias}" {if $subkanal eq ''} class="directory-read-menu-active" {/if}>Sekilas</a>
+        <a href="{$fulldomain}/tiket/{$detailalias}/news" {if $subkanal eq 'galeri'} class="directory-read-menu-active" {/if}>Berita </a>
+        {foreach from=$datapage key=id item=a}
+        	<a href="{$a.link}" {if $a.active eq '1'} class="directory-read-menu-active" {/if}>{$a.nama}</a>
+        {/foreach}
+        <a href="{$fulldomain}/tiket/{$detailalias}/galeri" {if $subkanal eq 'galeri'} class="directory-read-menu-active" {/if}>Photo Galeri</a>
+        <a href="{$fulldomain}/tiket/{$detailalias}/tiket" {if $subkanal eq 'galeri'} class="directory-read-menu-active" {/if}>Tiket</a>
+    </div>
+</div>
+<div class="container directory-detail">
+	<div class="col-md-8">
+    <div class="box-content"  {if $subkanal eq ''}{if $detailbackground neq ''} style="background:url('{$detailbackground}')" {/if}{/if}>
+        <div class="large-content">
+        
+        {if $subkanal neq ''}
+        	
+            {if $subkanal eq 'galeri'}
+            	<div class="box-content">
+                <div class="large-content">
+            
+                    {if $galeridetailgambar neq ''}
+                    <div class="thumbDetail">
+                        <img src="{$galeridetailgambar}" alt="{$galeridetailnama}" class="img-responsive" />
+                    </div>
+                    {/if}
+                    <div class="title-headline">
+                        <span>{$galeridetailnama}</span>
+                    </div><br clear="all" />
+            
+                    <p>{$galeridetailringkas}</p>
+                 <div class="bg-divider"></div>
+                {foreach from=$terkait key=id item=a}
+                  <div class="col-md-3">
+                 <div class="galeri-lain" >
+                    <div class="galeri-lain-isi" >
+                            <a href="{$a.link}" class="judul1"><img src="{$a.gambar}" alt="{$a.nama}" class="img-responsive" border="0" /></a>
+                    </div>
+                </div>
+                </div>
+                {/foreach}
+            
+                    <br clear="all" />
+                   <div id="share"></div> 
+                           <div class="bg-divider"></div>
+                    
+                  <br clear="all" /></div><br clear="all" />
+                    {include file="`$lokasitemplate`/komponen/home/komentar.html"}
+                  
+            
+                    
+                
+            </div>
+			
+            {else if $subkanal eq 'news'}
+            
+            {if $detailnamanews neq ''}
+            
+           
+                               
+                    {if $detailgambar neq ''}
+                    <div class="thumbDetail">
+                        <img src="{$detailgambarnews}" alt="{$detailnamanews}" class="img-responsive" />
+                    </div>
+                    {/if}
+                    <br clear="all" />
+                    <div class="title-headline">
+                        <span>{$detailnamanews}</span>
+                    </div><br clear="all" />
+                    <p>{$detaillengkapnews}</p>
+               	
+            
+            
+                                 <div id="share"></div>
+            
+                                <script src="{$lokasiwebtemplate}js/jssocials.min.js"></script>
+                                <script>
+                                    $("#share").jsSocials({
+                                        shares: ["facebook", "twitter", "googleplus", "whatsapp"]
+                                    });
+                                </script>
+                                <br clear="all" />               <div class="bg-divider"></div>
+                    
+                  <br clear="all" /><br clear="all" />
+      
+            
+            {else}
+            
+            {foreach from=$datanews key=id item=ch}
+                <div class="list-content">
+                    <div class="list-content-isi">
+                    {if $ch.gambar neq ''}
+                   
+                    <div class="thumbNews">
+                        <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}" class="img-responsive" /></a>
+                    </div>
+                    {/if}
+                 <a class="list-link" href="{$ch.link}">{$ch.nama}</a>
+                    <br />
+                    <span>{$ch.tanggal}</span>
+                    <br />
+                    <p>{$ch.ringkas}</p>
+                    </div>
+                </div>
+            {/foreach}
+            {/if}
+
+            {else if $subkanal eq 'tiket'}
+            
+            <div class="homeartikel">
+
+                {if $datadepankonsultasi}
+                {foreach from=$datadepankonsultasi key=id item=ch}
+                <div class="list-blog">
+                    <div class="col-md-4">
+                        <div class="list-blog-isi">
+                            {if $ch.gambar neq ''}
+                            <div class="list-blog-img">
+                                <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}"
+                                        class="img-responsive" /></a>
+                            </div>
+                            {/if}
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="list-blog-isi"> <a class="list-link" href="{$ch.link}">{$ch.nama}</a>
+                            <br />
+                            <span class="harga">Rp.{$ch.harga}</span>
+                            <br />
+                            <p>{$ch.ringkas}</p>
+
+                            <a class="btn btn-warning" href="{$ch.link}">Selengkapnya</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                {/foreach}
+                {else}
+                <div class="list-blog">
+                    <div class="col-md-12">
+                        <center> <strong>Tidak ada Event {$namaevent}</strong></center>
+                    </div>
+                </div>
+                {/if}
+
+            </div>
+            
+            {else}
+            <div class="row">
+            <h4><strong>{$detailnamapage}</strong></h4>
+            <p>{$detaillengkappage}</p>
+             <br clear="all" />
+             <div id="share"></div> 
+             <div class="bg-divider"></div>
+             <br clear="all" /><br clear="all" />
+             </div>
+             {/if}
+        
+        {else}
+        
+         <p>{$detaillengkap}</p>
+      	 <br clear="all" />
+         <div id="share"></div> 
+         <div class="bg-divider"></div>
+         <br clear="all" /><br clear="all" />
+         
+         {/if}
+         
+        </div>
+    </div>
+    
+    </div>
+	
+    <div class="col-md-4">
+    	<div class="box-kanan">
+            <div class="box-kanan-judul">
+              <span>Informasi Alamat</span>
+            </div>
+            <div class="box-kanan-isi">
+            <strong>Alamat:</strong> <br />{$detailalamat}<br />
+            <strong>Telephone:</strong> <br />{$detailtelp}<br />
+            <strong>Contact:</strong> <br />{$detailcontact}<br />
+            <strong>Email:</strong> <br /><a href="mailto:{$detailemail}">{$detailemail}</a><br />
+            <strong>Homepage:</strong> <br /><a href="{$detailhomepage}">{$detailhomepage}</a><br />
+            </div>
+        </div>
+    	<div class="box-kanan">
+            <div class="box-kanan-judul">
+               <span>Peta Lokasi</span>
+            </div>
+            <div class="box-kanan-isi">
+            <img src="https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyC1G2qPJ8hAMmQ5TFYv5zxj1Ne_OtQ8qII&center={$detaillatitude},{$detaillongitude}&zoom=14&size=350x350&markers=color:red%7Clabel:W%7C{$detaillatitude},{$detaillongitude}" />
+            <a href="https://www.google.co.id/maps/place/{$detaillatitude}+{$detaillongitude}/@{$detaillatitude},{$detaillongitude},12z" target="_blank">Buka di Google Maps</a>
+            </div>
+        </div>
+   </div> 
+    
+</div>
+<br clear="all" /><br clear="all" />

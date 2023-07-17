@@ -1,0 +1,125 @@
+{strip}
+
+<!-- library -->
+<link rel="stylesheet" type="text/css" href="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/library/slick/slick.css">
+<link rel="stylesheet" type="text/css" href="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/library/slick/slick-theme.css">
+
+<!-- style -->
+<link rel="stylesheet" href="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/css/konsultasi.css">
+
+<!-- penjelasan -->
+<section class="penjelasan">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <div class=" card-satu card-konsul" >
+          <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/konsultasi-1.png" class="card-img-top img-fluid" alt="Dfunstation">
+          <div class="card-body">
+            <h5 class="card-title text-center ">Layanan Individu dan Keluarga</h5>
+            <div class="card-text">Layanan Psikologi Klinis Anak</div>
+            <div class="card-text">Layanan Psikologi Klinis Remaja</div>
+            <div class="card-text">Layanan Psikologi Klinis Dewasa</div>
+          </div>
+        </div>
+        <div class="d-grid mt-3">
+          <a href="#" class="btn btn-success btn-janji text-decoration-underline" style="background: #00761A">Buat Janji</a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <div class=" card-dua card-konsul" >
+          <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/konsultasi-2.png" class="card-img-top img-fluid" alt="Dfunstation">
+          <div class="card-body">
+            <h5 class="card-title text-center ">Layanan Edukasi dan Sekolah</h5>
+            <div class="card-text">Layanan Tes Minat Bakat</div>
+            <div class="card-text">Tes Kesiapan Masuk Sekolah, </div>
+            <div class="card-text">Penjurusan, Psikotes</div>
+            <div class="card-text">Layanan Parenting</div>
+          </div>
+        </div>
+        <div class="d-grid mt-3">
+          <a href="#" class="btn btn-success btn-janji text-decoration-underline" style="background: #009999;">Buat Janji</a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <div class=" card-tiga card-konsul" >
+          <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/konsultasi-3.png" class="card-img-top img-fluid" alt="Dfunstation">
+          <div class="card-body">
+            <h5 class="card-title text-center ">Konsultasi Online</h5>
+            <div class="card-text text-center">
+              Layanan Konsultasi Psikologi
+              Secara Online Melalui Aplikasi d’Fun Station
+            </div>
+          </div>
+        </div>
+        <div class="d-grid mt-3">
+          <a href="#" class="btn btn-success btn-janji text-decoration-underline" style="background: #006B99;">Konsultasi</a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <div class=" card-empat card-konsul" >
+          <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/konsultasi-4.png" class="card-img-top img-fluid" alt="Dfunstation">
+          <div class="card-body">
+            <h5 class="card-title text-center ">Layanan Hukum</h5>
+            <div class="card-text ">Konsultasi  Hukum Pidana/Perdata</div>
+            <div class="card-text ">Pendampingan Hukum</div>
+            <div class="card-text ">Pendaftaran Hak Cipta dan Paten</div>
+          </div>
+        </div>
+        <div class="d-grid mt-3">
+          <a href="#" class="btn btn-success btn-janji text-decoration-underline" style="background:#D3567C;;">Buat Janji</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Daftar Konsultant -->
+<section class="variable slider">
+  {foreach from=$datadepankonsultan key=id item=ch}
+  <div onclick="redirect(`{$ch.url}`)" style="cursor: pointer;" class="container">
+    <div class="row konsultan-card " >
+      <div class="col-7">
+        <h5 class="konsultan-nama konsultan-mobile">
+          {$ch.nama_depan}
+          <br>
+          {$ch.belakang}
+        </h5>
+        <div class="konsultan-gelar konsultan-mobile">
+          {$ch.gelar}
+        </div>
+        <div class="konsultan-kategori konsultan-mobile">
+          {$ch.sec}
+        </div>
+        <p class="konsultan-deskripsi konsultan-mobile">
+          {$ch.keahlian}
+        </p>
+      </div>
+      <div class="col-5">
+        <img src="{$ch.gambardum}" alt="{$ch.nama}" class="img-fluid konsultan-image">
+      </div>
+    </div>
+  </div>
+  {/foreach}
+
+  
+</section>
+
+{include file="`$lokasitemplate`/komponen/home/footer-template.html"}
+
+<!-- libarary -->
+<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+<script src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/library/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  $(document).on('ready', function() {
+    $(".variable").slick({
+      dots: true,
+      infinite: true,
+      centerMode: true,
+      variableWidth: true
+    });
+    
+  });
+</script>
+
+
+{/strip}

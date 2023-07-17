@@ -1,0 +1,69 @@
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="items item-w2">
+                           <div class="row">
+                           <div class="col-xs-6">
+                                <h4 class="option-title text-green text-uppercase">Message <span>- Inbox ({$totalbaca})</span></h4>
+                           </div>
+                           <div class="col-xs-6">
+                                <div class="btn-group pull-right">
+                                    <button type="button" class="btn btn-default tooltips" data-original-title="Hapus" data-placement="top" onclick="return confirmDelete();">
+                                        <i class="icon-trash"></i> Hapus</button>
+                                </div>
+                           </div>
+                           <div class="clearfix"></div>
+                       </div>
+                       <!-- /.row -->
+                       </div>
+                        <!-- /.items item-w2 -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default e-squared p-0">
+                            <div class="panel-body p-0">
+                                 {if $inbox neq '0'}
+                                    <div class="mail-box">
+                                        <form action="{$fulldomain}/member/delete-all" method="post" name="deleteall" id="deleteallmessage">
+                                        <input type="hidden" name="aksi" value="delete" />
+                                        <table class="table table-hover table-mail">
+                                        <tbody>
+                                            
+                                            {foreach from=$datapesan key=id item=i}
+                                            <tr {if $i.baca eq '0' and $i.tipepesan eq 'inbox'}class="unread"{else}class="read"{/if}>
+                                                <td class="check-mail">
+                                                    <input type="checkbox" class="i-checks" name="messageid[]" value="{$i.messageid}" />
+                                                </td>
+                                                <td class="mail-contact"><a href="{$i.urldetail}">{$i.pengirim}</a></td>
+                                                <td class="mail-subject"><a href="{$i.urldetail}">{$i.judul}</a></td>
+                                                <td class=""><i class="fal fa-paperclip"></i></td>
+                                                <td class="text-right mail-date">{$i.tanggal}</td>
+                                            </tr>
+                                            {/foreach}
+
+                                        </tbody>
+                                        </table>
+                                        </form>
+                                        
+                                        <ul class="pagination m-0 ml-15">
+                                          {foreach from=$stringpage key=pageid item=a}
+                                          	<li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+                                          {/foreach}
+                                        </ul>
+                                        
+                                    </div>
+                                {else}
+                                    <div class="alert warning">Tidak ada pesan dalam kotak <strong>Pesan Masuk</strong> Anda.</div>
+                                {/if}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel .panel-default -->
+                    </div>
+                    <!-- /.col-xs-12 -->
+                </div>
+                <!-- /.row -->
+
+
+     

@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: #0C145A;
+}
+
+.bg-isi {
+    background-color: #c3c7e3;
+}
+
+.border-box {
+    border: 1px solid #0C145A ;
+}
+
+.hidden-form {
+    display: none;
+}
+
+.tulissoal {
+    cursor: pointer;
+}

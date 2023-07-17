@@ -1,0 +1,56 @@
+<div class="box-content">
+    <div class="large-content">
+        {if $detailgambar neq ''}
+        <div class="thumbDetail">
+            <img src="{$detailgambar}" alt="{$detailnama}" class="img-responsive" />
+        </div>
+        {/if}
+        <div class="title-headline">
+            <h2><strong>{$detailnama}</strong></h2>
+        </div>
+        <br clear="all" />
+         <div class="date">
+         	<span>{if $detailcreator neq ''}Oleh {$detailcreator} | {/if} {$detailtanggal} | {$detailstats} Views</span>
+         </div>
+
+        <br />
+        <p class="detailcontent" ><strong>Pertanyaan</strong><br />
+        {$detailtanya}<br /><br /><strong>Jawaban:</strong><br />
+        {$detaillengkap}</p>
+    <br clear="all" />
+
+ 		<br clear="all" />
+        <div id="share"></div>
+
+        <script src="{$lokasiwebtemplate}js/jssocials.min.js"></script>
+        <script>
+            $("#share").jsSocials({
+                shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "whatsapp"]
+            });
+        </script>
+        
+      <br clear="all" /><br clear="all" />
+     <div class="bg-divider"></div><br clear="all" />
+        {include file="`$lokasitemplate`/komponen/home/komentar.html"}
+    </div>
+      
+
+       	<br clear="all" />
+    <div class="infodetail"><span class="infodetail-1"><strong>{$rubrik} Lainnya</strong></span></div>
+    {foreach from=$terkait key=id item=a}
+     <div class="col-md-6">
+     <div class="boxnewspilihan">
+        <div class="boxnewspilihan-isi">
+            <div class="box-boxnewspilihan">
+                <a href="{$a.link}" class="judul1"><img src="{$a.gambar}" alt="{$a.nama}" border="0" /></a>
+            </div>
+            <span><a href="{$a.link}" class="judul1">{$a.nama}</a></span><br />
+       		<span class="tgl">{$a.tanggal}</span><br />
+            {$a.ringkas}
+        </div>
+    </div>
+    </div>
+    {/foreach}
+    
+</div>
+

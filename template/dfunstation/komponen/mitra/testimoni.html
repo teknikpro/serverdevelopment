@@ -1,0 +1,93 @@
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="items item-w2">
+                   <div class="row">
+                   <div class="col-md-6">
+                       <h4 class="option-title text-green text-uppercase">{$namaaksi} </h4>
+                   </div>
+                  <div class="col-md-6">
+                       <a href="{$fulldomain}/testimoni" class="btn btn-success pull-right">Lihat Semua Testimoni</a>
+                   </div>
+               </div>
+               <!-- /.row -->
+               </div>
+                <!-- /.items item-w2 -->
+            </div>
+        </div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+            {if $pesan neq ''}
+                <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                     {$pesan}
+               </div>
+             {/if}
+            
+            {if $jmltestimoni neq '1'}
+            {if $berhasil neq '1'}
+            <form action="" method="post">
+            Sebelum anda dapat menggunakan seluruh fitur yang ada di Detox Your Body - SentraDetox, anda harus terlebih dahulu memberikan testimoni untuk Detox Your Body - SentraDetox, silahkan
+            tulis testimoni anda melalui kotak isian dibawah ini.<br />
+            <textarea required="required" class="form-control" id="testimoni" name="testimoni" rows="8" placeholder="Silahkan berikan testimoni anda tentang Detox Your Body - SentraDetox"></textarea>
+            <br /><input type="submit" value="Kirimkan Testimoni" class="btn btn-primary pull-right" />
+            </form>
+            <br clear="all" />
+            <hr />
+            {/if}
+            {/if}
+		
+            {if $jml_post eq '0'}
+                <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                     Saat ini belum ada testimonial, silahkan mulailah untuk menulis sesuatu dan share sebanyak mungkin
+                     ke sosial media yang anda miliki.
+               </div>
+                <div class="clearfix"></div>
+            {else}
+            {foreach from=$datadetail key=id item=i name=list}
+
+                <div class="items item-content">
+                <div class="media">
+                   <div class="col-md-3">
+                       <div class="sm-cover-avatar media-img95" style="margin:10px 0px 10px 10px">
+                       	 <img src="{$i.gambar}" alt="" class="img-responsive">
+                       </div>
+                   </div>
+                   <div class="col-md-9">
+                    <div class="media-body">
+                      <h3 style="margin-top: 0px;"> {$i.nama}</h3>
+                        <p>
+                            {$i.ringkas}
+                            <br /><span class="date">
+                        </p>
+                        
+                       <em>{if $i.company neq ''} {$i.company} | {/if}{$i.tanggal}</em>
+                       <br clear="all" />
+                       <a href="{$fulldomain}/member/testimoni-edit/{$i.id}" class="btn btn-warning btn-md pull-right">Edit</a>
+                    </span>
+                    <br clear="all" />
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <!-- /.items -->
+
+            {/foreach}
+            {/if}
+                </div>
+              
+
+           </div>
+           <!-- /.col-xs-12 -->
+           		<ul class="pagination m-0 ml-15">
+                  {foreach from=$stringpage key=pageid item=a}
+                    <li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+                  {/foreach}
+                </ul>
+           </div>
+
+
+</div>

@@ -1,0 +1,87 @@
+{include file="`$lokasitemplate`/komponen/home/header2.html"}
+
+
+            {if $aksi eq 'success'}
+
+                <section id="pagesubcriber">
+                    <div class="container">
+                        <div class="row">
+                           <div class="col-md-12">
+								<div class="row">
+                                <div class="col-md-6 login-info col-md-offset-3"><br><br>
+									<h1>Berhasil Bergabung di Newsletter Detox Your Body - SentraDetox</h1>
+									<p>Terima kasih sudah mendafatar di Newsletter, anda akan mendapatkan informasi terbaru dari kami berupa EBook atau berbagai informasi lainnya tentang Detox Your Body - SentraDetox.</p>
+									<center><a href="{$fulldomain}" class="btn btn-lg btn-success">Kembali ke Beranda</a></center>
+								</div>
+                                </div>
+                           </div>
+                           
+
+                            
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container -->
+                </section>
+             {else if $aksi eq 'registered'}
+
+                <section id="pagesubcriber">
+                    <div class="container">
+                        <div class="row">
+                           <div class="col-md-12">
+								<div class="row">
+                                <div class="col-md-6 login-info col-md-offset-3"><br><br>
+                                       <center> 
+                                        <img src="{$contactphoto}" alt="{$contactname}" style="width:150px;"/>
+                                        </center><h1>Email telah terdaftar di Detox Your Body - SentraDetox</h1>
+                                        <p>Email <strong>{$subuseremail}</strong> milik <strong>{$subuserfullname}</strong> telah terdaftar di Detox Your Body - SentraDetox dan sudah direferensikan oleh Member <strong>{$contactname}</strong>.
+                                        Untuk informasi atau pertanyaan lebih lanjut silahkan hubungi referensi anda dibawah ini<br /></p>
+                       	 				<br />
+                                        <center><a href="{$backlink}" class="btn btn-lg btn-success">Kembali </a> <a href="{$fulldomain}" class="btn btn-lg btn-success">Hubungi </a></center>
+                                    </div>
+								</div>
+                                </div>
+                           </div>
+                           
+
+                            
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container -->
+                </section>
+            {else}
+
+                <section id="pagesubcriber">
+                    <div class="container">
+                       <div class="row">
+                           <div class="col-md-12">
+								<div class="row">
+                                <div class="col-md-6 login-info col-md-offset-3"><br><br>
+                                       <center> 
+                                        <img src="{$contactphoto}" alt="{$contactname}" style="width:150px;"/>
+                                        <h3>{$msg}</h23></center>
+                                        <p><br /></p>
+                       	 				<br />
+                                        <center><a href="{$fulldomain}" class="btn btn-lg btn-success">Kembali </a></center>
+                                    </div>
+								</div>
+                                </div>
+                           </div>
+                    </div>
+                    <!-- /.container -->
+                </section>
+                <!-- /#page -->
+            {/if}
+
+ <script type="text/javascript">
+
+	$(document).ready( function()
+	{
+		var $height = $(window).height();
+		var $hiframe = $height-150;
+		$('#pagemember').height($hiframe);
+	});
+
+	</script>
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

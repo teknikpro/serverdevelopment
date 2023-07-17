@@ -1,0 +1,120 @@
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="items item-w2">
+                           <div class="row">
+                           <div class="col-xs-6">
+                                <h4 class="option-title text-green text-uppercase">{$namarubrik}</h4>
+                           </div>
+                           <div class="col-xs-6">
+                                <!-- <div class="btn-group pull-right">
+                                    <button type="button" class="btn btn-default tooltips" data-original-title="Hapus" data-placement="top" onclick="return confirmDelete();">
+                                        <i class="icon-trash"></i> Hapus</button>
+                                </div> -->
+                           </div>
+                           <div class="clearfix"></div>
+                       </div>
+                       <!-- /.row -->
+                       </div>
+                        <!-- /.items item-w2 -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default e-squared p-0">
+                            <div class="panel-body p-0">
+                                 {if $jumlah_keranjang neq '0'}
+                                    <div class="mail-box">
+                                        <table class="table table-hover table-mail" width="100%" >
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Nama Produk</th>
+                                                <th>Harga Normal</th>
+                                                <th>Harga Hemat</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {foreach from=$dt_keranjang key=id item=a}
+                                            {literal}
+                                                <script>
+                                                    function submitcart{/literal}{$a.produkpostid}{literal}() {
+                                                        document.getElementById("product_addtocart_form{/literal}{$a.produkpostid}{literal}").submit();
+                                                    }
+                                                </script>
+                                            {/literal}
+                                            <form action="{$fulldomain}/wishlist/buy" method="post" id="product_addtocart_form{$a.produkpostid}" onsubmit="return cekqty()">
+                                            <input name="form_key" value="6UbXroakyQlbfQzK" type="hidden">
+                                            <input name="produkpostid" value="{$a.produkpostid}" type="hidden" />
+                                            <input name="id" value="{$a.id}" type="hidden" />
+                                            <tr >
+                                            <!-- <tr {if $i.baca eq '0' and $i.tipepesan eq 'inbox'}class="unread"{else}class="read"{/if}> -->
+                                                <td class="mail-contact">
+                                                    <a href="{$a.link_produk}" class="thumb-holder">
+                                                        <img class="lazy" alt="{$a.nama}" src="{$a.image_s}" />
+                                                    </a>
+                                                </td>
+                                                <td class="text mail-date">{$i.tanggaltransaksi}</td>
+                                                <td class="mail-subject"><a href="{$a.link_produk}">{$a.nama}</a></td>
+                                                <td class="mail-subject">
+                                                    {if $a.totalstok neq '0'}
+                                                    <span class="label label-success wishlist-in-stock" style="margin-top:15px;display:inline-block">Stok Ada</span>
+                                                    {else}
+                                                    <span class="label label-warning wishlist-in-stock" style="margin-top:15px;display:inline-block">Stok Habis</span>
+                                                    {/if}
+                                                </td>
+                                                <td class="text-right mail-date">
+                                                    {if $a.misc_harga_reseller neq '0'}
+                                                        <div class="price text-right">{$a.hargares}</div>
+                                                    {else}
+                                                        {if $a.diskon neq '0'}
+                                                        <div class="price col-sm-6"><del>{$a.harga}</del></div>
+                                                        <div class="price text-right col-sm-6">{$a.hargadiskon}</div>
+                                                        {else}
+                                                        <div class="price text-right">{$a.harga}</div>
+                                                        {/if}
+                                                    {/if}
+                                                </td>
+                                                <td class="text-right mail-date">
+                                                    {if $a.totalstok neq '0'}
+                                                    <div class="add-cart-button">
+                                                        <a href="#" onclick="submitcart{$a.produkpostid}();" class="le-button add_to_cart_button product_type_simple">Masuk ke Keranjang</a>
+                                                    </div>
+                                                    {/if}
+                                                    <a class="close-btn" href="{$fulldomain}/{$kanal}/wishlist/delete/{$a.id}"></a>
+                                                </td>
+                                            </tr>
+                                            </form>
+                                            {/foreach}
+
+                                        </tbody>
+                                        </table>
+                                        
+                                        <!-- <ul class="pagination m-0 ml-15">
+                                          {foreach from=$stringpage key=pageid item=a}
+                                            <li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+                                          {/foreach}
+                                        </ul> -->
+                                        
+                                    </div>
+                                {else}
+                                    <!-- <div class="alert warning">Tidak ada data transaksi dalam <strong>Transaksi List</strong> Anda.</div> -->
+                                    <center>
+                                    <img src="{$lokasiwebtemplate}images/icon.wishlist.png" alt="Wishlist" /><br />
+                                    Saat ini anda belum memiliki produk yang anda wishlist. Untuk memasukan wishlist <br />
+                                    silahkan kunjungi berbagai produk di dikatalog kami.<br /><br />
+                                    <a class="btn btn-warning" href="{$fulldomain}/product">Pilih Produk</a><br /><br />
+                                    </center>
+                                {/if}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel .panel-default -->
+                    </div>
+                    <!-- /.col-xs-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+
+     

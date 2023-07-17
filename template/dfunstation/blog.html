@@ -1,0 +1,107 @@
+{strip}
+{include file="`$lokasitemplate`komponen/home/header-template.html"}
+<!-- style page -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+<link rel="stylesheet" href="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/css/artikel-detail.css">
+
+<!-- banner -->
+<div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <h1 class="tag-fs">
+          BLOG
+          <br>
+          DAN
+          <br>
+          ARTIKEL
+        </h1>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <img class="img-fluid" src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/gambar-artikel.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+<!-- akhir banner -->
+
+<!-- isi content -->
+<section class="isi-content pb-5">
+    {if $aksi eq 'read'}
+        {include file="`$lokasitemplate`komponen/$kanal/$kanal.read.html"}
+    {else if $aksi eq 'tags'}
+        {include file="`$lokasitemplate`komponen/$kanal/$kanal.tag.html"}
+    {else}
+    <div class="container ">
+      <!-- Menampilkan menu tab -->
+      <ul class="nav nav-fill mx-auto">
+        <li class="nav-item item-tabs">
+          <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1">Semua Artikel</a>
+        </li>
+        <li class="nav-item item-tabs">
+          <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2">Anak</a>
+        </li>
+        <li class="nav-item item-tabs">
+          <a class="nav-link" id="tab3-tab" data-bs-toggle="tab" href="#tab3">Remaja</a>
+        </li>
+        <li class="nav-item item-tabs">
+          <a class="nav-link" id="tab4-tab" data-bs-toggle="tab" href="#tab4">Dewasa</a>
+        </li>
+        <li class="nav-item item-tabs">
+          <a class="nav-link" id="tab5-tab" data-bs-toggle="tab" href="#tab5">Umum</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-none" id="tab6-tab" data-bs-toggle="tab" href="#tab6">Tab 6</a>
+        </li>
+      </ul>
+        <!-- Menampilkan konten tab -->
+      <div class="row mt-2">
+        <div class="tab-content ">
+          <div class="tab-pane show active fade" id="tab1">
+
+            <div class="container mt-5">
+              <div class="row form-cari">
+                <div class="col-1"></div>
+                <div class="col-10">
+                  <div class="input-group mb-3  ">
+                    <button class="btn  dropdown-toggle rounded-0 bg-form border-0 text-success" type="button" data-bs-toggle="dropdown" aria-expanded="false">Kategori</button>
+                    <ul class="dropdown-menu bg-form">
+                      <li><a class="dropdown-item" href="#">Kategori</a></li>
+                      <li><a class="dropdown-item" href="#">konsultasi</a></li>
+                      <li><a class="dropdown-item" href="#">Permainan</a></li>
+                      <li><a class="dropdown-item" href="#">Pertanyaan</a></li>
+                    </ul>
+                    <input type="text" class="form-control rounded-0 bg-form" aria-label="Text input with dropdown button " placeholder="Cari berdasarkan kategori">
+                    <button class="btn  rounded-0 border-0 bg-success text-white" type="button" id="button-addon2">Cari</button>
+                  </div>
+                </div>
+                <div class="col-1"></div>
+              </div>
+            </div>
+
+            {include file="`$lokasitemplate`komponen/$kanal/$kanal.list.html"}
+
+          </div>
+          <div class="tab-pane fade" id="tab2">
+            <h4>Isi Konten Tab 2</h4>
+            <p>Ini adalah konten dari tab 2.</p>
+          </div>
+          <div class="tab-pane fade" id="tab3">
+            <h4>Isi Konten Tab 3</h4>
+            <p>Ini adalah konten dari tab 3.</p>
+          </div>
+          <div class="tab-pane fade" id="tab4">
+            <h4>Isi Konten Tab 4</h4>
+            <p>Ini adalah konten dari tab 4.</p>
+          </div>
+          <div class="tab-pane fade" id="tab5">
+            <h4>Isi Konten Tab 5</h4>
+            <p>Ini adalah konten dari tab 5.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {/if}
+  </section>
+
+{include file="`$lokasitemplate`/komponen/home/footer-template.html"}
+{/strip}

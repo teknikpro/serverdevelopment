@@ -1,0 +1,45 @@
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="items item-w2">
+                   <div class="row">
+                   <div class="col-xs-12">
+                       <h4 class="option-title text-green text-uppercase">Preview Berita</h4>
+                   </div>
+                   <div class="clearfix"></div>
+               </div>
+               <!-- /.row -->
+               </div>
+                <!-- /.items item-w2 -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default e-squared">
+                    <div class="panel-body">
+                    <h2><strong>{$detailnama}</strong></h2>{if $detailgambar neq ''}
+                     <div class="alert alert-dismissible" role="alert">
+                        <img src="{$detailgambar}" alt="{$detailnama}" class="img-responsive" style="width:100%" />
+                     </div>
+                    {/if}                  
+                      {$detaillengkap}
+                      <br /><br />
+                    <div class="clearfix">
+                     <span class="infodetail-2"><em>Diposting tanggal{$detailtanggal} | Dibaca {$detailstats} kali </em></span>
+                     </div>
+					
+                 	<hr />   
+                                          <div class="clearfix">
+                      <a href="{$i.link}" class="btn btn-sm btn-warning">Berita</a>
+                    {if $login eq '1' and $kanal eq 'member'} <a href="{$fulldomain}/member/berita-edit/{$detailid}" class="btn btn-sm btn-warning">Edit</a> <a href="{$fulldomain}/member/berita-hapus/{$detailid}" class="btn btn-sm btn-warning">Hapus</a>{/if}
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel .panel-default -->
+            </div>
+            <!-- /.col-xs-12 -->
+        </div>
+        <!-- /.row -->
+
+</div>

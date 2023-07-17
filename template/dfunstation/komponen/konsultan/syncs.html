@@ -1,0 +1,70 @@
+<div class="col-xs-12">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="items item-w2">
+               <div class="row">
+               <div class="col-xs-12">
+                   <h4 class="option-title text-green text-uppercase">Sinkronisasi Socmed</h4>
+               </div>
+               <div class="clearfix"></div>
+           </div>
+           <!-- /.row -->
+           </div>
+            <!-- /.items item-w2 -->
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+                <div class="form-group">
+                	{if $fbcid neq ''}
+                        <label class="col-sm-8 control-label">Saat ini akun anda sudah terhubung dengan <span style="color:#1a2bff">Facebook</span> account</label>
+                        <div class="col-sm-4">
+                            <a href="{$fulldomain}/member/syncs/unconnect/fbcid" class="btn btn-success btn-sm tooltips" data-original-title="Disconnect" data-placement="top">
+                                <i class="icon-globe"></i> Putus Hubungan</a>
+                        </div>
+                    {else}
+                        <label class="col-sm-8 control-label">
+                            Saat ini aku anda belum terhubung dengan &nbsp;<span style="color:#1a2bff">Facebook</span>. Silahkan hubungkan untuk mendapatkan fasilitas menarik lainnya yang terintergrasi dengan facebook
+                        </label>
+                        <div class="col-sm-4">
+                            <a href="{$fulldomain}/librari/fbconnect/index.php" class="btn btn-success btn-sm tooltips" data-original-title="Connect Now" data-placement="top">
+                                <i class="icon-globe"></i> Hubungkan</a>
+                        </div>
+                    {/if}
+                </div>
+                
+                <div class="clearfix"></div><br />
+
+                <div class="form-group">
+                	{if $twid neq ''}
+                        <label class="col-sm-8 control-label">Saat ini akun anda sudah terhubung dengan <span style="color:#0b69ff">Twitter</span> account</label>
+                        <div class="col-sm-4">
+                            <a href="{$fulldomain}/member/syncs/unconnect/twid" class="btn btn-success btn-sm tooltips" data-original-title="Disconnect" data-placement="top">
+                            	<i class="icon-globe"></i> Putus Hubungan</a>
+                        </div>
+                    {else}
+                        <label class="col-sm-8 control-label">
+                               Saat ini aku anda belum terhubung dengan  &nbsp;<span style="color:#0b69ff">Twitter</span>. Silahkan hubungkan untuk mendapatkan fasilitas menarik lainnya yang terintergrasi dengan twitter
+                        </label>
+                        <div class="col-sm-4">
+                            <a href="{$fulldomain}/librari/twitteroauth/index.php" class="btn btn-success btn-sm tooltips" data-original-title="Connect Now" data-placement="top">
+                            	<i class="icon-globe"></i> Hubungkan</a>
+                        </div>
+                    {/if}
+                </div>
+                
+                <div class="clearfix"></div><br />
+
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel .panel-default -->
+
+    </div>
+    <!-- /.col-xs-12 -->
+</div>
+<!-- /.row -->
+</div>

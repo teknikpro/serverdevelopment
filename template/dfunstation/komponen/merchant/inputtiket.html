@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="col-xs-12">
+      <div class="items item-w2">
+         <div class="row">
+         <div class="col-xs-6">
+              <h4 class="option-title text-green text-uppercase">Input Tiket</h4>
+         </div>
+         <div class="col-xs-6">
+  
+         </div>
+         <div class="clearfix"></div>
+     </div>
+     <!-- /.row -->
+     </div>
+      <!-- /.items item-w2 -->
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+      <div class="panel panel-default e-squared p-0">
+          <div class="panel-body p-3">
+
+            {if $error }
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                {$pesan}
+            </div>
+            {/if}
+
+            {if $berhasil }
+            <div class="alert alert-info alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                Nama : {$userfullname}
+                <br>
+                Invoice : {$invoiceid}
+                <br>
+                Tanggal Pembelian : {$create_date}
+                <br>
+                Jenis Tiket : {$nama}
+                <br>
+                Total Tagihan : Rp. {$totaltagihan}
+                <br>
+
+                <form style="margin-bottom: 20px ;" class="form-horizontal " role="form" name="profile" method="post" enctype="multipart/form-data" action="{$fulldomain}/merchant/inputtiket">
+                  <div class="form-group">
+                    <div class="col-sm-9">
+                    <input type="hidden" class="form-control" id="inputPassword3" name="insertivoice"  value="{$invoiceid}">
+                    </div>
+                  </div>
+        
+                  <button type="submit" class="btn btn-primary">
+                    Tandai Sudah Digunakan
+                  </button>
+                </form> 
+            </div>
+            {/if}
+
+            {if $doneinput}
+
+            <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              Data dengan invoice {$invoiceid} barhasil ditandai telah digunakan
+            </div>
+
+            {/if}
+
+            {if $otoritas}
+
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              Anda tidak mempunyai hak menandai tiket ini 
+            </div>
+
+            {/if}
+
+            <form style="margin-bottom: 20px ;" class="form-horizontal " role="form" name="profile" method="post" enctype="multipart/form-data" action="{$fulldomain}/merchant/inputtiket">
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-3 control-label">Masukan Invoice</label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control" id="inputPassword3" name="invoice"  placeholder="Masukan Invoice" value="{$datainput}">
+                </div>
+              </div>
+    
+              <div class="form-group">
+                <div class="col-xs-offset-3 col-xs-9">
+                  <button type="submit" class="btn btn-success">Cek Tiket</button>
+                </div>
+              </div>
+    
+          </form> 
+          </div>
+          <!-- /.panel-body -->
+      </div>
+      <!-- /.panel .panel-default -->
+  </div>
+  <!-- /.col-xs-12 -->
+</div>
+<!-- /.row -->
+</div>
+
+
+

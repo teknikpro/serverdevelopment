@@ -1,0 +1,112 @@
+<div class="box-content">
+    <div class="large-content">
+        <div class="title-headline">
+            <span>{$detailnama}</span>
+        </div><br clear="all" />
+         <div class="content-info">
+         	<span>{if $detailcreator neq ''}Oleh {$detailcreator} | {/if} {$detailtanggal} | {$detailstats} Views</span>
+         </div>
+
+        {if $detailgambar neq ''}
+        <div class="thumbDetail">
+            <img src="{$detailgambar}" alt="{$detailnama}" class="img-responsive" />
+        </div>
+        {/if}
+        <div class="ringkas">{$detailringkas}</div>
+        <p>{$detaillengkap}</p>
+	<br clear="all" />
+    {if $detailpromoprogram neq ''}
+    <a href="{$detailurlprogram}" class="promoprogram">{$detailpromoprogram}	</a>
+    <br clear="all" />
+    {/if}
+     <br clear="all" />
+    <div class="tagsbox">
+    <div class="tags-label">Tags</div>
+    <div class="tags-isi">
+    {foreach from=$tags key=id item=a}
+    	<a href="{$a.url}" class="tags">#{$a.tag}</a>
+    {/foreach}
+    </div>
+    </div>
+    <br clear="all" />
+
+        <br clear="all" />
+        <iframe allowTransparency='true' frameborder='0' scrolling='no' src='/librari/share/index.php?url={$uri}&title={$detailnama}&media={$detailgambar}' style='border:none; margin:15px 0px 15px 0px; overflow:hidden; width:450px; height:70px;'></iframe> 
+               <div class="bg-divider"></div>
+        
+      <br clear="all" /><br clear="all" />
+     <div class="bg-divider"></div><br clear="all" />
+        {include file="`$lokasitemplate`/komponen/home/komentar.html"}
+    </div>
+      
+
+       	<br clear="all" />
+<div class="infodetail"><span class="infodetail-1"><strong>{$rubrik} Lainnya</strong></span></div>
+    {foreach from=$terkait key=id item=a}
+     <div class="col-md-6">
+     <div class="boxnewspilihan">
+        <div class="boxnewspilihan-isi">
+            <div class="box-boxnewspilihan">
+                <a href="{$a.link}" class="judul1"><img src="{$a.gambar}" alt="{$a.nama}" border="0" /></a>
+            </div>
+            <span><a href="{$a.link}" class="judul1">{$a.nama}</a></span><br />
+       		<span class="tgl">{$a.tanggal}</span><br />
+            {$a.ringkas}
+        </div>
+    </div>
+    </div>
+    {/foreach}
+    
+</div>
+
+{if $popupnewsletter neq '0' and $login neq '0' and $kanal neq 'subscribe'}
+<!-- Start modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="col-md-4 text-center">
+                    <div class="contactbox1-gambar"><img src="{$contactphoto}" class="img-responsive" style="width:100%;" /><br /></div><br />{$contactname}<br />
+                    <a href="{$fulldomain}/contactmessage" class="btn btn-default btn-lg">Hubungi Saya</a>
+                </div>
+                <div class="col-md-8">
+                <div class="modal-info">
+                    <h2>Bantuan Informasi</h2>
+                    Hai, perkenalkan saya <strong>{$contactname}</strong>. Saya akan membantu anda untuk mengenal Detox Your Body - SentraDetox lebih mendalam, oleh karena itu
+                    silahkan masukan beberapa informasi dibawah ini untuk kemudahan saya memberikan informasi.<br />
+                    <form action="{$fulldomain}/subscribe" method="post">
+                    	<div class="input-group">
+                        <input type="email" title="" data-original-title="" placeholder="Masukan Alamat Email Anda" value=""  required="required"  id="email" name="email" class="form-control">
+                      	</div>
+                        <div class="input-group">
+                        <input type="text" title="" data-original-title="" placeholder="Masukan Nama Lengkap Anda" value=""  required="required" id="nama" name="nama" class="form-control">
+                      	</div>
+                        <div class="input-group">
+                        <input type="text" title="" data-original-title="" placeholder="Masukan Nomor Handphone anda" value=""  required="required" id="handphone" name="handphone" class="form-control">
+                      	</div>
+                        <div class="aput-group">
+                        <input type="checkbox" value="1" id="membermnc" name="membermnc" style="float:left; margin:15px 5px 0px 0px;">
+                        <span style="float:left; margin:10px 5px 0px 0px;">Saya adalah Member Detox Your Body - SentraDetox</span>
+                      	</div>
+                      	 <div class="input-group">
+                        <input type="submit" class="btn btn-lg btn-primary" value="Kirimkan" />
+                        
+                        </div>
+                    
+                    </form>
+                </div>
+                </div>
+                <br clear="all" />
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+	setTimeout(function() {
+	 $('#myModal').modal('show');
+	}, 20000); 
+});
+</script>
+
+{/if}        

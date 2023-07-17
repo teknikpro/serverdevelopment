@@ -1,0 +1,111 @@
+{include file="`$lokasitemplate`/komponen/home/header.html"}
+<div class="topkanal">
+	<div class="container">
+    	<div class="topkanal-inner">
+           <div class="topkanal-inner-1"><span>{$rubrik}</span></div>
+            <div class="topkanal-inner-2"><span>
+            Hubungi pemilik mainan di {$title}<br />
+            untuk melakukan pemesanan ataupun mendapatkan informasi yang lebih lengkap<br /> 
+            </span></div>
+        </div>
+    </div>
+</div>
+<div id="header-kanal">
+	 <div class="container">
+            <div class="row">
+					<span>&nbsp;</span>
+			</div>
+	 </div>
+</div>
+
+    <div id="content">
+        <div class="container">
+                
+                <div class="col-md-4">
+                  
+                  	<div class="contact-samping">
+                        <div class="contact-samping-isi">
+                            <div class="contactbox-gambar">
+                            <img src="{$detailowner.avatarl}" alt="{$detailowner.userfullname}" />
+                            </div>
+                            <span class="contactbox-nama"> {$detailowner.userfullname}</span>
+                            <br />
+                            Silahkan hubungi saya untuk memesan mainan yang saya miliki atau untuk mendapatkan informasi lebih
+                            lengkap tentang mainan <strong>{$detailnama}</strong>.<br clear="all" />
+                        </div>
+                    </div>
+					
+              	 </div>
+                
+                 
+                  <div class="col-md-8">
+                  		
+                        <div class="boxcontent1">
+                    					
+                                {if $berhasil eq '1'}
+                                    <div class="success">{$pesanhasil}</div><br clear="all" />
+                                    <a href="{$fulldomain}/contactmessage/{$produkpostid}"  class="btn btn-warning">Kembali</strong></a>
+                                {elseif $berhasil eq '0'}
+                                    <div class="error">{$pesanhasil}</div>
+                                    <ul>
+                                        {foreach from=$pesan key=id item=i}
+                                        <li>{$i.pesan}</li>
+                                        {/foreach}
+                                    </ul><br clear="all" />
+                                    <a href="{$fulldomain}/contactmessage/{$produkpostid}" class="btn btn-warning"> Kembali</a>
+                                {/if}
+
+                                {if $berhasil neq '1'}    
+                                <p>Anda dapat menghubungi saya melalui formulir dibawah ini, atau anda juga bisa menghubungi saya melalui
+                                nomor telephone {$detailowner.phone} </p>
+                                <form role="form" action="{$fulldomain}/contactmessage/{$produkpostid}" method="post" name="login">
+                                    <input type="hidden" name="action" value="savepesan" />
+                                     <input type="hidden" name="produkpostid" value="{$produkpostid}" /> 
+                                     <div class="form-group">
+                                    	<label>Nama Mainan</label>
+                                        <input type="text" data-original-title="Nama Lengkap" name="namamainan" \ disabled="disabled" class="form-control" required value="{$detailnama}" />
+                                    </div>
+                                    <div class="form-group">
+                                    	<label>Nama Lengkap</label>
+                                        <input type="text" data-original-title="Nama Lengkap" name="userfullname" data-content="Masukkan nama lengkap disini." data-trigger="focus" data-placement="left" data-toggle="popover" placeholder="Masukkan Nama Lengkap Anda" id="name" class="form-control" required value="{$message_userfullname}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Alamat Email</label>
+                                        <input type="email" data-original-title="Email" name="useremail" data-content="Masukkan alamat email disini." data-trigger="focus" data-placement="left" data-toggle="popover" placeholder="Masukkan alamat Email" id="email" class="form-control" required />
+                                    </div>
+                                     <div class="form-group">
+                                         <label>Nomor Handphone</label>
+                                         <input type="phone" data-original-title="Phone" name="userphone" data-content="Masukkan nomor telephone atau handphone disini." data-trigger="focus" data-placement="left" data-toggle="popover" placeholder="Masukkan nomor telephone atau handphone disini." id="email" class="form-control" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Pesan Anda</label>
+                                        <textarea data-original-title="Pesan" rows="10" name="pesan" data-content="Masukkan pesan disini." data-trigger="focus" data-placement="left" data-toggle="popover" placeholder="Masukkan Pesan atau pertanyaan anda" id="username" class="form-control" required>{$message_isi}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="secure-codebox">
+                                            <img id="siimage" align="left" style="padding-right:0; widborder: 0" src="{$fulldomain}/librari/captcha/securimage_show.php?sid={$kodegen}" />
+                                            <a class="recaptcha-reload" tabindex="-1" style="border-style: none; float:left; margin-left:10px" href="#" title="Refresh Code" onclick="document.getElementById('siimage').src = '{$fulldomain}/librari/captcha/securimage_show.php?sid=' + Math.random(); return false">[Refresh Code]</a>
+                                        </div>
+                                    </div><br clear="all" />
+                                    <div class="form-group">
+                                        <input type="text" name="code" id="scode" class="form-control" placeholder="Masukan Kode" data-original-title="Security Code" data-content="Masukkan kode disini." data-trigger="focus" data-placement="left" data-toggle="popover" class="form-control" required />
+                                    </div>
+
+                                  <button class="btn btn-warning btn-lg" type="submit">Kirimkan Sekarang</button>
+                                </form>
+                                {/if}
+                                </div>
+                         </div>
+                    
+                        </div>  			
+                  </div>
+                
+                   
+
+            </div>
+            <!-- /.row -->
+       </div>
+       <!-- /.container -->
+</div>
+<!-- /#isotope-element -->
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

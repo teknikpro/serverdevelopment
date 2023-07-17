@@ -1,0 +1,184 @@
+<script>
+
+    let menu = "lelang";
+
+    function cek() {
+        swal("Silahkan Login Terlebih Dahulu", {
+            buttons: {
+                cancel: "Cancel",
+                catch: {
+                    text: "Registrasi",
+                    value: "catch"
+                },
+                Login: true,
+            },
+        })
+            .then((value) => {
+                switch (value) {
+                    case "Login":
+                        window.location = "{$fulldomain}/user/" + menu + "";
+                        break;
+
+                    case "catch":
+                        window.location = "{$fulldomain}/user/daftar";
+                        break;
+
+                    default:
+                        swal("Kembali ke halaman lelang");
+                }
+            });
+
+        return false;
+    }
+
+    function like(id, iduser) {
+        var urls = "https://www.dfunstation.com/api4/android/index.php/member/like-simpo/" + iduser + "/" + id + "/?callback=?";
+        $.ajax({
+            type: "GET",
+            url: urls,
+            crossDomain: true,
+            cache: false,
+            success: function (data) {
+
+                if (data['status'] == "LIKE") {
+                    $("#like" + id).fadeIn();
+                    $("#like" + id).html('<img width="20px" height="20px" src="https://www.dfunstation.com/template/dfunstation/images/simposium/logolike.png" alt="">&nbsp;&nbsp; ' + data.jumlahlike + ' Menyukai')
+                } else {
+                    $("#like" + id).fadeIn();
+                    $("#like" + id).html('<img width="20px" height="20px" src="https://www.dfunstation.com/template/dfunstation/images/simposium/logolike2.png" alt="">&nbsp;&nbsp; ' + data.jumlahlike + ' Menyukai')
+                }
+            }
+        });
+
+    }
+    // function like(id) {
+    //     //swal('ini like '+id);
+    //     let userid = 23;
+    //     let chatid = 1;
+    //     let state = "state";
+    //     let file = "file";
+    //     $.ajax({
+    //         type: "POST",
+    //         crossDomain: true,
+    //         cache: false,
+    //         url: "https://www.serverdevelopment2020.my.id/api4/android/index.php/member/chat-mading-peer/" + userid + "/" + userid + "/" + id + "/" + chatid + "/?callback=?",
+    //         data: { 'function': 'like', 'state': state, 'file': file },
+    //         beforeSend: function () {
+    //             //$("#chat-area").animate({ scrollTop: 20000000 }, "slow");
+    //             //$("#load_data_message").show();
+    //         },
+    //         success: function (data) {
+    //             if (data['status'] == "OK") {
+    //                 $("#like" + id).html("<i class='fal fa-heart' style='margin-right:5px;color:red'></i> " + data.status + " Suka");
+    //             } else {
+    //                 $("#like" + id).html("<i class='fal fa-heart' style='margin-right:5px;'></i> " + data.status + " Suka");
+    //             }
+    //         }
+    //     });
+
+    // }
+
+</script>
+<div class="grid-list-products">
+    <div id="grid-view" class="products-grid fade tab-pane in active">
+
+        <div class="product-grid-holder medium">
+            <div class="row no-margin">
+
+                {if $tot eq '0' and $aksi eq 'list-search'}
+                <center>
+                    <br /><br /><br />Tidak ditemukan produk untuk pencarian menggunakan kata <strong>{$kata}</strong>.
+                    Silahkan coba kembali<br />
+                    <br /><br /><br /><br />
+                </center>
+                {else}
+
+                {foreach from=$list_post key=produkpostid item=p}
+                <div class="col-md-3">
+                    <div class="product-listitem">
+                        {if $p.misc_diskonn neq '0'}<div class="ribbon red"><span>sale</span></div>{/if}
+                        {if $p.bestseller eq '1'}<div class="ribbon green"><span>bestseller</span></div>{/if}
+
+                        <div class="product-listitem-img">
+                            <a href="{$p.link_detail}"><img alt="{$p.namaprod}" src="{$p.image_m}"
+                                    data-echo="{$p.image_m}" /></a>
+                        </div>
+                        <div class="product-listitem-body">
+                            {if $p.misc_diskonn neq '0'}<div class="label-discount green">Hemat {$p.savenya}</div>{/if}
+                            <div class="title">
+                                <a href="{$p.link_detail}">{$p.namaprod}</a>
+                            </div>
+                            <div class="prices">
+                                {if $p.harga neq '0'}
+                                <div class="price-current">Rp. {$p.harga}</div>
+                                {/if}
+                            </div>
+                            <div class="prodoct-listitem-ringkas">
+                                {$p.ringkas}
+                            </div>
+
+                            {if $p.namabr neq ''}<div class="brand">{$p.namabr}</div>{/if}
+                        </div>
+                        <br clear="all" />
+                        <div style="border-top: 1px solid rgb(185, 185, 185); padding-top: 7px;" class="hover-area">
+                            <div class="add-cart-button">
+                                <div class="row">
+                                    <div class="col-sm-6"><a class="">{$p.numviews} Dilihat</a></div>
+                                    <div style="cursor: pointer;" class="col-sm-6">
+                                        <a id="like{$p.produkpostid}" {if $login neq '1' } onclick="return cek();"
+                                            {else} onclick="like({$produkpostid}, {$iduser})" {/if}> <img width="20px"
+                                                height="20px" src="{$lokasiwebtemplate}images/simposium/{$p.statuslike}"
+                                                alt="">
+                                            &nbsp;&nbsp;
+                                            {$p.jumlahlike} Menyukai</a>
+                                    </div>
+                                </div>
+                                <hr>
+                                <a href="{$p.link_detail}" class="btn btn-warning">Beli Sekarang</a>
+                                <a href="{$p.link_detail}" class="btn btn-primary">Detail</a>
+                            </div>
+                        </div>
+                    </div><!-- /.product-item -->
+
+                </div><!-- /.product-item-holder -->
+                {/foreach}
+
+                {/if}
+
+
+            </div><!-- /.row -->
+        </div><!-- /.product-grid-holder -->
+
+        <!-- <script type="text/javascript">
+            $(document).ready(function () {
+                $(".tombol-simpan").click(function () {
+                    var data = $('.form-user').serialize();
+                    $.ajax({
+                        type: 'POST',
+                        url: "https://www.dfunstation.com/komponen/lelang/lelang.like.php",
+                        data: data,
+                        success: function () {
+                            $('.hover-area').load("https://www.dfunstation.com/lelang");
+                        }
+                    });
+                });
+            });
+        </script> -->
+
+
+        <div class="pagination-holder">
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-6 text-left">
+                    <ul class="pagination ">
+                        {foreach from=$stringpage key=pageid item=a}
+                        <li class="{$a.class}"><a href="{$a.link}"> {$a.nama} </a></li>
+                        {/foreach}
+                    </ul>
+                </div>
+
+            </div><!-- /.row -->
+        </div><!-- /.products-grid #grid-view -->
+
+
+    </div><!-- /.grid-list-products -->

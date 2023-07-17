@@ -1,0 +1,576 @@
+{strip}
+<!DOCTYPE html>
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<!-- =========================================
+    head
+    ========================================== -->
+
+<head>
+  <!-- =========================================
+        Basic
+        ========================================== -->
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="copyright" content="Copyright 2018 {$title}" />
+  <meta name="language" content="in,en" />
+  <meta name="distribution" content="Global" />
+  <meta name="rating" content="General" />
+  <meta name="robots" content="index,follow" />
+  <meta name="googlebot" content="index,follow" />
+  <meta name="revisit-after" content="20 minutes" />
+  <meta name="expires" content="never" />
+  <meta name="keywords" content="{$metakeyword}" />
+
+  {if $aksi eq 'detail' or $aksi eq 'read'}
+  <meta name="title" property="og:title" content="{$detailnama}" />
+  <meta name="description" property="og:description"
+    content="{if $detailringkas neq ''}{$detailringkas}{else}{$metadescription}{/if}" />
+  <meta name="image" property="og:image" content="{if $gambarshare neq ''}{$gambarshare}{else}{$detailgambar}{/if}" />
+  {elseif $kanal eq 'home'}
+  <meta name="title" property="og:title" content="{$title}" />
+  <meta name="description" property="og:description" content="{$metadescription}" />
+  <meta name="image" property="og:image" content="{$lokasiwebtemplate}images/img.share.1.jpg" />
+  {elseif $kanal eq 'termometer-kecemasan'}
+  <meta name="title" property="og:title" content="Termometer Kecemasan di DFun Station" />
+  <meta name="description" property="og:description"
+    content="Ukur tingkat kecemasan anda dan dapatkan solusinya. Pengembangan tes ini merupakan kerjasama antara Pojok Psikologi Bandung, d'Fun Station, IPK Jabar dan HIMPSI Jabar." />
+  <meta name="image" property="og:image" content="{$lokasiwebtemplate}images/kecemasan.jpg" />
+
+  {elseif $kanal eq 'video' and $aksi eq 'arsip'}
+  <meta name="title" property="og:title" content="{$rubrik} (Video)" />
+  <meta name="description" property="og:description"
+    content="{if $detailringkas neq ''}{$detailringkas}{else}{$webdesc}, {$metakeyword}{/if}" />
+  {else}
+  <meta name="title" property="og:title" content="{$rubrik} - {$title}" />
+  <meta name="description" property="og:description" content="{$metadescription}" />
+  {/if}
+
+  <title>{if $aksi eq 'detail' or $aksi eq 'isi' or $aksi eq 'read' }{$detailnama}{else}{$title} | {$rubrik}{/if}
+  </title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+
+  <link rel="stylesheet" href="{$lokasiwebtemplate}css/font-awesome.css" />
+
+  <link rel="stylesheet" href="{$lokasiwebtemplate}css/bootstrap.min.css" />
+  <link rel="stylesheet" href="{$lokasiwebtemplate}js/fancybox/jquery.fancybox.css" />
+
+
+  <!-- Important Owl stylesheet -->
+  <link rel="stylesheet" href="{$lokasiwebtemplate}js/owl-carousel/owl.carousel.css">
+  <link rel="stylesheet" href="{$lokasiwebtemplate}js/owl-carousel/owl.transitions.css">
+
+  <link rel="stylesheet" href="{$lokasiwebtemplate}css/jssocials.css" />
+  <link rel="stylesheet" href="{$lokasiwebtemplate}css/jssocials-theme-flat.css" />
+
+
+  <!-- Default Theme -->
+  <link rel="stylesheet" href="{$lokasiwebtemplate}js/owl-carousel/owl.theme.css">
+
+
+  <!-- own stylesheet -->
+  <link rel="stylesheet" href="{$lokasiwebtemplate}css/style.css" />
+  <link rel="stylesheet" href="{$lokasiwebtemplate}css/dev.css" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="{$fulldomain}/favicon.ico" />
+
+  <!-- =========================================
+        Head Libs
+        ========================================== -->
+
+  <!--{if $kanal eq 'cart'}
+        <script src="{$lokasiwebtemplate}js/jquery.min.js"></script>
+        {else}-->
+  <!--{/if}-->
+  <script src="{$lokasiwebtemplate}js/modernizr 2.8.3.min.js"></script>
+  <script src="{$lokasiwebtemplate}js/jquery.js"></script>
+
+  {if $kanal eq 'product' and $aksi eq 'read'}
+  <link rel="stylesheet" href="{$lokasiwebtemplate}css/prettyPhoto.css" />
+  <script src="{$lokasiwebtemplate}js/jquery.prettyPhoto.js"></script>
+  {/if}
+  <script type="text/javascript" src="{$lokasiwebtemplate}lib/swal/sweetalert.min.js"></script>
+
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="js/respond.min.js"></script>
+		<![endif]-->
+</head>
+<!-- /head -->
+
+
+<body>
+
+  <div class="mainmenu">
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="navbar-header">
+          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse"
+            data-target=".js-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{$fulldomain}">
+            <img src="{$lokasiwebtemplate}images/img.logo.png" alt="">
+          </a>
+        </div>
+
+
+        <div class="collapse navbar-collapse js-navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <form action="{$fulldomain}/search/" method="get">
+                <input type="hidden" name="aksi" value="cari">
+                <input type="text" class="caribox" name="q" id="q" placeholder="temukan sesuatu disini" />
+              </form>
+            </li>
+            <li>
+              <a href="{$fulldomain}/consultation">Fun Consultation</a>
+            </li>
+            <li>
+              <a href="{$fulldomain}/corner">Fun Event</a>
+            </li>
+
+            <li class="dropdown mega-dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fun World</a>
+
+              <ul class="dropdown-menu mega-dropdown-menu row">
+                <li class="col-sm-12">
+                  <div class="menumega">
+                    {foreach from=$worldsec key=secid item=a}
+                    <div class="col-md-2">
+                      <a href="{$a.urlsec}"><strong>{$a.namasec}</strong></a>
+                      {foreach from=$a.sub key=subid item=b}
+                      <a href="{$b.urlsub}">{$b.namasub}</a>
+                      {/foreach}
+                    </div>
+                    {/foreach}
+
+                  </div>
+                </li>
+              </ul>
+
+            </li>
+            <!--  <li class="dropdown mega-dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fun Parenting</a>
+
+          <ul class="dropdown-menu mega-dropdown-menu row">
+         
+             <li class="col-sm-12">
+               <div class="menumega">
+               
+                <div class="col-md-6">
+                    <div class="col-md-6">
+                     <img src="{$lokasiwebtemplate}images/img.konsultasi.parenting.jpg" alt="Konsultasi Parenting" style="width:100%; float:left; margin:10px 20px 0px 20px;" />
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{$fulldomain}/konsultasi"><strong>Konsultasi Parenting</strong></a>
+                         {foreach from=$konsultasisection key=secid item=b}
+                            <a href="{$b.urlmenu}">{$b.nama}</a>
+                        {/foreach}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                     <div class="col-md-6">
+                     <img src="{$lokasiwebtemplate}images/img.blog.artikel.jpg" alt="Blog Parenting" style="width:100%; float:left; margin:10px 20px 0px 20px;" />
+                    </div>
+                    <div class="col-md-6">
+                     <a href="{$fulldomain}/blog"><strong>Blog dan Artikel</strong></a>
+                     {foreach from=$blogsection key=secid item=b}
+                    <a href="{$b.urlmenu}">{$b.nama}</a>
+                    {/foreach}
+                    </div>
+                </div>
+               </div>
+            </li>
+           </ul>
+
+        </li>
+        
+       
+        
+        <li class="dropdown mega-dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fun Info</a>
+
+          <ul class="dropdown-menu mega-dropdown-menu row">
+          
+           <li class="col-sm-4">
+              <ul>
+                <li class="dropdown-header"><a href="{$fulldomain}/berita">&nbsp;&nbsp;&nbsp;<strong>Berita Terkini</strong></a></li>
+                <li>
+                <div class="col-md-9 col-md-offset-1">
+                <span>Update berita terkini tentang dunia anak dan parenting, jadilah pertama yang tau tentang
+                informasinya <br>
+               <a href="{$fulldomain}/berita"><button type="submit" class="btn btn-warning">Lihat Berita</button></a></span>
+                </div>
+                </li>
+                
+              </ul>
+            </li>
+             <li class="col-sm-4">
+              <ul>
+                <li class="dropdown-header"><a href="{$fulldomain}/event">&nbsp;&nbsp;&nbsp;<strong>Event and Seminar</strong></a></li>
+                <li>
+                 <div class="col-md-9 col-md-offset-1">
+                <span>Dapatkan informasi event dan seminar parenting dengan cepat dan lengkap dari dfun Station<br>
+               <a href="{$fulldomain}/event"><button type="submit" class="btn btn-warning">Lihat Event</button></a></span>
+                </div>
+                </li>
+                
+              </ul>
+            </li>
+             <li class="col-sm-4">
+              <ul>
+                <li class="dropdown-header"><a href="{$fulldomain}/agenda">&nbsp;&nbsp;&nbsp;<strong>Agenda Kegiatan</strong></a></li>
+                <li>
+                <div class="col-md-9 col-md-offset-1">
+                <span>Update selalu informasi tentangagenda kegiatan yang dilakukan di dfun Station beserta kegiatan mitra-mitra<br>
+               <a href="{$fulldomain}/agenda"><button type="submit" class="btn btn-warning">Lihat Agenda</button></a></span>
+                </div>
+                </li>
+                
+              </ul>
+            </li>
+           
+          
+        
+            
+          
+          </ul>
+
+        </li>  -->
+            <li class="dropdown mega-dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fun Station</a>
+
+              <ul class="dropdown-menu mega-dropdown-menu row">
+
+                <li class="col-sm-4">
+                  <ul>
+                    <li>
+                      <div class="col-md-6">
+                        <img src="{$lokasiwebtemplate}images/img.funstation.jpg" alt="Unjuk main"
+                          style="width:85%; float:left; margin:10px 20px 0px 20px;" />
+                      </div>
+                      <div class="col-md-6">
+                        <a href="{$fulldomain}"><span>Kenali lebih dekat tentang dFun Station dan dapatkan berbagai
+                            benefit ketika anda menjadi
+                            bagian dari d'Fun Station</span></a><br>
+                      </div>
+                    </li>
+
+                  </ul>
+                </li>
+                <li class="col-sm-8">
+                  <div class="menumega">
+                    <div class="col-md-4">
+                      <a href="{$fulldomain}/about">Profile dFun Station</a>
+                      <a href="{$fulldomain}/attraction">Attraction</a>
+                      <a href="{$fulldomain}/activities">Activities</a>
+                      <a href="{$fulldomain}/galeri">Photo Gallery</a>
+                    </div>
+                    <div class="col-md-4">
+                      <a href="{$fulldomain}/video">Video Gallery</a>
+                      <a href="{$fulldomain}/testimoni">Testimoni</a>
+                      <a href="{$fulldomain}/menjadi-mitra">Menjadi Mitra Fun Station</a>
+                      <a href="{$fulldomain}/membership">Informasi Membership</a>
+                    </div>
+                    <div class="col-md-4">
+                      <a href="{$fulldomain}/birthday">Paket Ulang Tahun</a>
+                      <a href="{$fulldomain}/location">Maps and Location</a>
+                      <a href="{$fulldomain}/contact">Contact</a>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
+
+            </li>
+
+            <li class="dropdown mega-dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fun Zone</a>
+
+              <ul style="overflow: scroll; height: 450px;" class="dropdown-menu mega-dropdown-menu row">
+                <li class="col-sm-12">
+                  <div class="menumega">
+
+                    <div class="col-md-6">
+                      <div class="col-md-6">
+                        <img src="{$lokasiwebtemplate}images/img.konsultasi.parenting.png" alt="Konsultasi Parenting"
+                          style="width:100%; float:left; margin:10px 20px 0px 20px;" />
+                      </div>
+                      <div class="col-md-6">
+                        <a href="{$fulldomain}/konsultasi"><strong>Tanya Ahli</strong></a>
+                        {foreach from=$konsultasisection key=secid item=b}
+                        <a href="{$b.urlmenu}">{$b.nama}</a>
+                        {/foreach}
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="col-md-6">
+                        <img src="{$lokasiwebtemplate}images/img.blog.artikel.jpg" alt="Blog Parenting"
+                          style="width:100%; float:left; margin:10px 20px 0px 20px;" />
+                      </div>
+                      <div class="col-md-6">
+                        <a href="{$fulldomain}/blog"><strong>Artikel</strong></a>
+                        {foreach from=$blogsection key=secid item=b}
+                        <a href="{$b.urlmenu}">{$b.nama}</a>
+                        {/foreach}
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li style="margin-top:20px;" class="col-sm-4">
+                  <ul>
+                    <li class="dropdown-header">&nbsp;&nbsp;&nbsp;Quiz dan Permainan</li>
+                    <li>
+                      <div class="col-md-9 col-md-offset-1">
+                        <span>Ikuti banyak permainan dan kuis untuk meningkatkan pengetahuan anda dan putra-putri anda
+                          <br>
+                          <a href="{$fulldomain}/fungame"><button type="submit" class="btn btn-warning">
+                              Mainkan Permainan
+                            </button></a></span>
+                      </div>
+                    </li>
+
+                  </ul>
+                </li>
+                <li style="margin-top:20px;" class="col-sm-4">
+                  <ul>
+                    <li class="dropdown-header">&nbsp;&nbsp;&nbsp;Kuis Harian</li>
+                    <li>
+                      <div class="col-md-9 col-md-offset-1">
+                        <span>Dapatkan tambahan poin member dengan mengikuti kuis yang digelar setiap hari<br>
+                          <a href="{$fulldomain}/kuis"><button type="submit" class="btn btn-warning">Ikuti Kuis &nbsp;
+                              Harian</button></a></span>
+                      </div>
+                    </li>
+
+                  </ul>
+                </li>
+                <li style="margin-top:20px;" class="col-sm-4">
+                  <ul>
+                    <li class="dropdown-header">&nbsp;&nbsp;&nbsp;Photo dari Anda</li>
+                    <li>
+                      <div class="col-md-9 col-md-offset-1">
+                        <span>Lihat foto-foto seru dan menarik yang dikirimkan dari dFuners semua, ayo ikut bergabung
+                          &nbsp;
+                          sekarang<br>
+                          <a href="{$fulldomain}/funfoto"><button type="submit" class="btn btn-warning">
+                              Lihat Foto-Foto
+                            </button></a></span>
+                      </div>
+                    </li>
+
+                  </ul>
+                </li>
+                <!-- <li class="col-sm-4">
+                  <ul>
+                    <li class="dropdown-header"><a href="{$fulldomain}/berita">&nbsp;&nbsp;&nbsp;<strong>Berita
+                          Terkini</strong></a></li>
+                    <li>
+                      <div class="col-md-9 col-md-offset-1">
+                        <span>Update berita terkini tentang dunia anak dan parenting, jadilah pertama yang tau tentang
+                          informasinya <br>
+                          <a href="{$fulldomain}/berita"><button type="submit" class="btn btn-warning">Lihat
+                              Berita</button></a></span>
+                      </div>
+                    </li>
+
+                  </ul>
+                </li>
+                <li class="col-sm-4">
+                  <ul>
+                    <li class="dropdown-header"><a href="{$fulldomain}/event">&nbsp;&nbsp;&nbsp;<strong>Event and
+                          Seminar</strong></a></li>
+                    <li>
+                      <div class="col-md-9 col-md-offset-1">
+                        <span>Dapatkan informasi event dan seminar parenting dengan cepat dan lengkap dari dfun
+                          Station<br>
+                          <a href="{$fulldomain}/event"><button type="submit" class="btn btn-warning">Lihat
+                              Event</button></a></span>
+                      </div>
+                    </li>
+
+                  </ul>
+                </li>
+                <li class="col-sm-4">
+                  <ul>
+                    <li class="dropdown-header"><a href="{$fulldomain}/agenda">&nbsp;&nbsp;&nbsp;<strong>Agenda
+                          Kegiatan</strong></a></li>
+                    <li>
+                      <div class="col-md-9 col-md-offset-1">
+                        <span>Update selalu informasi tentangagenda kegiatan yang dilakukan di dfun Station beserta
+                          kegiatan mitra-mitra<br>
+                          <a href="{$fulldomain}/agenda"><button type="submit" class="btn btn-warning">Lihat
+                              Agenda</button></a></span>
+                      </div>
+                    </li>
+
+                  </ul>
+                </li> -->
+
+              </ul>
+            <li class="dropdown mega-dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Assessment</a>
+
+              <ul style="overflow: scroll; height: 200px;" class="dropdown-menu mega-dropdown-menu row">
+
+                <li style="background-color: #ebe6e6; border-radius: 7px; margin: 8px; padding: 10px;" class="col-sm-5">
+                  <a href="{$fulldomain}/termometer-kecemasan/">
+                    <ul>
+                      <li>
+                        <div class="col-md-6">
+                          <img src="https://www.dfunstation.com/gambar/slide/slide-20.png" alt=""
+                            style="width:85%; float:left; margin:10px 20px 0px 20px;" />
+                        </div>
+                        <div class="col-md-6">
+                          <a href="{$fulldomain}/termometer-kecemasan/"><strong>Termometer Kecemasan</strong></a><br>
+                          <a href="{$fulldomain}/termometer-kecemasan/"><span>Tes derajat kecemasan anda</span></a><br>
+                        </div>
+                      </li>
+                    </ul>
+                  </a>
+                </li>
+                <li style="background-color: #ebe6e6; border-radius: 7px; margin: 8px; padding: 10px;" class="col-sm-5">
+                  <a href="{$fulldomain}/termometer-depresi">
+                    <ul>
+                      <li>
+                        <div class="col-md-6">
+                          <img src="https://www.dfunstation.com/gambar/slide/slide-19.png" alt=""
+                            style="width:85%; float:left; margin:10px 20px 0px 20px;" />
+                        </div>
+                        <div class="col-md-6">
+                          <a href="{$fulldomain}/termometer-depresi"><strong>Termometer Depresi</strong></a><br>
+                          <a href="{$fulldomain}/termometer-depresi"><span>Tes termometer Gejala depresi</span></a><br>
+                        </div>
+                      </li>
+                    </ul>
+                  </a>
+                </li>
+              </ul>
+
+            </li>
+            <!-- <li class="dropdown mega-dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Assessment</a>
+
+              <ul class="dropdown-menu mega-dropdown-menu row">
+
+                <li class="col-sm-4">
+                  <ul>
+                    <li>
+                      <div class="col-md-6">
+                        <img src="{$lokasiwebtemplate}images/img.menu.unjukmain.jpg" alt=""
+                          style="width:85%; float:left; margin:10px 20px 0px 20px;" />
+                      </div>
+                      <div class="col-md-6">
+                        <a href="{$fulldomain}/product"><strong>Produk</strong></a><br>
+                        <a href="{$fulldomain}/product"><span>Temukan berbagai berbagai produk terbaik untuk anda
+                            persembahan Fun Station dan Mitra Terpercaya</span></a><br>
+                      </div>
+                    </li>
+
+                  </ul>
+                </li>
+                <li class="col-sm-8">
+                  <div class="menumega">
+                    {foreach from=$productsec key=secid item=a}
+                    <div class="col-md-3">
+                      <a href="{$a.urlsec}"><strong>{$a.namasec}</strong></a>
+                      {foreach from=$a.sub key=subid item=b}
+                      <a href="{$b.urlsub}">{$b.namasub}</a>
+                      {/foreach}
+                    </div>
+                    {/foreach}
+                  </div>
+                </li>
+              </ul>
+
+            </li> -->
+            </li>
+            <li>
+              {if $login neq '1'} <a href="{$fulldomain}/user" class="btnlogin" id="btnlogin"><i
+                  class="fal fa-user"></i> Login</a>
+              {else}
+              <a href="{$fulldomain}/user" class="btnlogin" id="btnlogin"><i class="fal fa-user"></i> Akun</a>
+              {/if}
+            </li>
+
+
+          </ul>
+
+
+
+        </div>
+        <!-- /.nav-collapse -->
+      </nav>
+    </div>
+  </div>
+
+  {if $kanal neq 'home'}
+  <!--<div id="topmenu">
+	<div class="container">
+    	
+        <div class="col-md-6 col-md-offset-1">
+        	 <div class="topsearch">
+             	 <div class="col-md-12">
+                 <div class="row">
+                <form action="{$fulldomain}/search/" method="get">
+                 <input type="hidden" name="aksi" value="cari">
+                <div class="col-md-10 col-xs-10">
+                     <input type="text" class="form-control"  name="q" id="q" placeholder="Cari Artikel, Produk dan Lainnya" required>
+                </div>
+                <div class="col-md-2 col-xs-2">
+                  <span class="input-group-btn">
+                    <button class="btn btn-warning" type="submit">Cari</button>
+                  </span>
+                </div>
+                </form>
+                </div>
+              </div> 
+             </div>
+        </div>
+        {if $login neq '1'}
+        <div class="col-md-3 hidden-xs">
+        	<div class="col-xs-6">
+              	<div class="row">
+                	<a  class="btn-cart" href="{$fulldomain}/user/login">Login</a>
+                </div>
+             </div>
+             <div class="col-xs-6">
+             	<div class="row">
+              	<a class="btn-cart"  href="{$fulldomain}/user/daftar">Daftar</a>
+                </div>
+            </div>
+        </div>
+        {else}
+         <div class="col-md-3 hidden-xs">
+             <div class="col-xs-6">
+             <div class="row">
+              	<a class="btn-cart"  href="{$fulldomain}/user">Dashboard {if $jmlnotifikasi > 0 } <span class="label label-danger">{$jmlnotifikasi}</span> {/if}</a>
+             </div>
+            </div>
+            <div class="col-xs-6">
+            	<div class="row">
+              	<a class="btn-cart"  href="{$fulldomain}/cart">Keranjang</a>
+                </div>
+            </div>
+        </div>
+        {/if}
+    </div>
+</div>-->
+  {/if}
+
+  {/strip}

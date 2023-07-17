@@ -1,0 +1,78 @@
+{include file="`$lokasitemplate`/komponen/home/header.html"}
+<div class="topkanal">
+	<div class="container">
+    	<div class="topkanal-inner">
+           <div class="topkanal-inner-1"><span>Kuis Harian</span></div>
+        </div>
+    </div>
+</div>
+<div id="header-kanal">
+	 <div class="container">
+            <div class="row">
+					<span>&nbsp;</span>
+			</div>
+	 </div>
+</div>
+
+<div class="insight">
+    <div class="container">
+	<div class="boxcontent">
+    	<div class="box-content">
+        <div class="col-md-8">
+        	<div class="box-content">
+            {if $msg neq ''}
+            	 {if $error eq '1'}
+                 <div class="alert alert-danger">{$msg}
+                 </div>
+                 {else}
+                 <div class="alert alert-success">{$msg}
+                 <br /><br /><a href="{$fulldomain}/user/poin" class="btn btn-warning btn-lg">Lihat Histori Poin</a>
+                 </div>
+                 {/if}
+            {else}
+                {if $pertanyaan eq '' and $msg eq ''}
+                    <div class="alert alert-danger">Mohon maaf kuis <strong>belum tersedia</strong> untuk tanggal {$tanggal}, silahkan 
+                    mencoba esok hari atau kunjungi kami beberapa saat lagi untuk
+                    mengikuti kuis harian.
+                    </div>
+                {else}
+                    
+                    <div class="kuis-pertanyaan">
+                        {$pertanyaan}
+                    </div>
+                    <form action="{$fulldomain}/kuis" method="post">
+                    {foreach from=$jawabans key=jawabid item=a}
+                     <div class="kuis-jawaban">
+                        <input type="radio" value="{$a.hash}" name="jawabanid" class="form-control" /> {$a.jawaban}
+                    </div>
+                    {/foreach}
+                    <div class="kuis-jawaban">
+                        <input type="submit" value="Jawab dan Dapatkan Poin" name="submit" class="btn btn-default btn-warning btn-lg" onclick="return confirm('Apakah anda yakin dengan jawaban anda?')" />
+                    </div>
+                    </form>
+                    {/if}
+             {/if}
+            </div>
+        </div>
+        <div class="col-md-4">
+        	<div class="box-content">
+                <div class="bg-divider" style="margin:12px 0;"></div>
+            	<div class="side-contact">
+                      Kuis harian adalah kuis yang digelar setiap hari untuk
+                      member dfun station. Bila anda sudah menjadi member
+                      dan berhasil menjawab pertanyaan setiap harinya
+                      maka anda akan mendapatkan poin.<br />
+                      <br />Kumpulkan Poin sebanyak
+                      banyaknya dan tukarkan dengan 
+                      berbagai paket dan voucher menarik
+                      dari dfun Station.
+                 
+                </div>
+            </div>
+            </div>
+        </div> <br clear="all" />
+    </div>
+   
+</div>
+{include file="`$lokasitemplate`/komponen/home/footer.html"}
+ 

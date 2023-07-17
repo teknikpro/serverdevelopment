@@ -1,0 +1,31 @@
+{strip}
+{foreach from=$datadetail key=id item=ch}
+    <div class="list-content">
+    	<div class="list-content-isi">
+        {if $ch.gambar neq ''}
+       
+        <div class="thumbNews">
+            <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}" class="img-responsive" /></a>
+        </div>
+        {/if}
+        <b style="color:#558f0f">{$ch.namasec}</b><br />
+	 <a class="list-link" href="{$ch.link}">{$ch.nama}</a>
+        <br />
+        <span>{$ch.tanggal}</span>
+        <br />
+        <p>{$ch.ringkas}</p>
+        </div>
+    </div>
+{/foreach}
+<div class="paginate pull-right">
+    <ul class="pagination">
+        {foreach from=$stringpage key=pageid item=a}
+            {if $a.link neq ''}
+                <li><a href="{$a.link}">{$a.nama}</a></li>
+            {else}
+                <li><a href="javascript:void(0)">{$a.nama}</a></li>
+            {/if}
+        {/foreach}
+    </ul>
+</div>
+{/strip}

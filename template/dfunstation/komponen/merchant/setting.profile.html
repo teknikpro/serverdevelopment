@@ -1,0 +1,59 @@
+<script type="text/javascript" src="{$domain}/librari/ajax/ajax_feature.js"></script>
+
+{literal}
+<script type="text/javascript">
+function textCounter(field, countfield, maxlimit) {
+  if (field.value.length > maxlimit) {
+  field.value = field.value.substring(0, maxlimit);
+  } else {
+  countfield.value = maxlimit - field.value.length;
+  }
+}
+ </script>
+{/literal}
+
+       <form method="post" class="form-horizontal" role="form" name="profile" enctype="multipart/form-data" action="{$fulldomain}/konsultan/setting/profile">
+
+          <div class="form-group">
+            <label for="Profile" class="col-sm-3 control-label">Profile</label>
+            <div class="col-sm-9">
+             <textarea name="aboutme" class="form-control" id="aboutme" placeholder="aboutme" cols="30" rows="5">{$aboutme}</textarea>
+              <i>ceritakan profil singkat diri anda diform isian tentangku</i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="wiseword" class="col-sm-3 control-label">Kata Mutiara</label>
+            <div class="col-sm-9">
+             <textarea name="wiseword" class="form-control" id="wiseword" placeholder="wiseword" cols="30" rows="5">{$wiseword}</textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="companies" class="col-sm-3 control-label">Tempat Bekerja</label>
+            <div class="col-sm-9">
+             <textarea name="companies" class="form-control" id="companies" placeholder="Tempat Bekerja" cols="30" rows="5">{$companies}</textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="hobi" class="col-sm-3 control-label">Hobi</label>
+            <div class="col-sm-9">
+             <textarea name="hobi" class="form-control" id="hobi" placeholder="hobi" cols="30" rows="5">{$userhobi}</textarea>
+            </div>
+          </div>
+          
+          
+      <div class="form-group">
+        <label for="inputNama3" class="col-sm-3 control-label">Gambar</label>
+        <div class="col-sm-9">
+           <input type="file" name="avatar">
+        </div>
+      </div>
+        
+          <div class="form-group">
+            <div class="col-xs-offset-3 col-xs-9">
+                <input type="submit" class="button btn-success" name="submit" value="Simpan Perubahan Profile" />
+            </div>
+          </div>
+        </form>

@@ -1,0 +1,68 @@
+{include file="`$lokasitemplate`komponen/home/header-template.html"}
+
+<link rel="stylesheet" href="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/css/daftar-akun.css">
+
+<!-- banner -->
+<div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <h1 class="tag-fs">
+          BERGABUNG
+          <br>
+          MENJADI
+          <br>
+          MITRA
+        </h1>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <img class="img-fluid" src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/menjadi-mitra.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- form daftar -->
+<section>
+    <div class="container  daftar-akun-card">
+        <h1 class="daftar-akun-judul text-center">Bergabung dengan d’Fun Station, Yuk!</h1>
+        <h4 class="daftar-akun-des text-center">Masukan informasi diri anda melalui form yang disediakan dibawah ini untuk bergabung ke d'Fun Station - Sahabat Keluarga</h4>
+
+        <!-- form -->
+        <form method="post" action="{$fulldomain}/menjadi-mitra">
+            <input type="hidden" name="save" value="1" />
+
+            
+            <div class="mb-3">
+                <label for="namalengkap" class="form-label text-start fw-bold">Nama Lengkap</label>
+                <input type="text" class="form-control" name="nama" id="namalengkap" placeholder="Masukan Nama Lengkap" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label text-start fw-bold">Alamat Email</label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Masukan Email" required>
+            </div>
+            <div class="mb-3">
+                <label for="handphone" class="form-label text-start fw-bold">Nomor Handphone</label>
+                <input type="text" class="form-control" name="handphone" id="handphone" placeholder="Masukan Nomor Handphone" required>
+            </div>
+            <div class="mb-3">
+                <label for="judulpesan" class="form-label text-start fw-bold">Judul Pesan</label>
+                <input type="text" class="form-control" name="judul" id="judulpesan" placeholder="Masukan Nama Judul Pesan" required>
+            </div>
+            <div class="mb-3">
+                <label for="isipesan" class="form-label">Isi Pesan</label>
+                <textarea class="form-control" id="isipesan" name="pesan" rows="3" required></textarea>
+              </div>
+               
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+            <div class=" mb-3">
+                <div class="g-recaptcha" data-sitekey="{$sitekey}"></div>
+            </div>
+            <div class="button-daftar ">
+                <button type="submit" class="btn">Kirim</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+ 
+{include file="`$lokasitemplate`/komponen/home/footer-template.html"}

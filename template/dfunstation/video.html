@@ -1,0 +1,55 @@
+{include file="`$lokasitemplate`komponen/home/header.html"} 
+
+<div class="kanalabout">
+	<div class="container">
+            <span>{$rubrik}</span>
+            <p>Dokumentasi dan rekaman berbagai aktifitas yang ada di {$title} dan <br />berbagai ragam video tersedia di halaman ini.</p>
+    </div>
+</div>
+{include file="`$lokasitemplate`komponen/home/aboutmenu.html"}
+<div class="insight">
+    <div class="container">
+            
+                {if $aksi eq 'read'}
+                    <div class="col-md-8 boxcontent">
+                    {include file="`$lokasitemplate`komponen/$kanal/$kanal.read.html"}
+                    </div>
+                    
+                     <div class="col-md-4 ">
+                         <div class="box-kanan">
+                            <div class="box-kanan-judul">
+                                <span>Video Terpopuler</span>
+                            </div>
+                            <div class="box-kanan-isi">
+                            {foreach from=$videosamping key=id item=b}
+                             <div class="box-kanan-item">
+                                    <div class="col-xs-4">
+                                     {if $b.gambar neq ''}
+                                    <div class="box-kanan-item-img">
+                                        <a href="{$b.link}"><img src="{$b.gambar}" alt="{$b.nama}" class="img-responsive" /></a>
+                                    </div>
+                                    {/if}
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <a  href="{$b.link}"><h4>{$b.nama}</h4></a>
+                                        <span class="date">{$b.views} Views</span>
+                                   </div>
+                               </div>
+                               {/foreach}
+                            </div>
+                        </div>
+                        
+                         
+                        
+                        </div>
+                  
+                {else}
+                    <div class="col-md-12">
+                    {include file="`$lokasitemplate`komponen/$kanal/$kanal.list.html"}
+                    </div>
+                {/if}
+                
+    </div>
+</div>
+
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

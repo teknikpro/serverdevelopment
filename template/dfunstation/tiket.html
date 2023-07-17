@@ -1,0 +1,44 @@
+{include file="`$lokasitemplate`komponen/home/header.html"}
+{if $aksi eq 'read'}
+{include file="`$lokasitemplate`komponen/$kanal/$kanal.read.html"}
+{else}
+<div class="topkanal">
+	<div class="container">
+    	<div class="topkanal-inner">
+           <div class="col-md-12"><div class="topkanal-inner-1"><span>{$rubrik}</span></div></div>
+           
+         
+        </div>
+    </div>
+</div>
+
+<div class="insight">
+    <div class="container">
+        <div class="insight-headline">
+            
+            {foreach from=$datadetail key=id item=ch}
+                <div class="col-md-4">
+                    <div class="world-item">
+                    {if $ch.gambar neq ''}
+                    <div class="world-item-img">
+                        <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}" /></a>
+                    </div>
+                    {/if}
+                        <div class="world-item-isi">
+                        <a class="list-link" href="{$ch.link}">{$ch.nama}</a>
+                        <br />
+                        <p>{$ch.ringkas}</p>
+                        </div>
+                        <div class="world-item-btn">
+                        <a class="btn btn-block btn-default" href="{$ch.link}">Lihat Detail</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            {/foreach}
+
+        </div>
+    </div>
+</div>
+{/if}
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

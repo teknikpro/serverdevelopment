@@ -1,0 +1,71 @@
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="items item-w2">
+                           <div class="row">
+                           <div class="col-xs-10">
+                               <h4 class="option-title text-green text-uppercase">
+                               Compose <span>New Message</span></h4>
+                           </div>
+                           <div class="col-xs-2">
+                           <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-default tooltips" data-original-title="Kembali ke Message" data-placement="top" onClick="window.location=('{$fulldomain}/member/message')">
+                                    <i class="icon-envelope-alt"></i></button>
+                            </div>
+                           </div>
+                           
+                           <div class="clearfix"></div>
+                       </div>
+                       <!-- /.row -->
+                       </div>
+                        <!-- /.items item-w2 -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default e-squared">
+                            <div class="panel-body">
+                               <form action="{$fulldomain}/member/send-message" role="form" method="post" class="form-horizontal" name="profile" onsubmit="return simpan()" id="form-message">
+									<input type="hidden" name="untuk" id="autouname" value="{$untuk}" class="inputbiasa" />
+                                <div class="form-group">
+                                    <label for="inputJudul" class="col-sm-2 control-label">Kepada</label>
+                                    <div class="col-sm-10">
+                                      <input type="text" name="to" placeholder="Nama Lengkap" class="form-control" value="{$name}" id="autofname" readonly="readonly" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputSubjek" class="col-sm-2 control-label">Subjek</label>
+                                    <div class="col-sm-10">
+                                      <input type="text" name="judul" class="form-control" id="inputSubjek" placeholder="Subjek">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="textareaPesan" class="col-sm-2 control-label">Pesan</label>
+                                    <div class="col-sm-10">
+                                      <textarea name="pesan" id="textareaPesan" class="form-control" cols="30" rows="10"></textarea>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="col-xs-offset-2 col-xs-10">
+                                      <button class="btn btn-success" type="submit">Kirim</button>
+                                    </div>
+                                </div>
+
+
+
+                            </form>
+                           
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel .panel-default -->
+                    </div>
+                    <!-- /.col-xs-12 -->
+                </div>
+                <!-- /.row -->
+
+           </div>
+           <!-- /.col-xs-8 -->

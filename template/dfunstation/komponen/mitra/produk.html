@@ -1,0 +1,480 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="items item-w2">
+           <div class="row">
+           <div class="col-xs-6">
+               <h4 class="option-title text-green text-uppercase">{$namaaksi}</h4>
+           </div>
+            {if $usertipe eq '2'}
+            <div class="col-xs-6">
+               <a href="{$fulldomain}/mitra/produk/add" class="btn btn-md btn-warning pull-right">Upload Produk</a>
+           </div>
+           {/if}
+           <div class="clearfix"></div>
+       </div>
+       <!-- /.row -->
+       </div>
+        <!-- /.items item-w2 -->
+    </div>
+</div>
+
+{if $usertipe neq '2'}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+                <div class="alert alert-danger" role="alert">
+                  <p>Saat ini keanggotaan anda sebagai regular user. Untuk menjadi mitra yang dapat mengupload
+                  produk untuk bisa dipasarkan melalui website ini silahkan hubungi kami segera.</p>
+                  <br /><a href="{$fulldomain}/user" class="btn btn-md btn-warning">Kembali</a>
+                </div>
+
+			</div>
+        </div>
+     </div>
+</div>
+{else}
+
+{if $subaksi eq 'add'}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+            
+              {if $error}
+                <div class="alert {$style}" role="alert">
+                  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <p>{$error}</p>
+                  <center><a href="{$backlink}" class="btn btn-md btn-warning">Kembali</a></center>
+                </div>
+              {else}
+                {if $status eq '0'}
+                  <div class="alert alert-warning" role="alert">
+                  <p>Anda belum diperkenan memasang produk. Silahkan lengkapi profil anda terlebih dahulu!</p>.
+                  <center><a href="{$fulldomain}/mitra/setting" class="btn btn-md btn-warning">Lengkapi Profile</a></center>
+                </div>
+                {else}
+                  <div>
+                    <script src="{$fulldomain}/librari/ajax/ajax_sec.js.php"></script>
+                    <form method="post" class="form-horizontal" role="form"  name="produk" enctype="multipart/form-data" action="{$fulldomain}/mitra/produk/add">
+                      <div class="alert alert-danger">Mohon diperhatikan, kami akan menghapus tanpa pemberitahuan terlebih dahulu bila produk anda bukan
+                      tidak sesuai dengan aturan yang kami buat.</div>
+                      <br />
+                      Silahkan pasang produk anda melalui form dibawah ini, pastikan semua informasi lengkap dan benar untuk memudahkan
+                      calon pembeli atau pengguna produk anda mudah melihat produk anda.
+                      <hr />
+                      <input type="hidden" name="save" value="save" />
+
+                      <div class="form-group">
+                        <label for="Alamat" class="col-sm-3">Nama Produk</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="title" id="title" value="" required="required">
+                          <p class="note">Tulis nama produk anda dengan benar, wajib diisi</p>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="inputNama3" class="col-sm-3">Kategori</label>
+                        <div class="col-sm-9">
+                          <select name="secid" id="secid" class="form-control"  required="required"    onchange="getsub(this.value);" >
+                            <option value=""></option>
+                            {foreach from=$kategori key=secid item=u}
+                            <option value="{$u.secid}">{$u.nama}</option>
+                            {/foreach}
+                          </select>
+                          <p class="note">Pilihlah Kategori yang sesuai dengan produk anda, wajib diisi</p>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputNama3" class="col-sm-3">Sub Kategori</label>
+                        <div class="col-sm-9">
+                          <select name="subid" id="subid" class="form-control"  required="required" >
+                            <!-- {foreach from=$kategori key=secid item=u}
+                            <option value="{$u.secid}">{$u.nama}</option>
+                            {/foreach} -->
+                        </select>
+                        <p class="note">Pilihlah Sub Kategori yang sesuai dengan produk anda, wajib diisi</p>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="Alamat" class="col-sm-3">Status Barang</label>
+                        <div class="col-sm-6">
+                          <div class="col-xs-6">
+                          <input type="radio" name="status" checked="checked" value="0"  required="required"/> Barang Baru
+                          </div>
+                          <div class="col-xs-6">
+                          <input type="radio" name="status" value="1"  required="required"/> Barang Bekas
+                          </div>
+                           <p class="note">Pilih status barang yang anda produkkan barang bekas atau baru</p>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="Alamat" class="col-sm-3">Tag Produk</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="tag" value="{$tag}"><p class="note">Setiap kata dipisahkan oleh tanda koma (,) contoh Elekronik, Barang Bagus</p>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="Alamat" class="col-sm-3">Harga Satuan</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="harga" value="{$tag}" ><p class="note">Masukan harga dalam satuan Rupiah (Rp)</p>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="Alamat" class="col-sm-3">Ukuran Barang</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="body_dimension" value="{$body_dimension}" ><p class="note">Masukan ukuran barang</p>
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label for="Alamat" class="col-sm-3">Berat Barang</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="body_weight" value="{$body_weight}" ><p class="note">Masukan berat barang dalam satuan gram</p>
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label for="Alamat" class="col-sm-3">Jumlah Stok </label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="stock" value="{$stock}" ><p class="note">Masukan stok barang yang tersedia</p>
+                        </div>
+                      </div>
+
+                       <div class="form-group">
+                      <label for="Alamat" class="col-sm-3">Deskripsi</label>
+                      <div class="col-sm-9">
+                        <textarea name="ringkas" class="form-control" id="ringkas" cols="30" rows="8" required="required">{$dataedit.produk.ringkas}</textarea>
+                        <p class="note">Masukan informasi ringkas tentang produk anda disini, wajib diisi</p>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="Alamat" class="col-sm-3">Deskripsi Lengkap</label>
+                      <div class="col-sm-9">
+                        <textarea name="content" class="form-control" id="content" cols="30" rows="8" required="required">{$dataedit.produk.content}</textarea>
+                        <p class="note">Masukan informasi detail tentang produk anda disini, wajib diisi</p>
+                      </div>
+                    </div>
+
+                      <div class="form-group">
+                        <label for="Alamat" class="col-sm-3">Gambar Produk</label>
+                        <div class="col-sm-9">
+                         <input type="file"  name="gambar[]" class="form-control" multiple  required="required">
+                           <p class="note">Upload juga gambar produk anda, anda bisa memilih 5 gambar sekaligus dengan cara menggunakan kombinasi pada
+                           keyboard anda Control+Klik Gambar yang dipilih, gambar hanya mendukung format JPG</p>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-xs-offset-3 col-xs-9">
+                            <input type="submit" class="btn btn-warning" name="submit" value="Simpan Produk" />
+                            <a href="{$fulldomain}/mitra/produk" class="btn btn-default">Kembali</a>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                {/if}
+              {/if}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{else if $subaksi eq 'edit'}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+            
+              {if $error}
+                <div class="alert {$style}" role="alert">
+                  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <p>{$error}</p>
+                  <center><a href="{$backlink}" class="btn btn-md btn-warning">Kembali</a></center>
+                </div>
+              {else}
+                <div>
+                  <script src="{$fulldomain}/librari/ajax/ajax_sec.js.php"></script>
+                  <form method="post" class="form-horizontal" role="form"  name="produk" enctype="multipart/form-data" action="{$fulldomain}/mitra/produk/edit/{$dataedit.produk.produkpostid}/">
+                    Silahkan pasang produk anda melalui form dibawah ini, pastikan semua informasi lengkap dan benar untuk memudahkan
+                    calon pembeli atau pengguna produk anda mudah melihat produk anda.
+                    <hr />
+                    <input type="hidden" name="save" value="save" />
+                    <input type="hidden" name="produkpostid" value="{$dataedit.produk.produkpostid}" />
+
+                    <div class="form-group">
+                      <label for="Alamat" class="col-sm-3">Nama Produk</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="title" id="title" value="{$dataedit.produk.title}" required="required">
+                        <p class="note">Tulis nama produk anda dengan benar, wajib diisi</p>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputNama3" class="col-sm-3">Kategori</label>
+                      <div class="col-sm-9">
+                        <select name="secid" id="secid" class="form-control"  required="required"    onchange="getsub(this.value);" >
+                          <option value=""></option>
+                          {foreach from=$dataedit.kategori key=secid item=u}
+                          <option {if $dataedit.produk.secid eq $u.secid}selected=""{/if} value="{$u.secid}">{$u.namasec}</option>
+                          {/foreach}
+                        </select>
+                        <p class="note">Pilihlah Kategori yang sesuai dengan produk anda, wajib diisi</p>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputNama3" class="col-sm-3">Sub Kategori</label>
+                      <div class="col-sm-9">
+                        <select name="subid" id="subid" class="form-control"  required="required" >
+                          {foreach from=$dataedit.subopt key=subid item=u}
+                          <option {if $dataedit.produk.subid eq $u.subid}selected=""{/if} value="{$u.subid}">{$u.namasub}</option>
+                          {/foreach}
+                      </select>
+                      <p class="note">Pilihlah Sub Kategori yang sesuai dengan produk anda, wajib diisi</p>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="Alamat" class="col-sm-3">Status Barang</label>
+                      <div class="col-sm-6">
+                        <div class="col-xs-6">
+                        <input type="radio" name="status" {if $dataedit.produk.status eq '0'}checked="checked"{/if}  value="0" required="required"/> Barang Baru
+                        </div>
+                        <div class="col-xs-6">
+                        <input type="radio" name="status" {if $dataedit.produk.status eq '1'}checked="checked"{/if}  value="1"  required="required"/> Barang Bekas
+                        </div>
+                         <p class="note">Pilih status barang yang anda produkkan barang bekas atau baru</p>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="Alamat" class="col-sm-3">Tag Produk</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="tag" value="{$dataedit.produk.tag}"><p class="note">Setiap kata dipisahkan oleh tanda koma (,) contoh Elekronik, Barang Bagus</p>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="Alamat" class="col-sm-3">Harga Satuan</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="harga" value="{$dataedit.produk.harga}"><p class="note">Masukan harga dalam satuan Rupiah (Rp)</p>
+                      </div>
+                    </div>
+                     <div class="form-group">
+                        <label for="Alamat" class="col-sm-3">Ukuran Barang</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="body_dimension" value="{$dataedit.produk.body_dimension}" ><p class="note">Masukan ukuran barang</p>
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label for="Alamat" class="col-sm-3">Berat Barang</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="body_weight" value="{$dataedit.produk.body_weight}" ><p class="note">Masukan berat barang dalam satuan gram</p>
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label for="Alamat" class="col-sm-3">Jumlah Stok </label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="stock" value="{$dataedit.produk.stock}" ><p class="note">Masukan stok barang yang tersedia</p>
+                        </div>
+                      </div>
+
+                    <div class="form-group">
+                      <label for="Alamat" class="col-sm-3">Deskripsi</label>
+                      <div class="col-sm-9">
+                        <textarea name="ringkas" class="form-control" id="ringkas" cols="30" rows="8" required="required">{$dataedit.produk.ringkas}</textarea>
+                        <p class="note">Masukan informasi ringkas tentang produk anda disini, wajib diisi</p>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="Alamat" class="col-sm-3">Deskripsi Lengkap</label>
+                      <div class="col-sm-9">
+                        <textarea name="content" class="form-control" id="content" cols="30" rows="8" required="required">{$dataedit.produk.content}</textarea>
+                        <p class="note">Masukan informasi detail tentang produk anda disini, wajib diisi</p>
+                      </div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label for="Alamat" class="col-sm-3">Gambar Produk</label>
+                      <div class="col-sm-9">
+                        <div class="row">
+                          {foreach from=$dataedit.gambar key=albumid item=g}
+                          <div class="col-sm-3">
+                            <div class="img-produk">
+                              <img src="{$g.gambar}" alt="" class="img-resp"><br />
+                              <a class="delete" href="{$fulldomain}/mitra/produk/hapusgambar/{$g.albumid}">Hapus</a>
+                            </div>
+                          </div>
+                          {/foreach}
+                        </div>
+                        <br>
+                        <input type="file"  name="gambar[]" class="form-control" multiple>
+                        <p class="note">Upload juga gambar produk anda, anda bisa memilih 5 gambar sekaligus dengan cara menggunakan kombinasi pada
+                         keyboard anda Control+Klik Gambar yang dipilih, gambar hanya mendukung format JPG</p>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-xs-offset-3 col-xs-9">
+                          <input type="submit" class="btn btn-warning" name="submit" value="Simpan Produk" />
+                          <a href="{$fulldomain}/mitra/produk" class="btn btn-default">Kembali</a>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              {/if}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{else if $subaksi eq 'detail'}
+  
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+              <table class="table table-striped">
+                <tr>
+                  <th colspan="2" class="text-center">Detail</th>
+                </tr>
+                <tr>
+                  <td width="25%"><b>Nama Produk atau Jasa</b></td>
+                  <td>{$detail.nama}</td>
+                </tr>
+                <tr>
+                  <td><b>Kategori</b></td>
+                  <td>{$detail.namasec}</td>
+                </tr>
+                <tr>
+                  <td><b>Sub Kategori</b></td>
+                  <td>{$detail.namasub}</td>
+                </tr>
+                <tr>
+                  <td><b>Status</b></td>
+                  <td>{$detail.status}</td>
+                </tr>
+                <tr>
+                  <td><b>Tag Produk</b></td>
+                  <td>{$detail.tag}</td>
+                </tr>
+                <tr>
+                  <td><b>Harga</b></td>
+                  <td>Rp. {rupiah($detail.harga)}</td>
+                </tr>
+                <tr>
+                  <td><b>Deskripsi Ringkas</b></td>
+                  <td>{$detail.ringkas}</td>
+                </tr>
+                <tr>
+                  <td><b>Deskripsi</b></td>
+                  <td>{$detail.content}</td>
+                </tr>
+
+                <tr>
+                  <td><b>Gambar</b></td>
+                  <td>
+                    <div class="row">
+                      {foreach from=$detail.gambar key=albumid item=g}
+                      <div class="col-sm-4">
+                        <div class="img-produk">
+                          <img src="{$g.gambar}" alt="" class="img-resp">
+                          <center><a class="delete" href="{$fulldomain}/mitra/produk/hapusgambar/{$g.albumid}">Hapus</a></center>
+                        </div>
+                      </div>
+                      {/foreach}
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><a href="{$fulldomain}/mitra/produk/edit/{$detail.produkpostid}" class="btn btn-warning">Edit</a> <a href="{$fulldomain}/mitra/produk" class="btn btn-primary">Kembali</a></td>
+                </tr>
+              </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{else}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+
+            {if $jml_post eq '0'}
+              <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+       
+                   Saat ini anda tidak mempunyai satupun produk yang akan ditawarkan. Pasang
+                   produk anda sekarang juga dan temukan pembeli anda segera.
+                  
+              </div> 
+              <br clear="all" />
+		          <center><a href="{$fulldomain}/mitra/produk/add" class="btn btn-md btn-warning">Pasang Produk</a></center>
+              <div class="clearfix"></div>
+            {else}
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="20%">&nbsp;</th>
+                    <th width="65%">Keterangan</th>
+                    <th width="15%">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {foreach from=$datadetail item=i key=produkid name=list}
+                  <tr>
+                    <td >
+                      <img src="{$i.gambar}" alt="" class="img-resp">
+                    </td>
+                    <td>
+                      <span class="pull-right"><small><b>Rp. {$i.harga}</b></small></span>
+                      <b>{$i.nama}</b> {$i.published}<br>
+                      <em>{$i.tanggal}</em><br>
+                      <small>{$i.ringkas}</small>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu
+                          <span class="caret"></span>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li><a href="{$i.link}">Detail Produk</a></li>
+                          <li><a href="{$fulldomain}/mitra/produk/edit/{$i.id}/{$i.alias}">Edit</a></li>
+                          <li><a href="{$fulldomain}/mitra/produk/publish/{$i.id}/{$i.alias}">{$i.publish}</a></li>
+                          {if $i.published1 eq '1' and $i.status_tayang eq '1'}
+                          <li role="separator" class="divider"></li>
+                          <li><a class="" href="{$fulldomain}/mitra/produk/terjual/{$i.id}/{$i.alias}">Tandai Terjual</a></li>
+                          {/if}
+                          <li><a href="{$fulldomain}/mitra/produk/hapus/{$i.id}/{$i.alias}" onclick="return confirm('Apakah anda yakin akan menghapus produk ini, data produk tidak bisa dikembalikan?')">Hapus Produk</a></li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                  {/foreach}
+                </tbody>
+              </table>
+            {/if}
+            </div>
+        </div>
+           <!-- /.col-xs-12 -->
+     		<ul class="pagination m-0">
+          {foreach from=$stringpage key=pageid item=a}
+            <li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+          {/foreach}
+        </ul>
+    </div>
+</div>
+
+{/if}
+
+{/if}

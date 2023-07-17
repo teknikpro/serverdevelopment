@@ -1,0 +1,136 @@
+{include file="`$lokasitemplate`komponen/home/header_simposium.html"}
+{include file="`$lokasitemplate`komponen/simposium/simpo-menu.html"}
+
+<br clear="all" /><br clear="all" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <section id="berita" class="homeBerita1">
+                <div class="container">
+                    {foreach from=$datadetail key=id item=ch}
+                    <div class="col-md-8">
+                        <div class="homeartikel">
+                            <div class="list-blog">
+                                <div class="col-md-12">
+                                    <div class="list-blog-isi">
+                                        {if $ch.gambar neq ''}
+                                        <div class="list-blog-img">
+                                            <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}"
+                                                    class="img-responsive" /></a>
+                                        </div>
+                                        {/if}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="list-blog-isi"> <a class="list-link" href="{$ch.url}">{$ch.nama}</a>
+                                        <br />
+                                        <span><em>{$ch.sec}</em></span>
+                                        <br />
+                                        <span class="harga">Rp. {$ch.harga}</span>
+                                        <br />
+                                        <p>{$ch.ringkas}</p>
+                                        <h4>Syarat Dan Ketentuan</h4>
+                                        <p>{$ch.term}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+
+                        function getUrlVars(param = null) {
+                            if (param !== null) {
+                                var vars = [], hash;
+                                var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                                for (var i = 0; i < hashes.length; i++) {
+                                    hash = hashes[i].split('=');
+                                    vars.push(hash[0]);
+                                    vars[hash[0]] = hash[1];
+                                }
+                                return vars[param];
+                            }
+                            else {
+                                return null;
+                            }
+                        }
+                        let menu = getUrlVars("menu");
+                        let id = getUrlVars("id");
+
+                        function cek() {
+                            swal("Silahkan Login Terlebih Dahulu", {
+                                buttons: {
+                                    cancel: "Cancel",
+                                    catch: {
+                                        text: "Registrasi",
+                                        value: "catch"
+                                    },
+                                    Login: true,
+                                },
+                            })
+                                .then((value) => {
+                                    switch (value) {
+                                        case "Login":
+                                            window.location = "{$fulldomain}/user/" + menu + "/" + id + "";
+                                            break;
+
+                                        case "catch":
+                                            window.location = "{$fulldomain}/user/daftar";
+                                            break;
+
+                                        default:
+                                            swal("Kembali ke halaman voucher");
+                                    }
+                                });
+
+                            return false;
+                        }
+
+                    </script>
+
+                    <div class="col-md-4">
+                        <div class="box-kanal">
+                            <div class="box-kanan-isi">
+                                <div class="homevideo-title">Beli Voucher</div>
+                                <div class="homeartikel">
+                                    <form method="post" action="{$fulldomain}/cart/evoucher-simpo" {if $login neq '1' }
+                                        onsubmit="return cek();" {/if}>
+                                        <input type="hidden" value="{$detailid}" name="id" />
+                                        Untuk membeli {$ch.nama}. Silahkan masukan &nbsp;
+                                        jumlah eVoucher yang akan dibeli. Selanjutnya anda &nbsp;
+                                        akan diarahkan ke halaman Pembayaran.
+                                        <br /><br />
+                                        <div class="col-xs-4">
+                                            <select class="form-control" type="select" name="jml">
+                                                <option value="1">1</option>
+                                                <!-- <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option> -->
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <input type="submit" value="Beli Sekarang" class="btn btn-warning" />
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/foreach}
+
+        </div>
+
+        </section>
+    </div>
+</div>
+</div>
+
+<br clear="all" /><br clear="all" />
+{include file="`$lokasitemplate`/komponen/home/footer_simposium.html"}

@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="items item-w2">
+           <div class="row">
+           <div class="col-xs-6">
+               <h4 class="option-title text-green text-uppercase">Validasi Email dan Handphone</h4>
+           </div>
+          
+           <div class="clearfix"></div>
+       </div>
+       <!-- /.row -->
+       </div>
+        <!-- /.items item-w2 -->
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+            	
+             {if $validate eq '1'}
+             	
+               {if $berhasil eq '1'}
+                <div class="alert {$style}" role="alert">
+                  <p>{$pesanhasil}</p>
+                  <br />
+                  <a href="{$fulldomain}/user/" class="btn btn-md btn-success">Lanjutkan</a>
+                </div>
+              {else}
+             	 <div class="alert alert-danger" role="alert">
+                  <center>
+                  <p>{$pesanhasil}</p>
+                  <a href="{$fulldomain}/user/" class="btn btn-md btn-warning">Kembali</a>
+                  </center>
+                </div>
+              
+              {/if}
+                
+             {else}
+             
+            
+            
+              {if $berhasil eq '1'}
+                <div class="alert {$style}" role="alert">
+                  <p>{$pesanhasil}</p>
+                  <br />
+                  {if $jenis eq 'hp'}
+                   <form method="post" action="{$fulldomain}/user/kirimotp/hp/">
+                        <div class="col-xs-6">
+                        <input type="hidden" name="validatehp" value="1" />
+                        <input type="text" class="form-control" name="code" placeholder="Masukan kode dari HP" required />
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="row"><input type="submit" value="Validasi" class="btn btn-warning pull-left" /></div>
+                        </div>
+                    </form>
+                  {elseif $jenis eq 'email'}
+                   <form method="post" action="{$fulldomain}/user/kirimotp/email/">
+                        <div class="col-xs-6">
+                        <input type="hidden" name="validateemail" value="1" />
+                        <input type="text" class="form-control" name="code" placeholder="Masukan kode dari email" required />
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="row"><input type="submit" value="Validasi" class="btn btn-warning pull-left" />
+                          </div>
+                    </form>
+                  {/if}
+
+                </div>
+              {else}
+             	 <div class="alert {$style}" role="alert">
+                  <p>{$pesanhasil}</p>
+                  <a href="{$backlink}" class="btn btn-md btn-warning">Kembali</a>
+                </div>
+              
+              {/if}
+              
+              
+              {/if}
+
+            </div>
+        </div>
+    </div>
+</div>
+

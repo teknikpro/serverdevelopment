@@ -1,0 +1,75 @@
+{strip}
+{include file="`$lokasitemplate`komponen/home/header_coba.html"}
+<div class="topkanal">
+    <div class="container">
+        <div class="topkanal-inner">
+            <div class="topkanal-inner-1"><span>Artikel</span></div>
+        </div>
+    </div>
+</div>
+<div id="header-kanal">
+    <div class="container">
+        <div class="row">
+            <span>&nbsp;</span>
+        </div>
+    </div>
+</div>
+<div class="world-menu">
+    <div class="container">
+        <a href="{$fulldomain}/blog">Semua Artikel</a>
+        {foreach from=$blogsection key=secid item=a}
+        <a href="{$a.urlmenu}">{$a.nama}</a>
+        {/foreach}
+    </div>
+</div>
+<div class="insight">
+    <div class="container">
+        <br clear="all" />
+        {if $aksi eq 'read'}
+        <div class="col-md-8 boxcontent">
+            {include file="`$lokasitemplate`komponen/$kanal/$kanal.read.html"}
+        </div>
+        {else if $aksi eq 'tags'}
+        {include file="`$lokasitemplate`komponen/$kanal/$kanal.tag.html"}
+        {else}
+        <div class="col-md-8">
+            {include file="`$lokasitemplate`komponen/$kanal/$kanal.list.html"}
+        </div>
+        {/if}
+
+        <div class="col-md-4 ">
+
+
+
+            <div class="box-kanan">
+                <div class="box-kanan-judul">
+                    <span>Artikel Terpopuler</span>
+                </div>
+                <div class="box-kanan-isi">
+                    {foreach from=$dataartikelpopuler key=id item=b}
+                    <div class="box-kanan-item">
+                        <div class="col-xs-4">
+                            {if $b.gambar neq ''}
+                            <div class="box-kanan-item-img">
+                                <a href="{$b.link}"><img src="{$b.gambar}" alt="{$b.nama}" class="img-responsive" /></a>
+                            </div>
+                            {/if}
+                        </div>
+                        <div class="col-xs-8">
+                            <a href="{$b.link}">
+                                <h4>{$b.nama}</h4>
+                            </a>
+                            <span class="date">{$b.views} Views</span>
+                        </div>
+                    </div>
+                    {/foreach}
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+{include file="`$lokasitemplate`/komponen/home/footer.html"}
+{/strip}

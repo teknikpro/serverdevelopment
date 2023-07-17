@@ -1,0 +1,58 @@
+<link rel="stylesheet" type="text/css" href="{$lokasiwebtemplate}crop/style/jquery.simpleimagecrop.css" media="all">
+<!--<script src="jquery.min.js"></script>-->
+<script src="{$lokasiwebtemplate}crop/js/jquery.simpleimagecrop.js"></script>
+<script type="text/javascript">
+    $(window).load(function() {
+        $('#crop_container').simpleImageCrop({ 
+            maxPreviewImageWidth: 550,
+            maxPreviewImageHeight: 550,
+            newImageHeight: 250,
+            newImageWidth: 250,
+            imageDestination: '{$folderalbum}', // destination from the folder where the php script is located (without extension). if the same as the source file the image will be overwritten.
+            imageDestination2: '{$folderalbum2}', // destination from the folder where the php script is located (without ex
+			phpScriptLocation: '{$lokasiwebtemplate}crop/simpleImageCrop.php',
+            successMessage: 'Gambar Berhasil di potong, silahkan refresh untuk melihat hasilnya.',
+            warningMessage: 'Gambar terlalu kecil, nanti hasilnya buram.'
+        })         
+    });  
+</script>
+<noscript>Please enable JavaScript to use the Simple Image Crop plugin.</noscript>
+ {if $berhasil neq '1'}
+
+<form method="post" class="form-horizontal" role="form"  name="profile" enctype="multipart/form-data" action="{$fulldomain}/mitra/setting/avatar">
+
+      <div class="form-group">
+        <label for="inputNama3" class="col-sm-3 control-label">Gambar</label>
+        <div class="col-sm-9">
+           <input type="file" name="avatar">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-offset-3 col-xs-9">
+          <input type="submit" class="btn btn-success" name="submit" value="Ambil gambar" />
+        </div>
+      </div>
+</form>
+{else}
+Atur Gambar untuk avatar sesuai keinginan.<br />
+ <div id="crop_container" class="hidden">
+    <div id="crop_box">
+        <div id="resize_icon"></div>
+    </div>
+    <div id="crop_message">Leave this text here</div>
+    <img id="image_to_crop" src="{$avatarnya}" width="500px" alt="">   
+    <div id="crop_button">
+        <img src="{$lokasiwebtemplate}crop/img/cut_icon.png" title="Crop Image" alt="Crop"> Potong Gambar
+    </div>
+</div>
+ <br />
+<center>
+ <div id="crop_preview" class="hidden">
+    <div id="preview_message">Gambar yang akan dipasang.</div>
+    <img id="image_preview" name="gambar"  src="{$avatar}" alt="Crop Preview">  
+</div>
+</center>
+
+{/if}
+      

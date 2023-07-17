@@ -1,0 +1,62 @@
+{strip}
+{include file="`$lokasitemplate`komponen/home/header2.html"}
+<div class="topkanal">
+	<div class="container">
+    	<div class="topkanal-inner">
+           <div class="topkanal-inner-1"><span>{$rubrik}</span></div>
+        </div>
+    </div>
+</div>
+<div id="header-kanal">
+	 <div class="container">
+            <div class="row">
+					<span>&nbsp;</span>
+			</div>
+	 </div>
+</div>
+<div class="insight">
+    <div class="container">
+            	<br clear="all" />
+                  <div class="col-md-4 ">
+                
+
+                
+                 <div class="box-kanan">
+                    <div class="box-kanan-judul">
+                        <span>Pertanyaan</span>
+                    </div>
+                    <div class="box-kanan-isi">
+                    {foreach from=$datadetail key=id item=b}
+                     <div class="box-kanan-item">
+                        <a  href="{$b.link}">{$b.nama}</a>
+                     </div>
+                     {/foreach}
+                    </div>
+                </div>
+                </div>
+               <div class="col-md-8">
+               	<div class="boxcontent">
+                   <div class="box-content">
+                        <div class="large-content">
+                            <div class="title-headline">
+                                <span>{$detailnama}</span>
+                            </div><br clear="all" />
+                          
+                            <p>{$detaillengkap}</p>
+                         <br clear="all" />
+                        </div>
+                   </div>
+               </div>
+				</div>
+			
+
+                
+               
+                
+                 
+                
+                </div>
+    </div>
+</div><br clear="all" />
+{include file="`$lokasitemplate`/komponen/home/footer.html"}
+{/strip}

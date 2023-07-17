@@ -1,0 +1,235 @@
+    <div class="row">
+            <div class="col-xs-12">
+                <div class="items item-w2">
+                   <div class="row">
+                   <div class="col-xs-6">
+                       <h4 class="option-title text-green text-uppercase">Konsultasi Saya
+                       </h4>
+
+                   </div>
+                  
+                   <div class="clearfix"></div>
+               </div>
+               <!-- /.row -->
+               </div>
+                <!-- /.items item-w2 -->
+            </div>
+        </div>
+
+{if $subaksi eq 'start'}
+
+	<div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default e-squared">
+                <div class="panel-body">
+                
+                	<p id="name-area"></p>
+    
+                    <div id="chat-wrap">
+                    <div class="chat">
+                        <ul id="chat-area">
+                            <div class="loading"><center><img src="{$lokasiwebtemplate}images/loading.svg" /><br><b>Mohon menunggu</b><br>sedang menyiapkan halaman</center></div>
+                        </ul>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="sendie" maxlength= "500">
+                   </div>
+                    </div>
+
+				</div>
+                
+                {literal}
+				<script>
+				console.log("0");
+				var instanse = false;
+				var state;
+				var mes;
+				var file;
+				var name = "adisumaryadi";
+				var chatid = {/literal}{$chatid}{literal}
+
+				localStorage.lastchatid = 0;
+			
+			
+				function Chat () {
+					this.update = updateChat;
+					this.send = sendChat;
+					this.getState = getStateOfChat;
+				}
+				//gets the state of the chat
+				function getStateOfChat() {
+					if(!instanse){
+						instanse = true;
+						$.ajax({
+							type: "POST",
+							crossDomain: true,
+							cache: false,
+							url: "https://www.dfunstation.com/mitra/chat/stream/"+chatid+"/"+localStorage.userid+"/?callback=?",
+							data: {'function': 'getState', 'file': file},
+							success: function(data) {state = data.state;instanse = false;}
+						});
+					}	
+				}
+				
+				//Updates the chat
+				function updateChat() {
+					console.log("updatechat");
+					if(!instanse){
+						instanse = true;
+						$.ajax({
+							type: "POST",
+							crossDomain: true,
+							cache: false,
+							url: "https://www.dfunstation.com/mitra/chat/stream/"+chatid+"/"+localStorage.userid+"/"+localStorage.lastchatid+"/?callback=?",
+							data: {'function': 'update','state': state,'file': file},
+							success: function(data) {
+								if(data.text)
+								{
+									if(localStorage.lastchatid==0){ $(".loading").remove(); }
+									
+									for (var i = 0; i < data.text.length; i++) {
+										var datax = data.text[i];
+										var ids = datax.id;
+										var pesan = datax.pesan;
+										$('#chat-area').append($(""+ pesan +""));
+										localStorage.lastchatid = ids;
+									}	
+								}
+								document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
+								instanse = false;
+								state = data.state;
+							}
+						});
+					}
+					else {
+						setTimeout(updateChat, 1000);
+					}
+				}
+				
+				//send the message
+				function sendChat(message, nickname) { 
+					updateChat();
+					console.log("sendChat");
+					$.ajax({
+						type: "POST",
+						crossDomain: true,
+						cache: false,
+						url: "https://www.dfunstation.com/mitra/chat/stream/"+chatid+"/"+localStorage.userid+"/?callback=?",
+						data: {'function': 'send','message': message,'nickname': nickname,'file': file},
+						success: function(data){
+							updateChat();
+						}
+					});
+				}
+				
+				
+				 // kick off chat
+			  var chat =  new Chat();
+			
+			  $(function() {
+			  
+				 chat.getState(); 
+				 
+				 // watch textarea for key presses
+				 $("#sendie").keydown(function(event) {  
+				 
+					 var key = event.which;  
+			   
+					 //all keys including return.  
+					 if (key >= 33) {
+					   
+						 var maxLength = $(this).attr("maxlength");  
+						 var length = this.value.length;  
+						 
+						 // don't allow new content if length is maxed out
+						 if (length >= maxLength) {  
+							 event.preventDefault();  
+						 }  
+					 }  
+				 });
+				 // watch textarea for release of key press
+				 $('#sendie').keyup(function(e) {  
+					if (e.keyCode == 13) { 
+						  var text = $(this).val();
+						  var maxLength = $(this).attr("maxlength");  
+						  var length = text.length; 
+						   
+						  // send 
+						  if (length <= maxLength + 1) { 
+							
+							chat.send(text, name);  
+							$(this).val("");
+						  } else {
+							$(this).val(text.substring(0, maxLength));
+						  }  
+					}
+				 });
+			  });
+			  
+			
+				setInterval('chat.update()', 3000);
+			
+			
+			  </script>
+              {/literal}
+  
+    </div>
+    </div>
+</div>
+
+{else}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default e-squared">
+                <div class="panel-body">
+
+            {if !$datadetail}
+                <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                <center>
+                Saat ini tidak ada member yang berkonsultasi dengan anda.<br />Anda akan mendapatkan pemberitahun melalui aplikasi
+                bila ada chat konsultasi masuk.
+				</center>
+               </div>
+                <div class="clearfix"></div>
+            {else}
+            {foreach from=$datadetail key=id item=i name=list}
+
+                <div class="items item-content">
+                	<div class="media">
+                    <a href="{$i.user.url}"  class="avatar">
+                        <img src="{$i.user.avatar}" alt="" class="img-responsive">
+                    </a>
+                        <h4>{$i.user.userfullname} </h4>
+                        <p>
+                         <small class="tanggal">{$i.tanggal}</small><br />
+                         Silahkan klik button masuk chat untuk
+                         memulai percakapan<br />
+                         <a href="{$i.link}" class="btn btn-success">Masuk Chat</a>
+                        </p>
+                   
+                    </div>
+                </div>
+                <!-- /.items -->
+				<hr />
+            {/foreach}
+            {/if}
+                </div>
+              
+
+           </div>
+          {if $datadetail}
+           <!-- /.col-xs-12 -->
+           		<ul class="pagination m-0 ml-15">
+                  {foreach from=$stringpage key=pageid item=a}
+                    <li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+                  {/foreach}
+                </ul>
+           {/if}
+           </div>
+
+</div>
+</div>
+</div>
+
+{/if}
+

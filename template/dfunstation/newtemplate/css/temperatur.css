@@ -1,0 +1,20 @@
+.temperatur-depresi {
+    background: #fff;
+    padding: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.temperatur-judul {
+    font-weight: bold;
+    margin-top: 9px;
+}
+
+/* mobile css */
+@media (min-width: 600px) {
+
+    .temperatur-depresi {
+        margin-bottom: 0px;
+    }
+
+}

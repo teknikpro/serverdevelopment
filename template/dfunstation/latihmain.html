@@ -1,0 +1,61 @@
+{include file="`$lokasitemplate`komponen/home/header.html"}
+<div class="topkanal">
+	<div class="container">
+    	<div class="topkanal-inner">
+           <div class="topkanal-inner-1"><span>{$rubrik}</span></div>
+          
+        </div>
+    </div>
+</div>
+<div id="header-kanal">
+	 <div class="container">
+            <div class="row">
+					<span>&nbsp;</span>
+			</div>
+	 </div>
+</div>
+<div class="insight">
+    <div class="container">
+            
+                {if $aksi eq 'read'}
+                    <div class="col-md-8 boxcontent">
+                    {include file="`$lokasitemplate`komponen/$kanal/$kanal.read.html"}
+                    </div>
+                    
+                     <div class="col-md-4 mt-10">
+                
+
+                
+                 <div class="box-kanan">
+                    <div class="box-kanan-judul">
+                        <span>Latih Terpopuler</span>
+                    </div>
+                    <div class="box-kanan-isi">
+                    {foreach from=$terkait key=id item=b}
+                     <div class="box-kanan-item">
+                     		<div class="col-xs-4">
+                             {if $b.gambar neq ''}
+                            <div class="box-kanan-item-img">
+                                <a href="{$b.link}"><img src="{$b.gambar}" alt="{$b.nama}" class="img-responsive" /></a>
+                            </div>
+                            {/if}
+                     		</div>
+                            <div class="col-xs-8">
+                                <a  href="{$b.link}"><h4>{$b.nama}</h4></a>
+                                <span class="date">{$b.views} Views</span>
+                           </div>
+                       </div>
+                       {/foreach}
+                    </div>
+                </div>
+                
+                {else}
+                    <div class="col-md-12">
+                    {include file="`$lokasitemplate`komponen/$kanal/$kanal.list.html"}
+                    </div>
+                {/if}
+                
+    </div>
+</div>
+<br clear="all" />
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

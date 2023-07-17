@@ -1,0 +1,130 @@
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="items item-w2">
+                   <div class="row">
+                   <div class="col-xs-12">
+                       <h4 class="option-title text-green text-uppercase">{$namaaksi}</h4>
+                   </div>
+                   <div class="clearfix"></div>
+               </div>
+               <!-- /.row -->
+               </div>
+                <!-- /.items item-w2 -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default e-squared">
+                    <div class="panel-body">
+                    
+                      {if $berhasil neq ''}
+                     <div class="alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                             {$pesanhasil}.
+                             {if $berhasil eq '0'}
+                                 <ul>
+                                 {foreach from=$pesan key=id item=a}
+                                    <li>{$a.pesan}</li>
+                                 {/foreach}
+                                 </ul>
+                             {/if}
+                    </div>
+                    {/if}
+                    
+                    {if $berhasil eq ''}
+                    
+                     <div class="left-column">
+                     
+                     
+                            
+                    
+                  
+              
+       
+                     <script src="{$fulldomain}/librari/ckeditor/ckeditor.js"></script>
+                     {literal}<script>
+                        CKEDITOR.replace( 'lengkap', {
+                            toolbarGroups: [
+                                {"name":"basicstyles","groups":["basicstyles"]},
+                                {"name":"paragraph","groups":["list","blocks"]},
+                                {"name":"document","groups":["mode"]},
+                                {"name":"styles","groups":["styles"]}
+                            ],
+                            removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar,Source'
+                        } );
+                    </script>
+                    {/literal}
+                   <form method="post" class="form-horizontal"  name="profile" enctype="multipart/form-data" >
+                   	Silahkan masukan jawaban atas konsultasi yang dikirimkan melalui {$title}, pastikan semua kotak isian terisi lengkap dan benar, gunakan informasi yang baik karena karya
+                    anda akan dibaca oleh banyak orang.
+                    <input type="hidden" name="id" value="{$detailid}" />
+ 
+                         
+                          <div class="form-group">
+                            <label >Penanya</label>
+                            <div class="col-sm-12">
+                              {$detailuser}
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                          	<label>Judul Pertanyaan</label>
+                            <div class="col-sm-12">
+                              {$detailnama}
+                            </div>
+                          </div>
+						
+                        	 <div class="form-group">
+                            <label>Pertanyaan</label>
+                            <div class="col-sm-12">
+                              {$detailringkas}
+                            </div>
+                            
+                          </div>
+                            
+                          <div class="form-group">
+                            <label>Jawaban</label>
+                            <div class="col-sm-12">
+                              <textarea name="lengkap" class="ckeditor" id="lengkap" cols="30" rows="5">{$detaillengkap}</textarea>
+                           
+                            </div>
+                            
+                          </div>
+
+
+                          <div class="form-group">
+                            <label >Gambar Ilustrasi</label>
+                            <div class="col-sm-12">
+                             <input type="file"  name="gambar">
+                             <p class="note"><em>Sertakan gambar ilustrasi dengan format gambar yang didukung adalah JPG</em></p>
+                            </div>
+                          </div>
+						<hr />
+                          <div class="form-group">
+                            <div>
+                                <input type="submit" class="btn btn-primary" name="submit" value="Simpan Jawaban" />
+                            </div>
+                          </div>
+
+                    </form><br />
+                    <br />
+
+                    </div>
+                    
+                   {/if}      
+                     
+                      
+                
+                    
+                    
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel .panel-default -->
+            </div>
+            <!-- /.col-xs-12 -->
+        </div>
+        <!-- /.row -->
+
+

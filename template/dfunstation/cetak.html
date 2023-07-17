@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Mobile Specific -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta name="keywords" content="{$metakeyword}" />
+    <meta name="description" content="{$title} - {$webdesc}">
+
+    <title>{$title}</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="{$lokasiwebtemplate}assets/css/bootstrap.min.css">
+
+    <!-- Customizable CSS -->
+    <link rel="stylesheet" href="{$lokasiwebtemplate}css/cetak.css">
+    <link rel="stylesheet" href="{$lokasiwebtemplate}css/print.css" media="print">
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Icons/Glyphs -->
+    <link rel="stylesheet" href="{$lokasiwebtemplate}assets/css/font-awesome.min.css">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{$lokasiwebtemplate}assets/images/favicon.png">
+
+
+</head>
+
+<body>
+<div class="barcetak">
+	<div class="container">
+    <input type="button" class="btn btn-primary pull-right" value="Cetak Invoice" onClick="window.print()" />
+    </div>
+</div>
+    
+<div class="container">
+{$html}
+</div>
+<div class="barcetak">
+	<div class="container">
+    <input type="button" class="btn btn-primary pull-right" value="Cetak Invoice" onClick="window.print()" />
+    </div>
+</div>
+</body>
+</html>

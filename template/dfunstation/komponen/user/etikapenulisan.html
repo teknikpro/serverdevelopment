@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="items item-w2">
+           <div class="row">
+           <div class="col-xs-12">
+               <h4 class="option-title text-green text-uppercase">{$detailnama}</h4>
+           </div>
+           <div class="clearfix"></div>
+       </div>
+       <!-- /.row -->
+       </div>
+        <!-- /.items item-w2 -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+            
+            
+            {if $detailgambar neq ''}
+             <div class="alert alert-dismissible" role="alert">
+                <img src="{$detailgambar}" alt="{$detailnama}" />
+             </div>
+            {/if}                  
+              {$detaillengkap}<br />
+<br />
+			<a href="{$fulldomain}/member/add-blog" class="btn btn-lg btn-success">Lanjutkan Menulis Artikel</a>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel .panel-default -->
+    </div>
+    <!-- /.col-xs-12 -->
+</div>
+<!-- /.row -->
+

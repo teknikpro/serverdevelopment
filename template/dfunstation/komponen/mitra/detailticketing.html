@@ -1,0 +1,91 @@
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="items item-w2">
+                   <div class="row">
+                   <div class="col-xs-12">
+                       <h4 class="option-title text-green text-uppercase">{$namarubrik}</h4>
+                   </div>
+                   <div class="clearfix"></div>
+               </div>
+               <!-- /.row -->
+               </div>
+                <!-- /.items item-w2 -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default e-squared">
+                    <div class="panel-body">
+                    <h2><strong>{$detailnama}</strong></h2>
+                    <div class="comment-item">
+                        <div class="row no-margin">
+                            <div class="col-xs-12 col-lg-12 col-sm-12 no-margin-right">
+                                <div class="comment-body">
+                                    <div class="meta-info">
+                                        <header class="row no-margin">
+                                            <div class="pull-left">
+                                                <h4 class="author"><a href="#">{$detailpengirim}</a></h4>
+                                                <span class="date">{$tanggalpesan}</span>
+                                            </div>
+                                        </header>
+                                    </div>
+                                    <p class="comment-content">{$detailpesan}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                        {foreach from=$listpesan key=ticketingbalasid item=q}
+                        <div class="comment-item">
+                            <div class="row no-margin">
+                                <div class="col-xs-12 col-lg-12 col-sm-12 no-margin-right">
+                                    <div class="comment-body">
+                                        <div class="meta-info">
+                                            <header class="row no-margin">
+                                                <div class="pull-left">
+                                                    <h4 class="author"><a href="#">{$q.oleh}</a></h4>
+                                                    <span class="date">{$q.tanggal}</span>
+                                                </div>
+                                            </header>
+                                        </div>
+                                        <p class="comment-content">{$q.isijawaban}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/foreach}
+                        {if $close eq '0'}
+                        <div class="alert alert-warning">
+                        Apabila Anda merasa cukup dengan informasi yang diberikan, silahkan tutup tiket ini.
+                        <a href="{$fulldomain}/member/ticketingclose/{$ticketingid}/{$alias}.html" class="le-button post-comment-button pull-right">Tutup Tiket</a>
+                        </div>{/if}
+                    </section>
+                    {if $close eq '0'}
+                    <section class="leave-reply" id="reply-block">
+                        <h3>Tulis Ticketing</h3>
+                        <form class="reply-form cf-style-1" role="form" method="post" action="" enctype="multipart/form-data">
+                        <input type="hidden" name="aksi" value="save">
+                        <input type="hidden" name="ticketingid" value="{$ticketingid}">
+                            <div class="row field-row">
+                                <div class="col-xs-12">
+                                    <label>Ticketing</label>
+                                    <textarea name="pesan" class="form-control le-input" id="inputComment" rows="10" required></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="le-button big post-comment-button">Post Ticketing</button>
+                        </form>
+
+                    </section>
+                    {/if}
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel .panel-default -->
+            </div>
+            <!-- /.col-xs-12 -->
+        </div>
+        <!-- /.row -->
+
+</div>
+</div>

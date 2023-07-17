@@ -1,0 +1,101 @@
+{strip}
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"{$uri}"
+    },
+    "headline": "{$detailnama}",
+    "image": {
+      "@type": "ImageObject",
+      "url": "{$detailgambar}",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "{$detaildate}",
+    "dateModified": "{$detaildate}",
+    "author": {
+      "@type": "Person",
+      "name": "{$detailcreator}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "{$title}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{$fulldomain}{$lokasiwebtemplate}images/img.logo.png",
+        "width": 381,
+        "height": 60
+      }
+    },
+    "description": "{$detaillengkap}"
+  }
+  </script>
+
+<div class="box-content">
+    <div class="large-content">
+        <div class="title-headline">
+            <span>{$detailnama}</span>
+        </div><br clear="all" />
+         <div class="content-info">
+         	<span>{if $detailcreator neq ''}Oleh {$detailcreator} | {/if} {$detailtanggal} | {$detailstats} Views</span>
+         </div>
+
+        {if $detailgambar neq ''}
+        <div class="thumbDetail">
+            <img src="{$detailgambar}" alt="{$detailnama}" class="img-responsive" />
+        </div>
+        {/if}
+        <p>{$detaillengkap}</p>
+	<br clear="all" />
+	{if $jmltags > 0 }
+    <br clear="all" />
+    <div class="tagsbox">
+    <div class="tags-label">Tags</div>
+    <div class="tags-isi">
+    {foreach from=$tags key=id item=a}
+    	<a href="{$a.url}" class="tags">#{$a.tag}</a>
+    {/foreach}
+    </div>
+    </div>
+    {/if}
+    <br clear="all" />
+
+
+                     <div id="share"></div>
+
+					<script src="{$lokasiwebtemplate}js/jssocials.min.js"></script>
+                    <script>
+                        $("#share").jsSocials({
+                            shares: ["facebook", "twitter", "googleplus", "whatsapp"]
+                        });
+                    </script>
+                    <br clear="all" />               <div class="bg-divider"></div>
+        
+      <br clear="all" /><br clear="all" />
+     <div class="bg-divider"></div><br clear="all" />
+        {include file="`$lokasitemplate`/komponen/home/komentar.html"}
+    </div>
+      
+
+       	<br clear="all" />
+<div class="infodetail"><span class="infodetail-1"><strong>{$rubrik} Lainnya</strong></span></div>
+    {foreach from=$terkait key=id item=a}
+     <div class="col-md-6">
+     <div class="boxnewspilihan">
+        <div class="boxnewspilihan-isi">
+            <div class="box-boxnewspilihan">
+                <a href="{$a.link}" class="judul1"><img src="{$a.gambar}" alt="{$a.nama}" border="0" /></a>
+            </div>
+            <span><a href="{$a.link}" class="judul1">{$a.nama}</a></span><br />
+       		<span class="tgl">{$a.tanggal}</span><br />
+            {$a.ringkas}
+        </div>
+    </div>
+    </div>
+    {/foreach}
+    
+</div>
+{/strip}

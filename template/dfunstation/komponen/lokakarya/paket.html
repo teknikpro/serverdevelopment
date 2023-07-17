@@ -1,0 +1,54 @@
+<br clear="all" /><br clear="all" />
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            {foreach from=$section key=secid item=a}
+            <div class="list-konsultan-kanan">
+                <a href="{$a.url}">
+                    <div class="col-xs-12 list-simposium">
+                        <div class="list-konsultan-kanan-isi "> <strong style="color: #fff;">{$a.nama} </strong>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {/foreach}
+
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+            <div class=" pull-right ">
+                <h4>Supported By:</h4>
+                <a href="#">
+                    <img src="{$lokasiwebtemplate}images/img.logo.png" alt="">
+                </a>
+                <a href="#">
+                    <img width="65px" height="65px" src="{$lokasiwebtemplate}images/logosupport1.png" alt="">
+                </a>
+                <a href="#">
+                    <img width="65px" height="65px" src="{$lokasiwebtemplate}images/logosupport2.png" alt="">
+                </a>
+                <a href="#">
+                    <img width="65px" height="65px" src="{$lokasiwebtemplate}images/logosupportkapin.png" alt="">
+                </a>
+                <br>
+                <a href="#">
+                    <img width="65px" height="65px" src="{$lokasiwebtemplate}images/simposium/logosupportkadin.png"
+                        alt="">
+				</a>
+                <a href="#">
+                    <img width="65px" height="65px" src="{$lokasiwebtemplate}images/logoikj.png" alt="">
+					</a>
+                <a href="#">
+                    <img width="65px" height="65px" src="{$lokasiwebtemplate}images/logojarkot.png" alt="">
+					</a>
+                <a href="#">
+                    <img width="65px" height="65px" src="{$lokasiwebtemplate}images/logostk.png" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br clear="all" /><br clear="all" />

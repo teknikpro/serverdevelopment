@@ -1,0 +1,80 @@
+{include file="`$lokasitemplate`komponen/home/header.html"}
+<div class="kanalabout">
+	<div class="container">
+            <span>{$rubrik}</span>
+             <p>
+Foto-foto keseruan member d'Fun Station yang telah dikirimkan, anda juga bisa mengirimkan foto keseruan anda dengan 
+login di website ataupun aplikasi d'Fun Station.</p>
+    </div>
+</div>
+<div class="insight">
+    <div class="container">
+            
+        <div class="col-md-12">
+       
+       
+       <div class="insight-headline">
+ <div class="grid">   
+                                                  
+ {foreach from=$datadetail key=id item=ch}
+	<div class="grid-item">
+    <div class="col-md-12">
+        <div class="list-content-testi">
+            <div class="list-content-isi">
+                {if $ch.gambar neq ''}
+                <div class="col-md-12"><img src="{$ch.gambar}" style="width:100%" /></div>
+                {/if}
+                <div class="col-md-12">
+                    
+                    <p><span class="testimoni-item">{$ch.isi}</span><br /><strong>{$ch.nama}</strong><br />
+                    <span class="date">{$ch.tanggal}</span>
+                </p>
+                </div>
+                       
+            </div>
+        </div>
+    </div>
+    </div>
+{/foreach}
+</div>
+<br clear="all" />
+<div class="paginate pull-right">
+    <ul class="pagination">
+        {foreach from=$stringpage key=pageid item=a}
+            {if $a.link neq ''}
+                <li><a href="{$a.link}">{$a.nama}</a></li>
+            {else}
+                <li><a href="javascript:void(0)">{$a.nama}</a></li>
+            {/if}
+        {/foreach}
+    </ul>
+</div>
+</div>
+
+<script src="{$lokasiwebtemplate}js/masonry.js"></script> 
+<script src="{$lokasiwebtemplate}js/imagesloaded.js"></script>
+
+<script>
+	new AnimOnScroll( document.getElementById( 'grid' ), {
+		minDuration : 0.4,
+		maxDuration : 0.7,
+		viewportFactor : 0.2
+	} );
+</script>
+<script>
+var $grid = $('.grid').imagesLoaded( function() {
+  $grid.masonry({
+    itemSelector: '.grid-item',
+	columnWidth: 385
+  });
+});
+
+</script>
+
+
+       
+       
+        </div>
+    </div>
+</div>
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

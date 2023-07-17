@@ -1,0 +1,31 @@
+body {
+    background: #E8FBE5;
+    box-sizing: border-box;
+}
+
+.daftar-akun-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 50px;
+    border-radius: 6px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.daftar-akun-judul {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    color: #000;
+}
+
+.daftar-akun-des {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    color: #000;
+}
+
+.button-daftar button {
+    background: #025214;
+    color: #fff;
+}

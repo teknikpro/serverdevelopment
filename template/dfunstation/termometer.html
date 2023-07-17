@@ -1,0 +1,44 @@
+{include file="`$lokasitemplate`komponen/home/header-template.html"}
+
+<link rel="stylesheet" href="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/css/temperatur.css">
+
+<!-- banner -->
+<div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <h1 class="tag-fs">
+          ASSESMENT
+        </h1>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <img class="img-fluid" src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/assesment.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Termperatur -->
+<section class="temperatur mt-5 mb-5">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+              <div onclick="redirect(`/termometer-kecemasan`);" class="temperatur-depresi">         
+                  <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/temperatur-kecemasan.png" alt="Dfunstation" class="img-fluid">
+                  <div class="temperatur-judul">Temperatur Kecemasan</div>
+                  <div class="temperatur-deskripsi">STAI-State<br />
+Pengembangan tes ini merupakan kerjasama antara Pojok Psikologi Bandung, d'Fun Station, IPK Jabar dan HIMPSI Jabar.</div>
+              </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+              <div onclick="redirect(`/termometer-depresi`);" class="temperatur-depresi">         
+                  <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/temperatur-depresi.png" alt="Dfunstation" class="img-fluid">
+                  <div class="temperatur-judul">Temperatur Depresi</div>
+                  <div class="temperatur-deskripsi">BDI-II versi Bahasa Indonesia<br />
+Pengembangan tes ini merupakan kerjasama antara Pojok Psikologi Bandung, d'Fun Station, IPK Jabar dan HIMPSI Jabar.</div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+{include file="`$lokasitemplate`/komponen/home/footer-template.html"}

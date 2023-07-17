@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Halaman pembayaran</title>
+    <link rel="stylesheet" href="{$lokasiwebtemplate}css/font-awesome.min.css" />
+    <link rel="stylesheet" href="{$lokasiwebtemplate}fonts/titillium.css" />
+
+    <link rel="stylesheet" href="{$lokasiwebtemplate}css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{$lokasiwebtemplate}js/fancybox/jquery.fancybox.css" />
+
+
+    <!-- Important Owl stylesheet -->
+    <link rel="stylesheet" href="{$lokasiwebtemplate}js/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="{$lokasiwebtemplate}js/owl-carousel/owl.transitions.css">
+
+    <link rel="stylesheet" href="{$lokasiwebtemplate}css/jssocials.css" />
+    <link rel="stylesheet" href="{$lokasiwebtemplate}css/jssocials-theme-flat.css" />
+
+
+    <!-- Default Theme -->
+    <link rel="stylesheet" href="{$lokasiwebtemplate}js/owl-carousel/owl.theme.css">
+
+
+    <!-- own stylesheet -->
+    <link rel="stylesheet" href="{$lokasiwebtemplate}css/style.css" />
+    <link rel="stylesheet" href="{$lokasiwebtemplate}css/dev.css" />
+    <script src="{$lokasiwebtemplate}js/modernizr 2.8.3.min.js"></script>
+    <script src="{$lokasiwebtemplate}js/jquery.js"></script>
+
+    <style>
+        body {
+            margin-top: 1em
+        }
+
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+            /* border-bottom: 1px solid #dedede; */
+        }
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="row ">
+
+            {if $subaksi eq 'finish'}
+            {if $sukses eq '1'}
+            <center>
+                <div class="alert alert-success">
+                    <center>{$message}</center>
+                </div>
+                <a href="{$fulldomain}/cart/upgrade/closed" class="btn btn-warning">Lihat Riwayat Transaksi</a> <a
+                    href="{$fulldomain}" class="btn btn-primary">Kembali Ke Home</a>
+            </center>
+            {else}
+            <center>
+                <div class="alert alert-danger">
+                    <center>{$message}</center>
+                </div>
+                <a href="{$fulldomain}/cart/upgrade/closed" class="btn btn-warning">Lihat Riwayat Transaksi</a> <a
+                    href="{$fulldomain}" class="btn btn-primary">Kembali Ke Home</a>
+            </center>
+            {/if}
+
+            {else}
+
+            {if $message neq ''}
+            <div class="col-md-offset-3 col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4 class="text-center">
+                            <strong>Pembelian Dibatalkan</strong>
+                        </h4>
+                        <center>
+                            {$message}
+                        </center>
+                    </div>
+                </div>
+            </div>
+            {else}
+
+            <div class="col-md-offset-3 col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4 class="text-center">
+                            <strong>Pembayaran Voucher</strong>
+                        </h4>
+
+                        <p>Berikut ini adalah informasi pembayaran yang akan anda lakukan:</p>
+                        <table width="100%">
+                            <tr>
+                                <td><b>Nama Transaksi:</b> </td>
+                                <td>Pembelian Voucher</td>
+                            </tr>
+                            <tr>
+                                <td><b>Nama:</b> </td>
+                                <td>{$nama}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Total Pembayaran</b>: </td>
+                                <td>Rp. {$harga}</td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+
+                    <div class="panel-body">
+                        <form method="post" action="">
+                            <input type="hidden" value="{$chatid}" name="chatid">
+                            <input type="hidden" value="{$userid}" name="userid">
+
+                            <input type="submit" class="btn btn-success btn-lg btn-block" value="Bayar Sekarang">
+                        </form>
+                    </div>
+                    {/if}
+
+                    {/if}
+
+
+
+                </div>
+
+
+
+
+            </div>
+
+
+
+
+            <script src="{$lokasiwebtemplate}js/jquery.init.js"></script>
+            <script src="{$lokasiwebtemplate}js/dev.js"></script>
+
+            <script src="{$lokasiwebtemplate}js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

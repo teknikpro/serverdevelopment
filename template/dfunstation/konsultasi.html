@@ -1,0 +1,101 @@
+{include file="`$lokasitemplate`komponen/home/header.html"}
+<div class="topkanal">
+	<div class="container">
+    	<div class="topkanal-inner">
+           <div class="topkanal-inner-1"><span>{$rubrik}</span></div>
+        
+        </div>
+    </div>
+</div>
+<div id="header-kanal">
+	 <div class="container">
+            <div class="row">
+					<span>&nbsp;</span>
+			</div>
+	 </div>
+</div>
+
+<div class="world-menu">
+	<div class="container">
+    <a href="{$fulldomain}/konsultasi">Semua Konsultasi</a>
+     {foreach from=$konsultasisection key=secid item=a}
+       <a href="{$a.urlmenu}">{$a.nama}</a>
+	 {/foreach}
+    </div>
+</div>
+
+
+<div class="konsultasi-section">
+	<div class="container">
+    	<div class="konsultasi-info">
+        	<div class="col-md-2 hidden-xs">
+            	<img src="{$lokasiwebtemplate}images/img.konsultan.png" alt="Konsultan" style="width:100%" />
+            </div>
+            <div class="col-md-9">
+            	<div class="konsultasi-info-text">
+            	Apakah anda membutuhkan konsultasi dengan para ahli yang
+berpengalaman dalam dunia anak dan parenting? gunakan fasilitas
+konsultasi ini untuk menjawab permasalahan anda
+<br  clear="all"/>
+<a href="{$fulldomain}/konsultasi/create" class="mt-10 btn btn-default btn-lg"><span class="fal fa-envelope-o"></span>&nbsp;Kirim Pertanyaan</a>
+				</div>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+
+<div class="insight">
+    <div class="container">
+            
+                {if $aksi eq 'read'}
+                    <div class="col-md-8 boxcontent">
+                    {include file="`$lokasitemplate`komponen/$kanal/$kanal.read.html"}
+                    </div>
+                {else if $aksi eq 'create'}
+                	 <div class="col-md-8 boxcontent">
+                    {include file="`$lokasitemplate`komponen/$kanal/$kanal.create.html"}
+                    </div>
+                {else}
+                    <div class="col-md-8">
+                    {include file="`$lokasitemplate`komponen/$kanal/$kanal.list.html"}
+                    </div>
+                {/if} 
+                
+                <div class="col-md-4 mt-10 ">
+                
+
+                
+                 <div class="box-kanan">
+                    <div class="box-kanan-judul">
+                        <span>Terpopuler</span>
+                    </div>
+                    <div class="box-kanan-isi">
+                    {foreach from=$konsultasisamping key=id item=b}
+                     <div class="box-kanan-item">
+                     		<div class="col-xs-4">
+                             {if $b.gambar neq ''}
+                            <div class="box-kanan-item-img">
+                                <a href="{$b.link}"><img src="{$b.gambar}" alt="{$b.nama}" class="img-responsive" /></a>
+                            </div>
+                            {/if}
+                     		</div>
+                            <div class="col-xs-8">
+                                <a  href="{$b.link}"><h4>{$b.nama}</h4></a>
+                                <span class="date">{$b.views} Views</span>
+                           </div>
+                       </div>
+                       {/foreach}
+                    </div>
+                </div>
+                
+                 
+                
+                </div>
+                
+                
+    </div>
+</div>
+<br clear="all" />
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

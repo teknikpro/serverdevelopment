@@ -1,0 +1,23 @@
+
+<br clear="all" />
+<div class="insight-headlin1e">
+{foreach from=$datadetail key=id item=ch}
+    <div class="col-md-4">
+    	<div class="promo-item">
+        {if $ch.gambar neq ''}
+        <div class="promo-item-img">
+            <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}" /></a>
+        </div>
+        {/if}
+            <div class="promo-item-isi">
+            <a class="list-link" href="{$ch.link}">{$ch.nama}</a>
+            <br />
+            <p>{$ch.ringkas}</p>
+            <span class="text-gray">Periode {$ch.startdate} -  {$ch.enddate}</span><br /><br />
+            <a class="btn btn-block btn-default" href="{$ch.link}">Lihat Promo</a>
+            </div>
+        </div>
+    </div>
+{/foreach}
+<br clear="all" />
+</div>

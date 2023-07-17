@@ -1,0 +1,82 @@
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="items item-w2">
+                           <div class="row">
+                           <div class="col-xs-6">
+                                <h4 class="option-title text-green text-uppercase">{$namaaksi}</h4>
+                           </div>
+                           <div class="col-xs-6">
+                           </div>
+                           <div class="clearfix"></div>
+                       </div>
+                       <!-- /.row -->
+                       </div>
+                        <!-- /.items item-w2 -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default e-squared p-0">
+                            <div class="panel-body p-0">
+                                 {if $jml_post neq '0'}
+                                    <div class="mail-box">
+                                        <!-- <form action="{$fulldomain}/member/delete-transaksi" method="post" name="deleteall" id="deleteallmessage"> -->
+                                        <!-- <input type="hidden" name="aksi" value="delete" /> -->
+                                        <table class="table table-hover table-mail" width="100%" >
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th width="40%">Invoice</th>
+                                                <!-- <th width="20%">Informasi Pemesan</th> -->
+                                                <th width="15%">Total</th>
+                                                <!-- <th width="10%">Pembayaran</th> -->
+                                                <th width="30%">Tanggal Pesan</th>
+                                                <th width="10%">Status</th>
+                                                <th width="20%"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                            {foreach from=$datadetail key=transaksiid item=i}
+                                            <tr {if $i.baca eq '0' and $i.tipepesan eq 'inbox'}class="unread"{else}class="read"{/if}>
+                                                <td class="mail-contact">{$i.no}</td>
+                                                <!-- <td class="check-mail">
+                                                    <input type="checkbox" class="i-checks" name="transaksiid[]" value="{$i.transaksiid}" />
+                                                </td> -->
+                                                <!-- <td class="mail-contact"><a href="{$i.urldetail}">{$i.pengirim}</a></td> -->
+                                                <td class="mail-subject"><a href="{$i.urldetail}"><strong>{$i.invoiceid}</strong></a><br/> Pembayaran : {$i.pembayaran}</td>
+                                                <!-- <td class="mail-subject">{$i.billingnama}<br>{$i.billingalamat}<br>{$i.billingemail}</td> -->
+                                                <td class="text-right mail-date">{$i.total_bayar}</td>
+                                                <!-- <td class="text-right mail-date">{$i.pembayaran}</td> -->
+                                                <td class="text-right mail-date">{$i.tanggaltransaksi}</td>
+                                                <td class="text-left mail-date"><span class="label label-{$i.alert} label-lg">{$i.status}</span></td>
+                                                <td class="text-right mail-date"><a href="{$i.urldetail}" class="btn btn-default">Detail</a></td>
+                                            </tr>
+                                            {/foreach}
+
+                                        </tbody>
+                                        </table>
+                                        <!-- </form> -->
+                                        
+                                        <ul class="pagination m-0 ml-15">
+                                          {foreach from=$stringpage key=pageid item=a}
+                                            <li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+                                          {/foreach}
+                                        </ul>
+                                        
+                                    </div>
+                                {else}
+                                    <div class="alert warning">Tidak ada data transaksi dalam <strong>Transaksi List</strong> Anda.</div>
+                                {/if}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel .panel-default -->
+                    </div>
+                    <!-- /.col-xs-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+
+     

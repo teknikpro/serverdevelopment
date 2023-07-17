@@ -1,0 +1,51 @@
+            <div class="col-md-12 boxcontent">
+         <div class="insight-headline">
+       	{if $tot < 1}
+        	<br clear="all" /><div class="col-md-12"><br /><br /><center>Data konsultasi belum tersedia untuk kategori ini. <br />Apakah anda ingin berkonsultasi? </center><br /><br />
+            </div><br clear="all" />
+        {else}
+         {foreach from=$datadetail key=id item=ch}
+            <div class="list-blog">
+            	<div class="col-md-4">
+                    <div class="list-blog-isi">
+                    {if $ch.gambar neq ''}
+                    <div class="list-blog-img">
+                        <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}" class="img-responsive" /></a>
+                    </div>
+                    {/if}
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="list-blog-isi"> <a class="list-link" href="{$ch.link}">{$ch.nama}</a>
+                    <br />
+                    <span class="date">{$ch.tanggal}</span>
+                    <br />
+                    <p>{$ch.ringkas}</p>
+                 
+                    <a class="btn btn-info" href="{$ch.link}">Selengkapnya</a>
+                    <a class="btn btn-warning" href="{$ch.link}">Jawaban</a>
+                    </div>
+                </div>
+                
+            </div>
+
+        {/foreach}
+        
+       
+        <center>
+        <div class="paginate">
+            <ul class="pagination">
+                {foreach from=$stringpage key=pageid item=a}
+                    {if $a.link neq ''}
+                        <li><a href="{$a.link}">{$a.nama}</a></li>
+                    {else}
+                        <li><a href="javascript:void(0)">{$a.nama}</a></li>
+                    {/if}
+                {/foreach}
+            </ul>
+        </div>
+        </center>{/if}
+         </div>
+         
+        </div>
+

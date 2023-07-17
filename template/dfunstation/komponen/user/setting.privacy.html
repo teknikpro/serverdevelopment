@@ -1,0 +1,89 @@
+       <form method="post" class="form-horizontal" role="form"  name="profile" enctype="multipart/form-data" action="{$fulldomain}/user/setting/privacy">
+
+
+
+       <input type="hidden" name="id" value="{$id}" size="35" />
+     <div class="form-group">
+        <label class="col-sm-6 control-label">Siapa yang dapat melihat profil saya? </label>
+        <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="1" name="pvprofile" {if $pvprofile eq '1'} checked="checked"{/if}> Private
+        </div>
+         <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="2" name="pvprofile" {if $pvprofile eq '2'} checked="checked"{/if}> Friends
+        </div>
+         <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="3" name="pvprofile" {if $pvprofile eq '3'} checked="checked"{/if}> Public
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Tampilkan Tanggal Lahir ? </label>
+        <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="0" name="pvbirth" {if $pvnotif eq '0'} checked="checked"{/if}> Private
+        </div>
+         <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="1" name="pvbirth" {if $pvnotif eq '1'} checked="checked"{/if}> Public
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Tampilkan Tanggal Lahir ? </label>
+        <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="1" name="pvbirth" {if $pvbirth eq '1'} checked="checked"{/if}> Private
+        </div>
+         <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="0" name="pvbirth" {if $pvbirth eq '0'} checked="checked"{/if}> Public
+        </div>
+    </div>
+
+     <div class="form-group">
+        <label class="col-sm-6 control-label">Tampilkan Email ? </label>
+        <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="1" name="pvemail" {if $pvemail eq '1'} checked="checked"{/if}> Private
+        </div>
+         <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="0" name="pvemail" {if $pvemail eq '0'} checked="checked"{/if}> Public
+        </div>
+    </div>
+
+        
+     <div class="form-group">
+        <label class="col-sm-6 control-label">Tampilkan Alamat ? </label>
+        <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="1" name="pvaddress" {if $pvaddress eq '1'} checked="checked"{/if}> Private
+        </div>
+         <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="0" name="pvaddress" {if $pvaddress eq '0'} checked="checked"{/if}> Public
+        </div>
+    </div>
+        
+     <div class="form-group">
+        <label class="col-sm-6 control-label">Tampilkan Handphone ? </label>
+        <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="1" name="pvphonegsm" {if $pvphonegsm eq '1'} checked="checked"{/if}> Private
+        </div>
+         <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="0" name="pvphonegsm" {if $pvphonegsm eq '0'} checked="checked"{/if}> Public
+        </div>
+    </div>
+        
+     <div class="form-group">
+        <label class="col-sm-6 control-label">Siapa yang dapat menghubungi saya? </label>
+        <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="1" name="pvmessage" {if $pvmessage eq '1'} checked="checked"{/if}> Private
+        </div>
+         <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="2" name="pvmessage" {if $pvmessage eq '2'} checked="checked"{/if}> Friends
+        </div>
+         <div class="col-sm-2">
+           <input type="radio" class="i-checks" value="3" name="pvmessage" {if $pvmessage eq '3'} checked="checked"{/if}> Public
+        </div>
+    </div>
+
+   <div class="form-group">
+    <div class="col-xs-offset-6 col-xs-9">
+        <input type="submit" class="btn btn-success" name="submit" value="Simpan Keamanan dan Privasi" />
+    </div>
+  </div>
+
+    </form>

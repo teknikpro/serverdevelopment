@@ -1,0 +1,33 @@
+<br clear="all" /><br clear="all" />
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            {foreach from=$section key=secid item=a}
+            <div class="list-konsultan-kanan">
+                <a href="{$a.url}">
+                    <div class="col-xs-12 list-simposium">
+                        <div class="list-konsultan-kanan-isi "> <strong style="color: #fff;">{$a.nama} </strong>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {/foreach}
+
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+            <div class=" pull-right ">
+                <h4>Supported By:</h4>
+                <img src="{$lokasiwebtemplate}images/img.logo.png" alt="">
+                <br>
+                <!-- <img src="{$lokasiwebtemplate}images/img.logo.png" alt="">
+                <br>
+                <img src="{$lokasiwebtemplate}images/img.logo.png" alt=""> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<br clear="all" /><br clear="all" />

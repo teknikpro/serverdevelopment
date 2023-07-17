@@ -1,0 +1,74 @@
+<div class="grid-list-products">
+        <div id="grid-view" class="products-grid fade tab-pane in active">
+
+            <div class="product-grid-holder medium">
+                <div class="row no-margin">
+                
+                	{if $tot eq '0' and $aksi eq 'list-search'}
+                    	<center>
+                        	<br /><br /><br />Tidak ditemukan produk untuk pencarian menggunakan kata <strong>{$kata}</strong>. Silahkan coba kembali<br />
+                            <br /><br /><br /><br />
+                        </center>
+                    {else}
+
+                    {foreach from=$list_post key=produkpostid item=p}
+                    <div class="col-md-3">
+                         <div class="product-listitem">
+                      {if $p.misc_diskonn neq '0'}<div class="ribbon red"><span>sale</span></div>{/if}
+                      {if $p.bestseller eq '1'}<div class="ribbon green"><span>bestseller</span></div>{/if}
+
+                      <div class="product-listitem-img">
+                          <a href="{$p.link_detail}"><img alt="{$p.namaprod}" src="{$p.image_m}" data-echo="{$p.image_m}" /></a>
+                      </div>
+                      <div class="product-listitem-body">
+                            {if $p.misc_diskonn neq '0'}<div class="label-discount green">Hemat {$p.savenya}</div>{/if}
+                          <div class="title">
+                              <a href="{$p.link_detail}">{$p.namaprod}</a>
+                          </div>
+                          <div class="prices">
+                          {if $p.harga neq '0'}
+                              <div class="price-current">Rp. {$p.harga}</div>
+                          {/if}
+                          </div>
+                          <div class="prodoct-listitem-ringkas">
+                            {$p.ringkas}
+                          </div>
+
+                          {if $p.namabr neq ''}<div class="brand">{$p.namabr}</div>{/if}
+                      </div>
+                      
+                      <div class="hover-area">
+                          <div class="add-cart-button">
+                              <a href="{$p.link_detail}" class="btn btn-warning">Beli Sekarang</a>
+                              <a href="{$p.link_detail}" class="btn btn-primary">Detail</a>
+                          </div>
+
+                      </div>
+                  </div><!-- /.product-item -->
+                  
+                    </div><!-- /.product-item-holder -->
+                    {/foreach}
+                    
+                    {/if}
+
+
+                </div><!-- /.row -->
+            </div><!-- /.product-grid-holder -->
+
+            <div class="pagination-holder">
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-6 text-left">
+                        <ul class="pagination ">
+                            {foreach from=$stringpage key=pageid item=a}
+                            <li class="{$a.class}"><a href="{$a.link}"> {$a.nama} </a></li>
+                            {/foreach}
+                        </ul>
+                    </div>
+
+                </div><!-- /.row -->
+        </div><!-- /.products-grid #grid-view -->
+
+
+</div><!-- /.grid-list-products -->
+

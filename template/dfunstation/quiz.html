@@ -1,0 +1,365 @@
+{include file="`$lokasitemplate`komponen/home/header.html"}
+<div class="quiz-box">
+{if $aksi eq 'pilihtopik'}
+
+	<div class="container">
+    <div class="col-md-8 col-md-offset-2">
+    <div class="intro">{if $done neq ''}
+    	<br /><div class="alert alert-danger">Anda telah mengikuti topik yang dipilih, silahkan pilih yang lain</div><br />
+    {/if}
+    Hai <strong>{$userfullname} </strong>silahkan pilih topik terlebih dahulu sebelum masuk ke permainan Siapa ingin jadi Juara.
+    
+    <br clear="all" /> <br clear="all" />
+    {foreach from=$topik key=id item=a}
+    	<div class="col-md-12">
+        <div class="m-5">
+        	{if $a.jumlah > 1}
+            <a href="{$fulldomain}/quiz/start/{$a.secid}/1" class="btn btn-sec btn-block btn-lg btn-warning">{$a.namasec}  <span class="fal fa-chevron-circle-right"></span> </a>
+            {else}
+            <a href="javascript:void();" class="btn btn-sec btn-block btn-lg btn-default">{$a.namasec}  <span class="fal fa-chevron-circle-right"></span> </a>
+            {/if}
+        </div>
+        </div>
+    {/foreach}
+    </div>
+    </div>
+</div>
+<audio autoplay loop> 
+  <source src="{$lokasiwebtemplate}music/auswahlrunde_loesung.mp3" type="audio/mpeg">
+</audio>
+
+{else if $aksi eq 'start'}
+
+<div class="container">
+	<div class="col-md-2">
+    	<div class="intro">
+        	<center><img src="{$lokasiwebtemplate}images/img.logo.quiz.png" /></center><br clear="all" />
+        	<div class="level">
+            	{foreach from=$levels key=level item=a}
+            	<div class="level-item {if $step eq $a.level} level-item-active{/if} "><div class="col-xs-2">{$a.level}</div><div class="col-xs-9">{$a.nominal}</div></div>
+                {/foreach}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1">
+    	
+    </div>
+    <div class="col-md-9">
+    		{if $status eq 'success'}
+            	<!-- Modal -->
+
+                
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <p>{$materi}</p>
+                           
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <center>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                
+                
+            	<div class="notif">
+                    <div class="notif-success">
+                        <center>
+                        {$pesan}<br />
+                        {if $nominal neq ''}<br /><span class="nominal">Rp. {$nominal}</span><br />{/if}
+                        <br />
+                        <a href="#myModal" role="button" data-toggle="modal" class="btn btn-warning btn-lg"><span class="fal fa-newspaper-o"></span> Lihat Pembahasan</a>
+                        {if $end neq '1'}
+                        <a href="{$nextstep}" class="btn btn-success btn-lg"><span class="fal fa-chevron-right"></span> Lanjutkan</a>
+                        {else}
+                        {/if}
+                        </center>
+                    </div>
+                </div>
+            	<audio autoplay>
+                  <source src="{$lokasiwebtemplate}music/spielende_lang.mp3" type="audio/mpeg">
+                </audio>
+                <audio autoplay loop>
+                  <source src="{$lokasiwebtemplate}music/kompetenzjoker.mp3" type="audio/mpeg">
+                </audio>
+                
+                
+                
+            {/if}
+            
+            {if $status eq 'end'}
+            	
+            	   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <p>{$materi}</p>
+                               
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <center>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              
+                
+            	<div class="notif">
+                    <div class="notif-end">
+                        <center>
+                        Sayang sekali jawaban anda salah dan anda harus mengakhiri permainan Siapa Ingin Jadi Juara dilevel ini.
+                        <br /><br />
+                        <a href="#myModal" role="button" data-toggle="modal" class="btn btn-warning btn-lg"><span class="fal fa-newspaper-o"></span> Lihat Pembahasan</a>
+                        <a href="{$fulldomain}/quiz/reset/{$secid}" class="btn btn-success btn-lg"><span class="fal fa-chevron-right"></span> Coba Lagi</a>
+                        </center>
+                    </div>
+                </div>
+                
+                <audio autoplay>
+                  <source src="{$lokasiwebtemplate}music/falsch.mp3" type="audio/mpeg">
+                </audio>
+                <audio autoplay loop>
+                  <source src="{$lokasiwebtemplate}music/kompetenzjoker.mp3" type="audio/mpeg">
+                </audio>
+            {/if}
+            {if $status eq ''}
+            
+            <div class="bantuan">
+            	{if $urlbantuan1 neq ''}<a href="{$urlbantuan1}"><img src="{$lokasiwebtemplate}images/img.5050.png" /></a>{/if}
+                {if $urlbantuan2 neq ''}<a href="{$urlbantuan2}"><img src="{$lokasiwebtemplate}images/img.callfriend.png" /></a>{/if}
+                {if $urlbantuan3 neq ''}<a href="{$urlbantuan3}"><img src="{$lokasiwebtemplate}images/img.askaudience.png" /></a>{/if}
+            </div>
+            {if $bantuan1 eq '' and $bantuan2 eq '' and $bantuan3 eq ''}
+            <center><span class="count" id="120"></span></center>
+              <script>
+				function c(){
+					var n=$('.count').attr('id');
+					var c=n;
+					$('.count').text(c);
+					setInterval(function()
+					{
+						c--;
+						if(c>=0){
+							$('.count').text(c);
+						}
+						if(c==0){
+							location.href = '{$uri}/end';
+						}
+						
+					},1000);
+				}
+				
+				// Start
+				c();
+
+				</script>
+                {else}
+                	<center><span class="count" id="0">0</span></center>
+               {/if}
+             {/if}
+            
+    	<div class="soal">
+        	
+            <div class="soal-item">
+                {$pertanyaan}
+            </div>
+            <br clear="all" />
+            {if $status eq ''}
+                {foreach from=$jawabans key=jawabanid item=b}
+               		{if $b.hide eq ''}
+                     <a href="#" class="btn jawaban-item jitem {if $jawabanids eq $b.jawabanid} jawaban-lock {if $salah eq '1'} jawaban-salah{else}{/if} {else}{/if}  {if $jawabankunci eq $b.jawabanid} jawaban-right{else}{/if}" data-href="{$fuldomain}/quiz/jawab/{$b.hash}" data-jawab="{$b.alfabet}. {$b.jawaban}" data-toggle="modal" data-target="#confirm-jawab">{$b.alfabet}. {$b.jawaban}</a>
+                    {else}
+                      <a href="#" class="jawaban-item2 jitem2" data-href="#" data-jawab="#" data-toggle="modals" data-target="#confirm-jawab2">&nbsp;</a>
+                    {/if}
+                {/foreach}
+            {else}
+               {foreach from=$jawabans key=jawabanid item=b}
+                <a href="#" class="btn jawaban-item jitem {if $jawabanids eq $b.jawabanid} jawaban-lock {if $salah eq '1'} jawaban-salah{else}{/if} {else}{/if}{if $jawabankunci eq $b.jawabanid} jawaban-right{else}{/if}">{$b.alfabet}. {$b.jawaban}</a>
+                {/foreach}
+            {/if}
+        </div>
+        {if $status eq ''}
+        <script>
+		$(".jawaban-item" ).click(function() {
+		   $(".jitem").removeClass("jawaban-lock");
+		   $(this).toggleClass("jawaban-lock");
+		   $("#dipilih").play();
+		});
+		</script>
+        {/if}
+        
+    </div>
+
+</div>
+{if $status eq ''}
+<audio autoplay>
+  <source src="{$lokasiwebtemplate}music/wechsel_nach_stufe_2.mp3" type="audio/mpeg">
+</audio>
+<audio autoplay loop>
+  <source src="{$lokasiwebtemplate}music/stufe_1.mp3" type="audio/mpeg">
+</audio>
+<audio id="dipilih" src="{$lokasiwebtemplate}music/auswahlrunde_antwort_c.mp3" type="audio/mpeg"></audio>
+{/if}
+
+
+{if $reload eq '1'}
+ <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <center><h3>Halaman diakses Ulang</h3></center>
+                <hr />
+                <p>Anda baru saja mereload halaman yang sama dan menggunakan
+                bantuan secara berulang, sistem tidak memperkenankan itu dan permainan sebaiknya diakhiri</p>
+            </div>
+            
+            <div class="modal-footer">
+                <center>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">    
+    $(window).load(function(){
+        $('#myModal2').modal('show');
+    });
+</script>
+{/if}
+
+{if $bantuan2 eq '1'}
+ <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <center><h3>Bantuan Panggil Teman</h3></center>
+                <hr />
+                <p>Dalam menggunakan bantuan ini silahkan anda diperbolehkan untuk bertanya kepada
+                teman anda atau orang-orang disekitar anda, jika anda sudah yakin maka anda
+                diharuskan untuk menjawab pertanyaan</p>
+               
+            </div>
+            
+            <div class="modal-footer">
+                <center>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">    
+    $(window).load(function(){
+        $('#myModal2').modal('show');
+    });
+</script>
+{/if}
+
+{if $bantuan3 eq '1'}
+ <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <center><h3>Bantuan Tanya Penonton</h3></center>
+                <hr />
+              <p>Dalam menggunakan bantuan ini silahkan anda diperbolehkan untuk bertanya kepada
+                teman anda atau orang-orang disekitar anda, hitung jawaban yang paling banyak
+                direkomendasikan, jika anda sudah yakin maka anda
+                diharuskan untuk menjawab pertanyaan</p>
+               
+            </div>
+            
+            <div class="modal-footer">
+                <center>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">    
+    $(window).load(function(){
+        $('#myModal2').modal('show');
+    });
+</script>
+{/if}
+
+<div class="modal fade" id="confirm-jawab" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <center><p>Apakah anda yakin dengan jawaban anda untuk pertanyaan pada level ini?</p>
+                    </center>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <center>
+                    <a class="btn btn-success btn-ok">Saya Yakin</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Saya Tidak Yakin</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <script>
+	$('#confirm-jawab').on('show.bs.modal', function(e) {
+		$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+		//$('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+	});
+</script>
+        
+        
+{else if $aksi eq 'inputnama'}
+
+	<div class="container">
+	<div class="logohome"><br /><br /><center><img src="{$lokasiwebtemplate}images/img.logo.quiz.png" /></center></div>
+    <div class="col-md-6 col-md-offset-3">
+    <div class="intro">
+    Haii {$userfullname}, selamat datang di halaman permainan Siapa Ingin Jadi Juara?
+    Permainan ini akan menambah poin anda bila anda berhasil menjadi juara. <br /><br />
+    <form action="" method="post">
+          <input type="hidden" class="form-control input-lg" name="userfullname" value="{$userid}" placeholder="Ketik nama lengkap anda">
+            <input type="submit" class="btn btn-warning btn-lg" value="Lanjutkan Bermain" />
+
+      	
+    </div>
+    
+    </div>
+    </div>
+    <br clear="all" />
+</div>
+<audio autoplay loop>
+  <source src="{$lokasiwebtemplate}music/auswahlrunde_loesung.mp3" type="audio/mpeg">
+</audio>
+
+{else}
+    <div class="container">
+        <div class="logohome"><br /><br /><center><img src="{$lokasiwebtemplate}images/img.logo.quiz.png" /></center></div>
+        <div class="col-md-8 col-md-offset-2">
+        <div class="intro">Selamat datang di Permainan Siapa Ingin jadi Juara, permainan ini bersifat edukatif dan dapat dimainkan oleh anak maupun orang tua dengan
+        menyesuaikan tema yang dipilih. Jika anda dapat menjawab keseluruhan pertanyaan dengan benar maka akan menambah poin member anda. <b>Angka atau
+        nominal uang dalam permainan ini bukanlah yang sebenarnya hanya untuk tanda setiap level.</b> Selamat bermain dan belajar.
+        </div>
+        </div>
+        <br clear="all" />
+        <center><a href="{$fulldomain}/quiz/inputnama" class="btn btn-warning btn-lg">Mulai Permainan  <span class="fal fa-chevron-circle-right"></span></a></center>
+    </div>
+    <audio autoplay loop>
+      <source src="{$lokasiwebtemplate}music/intro.mp3" type="audio/mpeg">
+    </audio>
+{/if}
+</div>
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

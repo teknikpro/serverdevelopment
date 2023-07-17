@@ -1,0 +1,31 @@
+{include file="`$lokasitemplate`komponen/home/header.html"}
+<div class="wisata-read mt-0" style="height:auto; min-height:100px">
+	<img src="{$detailgambar}" style="width:100%; height:auto" />  
+</div> 
+{include file="`$lokasitemplate`komponen/home/aboutmenu.html"}
+
+<div class="container">
+<div class="col-md-12">
+    <div class="box-about">
+ 		
+        <div class="title-headline">
+            <span>{$detailnama}</span>
+        </div>
+        <br clear="all" />
+        <div class="detailcontent">{$detaillengkap}</div>
+        <br clear="all" />
+        <hr />
+         <div id="share"></div>
+
+        <script src="{$lokasiwebtemplate}js/jssocials.min.js"></script>
+        <script>
+            $("#share").jsSocials({
+                shares: ["facebook","twitter","googleplus", "linkedin", "whatsapp"]
+            });
+        </script>
+ </div> 
+</div>
+</div> 
+ 
+ <br clear="all" /><br clear="all" />
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

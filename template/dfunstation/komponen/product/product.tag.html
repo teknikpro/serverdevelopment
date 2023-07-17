@@ -1,0 +1,31 @@
+<div class="sub-location hidden-lg hidden-md">
+    {$bahasa.news}
+</div>
+<div class="box-content">
+    {foreach from=$datadetail key=id item=ch}
+        
+        <div class="list-content">
+            {if $ch.gambar neq ''}
+            <div class="thumbNews hover-effect pull-left">
+                <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}" class="img-responsive" /></a>
+            </div>
+            {/if}
+            <span>{$ch.tanggal}</span>
+            <br />
+            <a class="list-link" href="{$ch.link}">{$ch.nama}</a>
+            <br />
+            <p>{$ch.ringkas}</p>
+        </div>
+    {/foreach}
+</div>
+<div class="paginate pull-right">
+    <ul class="pagination">
+        {foreach from=$stringpage key=pageid item=a}
+            {if $a.link neq ''}
+                <li><a href="{$a.link}">{$a.nama}</a></li>
+            {else}
+                <li><a href="javascript:void(0)">{$a.nama}</a></li>
+            {/if}
+        {/foreach}
+    </ul>
+</div>

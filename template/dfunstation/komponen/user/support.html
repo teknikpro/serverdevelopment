@@ -1,0 +1,136 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="items item-w2">
+           <div class="row">
+           <div class="col-xs-12">
+               <h4 class="option-title text-green text-uppercase">Pertanyaan Masuk</h4>
+           </div>
+           <div class="clearfix"></div>
+       </div>
+       <!-- /.row -->
+       </div>
+        <!-- /.items item-w2 -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+            
+            {if $childaksi eq 'detail'}
+            	{if $msg neq ''}
+                	<div class="alert alert-success alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <strong>Perubahan status berhasil</strong> satu daftar followup sudah anda lakukan, terima kasih dan sukses selalu untuk anda.
+                    </div>
+                {/if}
+                {foreach from=$datadetail key=id item=a}
+            	 <form method="post" class="form-horizontal" role="form" name="profile" enctype="multipart/form-data" action="">
+                <div class="col-md-6">
+                	
+                    <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Tanggal Subcribe</label>
+                        <div class="col-sm-8">
+                          {$a.tanggal}
+                      </div>
+                   </div>
+                   <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Nama Lengkap</label>
+                        <div class="col-sm-8">
+                          {$a.userfullname}
+                      </div>
+                   </div>
+                   <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Alamat Email</label>
+                        <div class="col-sm-8">
+                          {$a.useremail}
+                      </div>
+                   </div>
+                   <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Nomor Handphone</label>
+                        <div class="col-sm-8">
+                          {$a.userhandphone}
+                      </div>
+                   </div>
+                   <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Kota</label>
+                        <div class="col-sm-8">
+                          {$a.kota}
+                      </div>
+                   </div>
+                   <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Status</label>
+                        <div class="col-sm-8">
+                          {if $a.status eq '1'}
+                        <span class="label label-success label-md">Sudah difollowup</span>
+                        {else}
+                        <span class="label label-danger label-md">Belum difollowup</span>
+                        {/if}
+                      </div>
+                   </div>
+                	
+                    
+                    
+                </div>
+                <div class="col-md-6">
+                	<strong>Informasi Follow Up</strong><br />
+                    {if $a.info neq ''}
+                    {$a.info}<br />
+                    <em>Followup Tanggal: {$a.tanggalfollow}</em><br  clear="all" /><br  clear="all" />
+                    {else}
+                    <textarea class="form-control" name="info"  placeholder="Tuliskan apa yang anda lakukan dan bagaimana respon subcriber" rows="10" required="required"></textarea><br />
+                    <input type="submit" class="btn btn-primary" value="Simpan Telah Di Followup" />
+                    {/if}
+                    <a href="{$fulldomain}/member/subcriber"class="btn btn-primary">Kembali</a>
+                </div>
+            	</form>
+                {/foreach}
+            {else} 
+            
+             {if $jml_post eq '0'}
+                <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                     Saat ini anda belum memiliki daftar Subscriber yang harus di followup, silahkan promosikan website replika anca
+                     supaya semakin banyak member baru yang dapat diajak untuk bergabung kedalam Detox Your Body - SentraDetox
+               </div>
+                <div class="clearfix"></div>
+            {else}
+            	Berikut ini adalah daftar subscriber yang harus anda followup dalam upaya menjaring member member baru dimana
+                anda adalah sebagai referensinya.<br /><br />
+                <hr />
+                                   
+              {foreach from=$datadetail key=id item=a}
+                	<div class="col-md-4"><strong>Nama Pengirim</strong></div><div class="col-md-8">{$a.userfullname}</div><br clear="all" />
+                    <div class="col-md-4"><strong>Nomor Handphone</strong></div><div class="col-md-8">{$a.userhandphone}</div><br clear="all" />
+                    <div class="col-md-4"><strong>Email</strong></div><div class="col-md-8">{$a.useremail}</div><br clear="all" />
+                    <div class="col-md-4"><strong>Pesan</strong></div><div class="col-md-8">{$a.pesan}</div><br clear="all" />
+                    <div class="col-md-4"><strong>Tanggal</strong></div><div class="col-md-8">{$a.tanggal}</div><br clear="all" />
+                  	<hr />
+                  
+                {/foreach}
+              <br /><br />
+                
+                <div class="paginate pull-right">
+                    <ul class="pagination">
+                        {foreach from=$stringpage key=pageid item=a}
+                            {if $a.link neq ''}
+                                <li><a href="{$a.link}">{$a.nama}</a></li>
+                            {else}
+                                <li><a href="javascript:void(0)">{$a.nama}</a></li>
+                            {/if}
+                        {/foreach}
+                    </ul>
+                </div>
+            {/if}
+            
+            {/if}
+
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel .panel-default -->
+    </div>
+    <!-- /.col-xs-12 -->
+</div>
+<!-- /.row -->
+

@@ -1,0 +1,35 @@
+<form class="form-horizontal" role="form" method="post" name="profile" enctype="multipart/form-data" action="{$fulldomain}/member/minisite/setting">
+
+  <div class="form-group">
+    <label for="inputNama3" class="col-sm-3 control-label">Alamat Web Replika</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" id="namadomain" value="{$username}" name="namadomain" style="width:30%; float:left"  placeholder="Nama Lengkap"><span style="float:left; padding:3px 0px 0px 3px"><strong>.{$basedomain}</strong></span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="Kota" class="col-sm-3 control-label">Judul Web</label>
+    <div class="col-sm-9">
+      <input type="text" name="webtitle" value="{$webtitle}" class="form-control">
+    </div>
+  </div>
+ <div class="form-group">
+    <label for="Alamat" class="col-sm-3 control-label">Deskripsi Web</label>
+    <div class="col-sm-9">
+     <textarea name="webdesc" id="webdesc" cols="30" rows="5" class="form-control">{$webdesc}</textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="Alamat" class="col-sm-3 control-label">Keywords</label>
+    <div class="col-sm-9">
+     <textarea name="webmeta" id="webmeta" cols="30" rows="5" class="form-control">{$webmeta}</textarea>
+     Gunakan tanda koma untuk memisahkan keyword yang berhubungan
+    </div>
+  </div>
+ 
+
+  <div class="form-group">
+    <div class="col-xs-offset-3 col-xs-9">
+      <input type="submit" class="btn btn-success" name="submit" value="Simpan Web Replika" />
+    </div>
+  </div>
+</form>

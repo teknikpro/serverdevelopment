@@ -1,0 +1,24 @@
+{strip}
+
+<div class="container">
+    <div class="row mt-4">
+        {foreach from=$datadetail key=id item=ch}
+        <div class="col-lg-4 col-md-4 col-sm-12 mb-4 mb-4">
+            <div  onclick="redirectlink(`{$ch.link}`)" class="card border-0 rounded-0 p-3" >
+                {if $ch.gambar neq ''}
+              <img src="{$ch.gambar}" class=" rounded-0 " alt="{$ch.nama}">
+              {/if}
+              <div >
+                <div class="allartikel-kategori">{$ch.namasec}</div>
+                <h5 class="card-title">{$ch.nama}</h5>
+                <p class="card-text">{$ch.ringkas}</p>
+                <div class="allartikel-penulis">Penulis : Denia Rahmayanthi, S.Psi., M.Psi., Psikolog</div>
+              </div>
+            </div>
+          </div>
+        {/foreach}
+      
+    </div>
+  </div>
+
+{/strip}

@@ -1,0 +1,89 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="items item-w2">
+                           <div class="row">
+                           <div class="col-xs-6">
+                                <h4 class="option-title text-green text-uppercase">History Penarikan</h4>
+                           </div>
+                           <div class="col-xs-6">
+                                
+                           </div>
+                           <div class="clearfix"></div>
+                       </div>
+                       <!-- /.row -->
+                       </div>
+                        <!-- /.items item-w2 -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default e-squared p-0">
+                            <div  class="panel-body p-5">
+
+                                {if $pesan}
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                {$pesan}
+                                </div>
+                                {/if}
+
+
+                                    <div class="mail-box">
+                                        {if $history }
+                                        <table id="table_id" class="display" width="100%" >
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Tanggal Pengajuan</th>
+                                                <th>Jumlah</th>
+                                                <th>Berhasil / Ditolak</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {foreach from=$history key=id_penarikan item=i}
+                                            <tr >
+                                                <td >{$i.no}</td>
+                                                <td >{$i.tanggal}</td>
+                                                <td >Rp. {$i.jumlah}</td>
+                                                <td>{$i.donedate}</td>
+                                                <td >
+                                                    <a href="#">
+                                                        <span class="label label-{$i.btn}">{$i.status}</span>
+                                                        <br>
+                                                        {$i.alasanditolak}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            {/foreach}
+                                        </tbody>
+                                        </table>
+                                        {else}
+                                            <center style="margin-top: 15px ;">Belum ada penarikan</center>
+                                        {/if}
+                                        
+                                    </div>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel .panel-default -->
+                    </div>
+                    <!-- /.col-xs-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+
+            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+            <script>
+
+                $(document).ready( function () {
+                    $('#table_id').DataTable();
+                } );
+
+            </script>
+
+
+     

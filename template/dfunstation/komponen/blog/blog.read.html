@@ -1,0 +1,137 @@
+{strip}
+
+<div class="container ">
+  <!-- Menampilkan menu tab -->
+  <ul class="nav nav-fill mx-auto">
+    <li class="nav-item item-tabs">
+      <a class="nav-link" href="{$fulldomain}/blog">Semua Artikel</a>
+    </li>
+    <li class="nav-item item-tabs">
+      <a class="nav-link"  href="#">Anak</a>
+    </li>
+    <li class="nav-item item-tabs">
+      <a class="nav-link"  href="#">Remaja</a>
+    </li>
+    <li class="nav-item item-tabs">
+      <a class="nav-link"  href="#">Dewasa</a>
+    </li>
+    <li class="nav-item item-tabs">
+      <a class="nav-link" href="#">Umum</a>
+    </li>
+    
+  </ul>
+
+  <!-- detail blog -->
+  <div class="row mt-3">
+    <div class="col-lg-8 col-md-8 col-sm-12">
+      <div class="isi-content">
+        {if $detailgambar neq ''}
+        <img src="{$detailgambar}" alt="{$detailnama}" class="img-fluid">
+        {/if}
+        <div class="artikel-sumber-gambar">
+          image : Illustration by google
+        </div>
+        <div class="artikel-judul">
+          {$detailnama}
+        </div>
+        <div class="artikel-informasi">
+          {if $detailcreator neq ''} Oleh {$detailcreator} | {/if} {$detailtanggal} | {$detailstats} Views
+          <br>
+          Disunting Oleh : {$penyunting}
+        </div>
+        <div class="artikel-isi">
+          {$detaillengkap}
+        </div>
+        {if $jmltags > 0 }
+        <div class="artikel-tags mt-4">
+          <div>Tags</div>
+          {foreach from=$tags key=id item=a}
+          <span>#{$a.tag} </span>
+          {/foreach}
+        </div>
+        {/if}
+        <div class="artikel-bagikan">
+          <div class="bagikan-judul mb-3">Bagikan Artikel</div>
+            <div class="sosmed">
+              <a class="social-icon" onclick="shareOnTwitter()" ><i class="fab fa-twitter"></i></a>
+              <a class="social-icon" onclick="shareOnFacebook()" ><i class="fab fa-facebook-f"></i></a>
+              <a class="social-icon" onclick="copyUrlToClipboard()" ><i class="fas fa-link"></i></a>
+            </div>
+        </div>
+        <div class="artikel-komentar mt-3">
+          <div class="judul">Berikan Komentar</div>
+          {if $login}
+            <div class="row">
+              <div class="col-1">
+                <div class="profile">
+                  <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/icon-user.png" alt="Dfunstation" class="img-fluid">
+                </div>
+              </div>
+              <div class="col-11">
+                  <form action="">
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" placeholder="Komentar anda..." >
+                      <button class="btn btn-outline-secondary" type="button" id="button-addon1">Kirim</button>
+                    </div>
+                  </form>
+              </div>
+            </div>
+          {else}
+            <div class="row">
+              <div class="col-12">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Silahkan Login untuk berkomentar</a>
+              </div>
+            </div>
+          {/if}
+        </div>
+        <div class="artikel-komentar-populer mt-3">
+          <div class="judul mb-2">Komentar popoler</div>
+          {if $komentar}
+            {foreach from=$komentar key=id item=ch}
+              <div class="row">
+                <div class="col-1">
+                  <div class="profile">
+                    <img src="{$ch.photo}" alt="{$ch.nama}" class="img-fluid img-thumbnail">
+                  </div>
+                </div>
+                <div class="col-11">
+                    <p class="mt-2">{$ch.komentar}</p>
+                </div>
+              </div>
+            {/foreach}
+          {else}
+            <div class="row">
+              <div class="col-12">Belum ada komentar</div>
+            </div>
+          {/if}
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="artikelpopuler">
+        <div class="judul">Artikel Populer</div>
+        <div class="isi-konten">
+          {foreach from=$dataartikelpopuler key=id item=b}
+            <div onclick="redirectlink(`{$b.link}`)" class="row">
+              <div class="col-4">
+                {if $b.gambar neq ''}
+                <img src="{$b.gambar}" alt="{$b.nama}" class="img-fluid img-thumbnail">
+                {/if}
+              </div>
+              <div class="col-8">
+                <div class="populer-judul">{$b.nama}</div>
+                <div class="populer-view">{$b.views} Views</div>
+              </div>
+            </div>
+            <hr class="line">
+          {/foreach}
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  </div>
+  
+</div>
+
+{/strip}

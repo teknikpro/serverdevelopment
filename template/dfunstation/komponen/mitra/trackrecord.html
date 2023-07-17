@@ -1,0 +1,285 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="items item-w2">
+           <div class="row">
+           <div class="col-xs-12">
+               <h4 class="option-title text-green text-uppercase">{$namaaksi}</h4>
+           </div>
+           <div class="clearfix"></div>
+       </div>
+       <!-- /.row -->
+       </div>
+        <!-- /.items item-w2 -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+            
+			{if $childaksi eq 'create'}
+            	
+                {if $pesanhasil neq ''}
+                	{if $berhasil eq '1'}
+                    	<div class="alert alert-success alert-dismissible" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <strong>Penambahan Trackrecord berhasil</strong> {$pesanhasil}.<br />
+                          <a href="{$fulldomain}/member/trackrecord" class="btn btn-success">Lihat Trackrecord</a>
+                        </div>
+                    {else}
+                    	<div class="alert alert-warning alert-dismissible" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <strong>Penambahan Trackrecord gagal</strong> {$pesanhasil}.
+                        </div>
+                    {/if}
+                
+                {else}
+                
+                  <form method="post" class="form-horizontal" role="form" name="profile" enctype="multipart/form-data" action="{$fulldomain}/member/trackrecord/create">
+                  <div class="form-group">
+                            <label for="inputNama3" class="col-sm-3 control-label">Pertemuan Ke</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" id="pertemuan" value="{$pertemuan}" name="pertemuan"  placeholder="Tulis pertemuan keberapa" required="required">
+                          </div>
+                   </div>
+                    <div class="form-group">
+                        <label for="dob" class="col-sm-3 control-label">Tanggal</label>
+                        <div class="col-sm-3">
+                         <select name="date" class="form-control"  required="required">
+                          <option value="00" selected>--Hari--</option>
+                          {html_options values=$dateloop output=$dateloop selected=$dateselected}
+                          </select>
+                        </div>
+                        <div class="col-xs-3">
+                          <select name="month" class="form-control"  required="required">
+                          <option value="00" selected>--Bulan--</option>
+                          {html_options values=$monthloop output=$monthloop selected=$monthselected}
+                          </select>
+                        </div>
+                        <div class="col-xs-3">
+                        <select name="year" class="form-control"  required="required">
+                          <option value="00" selected>--Tahun--</option>
+                          {html_options values=$yearloop  output=$yearloop selected=$yearselected}
+                        </select>
+                        </div>
+                      </div>
+
+				  <div class="form-group">
+                            <label for="inputNama3" class="col-sm-3 control-label">Nama Lengkap</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" id="namalengkap" value="{$namalengkap}" name="namalengkap"  placeholder="Masukan nama lengkap"  required="required">
+                          </div>
+                   </div>
+                    <div class="form-group">
+                            <label for="inputNama3" class="col-sm-3 control-label">Usia</label>
+                            <div class="col-sm-9">
+                            	<div class="col-sm-4">
+                              	<input type="text" class="form-control" id="usia" value="{$usia}" name="usia"  placeholder="Masukan usia"  required="required">
+                                </div>
+                                <div class="col-sm-3">
+                                	Tahun
+                                </div>
+                         	 </div>
+                   </div>
+                    <div class="form-group">
+                            <label for="inputNama3" class="col-sm-3 control-label">Jenis Kelamin</label>
+                            <div class="col-sm-9">
+                              <select id="jeniskelamin" name="jeniskelamin" class="form-control"  required="required">
+                              	<option value=""> Pilih Jenis Kelamin</option>
+                              	<option value="L">Laki-laki</option>
+                                <option value="P">Perempuan</option>
+                              </select>
+                          </div>
+                   </div>
+                    <div class="form-group">
+                            <label for="inputNama3" class="col-sm-3 control-label">Nomor Kontak</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" id="contact" value="{$contact}" name="contact"  placeholder="Tulis nomor kontak orang yang anda terapi"  required="required">
+                          </div>
+                   </div>
+                    <div class="form-group">
+                    <label for="Profile" class="col-sm-3 control-label">Deskripsi Masalah</label>
+                    <div class="col-sm-9">
+                     <textarea name="masalah" class="form-control" id="masalah" placeholder="masalah" cols="30" rows="5"  required="required">{$aboutme}</textarea>
+                      <i>Deskripsikan masalah yang dialami oleh orang yang anda terapi</i>
+                    </div>
+                  </div>
+        
+                  <div class="form-group">
+                    <label for="wiseword" class="col-sm-3 control-label">Proses Terapi</label>
+                    <div class="col-sm-9">
+                     <textarea name="terapi" class="form-control" id="terapi" placeholder="terapi" cols="30" rows="5"  required="required">{$wiseword}</textarea>
+                      <i>Ceritakan proses terapi yang anda lakukan termasuk bacaan yang anda gunakan</i>
+                    </div>
+                  </div>
+        
+                  <div class="form-group">
+                            <label for="inputNama3" class="col-sm-3 control-label">Skala Awal</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" id="skalaawal" value="{$skalaawal}" name="skalaawal"  required="required" placeholder="Masukan skala awal">
+                          </div>
+                   </div>
+        
+                  <div class="form-group">
+                            <label for="inputNama3" class="col-sm-3 control-label">Skala Akhir</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" id="skalaakhir" value="{$skalaakhir}" name="skalaakhir"  required="required" placeholder="Masukan skala akhir">
+                          </div>
+                   </div>
+                   
+                   
+                  <div class="form-group">
+                    <label for="inputNama3" class="col-sm-3 control-label">Photo</label>
+                    <div class="col-sm-9">
+                       <input type="file" name="gambar" class="file"  required="required">
+                    </div>
+                  </div>
+                
+                  <div class="form-group">
+                    <div class="col-xs-offset-3 col-xs-9">
+                        <input type="submit" class="btn btn-success" name="submit" value="Simpan Track Record" />
+                    </div>
+                  </div>
+                </form>
+                
+                {/if}
+           
+           {else if $childaksi eq 'detail'}
+                {foreach from=$datadetail key=id item=a}
+                    <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label text-left">Pertemuan</label>
+                        <div class="col-sm-8">
+                          {$a.pertemuan}
+                      </div>
+                   </div><br clear="all" />
+                    <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label text-left">Tanggal</label>
+                        <div class="col-sm-8">
+                          {$a.tanggal}
+                      </div>
+                   </div><br clear="all" />
+                   <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Nama Lengkap</label>
+                        <div class="col-sm-8">
+                          {$a.namalengkap}
+                      </div>
+                   </div><br clear="all" />
+                    <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Usia / Jenis Kelamin</label>
+                        <div class="col-sm-8">
+                          {$a.usia} tahun / {$a.jeniskelamin}
+                      </div>
+                   </div><br clear="all" />
+                   <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Contact</label>
+                        <div class="col-sm-8">
+                          {$a.contact}
+                      </div>
+                   </div><br clear="all" />
+                   <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Masalah</label>
+                        <div class="col-sm-8">
+                          {$a.masalah}
+                      </div>
+                   </div><br clear="all" />
+                   <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Terapi</label>
+                        <div class="col-sm-8">
+                          {$a.terapi}
+                      </div>
+                   </div><br clear="all" />
+                  <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Skala Awal</label>
+                        <div class="col-sm-8">
+                          {$a.skalaawal}
+                      </div>
+                   </div><br clear="all" />
+                    <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Skala Akhir</label>
+                        <div class="col-sm-8">
+                          {$a.skalaakhir}
+                      </div>
+                   </div><br clear="all" />
+                	
+                    <div class="form-group">
+                        <label for="inputNama3" class="col-sm-4 control-label">Photo</label><br clear="all" />
+                          {if $a.gambar neq ''}
+                          	<img src="{$a.gambar}" class="img-responsive" style="width:100%; height:auto" />
+                          {else}
+                          Photo tidak ada
+                          {/if}
+                   </div><br clear="all" />
+                    
+                    
+              
+                {/foreach}
+            	
+            {else}            
+                Dibawah ini adalah data Track record anda dalam membantu orang lain dengan menggunakan
+                metode Detox Your Body - SentraDetox.<br />
+               <a href="{$fulldomain}/member/trackrecord/create" class="btn btn-primary pull-right">Catat Track Record</a>
+               <br clear="all" />
+                {if $jml_post eq '0'}
+                    <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                         Saat ini anda belum memiliki daftar trackrecord yang anda lakukan dalam membantu orang lain dengan metode Detox Your Body - SentraDetox,
+                         jika anda sudah memulai, silahkan catat menggunakan fitur ini.
+                   </div>
+                    <div class="clearfix"></div>
+                {else}
+            	<br />
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Tanggal</th>
+                        <th>Nama Lengkap</th>
+                        <th>Contact</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     
+                    
+              {foreach from=$datadetail key=id item=a}
+                	<tr>
+                        <td>{$a.no}</td>
+                        <td>{$a.tanggal}</td>
+                       	<td>{$a.namalengkap}</td>
+                        <td>{$a.contact}</td>
+                        <td>
+                        <a href="{$fulldomain}/member/trackrecord/detail/{$a.id}">Detail</a>
+                        </td>
+                     </tr>
+                  
+                {/foreach}
+                </tbody>
+                  </table>
+                </div>
+                <div class="paginate pull-right">
+                    <ul class="pagination">
+                        {foreach from=$stringpage key=pageid item=a}
+                            {if $a.link neq ''}
+                                <li><a href="{$a.link}">{$a.nama}</a></li>
+                            {else}
+                                <li><a href="javascript:void(0)">{$a.nama}</a></li>
+                            {/if}
+                        {/foreach}
+                    </ul>
+                </div>
+                 
+                 
+                 {/if}
+                
+            {/if}
+
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel .panel-default -->
+    </div>
+    <!-- /.col-xs-12 -->
+</div>
+<!-- /.row -->
+

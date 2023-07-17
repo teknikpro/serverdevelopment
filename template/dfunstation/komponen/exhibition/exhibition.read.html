@@ -1,0 +1,325 @@
+<div class="product-detail">
+    <!-- <div class="product-detail-body"> -->
+    <div style="margin: 20px;">
+
+        <!-- <div class="col-md-6"> -->
+        <!-- XZoom -->
+        <!-- <link rel="stylesheet" type="text/css" href="{$lokasiwebtemplate}lib/xzoom/xzoom.css" media="all" /> -->
+        <!-- <div style="margin-bottom: 10px;" class="product-detail-img">
+                <img src="{$gambarutama}" class="xzoom" id="xzoom-default" xoriginal="{$gambarutama}">
+            </div>
+            <div class="xzoom-thumbs">
+                {foreach from=$list_image key=albumid item=a}
+                <a href="{$a.image_f}">
+                    <img src="{$a.image_f}" class="xzoom-gallery" width="80" xpreview="{$a.image_f}" alt="">
+                </a>
+                {/foreach}
+            </div> -->
+        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Lihat Video</button>
+            <script src="{$lokasiwebtemplate}lib/xzoom/xzoom.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('.xzoom, .xzoom-gallery').xzoom({
+                        zoomWidth: 500,
+                        title: false,
+                        tint: '#333',
+                        xoffset: 15
+                    });
+                });
+            </script>
+        </div> -->
+        <div class="col-md-6">
+            <div class="product-detail-img">
+                {foreach from=$list_image key=albumid item=a}
+                <div class="single-product-gallery-item" id="slide{$a.albumid}">
+                    <a rel="prettyPhoto" href="{$a.image_f}">
+                        <img class="img-responsive" alt="{$a.nama_image}" src="{$a.image_f}" data-echo="{$a.image_f}" />
+                    </a>
+                </div>
+                {/foreach}
+            </div>
+            <button type="button" style="margin-top: 10px;" class="btn btn-primary" data-toggle="modal"
+                data-target="#myModal">Lihat
+                Video</button>
+        </div>
+        <div class="col-md-6">
+            <h2 class="title"><a><strong>{$detailnama}</strong></a></h2>
+            <p>{$detaillengkap}</p>
+            <hr />
+
+            {literal}
+            <script>
+                function submitcart() {
+                    document.getElementById("product_addtocart_form").submit();
+                }
+            </script>
+            {/literal}
+
+            <div class="qnt-holder">
+                {if $totalstok neq '0'}
+                <form action="{$fulldomain}/cart/buy" method="post" id="product_addtocart_form"
+                    onsubmit="return cekqty()">
+                    <input name="form_key" value="6UbXroakyQlbfQzK" type="hidden">
+                    <input name="produkpostid" value="{$produkpostid}" type="hidden" />
+
+
+                    <input name="qty" type="hidden" value="1" />
+
+                    <!-- <a id="addto-cart" href="#" onclick="submitcart();" class="btn btn-warning btn-lg pull-right">Beli
+                        Produk Ini</a> -->
+
+                </form>
+                {/if}
+                <!-- <a href="{$fulldomain}/contactmessage/{$produkpostid}"  class="btn btn-success btn-lg pull-right">Hubungi Penjual</a> -->
+            </div>
+
+        </div>
+        <br clear="all" /><br clear="all" />
+        <div class="col-md-12">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Profil Pekarya</div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="homeartikel">
+                            <div class="list-konsultan-kanan">
+                                {if $id_pekarya}
+                                <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12 col-12">
+                                    <div class="list-konsultan-kanan-img"><a href="#"><img
+                                                src="https://www.dfunstation.com/uploads/avatars/{$fotopekarya}"
+                                                alt="{$namaperkarya}" class="img-responsive"></a></div>
+                                </div>
+                                <div class="col-lg-11 col-md-10 col-sm-12 col-xs-12 col-12">
+                                    <div class="list-konsultan-kanan-isi">
+                                        <a href="#"><strong>{$namaperkarya}</strong></a>
+                                    </div>
+                                    <div style="margin-bottom: 4px; margin-top: 4px;" class="row">
+                                        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5">
+                                            Umur
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7">
+                                            {$umur} Tahun
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 4px; " class="row">
+                                        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5">
+                                            Asal Provinsi
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7">
+                                            {$asal_provinsi}
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 4px;" class="row">
+                                        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5">
+                                            Alamat Lengkap
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7">
+                                            {$alamat_lengkap}
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 4px;" class="row">
+                                        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5">
+                                            Diagnosa Pekarya
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7">
+                                            {$diagnosa_pekarya}
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 4px;" class="row">
+                                        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5">
+                                            Institusi/Lembaga
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7">
+                                            {$institusi}
+                                        </div>
+                                    </div>
+                                </div>
+                                {else}
+                                <strong>Profil Masih Kosong</strong>
+                                {/if}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br clear="all" />
+        <script>
+
+            function getUrlVars(param = null) {
+                if (param !== null) {
+                    var vars = [], hash;
+                    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                    for (var i = 0; i < hashes.length; i++) {
+                        hash = hashes[i].split('=');
+                        vars.push(hash[0]);
+                        vars[hash[0]] = hash[1];
+                    }
+                    return vars[param];
+                }
+                else {
+                    return null;
+                }
+            }
+
+            let menu = getUrlVars("menu");
+            let id = getUrlVars("id");
+
+            function cek() {
+                swal("Silahkan Login Terlebih Dahulu", {
+                    buttons: {
+                        cancel: "Cancel",
+                        catch: {
+                            text: "Registrasi",
+                            value: "catch"
+                        },
+                        Login: true,
+                    },
+                })
+                    .then((value) => {
+                        switch (value) {
+                            case "Login":
+                                window.location = "{$fulldomain}/user/" + menu + "/" + id + "";
+                                break;
+
+                            case "catch":
+                                window.location = "{$fulldomain}/user/daftar";
+                                break;
+
+                            default:
+                                swal("Kembali ke halaman exhibition");
+                        }
+                    });
+
+                return false;
+            }
+
+        </script>
+        <div class="col-md-12">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Berikan Dukungan dan Apresiasi Terbaikmu</div>
+                <div class="panel-body">
+
+                    {if $numc eq '0'}
+                    <div class="alert alert-warning">
+                        Belum ada apresiasi untuk karya ini
+                    </div>
+                    {else}
+                    <div class="comments">
+
+                        {foreach from=$list_comment key=commentid item=c}
+                        <div class="comment-item">
+                            <div class="row no-margin">
+                                <div class="col-lg-1 col-xs-12 col-sm-2 no-margin">
+                                    <div class="avatar">
+                                        <img alt="{$c.nama}" src="https://www.dfunstation.com/images/no_pic.jpg">
+                                    </div><!-- /.avatar -->
+                                </div><!-- /.col -->
+
+                                <div class="col-xs-12 col-lg-11 col-sm-10 no-margin">
+                                    <div class="comment-body">
+                                        <div class="meta-info">
+                                            <div class="author inline">
+                                                {$c.nama} - <span class="date">{$c.tanggal}</span>
+                                            </div>
+
+                                        </div><!-- /.meta-info -->
+                                        <p class="comment-text">
+                                            {$c.komentar}
+                                        </p><!-- /.comment-text -->
+                                    </div><!-- /.comment-body -->
+
+                                </div><!-- /.col -->
+
+                            </div><!-- /.row -->
+                        </div><!-- /.comment-item -->
+                        {/foreach}
+                    </div><!-- /.comments -->
+                    {/if}
+                    <!-- {if !$login }
+                    <button onclick="return cek();" style="margin-top: 10px;" class="btn btn-primary">Berikan
+                        Apresiasimu</button>
+                    {/if} -->
+                    <div class="add-review row">
+                        <div class="col-sm-12 col-xs-12">
+                            <div class="new-review-form">
+                                <h4>&nbsp;Tulis apresiasi kamu disini</h4>
+                                <form id="contact-form" class="contact-form" method="post">
+                                    <input type="hidden" value="simpan" name="aksi" />
+                                    <input type="hidden" value="0" name="userid" />
+                                    <input type="hidden" value="{$produkpostid}" name="produkpostid" />
+                                    <div class="field-row">
+                                        <label for="username">Nama Lengkap</label>
+                                        <input type="text" class="form-control" name="username" id="username">
+                                    </div>
+                                    <div class="field-row">
+                                        <textarea rows="5" class="form-control" name="pesan"
+                                            placeholder="Tulis apresiasi untuk produk {$detailnama}"></textarea>
+                                    </div>
+                                    <div class="field-row">
+
+                                        <button type="submit" class="btn btn-warning ml-5">Apresiasi</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <br clear="all" /><br clear="all" />
+        <strong>Bagikan karya ini</strong>
+        <div id="share"></div>
+        <script src="{$lokasiwebtemplate}js/jssocials.min.js"></script>
+        <script>
+            $("#share").jsSocials({
+                shares: ["facebook", "twitter", "googleplus", "whatsapp"]
+            });
+
+            function copy_text() {
+                let copyText = document.getElementById("pilih");
+                copyText.select();
+                document.execCommand("copy");
+                alert("Text berhasil dicopy");
+            }
+
+        </script>
+        <div>
+            <button type="button" class="btn btn-primary" onclick="copy_text()"><i class="fal fa-link"></i>
+                Salin Tautan</button>
+            <input style="border: #fff; color: #fff; outline: none;" type="text" value="{$linkproduk}" id="pilih"
+                readonly />
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Video karya</h4>
+            </div>
+            <div style="height: 300px;" class="modal-body">
+                {if $vidio}
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{$vidio}"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                {else}
+                <strong style="margin-top: 15px; text-align: center;">Mohon maaf vidio belum tersedia</strong>
+                {/if}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="items item-w2">
+                           <div class="row">
+                           <div class="col-xs-6">
+                                <h4 class="option-title text-green text-uppercase">Tambah Tiket</h4>
+                           </div>
+                           <div class="col-xs-6">
+                                
+                           </div>
+                           <div class="clearfix"></div>
+                       </div>
+                       <!-- /.row -->
+                       </div>
+                        <!-- /.items item-w2 -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default e-squared p-0">
+                            <div  class="panel-body p-5">
+
+                                {if $idtransaksi}
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                Data dengan invoice {$getinvoice}  barhasil ditandai telah digunakan
+                                </div>
+                                {/if}
+
+                                <script src="librari/ckeditor/ckeditor.js"></script>
+                                <form method="post" method="post" enctype="multipart/form-data" action="{$fulldomain}/merchant/tiket-tambah" >
+                                    <input type="hidden" name="idmerchant" value="{$idmerchant}">
+                                    <div class="form-group">
+                                      <label for="namavoucher">Nama Voucher </label>
+                                      <input type="text" class="form-control" id="namavoucher" name="namavoucher" placeholder="Nama Voucher" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ringkas">Ringkas</label>
+                                        <textarea class="form-control" rows="3" name="ringkas" required></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="harga">Harga</label>
+                                        <input type="number" class="form-control" id="harga" name="harga" placeholder="Harga" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="awalberlaku">Tanggal Awal Berlaku</label>
+                                        <input type="date" class="form-control" id="awalberlaku" name="awalberlaku" placeholder="Tanggal Awal Berlaku" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="akhirberlaku">Tanggal Akhir Berlaku</label>
+                                        <input type="date" class="form-control" id="akhirberlaku" name="akhirberlaku" placeholder="Tanggal Akhir Berlaku" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="kuantitas">Kuantitas</label>
+                                        <input type="number" class="form-control" id="kuantitas" name="kuantitas" placeholder="Kuantitas" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="awaltayang">Tanggal Awal Tayang</label>
+                                        <input type="date" class="form-control" id="awaltayang" name="awaltayang" placeholder="Tanggal Awal Tayang" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="akhirtayang">Tanggal Akhir Tayang</label>
+                                        <input type="date" class="form-control" id="akhirtayang" name="akhirtayang" placeholder="Tanggal Akhir Tayang" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="term">Term</label>
+                                        <textarea name="term" id="term" cols="70" rows="6" class="ckeditor form-control"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Tambah Tiket</button>
+                                </form>
+
+                                
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel .panel-default -->
+                    </div>
+                    <!-- /.col-xs-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+
+            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+            <script>
+
+                $(document).ready( function () {
+                    $('#table_id').DataTable();
+                } );
+
+            </script>
+
+
+     

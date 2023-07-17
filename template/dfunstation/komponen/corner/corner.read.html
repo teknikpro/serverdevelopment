@@ -1,0 +1,138 @@
+{strip}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+<link rel="stylesheet" href="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/css/tiket-deskripsi.css">
+
+<!-- tiket detail -->
+<section class="tiket-deskripsi p-3">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-8 col-md-8 col-sm-12">
+            {foreach from=$datadetail key=id item=ch}
+                {if $ch.gambar neq ''}
+              <img src="{$ch.gambar}" class="img-fluid rounded-2" alt="{$ch.nama}">
+                {/if}
+            {/foreach}
+              <div class="deskripsi">
+                  <ul class="nav nav-underline nav-fill  " id="myTabs" role="tablist">
+                          <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#content1" role="tab" aria-controls="content1" aria-selected="true">Deskripsi</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="tab2" data-bs-toggle="tab" href="#content2" role="tab" aria-controls="content2" aria-selected="false">Tiket</a>
+                          </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                    {foreach from=$datadetail key=id item=ch}
+                      <div class="tab-pane fade show active" id="content1" role="tabpanel" aria-labelledby="tab1">
+                        <p class="text-black pt-2">{$ch.ringkas}</p>
+                        <div class="tiketdetail-gambar d-flex justify-content-center">
+                          {if $ch.banner neq ''}
+                          <img src="{$ch.banner}" class="img-fluid" alt="{$ch.nama}">
+                          {/if}
+                        </div>
+                        <div class="syaratketentuan mt-3">
+                          <h4 class="text-black">Syarat & Ketentuan</h4>
+                          {$ch.term}
+                        </div>
+                      </div>
+                      <div class="tab-pane fade" id="content2" role="tabpanel" aria-labelledby="tab2">
+
+                        {foreach from=$ch.datatiket key=id item=dt}
+                          <div class="list-tiket mt-3 mb-5">
+                              <h4 class="text-black tiket-jenis ">{$dt.jenis_tiket}</h4>
+                              <div class="row mb-4">
+                                  <div class="col-1"><img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/icon-tanggal.png" class="img-fluid" alt="Dfunstation"></div>
+                                  <div class="col-11 tiket-berakhir">Berakhir {$dt.tanggal_selesai} Pukul {$dt.jam_selesai}</div>
+                              </div>
+                              <div class="dashed-line mb-4"></div>
+                              <div class="row">
+                                  <div class="col-8 text-black fw-bold">
+                                      Rp. {$dt.harga}
+                                  </div>
+                                  <div class="col-4 tiket-sold fw-bold">
+                                      {if $dt.jumlah <= 0}
+                                        Sold Out
+                                      {else}
+                                        <div class="row ">
+                                          <div class="col-2"><a class="item" href="#"><img  src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/btn-minus.png" alt="Dfunstation"></a></div>
+                                          <div class="col-1 text-center  item-jumlah">{$dt.jumlah}</div>
+                                          <div class="col-2"><a class="item" href="#"><img  src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/btn-plus.png" alt="Dfunstation"></a></div>
+                                        </div>
+                                      {/if}
+                                  </div>
+                              </div>
+                          </div>
+                        {/foreach}
+
+                      </div>
+                      {/foreach}
+                    </div>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="card border-0 card-informasi mb-4" >
+                {foreach from=$datadetail key=id item=ch}
+                  <div class="card-body">
+                    <h5 class="card-title text-black ">{$ch.nama}</h5>
+                    <div class="row mb-3 mt-4">
+                      <div class="col-2"><img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/icon-tanggal.png" class="img-fluid" alt="{$ch.nama}"></div>
+                      <div class="col-10 text-black">{$ch.startdate} - {$ch.enddate}</div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-2"><img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/icon-jam.png" class="img-fluid" alt="Dfunstation"></div>
+                      <div class="col-10 text-black">{$ch.waktumulai} - {$ch.waktuselesai} WIB</div>
+                    </div>
+                    <div class="row mb-2">
+                      <div class="col-2"><img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/icon-maps.png" class="img-fluid" alt="Dfunstation"></div>
+                      <div class="col-10 text-black">
+                        <span class="fw-semibold">
+                          {$ch.namasec}
+                        </span>
+                        <br>
+                          {$ch.alamat}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                      <div class="row">
+                          <div class="col-2"><img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/Logo-SSRC 1.png" alt=""></div>
+                          <div class="col-10">
+                              <div class="tiket-penyelenggara">Diselenggarakan oleh :</div>
+                              <div class="tiket-tempat">{$ch.namasec}</div>
+                          </div>
+                      </div>
+                  </div>
+                {/foreach}
+              </div>
+              <div class="card border-0 card-informasi" >
+                <div class="card-body">
+                  <div class="row mb-3 mt-4">
+                    <div class="col-2"><img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/icon-tanggal.png" class="img-fluid mt-4" alt="Dfunstation"></div>
+                    <div class="col-10 text-black tiket-belumbeli">Kamu belum memilih tiket. Silakan pilih lebih dulu di tab menu TIKET.</div>
+                  </div>
+                  <hr>
+                  <div class="row mt-3 mb-4">
+                    <div class="col-7 text-black tiket-belumbeli">Harga Mulai</div>
+                    <div class="col-5 text-black tiket-belumbeli">Rp. 300.000</div>
+                  </div>
+                  <div class="d-grid">
+                    <a href="" class="btn btn-belitiket">Beli Tiket</a>
+                  </div>
+                </div>
+              </div>
+              <div class="bagikan">
+                <div class="bagikan-judul mb-3">Bagikan Event</div>
+                <div class="sosmed">
+                  <a class="social-icon" onclick="shareOnTwitter()" ><i class="fab fa-twitter"></i></a>
+                  <a class="social-icon" onclick="shareOnFacebook()" ><i class="fab fa-facebook-f"></i></a>
+                  <a class="social-icon" onclick="copyUrlToClipboard()" ><i class="fas fa-link"></i></a>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+{/strip}

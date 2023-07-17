@@ -1,0 +1,76 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="items item-w2">
+                           <div class="row">
+                           <div class="col-xs-6">
+                                <h4 class="option-title text-green text-uppercase">Pendapatan</h4>
+                           </div>
+                           <div class="col-xs-6">
+                                
+                           </div>
+                           <div class="clearfix"></div>
+                       </div>
+                       <!-- /.row -->
+                       </div>
+                        <!-- /.items item-w2 -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default e-squared p-0">
+                            <div  class="panel-body p-5">
+
+                                {if $pesan}
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                {$pesan}
+                                </div>
+                                {/if}
+
+                                <a href="{$fulldomain}/merchant/tarik-dana" style="margin-left: 10px ;" class="btn btn-primary">Tarik Dana</a>
+                                <a  href="{$fulldomain}/merchant/history-penarikan">History Penarikan</a>
+
+                                <div class="row">
+                                    <div style="margin: 10px ;" class="col-sm-6 col-md-4">
+                                      <div style="background-color: #42f590 ;" class="thumbnail">
+                                        <div class="caption">
+                                          <h4>Saldo</h4>
+                                          <p>Rp. {$sisa_saldo}</p>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div style="margin: 10px ;" class="col-sm-6 col-md-4">
+                                      <div  class="thumbnail bg-primary">
+                                        <div class="caption">
+                                          <h4>Total Pendapatan</h4>
+                                          <p>Rp. {$pendapatan}</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    
+                                </div>
+
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel .panel-default -->
+                    </div>
+                    <!-- /.col-xs-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+
+            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+            <script>
+
+                $(document).ready( function () {
+                    $('#table_id').DataTable();
+                } );
+
+            </script>
+
+
+     

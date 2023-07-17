@@ -1,0 +1,112 @@
+body {
+    background: linear-gradient(100.4deg, #025214 -0.11%, rgba(0, 97, 15, 0.58) 100%);
+}
+
+/* penjelasan */
+.penjelasan {
+    padding-top: 63px;
+    background: #E8FBE5;
+}
+
+.card-konsul {
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 15px;
+}
+
+.card-konsul:hover {
+    cursor: pointer !important;
+}
+
+
+.card-satu {
+    background: linear-gradient(180deg, #E8FBE5 0%, #009922 100%);
+    
+}
+
+.card-dua {
+    background: linear-gradient(180deg, #E8FBE5 0%, #009999 100%);
+}
+
+.card-tiga {
+    background: linear-gradient(180deg, #E8FBE5 0%, #006B99 100%);
+}
+
+.card-empat {
+    background: linear-gradient(180deg, #E8FBE5 0%, #D3567C 100%);
+}
+
+.card-title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    color: #fff;
+    margin-top: 58px;
+    margin-bottom: 36px;
+}
+
+.card-text {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    color: #fff;
+    line-height: 30px;
+}
+
+.btn-janji {
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+/* daftar konsultant */
+
+* {
+    box-sizing: border-box;
+  }
+
+  .slider {
+      width: 80%;
+      margin: 50px auto;
+  }
+
+  .slick-slide {
+    margin: 0px 20px;
+  }
+
+
+  .slick-prev:before,
+  .slick-next:before {
+    color: #fff;
+  }
+
+
+  .slick-slide {
+    transition: all ease-in-out .3s;
+    opacity: .2;
+    color: #fff;
+  }
+  
+  .slick-active {
+    opacity: .5;
+  }
+
+  .slick-current {
+    opacity: 1;
+  }
+
+
+
+/* mobile css */
+@media (min-width: 600px) {
+
+    /* penjelasan */
+    .card-konsul {
+        height: 550px;
+        padding: 20px;
+    }
+
+
+
+}

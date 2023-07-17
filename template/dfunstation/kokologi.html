@@ -1,0 +1,120 @@
+{strip}
+{include file="`$lokasitemplate`komponen/home/header.html"}
+{if $aksi eq 'list' or $aksi eq ''}
+
+
+{else}
+
+{/if}
+
+{if $aksi eq 'jawaban'}
+
+<br clear="all" />
+<section id="berita" class="homeBerita1">
+    <div class="container">
+        <div style="margin-bottom: 200px; margin-top:50px;" class="col-12">
+            <p>{$jawaban}</p>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+{else if $aksi eq 'penjelasan'}
+
+
+<br clear="all" />
+<section id="berita" class="homeBerita1">
+    <div class="container">
+        <div style="margin-bottom: 200px; margin-top:50px;" class="col-12">
+            <p>Pilihanmu adalah <strong>{$jawaban}</strong></p>
+            <p>{$penjelasan}</p>
+        </div>
+    </div>
+    </div>
+</section>
+{else if $aksi eq 'soal'}
+
+<br clear="all" />
+
+<section id="berita" class="homeBerita1">
+
+    <div class="container">
+        <div class="col-sm-12">
+            <div class="homevideo-title">Kokologi</div>
+            <div class="homeartikel">
+                {if $soal}
+                <div class="list-konsultan-kanan">
+                    <div class="col-12">
+                        {$soal}
+                    </div>
+                    {if $tipe == 1}
+                    <ul>
+                        {foreach from=$jawaban item=jb}
+                        <li style="list-style: none;"><a style="color: #2975A6 ;" href="{$jb.link}{$jb.id_kokologi_soali}/{$jb.id_kokologi_jawaban}">{$jb.jawaban}</a></li>
+                        {/foreach}
+                    </ul>
+                    {else}
+                    <form action="{$link}/kokologi/jawaban/{$id_kokologi_soal}" method="POST" >
+                        <input 
+                        type="hidden" name="idsoal" 
+                        value="{$id_kokologi_soal}"
+                        data-original-title="Jawaban"
+                        data-content="Silahkan masukan jawaban anda disini">
+                        <textarea name="jawaban" style="margin-top: 20px ;" class="form-control" rows="3" required></textarea>
+                        <button name="submit" style="margin-top: 10px ;" class="btn btn-primary" >Kirim Jawaban</button>
+                    </form>
+                    {/if}  
+                </div>
+                {else}
+                <strong>Kokologi Masih Kosong</strong>
+                {/if}
+            </div>
+        </div>
+    </div>
+    </div>
+
+</section>
+
+{else}
+
+
+<br clear="all" />
+
+<div class="shortcut">
+    <div class="container">
+        <div class="shortcut-content">
+            <div class="row">
+
+                {if $kokologisoal }
+
+                    {foreach from=$kokologisoal key=id item=ch}
+
+                    <div  class="col-md-3 col-sm-12">
+                        <a href="{$ch.link}/kokologi/soal/{$ch.id_kokologi_soal}" class="shortcut-item">
+                            <div style="min-height: 150px ; border: 1px solid rgb(165, 163, 163); border-right: 1px solid rgb(165, 163, 163) ; min-width: 300px;" class="box-content-why">
+                                <p style="text-align: center ; font-size: 20px;" >{$ch.soal_pendek}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {/foreach}
+                {else }
+                    <div class="col-12 text-center">Kokologi Masih kosong</div>
+                {/if}
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{/if}
+
+<br clear="all" />
+
+
+
+
+{include file="`$lokasitemplate`/komponen/home/footer.html"}
+{/strip}

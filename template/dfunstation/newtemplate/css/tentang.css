@@ -1,0 +1,59 @@
+
+/* visi misi */
+
+.visi-misi {
+    background: #fff;
+    margin-top: 0px;
+    border-radius: 10px;
+    padding: 10px;
+    padding-top: 20px;
+}
+
+.visi-judul {
+    font-weight: 500;
+    font-size: 25px;
+}
+
+.visi-isi {
+    font-weight: 500;
+    font-size: 17px;
+}
+
+
+/* lokasi */
+
+.lokasi {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+
+/* mobile css */
+@media (min-width: 600px) {
+
+
+/* visi misi */
+
+.visi-misi {
+    margin-top: 38px;
+}
+
+.visi-judul {
+    font-weight: 500;
+    font-size: 40px;
+}
+
+.visi-isi {
+    font-weight: 500;
+    font-size: 21px;
+}
+
+/* lokasi */
+.lokasi-maps {
+    height: 540px;
+}
+
+
+}

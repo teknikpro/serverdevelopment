@@ -1,0 +1,186 @@
+{include file="`$lokasitemplate`/komponen/home/header.html"}
+<div class="topkanal">
+	<div class="container">
+    	<div class="topkanal-inner">
+           <div class="topkanal-inner-1"><span>Nilai Website Ini</span></div>
+        </div>
+    </div>
+</div>
+<div id="header-kanal">
+	 <div class="container">
+            <div class="row">
+					<span>&nbsp;</span>
+			</div>
+	 </div>
+</div>
+
+<div class="insight">
+    <div style="margin: auto;" class="container">
+	<div class="boxcontent">
+    	<div class="box-content">
+        
+        <div class="col-md-12">
+        	<div  class="box-content">
+                <div class="bg-divider" style="margin:12px 0;"></div>
+            	<div class="side-contact">
+                          Silahkan pergunakan form dibawah ini untuk menilai website ini
+                    {literal}
+					<script type="text/javascript">
+                    function simpan()
+                    {
+                        var email_check = new RegExp(/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/i);
+                        var email       = $("#email").val();
+                        
+                        if ($("#nama").val() == "")
+                        {
+                            alert("{/literal}Nama Lengkap anda masih kosong, silahkan isi terlebih dahulu{literal}")
+                            $("#nama").focus();
+                            return false
+                        }
+                        else if ($("#nama").val().length < 3)
+                        {
+                            alert("{/literal}Nama Lengkap anda terlalu pendek , silahkan isi terlebih dahulu{literal}")
+                            $("#nama").focus();
+                            return false
+                        }
+                        else if (email == "")
+                        {
+                            alert("{/literal}Email anda salah penulisan atau kosong, silahkan ulangi kembali{literal}")
+                            $("#email").focus();
+                            return false   
+                        }
+                        else if (!email_check.test(email))
+                        {
+                            alert("{/literal}Email anda salah penulisan atau kosong, silahkan ulangi kembali{literal}")
+                            $("#email").focus();
+                            return false   
+                        }
+						 else if ($("#handphone").val() == "")
+                        {
+                            alert("{/literal}Mohon untuk menuliskan nomor handphone{literal}")
+                            $("#handphone").focus();
+                            return false   
+                        }
+                        else if ($("#pesan").val() == "")
+                        {
+                            alert("{/literal}Isi pesan anda kepada kami masih kosong, silahkan isi terlebih dahullu{literal}")
+                            $("#pesan").focus();
+                            return false   
+                        }
+                        else if ($("#rating").val() == "")
+                        {
+                            alert("{/literal}Rating masih kosong silahkan isi terlebih dahulu{literal}")
+                            $("#pesan").focus();
+                            return false   
+                        }
+						 else if ($("#kata").val() == "")
+                        {
+                            alert("{/literal}Masukan terlebih dahulu anti spam dikotak yang disediakan{literal}")
+                            $("#kata").focus();
+                            return false   
+                        }
+                    }	
+                    </script>
+                    {/literal}
+                    
+                    {if $msg neq ''}<div class="btn-warn bg-success"><p class="text-success">{$msg}</p></div>{/if}
+                    {if $error neq ''}<div class="btn-warn bg-danger"><p class="text-danger">{$error}</p></div>{/if}
+                    <br /><br />
+                    <form class="form-contact1" style="height:auto;" method="post" action="{$fulldomain}/nilai" onsubmit="return simpan();">
+                    	<input type="hidden" name="save" value="1" />
+                        <br />Nama Lengkap<br /><input type="text" name="nama" id="nama" placeholder="Tulis  Nama lengkap anda"   class="form-control"/>
+                    	<br />Alamat Email<br /><input type="text" name="email" id="email" placeholder="Tulis Email anda"   class="form-control"/>
+                        <br />Nomor Handphone<br /><input type="number" name="handphone" id="handphone" placeholder="Tulis Nomor Handphone"  class="form-control" />
+                        <br />Isi Pesan<br />
+                        <textarea placeholder="Tuliskan pesan anda untuk kami" name="pesan" id="pesan"  rows="10" class="form-control"></textarea>
+                        <br>
+                        <br />Rating<br />
+                        <div style="border: 1px solid #d3d3d3; border-radius: 5px; padding: 10px;" class="rating">
+                            <div class="radio">
+                                <label>
+                                  <input type="radio" name="rating" id="rating" value="1">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg>
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                  <input type="radio" name="rating" id="rating" value="2" >
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg>
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                  <input type="radio" name="rating" id="rating" value="3" checked  >
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg>
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                  <input type="radio" name="rating" id="rating" value="4" >
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg>
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                  <input type="radio" name="rating" id="rating" value="5" >
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg>
+                                </label>
+                            </div>
+                        </div>
+                          <script src='https://www.google.com/recaptcha/api.js'></script>
+                           <div class="input-group mb-10">
+                            <div class="col-md-4" style="margin-bottom:0px; margin-top:10px;">
+                            <div class="g-recaptcha" data-sitekey="{$sitekey}"></div>
+                          </div>
+                          </div>
+                        <br  clear="all"/><input type="submit" value="Kirim" class="btn btn-warning btn-lg" />
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div> <br clear="all" />
+    </div>
+   
+</div>
+{include file="`$lokasitemplate`/komponen/home/footer.html"}
+ 

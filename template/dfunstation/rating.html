@@ -1,0 +1,122 @@
+{include file="`$lokasitemplate`/komponen/home/header.html"}
+<div class="topkanal">
+	<div class="container">
+    	<div class="topkanal-inner">
+           <div class="topkanal-inner-1"><span>Hubungi Kami</span></div>
+        </div>
+    </div>
+</div>
+<div id="header-kanal">
+	 <div class="container">
+            <div class="row">
+					<span>&nbsp;</span>
+			</div>
+	 </div>
+</div>
+
+<div class="insight">
+    <div class="container">
+	<div class="boxcontent">
+    	<div class="box-content">
+        <div class="col-md-8">
+
+            	<div class="maps">
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15841.852250328295!2d107.59868!3d-6.954576!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7535f01128a078de!2sd&#39;Fun+Station!5e0!3m2!1sid!2sid!4v152578241156"
+                            width="96%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe></div>
+
+        </div>
+        <div class="col-md-4">
+        	<div class="box-content">
+                <div class="bg-divider" style="margin:12px 0;"></div>
+            	<div class="side-contact">
+                          Silahkan pergunakan form dibawah ini untuk menghubungi kami, kami akan menghubungi
+                          kembali anda sesegera mungkin. Anda juga dapat menggunakan fitur online chat yang ada pada
+                          bagian bawah halaman website.
+                    
+                    {literal}
+					<script type="text/javascript">
+                    function simpan()
+                    {
+                        var email_check = new RegExp(/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/i);
+                        var email       = $("#email").val();
+                        
+                        if ($("#nama").val() == "")
+                        {
+                            alert("{/literal}Nama Lengkap anda masih kosong, silahkan isi terlebih dahulu{literal}")
+                            $("#nama").focus();
+                            return false
+                        }
+                        else if ($("#nama").val().length < 3)
+                        {
+                            alert("{/literal}Nama Lengkap anda terlalu pendek , silahkan isi terlebih dahulu{literal}")
+                            $("#nama").focus();
+                            return false
+                        }
+                        else if (email == "")
+                        {
+                            alert("{/literal}Email anda salah penulisan atau kosong, silahkan ulangi kembali{literal}")
+                            $("#email").focus();
+                            return false   
+                        }
+                        else if (!email_check.test(email))
+                        {
+                            alert("{/literal}Email anda salah penulisan atau kosong, silahkan ulangi kembali{literal}")
+                            $("#email").focus();
+                            return false   
+                        }
+						 else if ($("#handphone").val() == "")
+                        {
+                            alert("{/literal}Mohon untuk menuliskan nomor handphone{literal}")
+                            $("#handphone").focus();
+                            return false   
+                        }
+                        else if ($("#judul").val() == "")
+                        {
+                            alert("{/literal}Judul pesan anda kepada kami masih kosong{literal}")
+                            $("#subject").focus();
+                            return false   
+                        }
+                        else if ($("#pesan").val() == "")
+                        {
+                            alert("{/literal}Isi pesan anda kepada kami masih kosong, silahkan isi terlebih dahullu{literal}")
+                            $("#pesan").focus();
+                            return false   
+                        }
+						 else if ($("#kata").val() == "")
+                        {
+                            alert("{/literal}Masukan terlebih dahulu anti spam dikotak yang disediakan{literal}")
+                            $("#kata").focus();
+                            return false   
+                        }
+                    }	
+                    </script>
+                    {/literal}
+                    
+                    {if $msg neq ''}<div class="btn-warn bg-success"><p class="text-success">{$msg}</p></div>{/if}
+                    {if $error neq ''}<div class="btn-warn bg-danger"><p class="text-danger">{$error}</p></div>{/if}
+                    <br /><br />
+                    <form class="form-contact1" style="height:auto;" method="post" action="{$fulldomain}/contact" onsubmit="return simpan();">
+                    	<input type="hidden" name="save" value="1" />
+                        <br />Nama Lengkap<br /><input type="text" name="nama" id="nama" placeholder="Tulis  Nama lengkap anda"   class="form-control"/>
+                    	<br />Alamat Email<br /><input type="text" name="email" id="email" placeholder="Tulis Email anda"   class="form-control"/>
+                        <br />Nomor Handphone<br /><input type="text" name="handphone" id="handphone" placeholder="Tulis Nomor Handphone"  class="form-control" />
+                        <br />Judul Pesan<br /><input type="text" name="judul" id="judul" placeholder="Judul Pesan"   class="form-control"/>
+                        <br />Isi Pesan<br />
+                        <textarea placeholder="Tuliskan pesan anda untuk kami" name="pesan" id="pesan"  rows="10" class="form-control"></textarea>
+                          <script src='https://www.google.com/recaptcha/api.js'></script>
+                           <div class="input-group mb-10">
+                            <div class="col-md-4" style="margin-bottom:0px; margin-top:10px;">
+                            <div class="g-recaptcha" data-sitekey="{$sitekey}"></div>
+                          </div>
+                          </div>
+                        <br  clear="all"/><input type="submit" value="Kirim" class="btn btn-warning btn-lg" />
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div> <br clear="all" />
+    </div>
+   
+</div>
+{include file="`$lokasitemplate`/komponen/home/footer.html"}
+ 

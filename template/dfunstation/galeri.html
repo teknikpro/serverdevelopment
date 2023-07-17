@@ -1,0 +1,101 @@
+{include file="`$lokasitemplate`komponen/home/header-template.html"}
+<link rel="stylesheet" href="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/css/galeri.css">
+
+<!-- banner -->
+<div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <h1 class="tag-fs">
+          GALERI
+          <br>
+          PHOTO DAN
+          <br>
+          AKTIVITAS
+        </h1>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <img class="img-fluid" src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/galeri.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- isi konten -->
+<section class="galeri pt-5 mb-5">
+    <div class="container">
+        <div class="row">
+            {if $aksi eq 'read'}
+                {include file="`$lokasitemplate`komponen/$kanal/$kanal.read.html"}
+            {else}
+                {include file="`$lokasitemplate`komponen/$kanal/$kanal.list.html"}
+            {/if}
+            
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        <div class="row">
+            <h3 class="galeri-populer">Terpopuler</h3>
+            <div data-bs-toggle="modal" data-bs-target="#modalgalery" class="col-lg-3 col-md-3 col-sm-12">
+                <div class="card border-0 rounded-0 p-2" >
+                    <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/galeri-populer.png" class=" rounded-0 " alt="Dfunstation">
+                </div>
+            </div>
+            <div data-bs-toggle="modal" data-bs-target="#modalgalery" class="col-lg-3 col-md-3 col-sm-12">
+                <div class="card border-0 rounded-0 p-2" >
+                    <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/galeri-populer.png" class=" rounded-0 " alt="Dfunstation">
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div data-bs-toggle="modal" data-bs-target="#modalgalery" class="card border-0 rounded-0 p-2" >
+                    <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/galeri-populer.png" class=" rounded-0 " alt="Dfunstation">
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div data-bs-toggle="modal" data-bs-target="#modalgalery" class="card border-0 rounded-0 p-2" >
+                    <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/galeri-populer.png" class=" rounded-0 " alt="Dfunstation">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row">
+            <h3 class="galeri-populer">Terbaru</h3>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div data-bs-toggle="modal" data-bs-target="#modalgalery"  class="card border-0 rounded-0 p-2" >
+                    <img  src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/galeri-populer.png" class=" rounded-0 " alt="Dfunstation">
+                </div>
+            </div>
+            <div data-bs-toggle="modal" data-bs-target="#modalgalery" class="col-lg-3 col-md-3 col-sm-12">
+                <div class="card border-0 rounded-0 p-2" >
+                    <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/galeri-populer.png" class=" rounded-0 " alt="Dfunstation">
+                </div>
+            </div>
+            <div data-bs-toggle="modal" data-bs-target="#modalgalery" class="col-lg-3 col-md-3 col-sm-12">
+                <div class="card border-0 rounded-0 p-2" >
+                    <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/galeri-populer.png" class=" rounded-0 " alt="Dfunstation">
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div data-bs-toggle="modal" data-bs-target="#modalgalery" class="card border-0 rounded-0 p-2" >
+                    <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/galeri-populer.png" class=" rounded-0 " alt="Dfunstation">
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+
+{include file="`$lokasitemplate`/komponen/home/footer-template.html"}
+
+<!-- Modal -->
+<div   class="modal fade" id="modalgalery" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg ">
+      <div class="modal-content ps-4 pe-4 pb-4">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <img   src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/contoh-gambar.png" class="card-img-top" alt="Image 1">
+      </div>
+    </div>
+  </div>

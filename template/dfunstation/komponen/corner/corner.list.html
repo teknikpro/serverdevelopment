@@ -1,0 +1,70 @@
+{strip}
+
+<!-- daftar event dan tiket -->
+<section class="daftar-tiket p-4">
+  <div class="container">
+      <h4 class="pt-4 text-white">Event Pilihan</h4>
+      <div class="row mb-5">
+        {if $datadepankonsultasi}
+          {foreach from=$datadepankonsultasi key=id item=ch}
+          <div class="col-lg-3 col-md-3 col-sm-12 mb-3">
+              <div onclick="redirectlink(`{$ch.link}`);" class="card rounded-0" >
+                  {if $ch.gambar neq ''}
+                  <img src="{$ch.gambar}" alt="{$ch.nama}">
+                  {/if}
+                  <div class="card-body">
+                    <div class="card-title text-black fw-bold">{$ch.nama}</div>
+                    <div class="card-text tgl-berlaku">{$ch.startdate} - {$ch.enddate}</div>
+                    <div class="card-text text-black">Rp. {$ch.harga}</div>
+                  </div>
+                  <div class="card-footer">
+                      <div class="row">
+                          <div class="col-3">
+                              <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/icon-maps.png" alt="{$ch.namasec}">
+                          </div>
+                          <div class="col-9 text-black tiket-lokasi">{$ch.namasec}</div>
+                      </div>
+                  </div>
+                </div>
+          </div>
+          {/foreach}
+        {else}
+          <h1>Data Masih kosong</h1>
+        {/if}
+          
+      </div>
+      <h4 class="pt-4 text-white">Event Terdahulu</h4>
+      <div class="row">
+        {if $datadepankonsultasi}
+          {foreach from=$datadepankonsultasi key=id item=ch}
+          <div class="col-lg-3 col-md-3 col-sm-12 mb-3">
+              <div class="card rounded-0" >
+                  {if $ch.gambar neq ''}
+                  <img src="{$ch.gambar}" alt="{$ch.nama}">
+                  {/if}
+                  <div class="card-body">
+                    <div class="card-title text-black fw-bold">{$ch.nama}</div>
+                    <div class="card-text tgl-berlaku">{$ch.startdate} - {$ch.enddate}</div>
+                    <div class="card-text text-black">Rp. {$ch.harga}</div>
+                  </div>
+                  <div class="card-footer">
+                      <div class="row">
+                          <div class="col-3">
+                              <img src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/icon-maps.png" alt="{$ch.namasec}">
+                          </div>
+                          <div class="col-9 text-black tiket-lokasi">{$ch.namasec}</div>
+                      </div>
+                  </div>
+                </div>
+          </div>
+          {/foreach}
+        {else}
+          <h1>Data Masih kosong</h1>
+        {/if}
+          
+      </div>
+  </div>
+</section>
+
+
+{/strip}

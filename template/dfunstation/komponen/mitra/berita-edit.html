@@ -1,0 +1,102 @@
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="items item-w2">
+                   <div class="row">
+                   <div class="col-xs-12">
+                       <h4 class="option-title text-green text-uppercase">{$namaaksi}</h4>
+                   </div>
+                   <div class="clearfix"></div>
+               </div>
+               <!-- /.row -->
+               </div>
+                <!-- /.items item-w2 -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default e-squared">
+                    <div class="panel-body">
+                    {if $berhasil neq ''}
+                     <div class="alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                             {$pesanhasil}.
+                             {if $berhasil eq '0'}
+                                 <ul>
+                                 {foreach from=$pesan key=id item=a}
+                                    <li>{$a.pesan}</li>
+                                 {/foreach}
+                                 </ul>
+                             {/if}
+                    </div>
+                    {/if}
+              
+                    
+                   <form method="post" class="form-horizontal" role="form"  name="profile" enctype="multipart/form-data" action="{$fulldomain}/member/berita-edit/{$id}">
+                   
+                   <input type="hidden" name="id" value="{$id}" size="35" />
+ 
+ 				<script src="{$fulldomain}/librari/ckeditor/ckeditor.js"></script>
+                           <div class="form-group">
+                            <label for="inputNama3" class="col-sm-3 control-label">Kategori</label>
+                            <div class="col-sm-9">
+                              <select name="secid" id="secid" class="form-control" >
+                                {foreach from=$datakategori key=secid item=u}
+                                <option value="{$u.secid}" {if $secid == $u.secid}selected{/if} >{$u.nama}</option>
+                                {/foreach}
+                            </select>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">
+                            <label for="Alamat" class="col-sm-3 control-label">Judul</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" name="nama" id="nama" value="{$nama}">
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="Alamat" class="col-sm-3 control-label">Tag</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" name="tag" value="{$tag}"><p class="note">Setiap kata dipisahkan oleh tanda koma (,)</p>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="Alamat" class="col-sm-3 control-label">Tulisan Ringkas</label>
+                            <div class="col-sm-9">
+                              <textarea name="ringkas" class="form-control" cols="30" rows="5">{$ringkas}</textarea>
+                            </div>
+                          </div>
+
+
+                          <div class="form-group">
+                            <label for="Alamat" class="col-sm-3 control-label">Lengkap</label>
+                            <div class="col-sm-9">
+                              <textarea name="lengkap" class="form-control ckeditor" cols="30" rows="10">{$lengkap}</textarea>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="Alamat" class="col-sm-3 control-label">Gambar Ilustrasi</label>
+                            <div class="col-sm-9">
+                             <input type="file"  name="gambar">
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="col-xs-offset-3 col-xs-9">
+                                <input type="submit" class="btn btn-success" name="submit" value="Simpan" />
+                            </div>
+                          </div>
+
+                    </form>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel .panel-default -->
+            </div>
+            <!-- /.col-xs-12 -->
+        </div>
+        <!-- /.row -->
+

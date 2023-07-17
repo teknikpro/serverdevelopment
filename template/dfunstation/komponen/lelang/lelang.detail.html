@@ -1,0 +1,257 @@
+<div class="product-detail">
+    <div class="product-detail-body">
+
+        <div class="col-md-6">
+            <!-- XZoom -->
+            <link rel="stylesheet" type="text/css" href="{$lokasiwebtemplate}lib/xzoom/xzoom.css" media="all" />
+            <div style="margin-bottom: 10px;" class="product-detail-img">
+                <img src="{$gambarutama}" class="xzoom" id="xzoom-default" xoriginal="{$gambarutama}">
+            </div>
+            <div class="xzoom-thumbs">
+                {foreach from=$list_image key=albumid item=a}
+                <a href="{$a.image_f}">
+                    <img src="{$a.image_f}" class="xzoom-gallery" width="80" xpreview="{$a.image_f}" alt="">
+                </a>
+                {/foreach}
+            </div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Lihat Vidio
+                Produk</button>
+            <script src="{$lokasiwebtemplate}lib/xzoom/xzoom.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('.xzoom, .xzoom-gallery').xzoom({
+                        zoomWidth: 500,
+                        title: false,
+                        tint: '#333',
+                        xoffset: 15
+                    });
+                });
+            </script>
+        </div>
+        <div class="col-md-6">
+            <h2 class="title"><a><strong>{$detailnama}</strong></a></h2>
+            <p>{$detailringkas}</p>
+            <hr />
+            <div class="inline">
+                <label>Berat Produk</label>
+                <div class="value">{$body_weight} gram</div>
+            </div>
+            <div class="inline">
+                <label>Ukuran Produk</label>
+                <div class="value">{$body_dimension} cm</div>
+            </div>
+            <div class="inline">
+                <label>Stok Produk</label>
+                <div class="value">
+                    {if $totalstok neq '0'}
+                    {$totalstok} Stock tersedia
+                    {else}
+                    Stok sedang kosong
+                    {/if}
+                </div>
+            </div>
+            <hr />
+
+            {literal}
+            <script>
+                function submitcart() {
+                    document.getElementById("product_addtocart_form").submit();
+                }
+            </script>
+            {/literal}
+
+            <div class="qnt-holder">
+                {if $totalstok neq '0'}
+                <form action="{$fulldomain}/cart/buy" method="post" id="product_addtocart_form"
+                    onsubmit="return cekqty()">
+                    <input name="form_key" value="6UbXroakyQlbfQzK" type="hidden">
+                    <input name="produkpostid" value="{$produkpostid}" type="hidden" />
+
+
+                    <input name="qty" type="hidden" value="1" />
+
+                    <!-- <a id="addto-cart" href="#" onclick="submitcart();" class="btn btn-warning btn-lg pull-right">Beli
+                        Produk Ini</a> -->
+                        <a id="addto-cart" href="https://api.whatsapp.com/send?phone=628126008924&text=Halo%20Kak%20apakah%20produk%20Lelang%20{$detailnama}%20ini%20masih%20ready?"  class="btn btn-warning btn-lg pull-right">Beli Produk Ini</a>
+                </form>
+                {/if}
+                <!-- <a href="{$fulldomain}/contactmessage/{$produkpostid}"  class="btn btn-success btn-lg pull-right">Hubungi Penjual</a> -->
+            </div>
+
+        </div>
+        <br clear="all" /><br clear="all" />
+        <div class="col-md-12">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Syarat Dan Ketentuan Lelang</div>
+                <div class="panel-body">
+                    {$detaillengkap}
+                </div>
+            </div>
+        </div>
+
+        <br clear="all" />
+
+        <script>
+
+            function getUrlVars(param = null) {
+                if (param !== null) {
+                    var vars = [], hash;
+                    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                    for (var i = 0; i < hashes.length; i++) {
+                        hash = hashes[i].split('=');
+                        vars.push(hash[0]);
+                        vars[hash[0]] = hash[1];
+                    }
+                    return vars[param];
+                }
+                else {
+                    return null;
+                }
+            }
+
+            let menu = getUrlVars("menu");
+            let id = getUrlVars("id");
+
+            function cek() {
+                swal("Silahkan Login Terlebih Dahulu", {
+                    buttons: {
+                        cancel: "Cancel",
+                        catch: {
+                            text: "Registrasi",
+                            value: "catch"
+                        },
+                        Login: true,
+                    },
+                })
+                    .then((value) => {
+                        switch (value) {
+                            case "Login":
+                                window.location = "{$fulldomain}/user/" + menu + "/" + id + "";
+                                break;
+
+                            case "catch":
+                                window.location = "{$fulldomain}/user/daftar";
+                                break;
+
+                            default:
+                                swal("Kembali ke halaman lelang");
+                        }
+                    });
+
+                return false;
+            }
+
+        </script>
+        <div class="col-md-12">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Ulasan Produk</div>
+                <div class="panel-body">
+
+                    {if $numc eq '0'}
+                    <div class="alert alert-warning">
+                        Belum ada ulasan tentang produk ini, anda bisa memberikan ulasan apabila anda sudah pernah
+                        memesan atau membeli produk ini {if $login neq '1'}Silahkan Login terlebih dahulu untuk
+                        melakukan review.{/if}
+                    </div>
+                    {else}
+                    <div class="comments">
+
+                        {foreach from=$list_comment key=commentid item=c}
+                        <div class="comment-item">
+                            <div class="row no-margin">
+                                <div class="col-lg-1 col-xs-12 col-sm-2 no-margin">
+                                    <div class="avatar">
+                                        <img alt="{$c.nama}" src="{$c.gambar}">
+                                    </div><!-- /.avatar -->
+                                </div><!-- /.col -->
+
+                                <div class="col-xs-12 col-lg-11 col-sm-10 no-margin">
+                                    <div class="comment-body">
+                                        <div class="meta-info">
+                                            <div class="author inline">
+                                                {$c.nama} - <span class="date">{$c.tanggal}</span>
+                                            </div>
+
+                                        </div><!-- /.meta-info -->
+                                        <p class="comment-text">
+                                            {$c.komentar}
+                                        </p><!-- /.comment-text -->
+                                    </div><!-- /.comment-body -->
+
+                                </div><!-- /.col -->
+
+                            </div><!-- /.row -->
+                        </div><!-- /.comment-item -->
+                        {/foreach}
+                    </div><!-- /.comments -->
+                    {/if}
+                    {if !$login }
+                    <button onclick="return cek();" style="margin-top: 10px;" class="btn btn-primary">Ajukan Harga
+                        Terbaikmu</button>
+                    {/if}
+                    {if $login eq '1'}
+                    <div class="add-review row">
+                        <div class="col-sm-12 col-xs-12">
+                            <div class="new-review-form">
+                                <h4>&nbsp;Ajukan Harga Terbaikmu</h4>
+                                <form id="contact-form" class="contact-form" method="post">
+                                    <input type="hidden" value="simpan" name="aksi" />
+                                    <input type="hidden" value="{$userid}" name="userid" />
+                                    <input type="hidden" value="{$produkpostid}" name="produkpostid" />
+                                    <div class="field-row">
+                                        <textarea rows="5" class="form-control" name="pesan"
+                                            placeholder="Ajukan harga untuk produk {$detailnama}"></textarea>
+                                    </div>
+                                    <div class="field-row">
+
+                                        <button type="submit" class="btn btn-warning ml-5">Ajukan Harga</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/if}
+                </div>
+            </div>
+        </div>
+
+        <br clear="all" /><br clear="all" />
+        <div id="share"></div>
+        <script src="{$lokasiwebtemplate}js/jssocials.min.js"></script>
+        <script>
+            $("#share").jsSocials({
+                shares: ["facebook", "twitter", "googleplus", "whatsapp"]
+            });
+        </script>
+    </div>
+</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Vidio Produk</h4>
+            </div>
+            <div style="height: 300px;" class="modal-body">
+                {if $vidio}
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{$vidio}"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                {else}
+                <strong style="margin-top: 15px; text-align: center;">Mohon maaf vidio produk belum tersedia</strong>
+                {/if}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

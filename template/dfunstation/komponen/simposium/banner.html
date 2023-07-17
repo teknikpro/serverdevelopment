@@ -1,0 +1,23 @@
+<div style="margin-bottom: 20px;" class="mainbanner-home">
+    <div class="homeslide">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                {foreach from=$slide key=id item=a}
+                <li data-target="#myCarousel" data-slide-to="{$a.no}" {if $a.no eq '1' } class="active" {/if}></li>
+                {/foreach}
+            </ol>
+            <div class="carousel-inner">
+                {foreach from=$slide key=id item=a}
+                <div class="item {if $a.no eq '1'} active {/if}">
+                    <a href="{$a.url}"><img src="{$a.gambar}" alt="{$a.nama}" border="0" /></a>
+                </div>
+                {/foreach}
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span
+                    class="glyphicon glyphicon-chevron-left"></span></a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next"><span
+                    class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+    </div>
+</div>

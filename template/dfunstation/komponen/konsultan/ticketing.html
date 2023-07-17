@@ -1,0 +1,74 @@
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="items item-w2">
+                           <div class="row">
+                           <div class="col-xs-6">
+                                <h4 class="option-title text-green text-uppercase">{$namarubrik}</h4>
+                           </div>
+                           <div class="col-xs-6">
+                                <div class="btn-group pull-right">
+                                    <a href="{$fulldomain}/member/addticketing" class="le-button post-comment-button">
+                                    <button type="button" class="btn btn-default tooltips" data-original-title="Buat Ticket" data-placement="top" >
+                                        <i class="icon-trash"></i> Buat Ticket</button></a>
+                                </div>
+                           </div>
+                           <div class="clearfix"></div>
+                       </div>
+                       <!-- /.row -->
+                       </div>
+                        <!-- /.items item-w2 -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default e-squared p-0">
+                            <div class="panel-body p-0">
+                                 {if $totalticketing neq '0'}
+                                    <div class="mail-box">
+                                        <table class="table table-hover table-mail" width="100%" >
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Perihal</th>
+                                                <th>Kategori Pertanyaan</th>
+                                                <th width="120" class="text-center">Status</th>
+                                                <th>Tanggal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {foreach from=$dataticketing key=ticketingid item=k}
+                                            <tr>
+                                                <td>{$k.no}</td>
+                                                <td><a href="{$k.link}"><strong>{$k.judul}</strong></a></td>
+                                                <td>{$k.kategori}</td>
+                                                <td>{if $k.is_closed eq '0'}<i class="fal fa-unlock"></i>{else}<i class="fal fa-lock"></i>{/if} {$k.stats} </td>
+                                                <td class="text-right mail-date">{$k.tanggal}</td>
+                                            </tr>
+                                            {/foreach}
+
+                                        </tbody>
+                                        </table>
+                                        
+                                        {if $totalticketing neq '0'}
+                                        <ul class="pagination m-0 ml-15">
+                                          {foreach from=$stringpage key=pageid item=a}
+                                            <li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+                                          {/foreach}
+                                        </ul>
+                                        {/if}
+                                    </div>
+                                {else}
+                                    <div class="alert warning">Anda belum mengirimkan pertanyaan untuk ticketing, untuk mengirimkan pertanyaan silahkan klik tombol <strong>Tambah Pertanyaan</strong>.</div>
+                                {/if}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel .panel-default -->
+                    </div>
+                    <!-- /.col-xs-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+
+     

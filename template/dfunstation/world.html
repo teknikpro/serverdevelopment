@@ -1,0 +1,54 @@
+{include file="`$lokasitemplate`komponen/home/header.html"}
+{if $aksi eq 'read'}
+{include file="`$lokasitemplate`komponen/$kanal/$kanal.read.html"}
+{else}
+<div class="topkanal">
+	<div class="container">
+    	<div class="topkanal-inner">
+           <div class="col-md-12"><div class="topkanal-inner-1"><span>{$rubrik}</span></div></div>
+           
+         
+        </div>
+    </div>
+</div>
+<div id="header-kanal">
+	 <div class="container">
+            <div class="row">
+					<span>&nbsp;</span>
+			</div>
+	 </div>
+</div>
+<div class="world-menu">
+	<div class="container">
+    <div class="col-md-9">
+     {foreach from=$worldsec key=secid item=a}
+       <a href="{$a.urlsec}">{$a.namasec}</a>
+	 {/foreach}
+     </div>
+       <div class="col-md-3">
+           <form method="post" action="{$fulldomain}/world/cat/{$secalias}/{$subalias}/1/{$par}">
+                <select name="urut" id="urut" class="form-control" onchange="this.form.submit()">
+                    <option value="1" {if $urut eq '1'} selected="selected" {/if}>Terbanyak dilihat</option>
+                    <option value="2" {if $urut eq '2'} selected="selected" {/if}>Terbaru</option>
+                    <option value="3" {if $urut eq '3'} selected="selected" {/if}>Nama A-Z</option>
+                    <option value="4" {if $urut eq '4'} selected="selected" {/if}>Nama Z-A</option>
+                </select>
+            </form>
+            </div>
+    </div>
+</div>
+<div class="insight">
+    <div class="container">
+
+                    <div class="col-md-12">
+                    {include file="`$lokasitemplate`komponen/$kanal/$kanal.list.html"}
+                    </div>
+                
+              
+                
+                
+    </div>
+</div>
+
+{/if}
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

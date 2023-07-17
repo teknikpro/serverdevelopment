@@ -1,0 +1,32 @@
+<div class="content-large">
+{foreach from=$datadetail key=id item=ch}
+    <div class="list-content">
+    	<div class="list-content-isi">
+            <div class="col-md-3">
+                <a href="{$ch.link}"><img src="{$ch.gambar}" alt="{$ch.nama}" class="img-responsive" style="width:90%" /></a>
+            </div>
+            <div class="col-md-9">
+            <a class="list-link" href="{$ch.link}">{$ch.nama}</a>
+            <br />
+            <span>{$ch.tanggal}</span>
+            <br />
+            <p>{$ch.ringkas}</p>
+            <a class="btn btn-success pull-right" href="{$ch.link}/download">Download</a>
+             <a class="btn btn-warning pull-right" href="{$ch.link}">Detail</a>
+            </div>
+        </div>
+    </div>
+{/foreach}
+</div>
+<div class="paginate pull-right">
+    <ul class="pagination">
+        {foreach from=$stringpage key=pageid item=a}
+            {if $a.link neq ''}
+                <li><a href="{$a.link}">{$a.nama}</a></li>
+            {else}
+                <li><a href="javascript:void(0)">{$a.nama}</a></li>
+            {/if}
+        {/foreach}
+    </ul>
+</div>
+

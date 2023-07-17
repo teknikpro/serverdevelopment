@@ -1,0 +1,81 @@
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="items item-w2">
+                   <div class="row">
+                   <div class="col-xs-12">
+                       <h4 class="option-title text-green text-uppercase col-md-6">{$namaaksi} </h4>
+                        {if $login eq '1' and $kanal eq 'member'}
+                        <div class="form1-group pull-right">
+                               <a href="{$fulldomain}/member/berita-add" class="btn btn-success"> Menulis Berita</a>
+                        </div>
+
+                        {/if}
+                      
+
+                   </div>
+                   <div class="clearfix"></div>
+               </div>
+               <!-- /.row -->
+               </div>
+                <!-- /.items item-w2 -->
+            </div>
+        </div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+
+            {if $jml_post eq '0'}
+                <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                     Saat ini anda tidak mempunyai satupun postingan berita, silahkan mulailah untuk menulis sesuatu dan share sebanyak mungkin
+                     ke sosial media yang anda miliki.
+               </div>
+                <div class="clearfix"></div>
+            {else}
+            {foreach from=$datadetail key=id item=i name=list}
+
+                <div class="items item-content">
+                <div class="media">
+                   <div class="col-md-3">
+                   <a href="{$i.link}" style="margin:10px; float:left">
+                        <img src="{$i.gambar}" alt="" class="img-responsive">
+                    </a>
+                   </div>
+                   <div class="col-md-9">
+                    <div class="media-body">
+                      <h2 style="margin-top: 0px;"> {$i.nama}</h2>
+                        <p>
+                            {$i.ringkas}
+                            <br /><span class="date">
+                        </p>
+                        
+                       <em> {$i.tanggal} | {$i.views} views </em>
+                    </span>
+                    <br clear="all" />
+                        {if $login eq '1' and $kanal eq 'member'} <a href="{$fulldomain}/member/berita-edit/{$i.id}" class="btn btn-sm btn-success" style="margin:2px;">Edit</a> <a href="{$fulldomain}/member/berita-hapus/{$i.id}" class="delete btn btn-sm btn-success"  style="margin:2px;">Hapus</a>{/if}
+                        <a href="{$i.link}" class="btn btn-sm btn-success"  style="margin:2px;">Preview</a>
+                        <a href="#" class="btn btn-sm btn-warning"  style="margin:2px;">{if $i.published  eq '0'}Menunggu persetujuan{else}disetujui{/if}</a>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <!-- /.items -->
+
+            {/foreach}
+            {/if}
+                </div>
+              
+
+           </div>
+           <!-- /.col-xs-12 -->
+           		<ul class="pagination m-0 ml-15">
+                  {foreach from=$stringpage key=pageid item=a}
+                    <li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+                  {/foreach}
+                </ul>
+           </div>
+
+
+</div>

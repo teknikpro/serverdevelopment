@@ -1,0 +1,36 @@
+{strip}
+{include file="`$lokasitemplate`komponen/home/header-template.html"}
+
+<link rel="stylesheet" href="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/css/event.css">
+
+
+<!-- banner -->
+<div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <h1 class="tag-fs">
+          EVENT
+          <br>
+          DAN
+          <br>
+          TIKET
+        </h1>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <img class="img-fluid" src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/event.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+{if $aksi eq 'read'}
+    {include file="`$lokasitemplate`komponen/$kanal/$kanal.read.html"}
+{else if $aksi eq 'profile'}
+    <h1>Hello World</h1>
+{else}
+    {include file="`$lokasitemplate`komponen/$kanal/$kanal.list.html"}
+{/if}
+
+
+{include file="`$lokasitemplate`/komponen/home/footer-template.html"}
+{/strip}

@@ -1,0 +1,59 @@
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="items item-w2">
+                           <div class="row">
+                           <div class="col-xs-6">
+                                <h4 class="option-title text-green text-uppercase">Tarik Dana</h4>
+                           </div>
+                           <div class="col-xs-6">
+                                
+                           </div>
+                           <div class="clearfix"></div>
+                       </div>
+                       <!-- /.row -->
+                       </div>
+                        <!-- /.items item-w2 -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default e-squared p-0">
+                            <div  class="panel-body p-5">
+
+                                {if $pesan}
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                {$pesan}
+                                </div>
+                                {/if}
+
+                                <form style="margin-bottom: 20px ;" class="form-horizontal " role="form" name="profile" method="post" enctype="multipart/form-data" action="{$fulldomain}/merchant/tarik-dana">
+                                    <div class="form-group">
+                                      <label for="penarikan" class="col-sm-3 control-label">Masukan Jumlah Penarikan</label>
+                                      <div class="col-sm-9">
+                                      <input type="number" class="form-control" id="penarikan" name="penarikan"  placeholder="Minimal 5.000" value="{$datainput}" required>
+                                      </div>
+                                    </div>
+                          
+                                    <div class="form-group">
+                                      <div class="col-xs-offset-3 col-xs-9">
+                                        <button type="submit" class="btn btn-success">Tarik Dana</button>
+                                      </div>
+                                    </div>
+                          
+                                </form> 
+                                
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel .panel-default -->
+                    </div>
+                    <!-- /.col-xs-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+
+
+
+     

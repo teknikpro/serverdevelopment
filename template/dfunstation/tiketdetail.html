@@ -1,0 +1,137 @@
+{if $tiketform}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form Tiket</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <form method="post" action="{$fulldomain}/tiket/bayar">
+            <input type="hidden" name="idvoucher" id="" value="{$getid}">
+            <div class="mb-3">
+                <label for="namalengkap" class="form-label">Nama Lengkap</label>
+                <input type="text" class="form-control" name="namalengkap" id="namalengkap" required>
+                <div id="namalengkap" class="form-text">Silahkan Masukan Nama Lengkap</div>
+            </div>
+            <div class="mb-3">
+                <label for="telepon" class="form-label">Nomor Telepon</label>
+                <input type="number" class="form-control" id="telepon" name="telepon" required>
+                <div id="telepon" class="form-text">Masukan Nomor Telepon</div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email"  id="email" required>
+                <div id="email" class="form-text">Masukan Email</div>
+            </div>
+            <div class="mb-3">
+                <label for="jumlah" class="form-label">Jumlah Tiket</label>
+                <select name="jumlah" class="form-select" aria-label="Default select example" required>
+                    <option value="" >Pilih</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Beli Sekarang</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+{else}
+{include file="`$lokasitemplate`komponen/home/header.html"}
+
+<div class="topkanal">
+    <div class="container">
+        <div class="topkanal-inner">
+            <div class="topkanal-inner-1"><span>Detail Tiket</span></div>
+
+        </div>
+    </div>
+</div>
+<div id="header-kanal">
+    <div class="container">
+        <div class="row">
+            <span>&nbsp;</span>
+        </div>
+    </div>
+</div>
+
+<br clear="all" />
+<section id="berita" class="homeBerita1">
+
+    <div class="container">
+
+        <div class="col-md-8">
+            <div class="homeartikel">
+                <div class="list-blog">
+                    <div class="col-md-12">
+                        <div class="list-blog-isi">
+                            <div class="list-blog-img">
+                                <a href="#"><img src="{$gambar}" alt="{$nama}" class="img-responsive" /></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="list-blog-isi"> <a class="list-link" href="#">{$nama}</a>
+                            <br />
+                            {if $qty < 1}
+                            <span style="color: red ;">Tiket sudah habis</span>
+                            {else}
+                            <span style="color: blue ;">{$qty} tersisa</span>
+                            {/if}
+                            <br />
+                            <span class="harga">Rp. {$harga}</span>
+                            <br />
+                            <p>{$ringkas}</p>
+                            <h4>syarat dan ketentuan</h4>
+                            <p>{$term}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="box-kanal">
+                <div class="box-kanan-isi">
+                    <div class="homevideo-title">Beli Voucher</div>
+                    <div class="homeartikel">
+                        {if $qty < 1}
+                            <p>Mohon maaf untuk tiket jenis ini sudah tidak tersedia</p>
+                        {else}
+                        <p>Untuk membeli tiket ini. Silahkan masukan &nbsp;
+                            jumlah eVoucher yang akan dibeli. Selanjutnya anda &nbsp;
+                            akan diarahkan ke halaman Pembayaran.</p>
+                        <div class="col-xs-12">
+                            <a href="{$fulldomain}/tiketdetail/form/{$voucherid}" class="btn btn-warning">Beli
+                                Sekarang</a>
+                        </div>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<br clear="all" />
+
+{include file="`$lokasitemplate`/komponen/home/footer.html"}
+
+{/if}

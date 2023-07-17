@@ -1,0 +1,53 @@
+<div class="sub-location hidden-lg hidden-md">
+    {$bahasa.news}
+</div>
+<div class="box-content">
+    <div class="large-content">
+         {if $detailjenis eq 'youtube'}
+         	 <div class="thumbDetail">
+             <iframe width="100%" height="480" src="{$detailvideo}" frameborder="0" allowfullscreen></iframe>
+             </div>
+         {else}
+         
+        <div class="thumbDetail1">
+             <script type="text/javascript" src="{$domain}/librari/videoplayer/jwplayer.js"></script>
+             <script type="text/javascript">jwplayer.key="uzBbpYh+pgrOIlodl46+LloYU9avwUZ/lR5yAw==";</script>
+                    <div id='mediaplayer'></div>
+                    {literal}
+		            <script type="text/javascript">
+                      jwplayer('mediaplayer').setup({
+					    playlist: [{
+							image: "{/literal}{$detailgambar}{literal}",
+							sources: [
+								{ file: "{/literal}{$detailvideo}{literal}" }
+							],
+							title: "{/literal}{$detailnama}{literal}"
+						}],
+                        width: '100%',
+                        height: '513',
+                        autostart: 'true',
+                        stretching: 'exactfit',
+						
+                      });
+                    </script>
+                    {/literal}
+
+        </div>
+        {/if}
+        <div class="title-headline">
+            <span>{$detailnama}</span>
+
+        </div>
+       
+        <p>{$detaillengkap}. <em>{if $detailcreator neq ''}Oleh {$detailcreator} | {/if} {$detailtanggal} | {$detailstats} Views</em></p>
+        
+        <br clear="all" />
+       <div id="share"></div> 
+        <br clear="all" /><br clear="all" />
+    </div>
+           <div class="bg-divider"></div>
+        
+        
+
+           
+</div>

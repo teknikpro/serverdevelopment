@@ -1,0 +1,611 @@
+{include file="`$lokasitemplate`/komponen/home/header.html"}
+
+
+{if $aksi eq 'tes'}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <br><br>
+                <div class="sign-form single">
+                    <div class="tesmandiri-intro">
+                        <center>
+                            <b>
+                                D'funStation
+                                <br>
+                                Ruko Istana Pasteur Regency Blok CRA-51
+                                <br>
+                                Jl. Ters. Gunung Batu, Sukaraja, kec. Cicendo Kota Bandung
+                                <br>
+                                WhatsApp: 085956000087
+                            </b>
+                        </center>
+                    </div>
+                    <div class="sign-inner">
+
+                        <div class="col-md-12">
+                            <div class="row form-group">
+                                <div class="col-xs-12">
+                                    <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                                        <li class="disabled"><a href="#step-1">
+                                                <h4 class="list-group-item-heading">Daftar</h4>
+                                            </a></li>
+                                        <li class="active"><a href="#step-2">
+                                                <h4 class="list-group-item-heading">Tes</h4>
+                                            </a></li>
+                                        <li class="disabled"><a href="#step-3">
+                                                <h4 class="list-group-item-heading">Hasil</h4>
+                                            </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                            {if $pesanhasil neq ''}
+                            <div class="alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible"
+                                role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span
+                                        aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                {$pesanhasil}.
+                                <ul>
+                                    {foreach from=$pesan key=id item=a}
+                                    <li>{$a.pesan}</li>
+                                    {/foreach}
+                                </ul>
+                            </div>
+                            {else}
+
+                            {/if}
+
+                            {if $pesanhasil eq ''}
+                            <div class="p-10">
+                                <form method="post" name="ptform" id="ptform">
+                                    <input type="hidden" value="1" name="sikap" />
+                                    {foreach from=$soalsikap key=soalid item=a}
+                                    <input type="hidden" name="no[{$a.no}]" value="{$a.ptsoalid}" />
+                                    <input type="hidden" name="soal[{$a.no}]" value="{$a.soalid}" />
+                                    <input type="hidden" name="tipe-{$a.soalid}" value="{$a.tipe}">
+                                    <br clear="all" />
+                                    <div class="soal-pt-item">
+                                        <div class="p-10">
+                                            <div class="soal-pt-pertanyaan" id="sikap-{$a.soalid}">
+                                                <div class="col-md-12">
+                                                    <div class=" btn-warning soal-item-nomor">{$a.nomor}</div>
+                                                    <span>{$a.pertanyaan}</span>
+                                                </div><br clear="all" />
+                                                <div class="col-md-12">
+                                                    {foreach from=$a.pilihan item=pg}
+                                                    <div class="col-md-4"><input
+                                                            style="padding:5px; width:25px; height:25px"
+                                                            onclick="pilih('{$a.soalid}')" type="radio"
+                                                            name="j-{$a.soalid}" value="{$pg.bobot}" required>
+                                                        {$pg.jawaban}
+                                                    </div>
+                                                    {/foreach}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/foreach}
+
+                                    <br clear="all" />
+
+                                    <script>
+                                        function pilih(data) {
+                                            $("#sikap-" + data).addClass("soal-pilih");
+                                        }
+                                    </script>
+
+                                    <br clear="all" />
+
+                                    <div class="alert alert-default"><strong>Pastikan semua jawaban terisi
+                                            penuh.</strong> Jika telah selesai menjawab semua pertanyaan, silahkan klik
+                                        tombol di bawah ini untuk mengirimkan jawaban anda.
+                                        <br clear="all" /><br />
+                                        <input type="hidden" name="aksi" value="simpan" />
+                                        <input type="submit" value="Lihat Hasil " class="btn btn-success btn-lg" />
+                                    </div>
+                                </form>
+                                {/if}
+                                <br clear="all" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-xs-12 -->
+    </div>
+    <!-- /.row -->
+    </div>
+    <!-- /.container -->
+    <br clear="all" />
+</section>
+<!-- /#page -->
+
+{elseif $aksi eq 'mencolok'}
+
+<div class="container">
+    <form action="{$fulldomain}/tes-sekolah/mencolok" method="post">
+        <h2 class="text-center" >Hal hal yang mencolok</h2>
+        <h4 class="text-center" > <strong>Bisa lebih dari satu</strong></h4>
+        <h5 class="text-center" >Untuk melihat banyak pilihan, silahkan geser ke sebelah kiri</h5>
+        <div class="table-responsive">
+            <table class="table">
+              <tr>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Kidal"> Kidal</label></td>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Mengisap jempol"> Mengisap jempol</label></td>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Menggigit-gigit kuku"> Menggigit-gigit kuku</label></td>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Berkaca mata"> Berkaca mata</label></td>
+              </tr>
+              <tr>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Cengeng "> Cengeng </label></td>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Perengek"> Perengek</label></td>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Tidak patuh"> Tidak patuh</label></td>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Masih senang bermain-main"> Masih senang bermain-main</label></td>
+              </tr>
+              <tr>
+                 <td><label><input type="checkbox" name="mencolok[]" value="Pelamun"> Pelamun</label></td>
+                 <td><label><input type="checkbox" name="mencolok[]" value="Pemalas"> Pemalas </label></td>
+                 <td><label><input type="checkbox" name="mencolok[]" value="Jorok"> Jorok  </label></td>
+                 <td><label><input type="checkbox" name="mencolok[]" value="Tampak seperti kanak-kanak"> Tampak seperti kanak-kanak  </label></td>
+              </tr>
+              <tr>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Pendengaran kurang baik"> Pendengaran kurang baik</label></td>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Penglihatan kurang baik"> Penglihatan kurang baik</label></td>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Sangat banyak bergerak"> Sangat banyak bergerak</label></td>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Sangat lamban"> Sangat lamban</label></td>
+              </tr>
+              <tr>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Penakut "> Penakut</label></td>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Cepat lelah "> Cepat lelah</label></td>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Lalai  "> Lalai</label></td>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Sangat pemalas"> Sangat pemalas</label></td>
+              </tr>
+              <tr>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Gangguan berbicara "> Gangguan berbicara</label></td>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Lispelan  "> Lispelan </label></td>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Keras kepala  "> Keras kepala </label></td>
+                  <td><label><input type="checkbox" name="mencolok[]" value="Gangguan dalam motorik  "> Gangguan dalam motorik </label></td>
+              </tr>
+            </table>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Hal Lainnya</span>
+            <input type="text" class="form-control" name="mencolok[]" placeholder="Hal Lainnya" aria-describedby="basic-addon1">
+        </div>
+        <br><br>
+        <button type="submit" name="simpan" class="btn btn-primary btn-default btn-block">Simpan</button>
+        <br><br><br><br>
+    </form>
+</div>
+
+{elseif $aksi eq 'pertanyaan'}
+
+<div class="container">
+    <br><br><br><br>
+    <form action="{$fulldomain}/tes-sekolah/pertanyaan" method="post">
+        <h5 class="text-center" >Apakah saudara berpendapat, bahwa anak tersebut sudah mampu untuk sekolah? </h5>
+        <div class="table-responsive">
+            <table class="table">
+              <tr>
+                  <td><label><input type="radio" required name="pertanyaan" value="Ya"> Ya</label></td>
+                  <td><label><input type="radio" required name="pertanyaan" value="Ragu-ragu"> Ragu-ragu</label></td>
+                  <td><label><input type="radio" required name="pertanyaan" value="Tidak"> Tidak</label></td>
+              </tr>
+            </table>
+        </div>
+        <button type="submit" name="simpan" class="btn btn-primary btn-default btn-block">Simpan</button>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </form>
+</div>
+
+{elseif $aksi eq 'hasil'}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="sign-form single">
+                    <div class="sign-inner">
+
+                        <div class="col-md-12">
+                            <div class="row form-group">
+                                <!-- <div class="col-xs-12">
+                                    <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                                        <li class="disabled"><a href="#step-1">
+                                                <h4 class="list-group-item-heading">Daftar</h4>
+                                            </a></li>
+                                        <li class="disabled"><a href="#step-2">
+                                                <h4 class="list-group-item-heading">Tes</h4>
+                                            </a></li>
+                                        <li class="active"><a href="#step-3">
+                                                <h4 class="list-group-item-heading">Hasil</h4>
+                                            </a></li>
+                                    </ul>
+                                </div> -->
+                            </div>
+
+                            <div>
+                                <div class="container">
+                                    <div class="tes text-center">
+                                        <h2>Tes Telah Berhasil</h2>
+                                        <a href="https://www.dfunstation.com/tes-sekolah" class="btn btn-primary" >Kembali Ke Home</a>
+                                    </div>
+                                    <br><br><br><br> <br><br><br><br><br><br><br><br> <br><br><br><br> <br><br><br><br>
+                                    <!-- <div class="table-responsive">
+                                        <table class="table">
+                                          <tr>
+                                              <td>Tes Telah Berhasil</td>
+                                              <td>{$identitas.nama_lengkap}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Jenis Kelamin</td>
+                                            <td>{$identitas.jenis_kelamin}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Tempat Tanggal Lahir</td>
+                                            <td>{$identitas.tempat_lahir} {$identitas.tanggal_lahir}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Lama STK</td>
+                                            <td>{$identitas.lama_stk}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Sekolah</td>
+                                            <td>{$identitas.sekolah}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Alamat</td>
+                                            <td>{$identitas.alamat}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Nama Guru</td>
+                                            <td>{$identitas.nama_guru}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Tangal Pengisian</td>
+                                            <td>{$identitas.tanggal_pengisian}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Nilai Tipe A</td>
+                                            <td>{$nilaia}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Nilai Tipe B</td>
+                                            <td>{$nilaib}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Nilai Tipe C</td>
+                                            <td>{$nilaic}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Hal yang mencolok</td>
+                                            <td>{$mencolok}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Pertanyaan terakhir</td>
+                                            <td>{$pertanyaan}</td>
+                                          </tr>
+                                        </table>
+                                      </div> -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-xs-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+    <br clear="all" />
+</section>
+<!-- /#page -->
+
+{else}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <br><br>
+                <div class="sign-form single">
+                    <div class="tesmandiri-intro">
+                        <center>
+                            <b>
+                                D'funStation
+                                <br>
+                                Ruko Istana Pasteur Regency Blok CRA-51
+                                <br>
+                                Jl. Ters. Gunung Batu, Sukaraja, kec. Cicendo Kota Bandung
+                                <br>
+                                WhatsApp: 085956000087
+                            </b>
+                        </center>
+                    </div>
+                    <div class="sign-inner">
+
+                        <div class="col-md-12">
+                            <div class="row form-group">
+                                <div class="col-xs-12">
+                                    <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                                        <li class="active"><a href="#step-1">
+                                                <h4 class="list-group-item-heading">Daftar</h4>
+                                            </a></li>
+                                        <li class="disabled"><a href="#step-2">
+                                                <h4 class="list-group-item-heading">Tes</h4>
+                                            </a></li>
+                                        <li class="disabled"><a href="#step-3">
+                                                <h4 class="list-group-item-heading">Hasil</h4>
+                                            </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div>
+
+                                {if $pesanhasil neq ''}
+                                <div class="alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible"
+                                    role="alert">
+                                    <button type="button" class="close" data-dismiss="alert"><span
+                                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    {$pesanhasil}.
+                                    <ul>
+                                        {foreach from=$pesan key=id item=a}
+                                        <li>{$a.pesan}</li>
+                                        {/foreach}
+                                    </ul>
+                                </div>
+                                {else}
+                                Kuesioner ini harap diisi oleh guru TK/RA yang mendampingi anak selama di sekolah. Sebelum memulai, silahkan isi data anak dibawah ini.<br /><br />
+                                {/if}
+
+                                {if $berhasil neq '1'}
+                                <script src="{$fulldomain}/librari/ajax/ajax_kota.js.php"></script>
+                                <script src="{$fulldomain}/librari/ajax/ajax_kec.js.php"></script>
+                                <form role="form" action="{$fulldomain}/tes-sekolah/daftaranggota"
+                                    method="post" name="login">
+                                    <input type="hidden" name="fbid" value="{$fbid}" />
+                                    <input type="hidden" name="twid" value="{$twid}" />
+                                    <input type="hidden" name="gpid" value="{$gpid}" />
+
+                                    <div class="form-group">
+                                        <label>Nama Lengkap Anak</label>
+                                        <input type="text" data-original-title="Name" name="userfullname"
+                                            value="{$daftarname}"
+                                            data-content="Silahkan masukan nama lengkap anak disini."
+                                            data-trigger="focus" data-placement="left" data-toggle="popover"
+                                            placeholder="Masukan Nama Lengkap Anak" id="name" class="form-control"
+                                            required="required">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Jenis Kelamin</label><br clear="all" />
+                                        <div class="col-sm-4">
+                                            <input type="radio" style="padding:5px; width:25px; height:25px"
+                                                class="i-checks" name="usergender" value="laki-laki" {if $usergender
+                                                eq 'laki-laki' }checked{/if} required> Laki-laki
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="radio" style="padding:5px; width:25px; height:25px"
+                                                class="i-checks" name="usergender" value="perempuan" {if $usergender
+                                                eq 'perempuan' }checked{/if} required> Perempuan
+                                        </div>
+                                    </div>
+                                    <br clear="all" />
+
+                                    <div class="form-group">
+                                        <label>Tempat Lahir</label>
+                                        <input type="text" data-original-title="Name" name="tempatlahir"
+                                            value="{$tempatlahir}"
+                                            data-content="Silahkan masukan tempat lahir"
+                                            data-trigger="focus" data-placement="left" data-toggle="popover"
+                                            placeholder="Masukan Tempat Lahir" id="name" class="form-control"
+                                            required="required">
+                                    </div>
+
+                                    <div class="form-group mt-10">
+                                        <label>Tanggal Lahir</label><br clear="all" />
+                                        <input type="date" data-original-title="Name" name="tanggallahir"
+                                            value="{$tanggallahir}"
+                                            data-content="Tanggal Lahir"
+                                            data-trigger="focus" data-placement="left" data-toggle="popover"
+                                            placeholder="Tanggal Lahir" id="tanggallahir" class="form-control"
+                                            required="required">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Lama Duduk di TK/RA</label>
+                                        <input type="number" data-original-title="Name" name="stk"
+                                            value="{$stk}"
+                                            data-content="Lama Duduk di TK/RA"
+                                            data-trigger="focus" data-placement="left" data-toggle="popover"
+                                            placeholder="Lama Duduk di TK/RA" id="name" class="form-control"
+                                            required="required">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Nama Sekolah TK/RA</label>
+                                        <input type="text" data-original-title="Name" name="sekolah"
+                                            value="{$sekolah}"
+                                            data-content="Sekolah"
+                                            data-trigger="focus" data-placement="left" data-toggle="popover"
+                                            placeholder="Nama Sekolah TK/RA" id="sekolah" class="form-control"
+                                            required="required">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Alamat Sekolah</label>
+                                        <textarea name="alamat" id="alamat" cols="30" class="form-control" rows="10" required></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Nama Guru Pendamping Anak di TK/RA</label>
+                                        <input type="text" data-original-title="Name" name="namaguru"
+                                            value="{$namaguru}"
+                                            data-content="Nama Guru"
+                                            data-trigger="focus" data-placement="left" data-toggle="popover"
+                                            placeholder="Nama Guru Pendamping Anak di TK/RA" id="namaguru" class="form-control"
+                                            required="required">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>No. Telepon Guru Pendamping di TK/RA</label>
+                                        <input type="number" data-original-title="Name" name="teleponguru"
+                                            value="{$teleponguru}"
+                                            data-content="Telepon Guru"
+                                            data-trigger="focus" data-placement="left" data-toggle="popover"
+                                            placeholder="No. Telepon Guru Pendamping di TK/RA" id="teleponguru" class="form-control"
+                                            required="required">
+                                    </div>
+
+                                    <br clear="all" />
+
+                                    <div class="form-group">
+                                        <label>Saya bersedia memberikan informasi mengenai anak tersebut yang sesuai dengan pengamatan saya selama mendampingi anak menjalani proses belajar mengajar di TK/RA. Informasi ini saya berikan sesuai dengan kondisi anak yang sebenar-benarnya agar dapat digunakan untuk pengembangan diri anak tersebut.</label><br clear="all" />
+                                        <div class="col-sm-4">
+                                            <input type="radio" style="padding:5px; width:25px; height:25px"
+                                                class="i-checks" name="termcondition" value="Bersedia" required> Bersedia
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="radio" style="padding:5px; width:25px; height:25px"
+                                                class="i-checks" name="termcondition" value="Tidak Bersedia" required> Tidak Bersedia
+                                        </div>
+                                    </div>
+                                    <br clear="all" />
+
+                                    <!-- <div class="form-group">
+                                        <label>Tanggal Pengisian</label>
+                                        <input type="date" data-original-title="Name" name="tanggalpengisian"
+                                            value="{$tanggalpengisian}"
+                                            data-content="Tanggal Pengisian"
+                                            data-trigger="focus" data-placement="left" data-toggle="popover"
+                                            placeholder="Tanggal Pengisian" id="tanggalpengisian" class="form-control"
+                                            required="required">
+                                    </div> -->
+                                    
+                                    <br clear="all" />
+                                    <!-- <hr />
+                                    <br />
+
+
+                                    <hr /> -->
+                                    <button class="btn btn-lg btn-success" type="submit">Lanjut Langkah Selanjutnya <i class="fal fa-arrow-right"></i> </button>
+                                </form>
+                                {/if}
+                                <br clear="all" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col-xs-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+            <br clear="all" />
+</section>
+<!-- /#page -->
+
+{/if}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var $height = $(window).height();
+        var $hiframe = $height - 150;
+        $('#pagemember').css('min-height', $hiframe + 'px');
+    });
+</script>
+
+{if $kanal eq 'user' and $aksi eq 'daftar'}
+<!-- Start modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-keyboard="false">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-info">
+                    <h2>{$detailnama}</h2>
+                    {$detaillengkap} <br clear="all" />
+                    <center><button type="button" class="btn btn-default" data-dismiss="modal">Selesai Baca dan
+                            Lanjutkan</button></center>
+                </div>
+            </div>
+            <br clear="all" />
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#klikkodeetik").click(function () {
+            $('#myModal2').modal('show');
+        });
+    });
+</script>
+
+{/if}
+
+{strip}
+
+<footer id="footer">
+
+
+
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <center>Dfunstation &copy; 2022</center>
+                    </p>
+                </div>
+
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.footer-bottom -->
+</footer>
+</div>
+<!-- /#inner-wrapper -->
+<!-- /#wrapper -->
+
+
+
+<script src="{$lokasiwebtemplate}js/jquery.init.js"></script>
+<script src="{$lokasiwebtemplate}js/dev.js"></script>
+
+<script src="{$lokasiwebtemplate}js/bootstrap.min.js"></script>
+
+
+{literal}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-36866276-23"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-36866276-23');
+</script>
+
+{/literal}
+
+
+
+<!-- =========================================
+        CUSTOM AND CONFIGURATION JAVASCRIPT DONT PLACE SCRIPT INLINE
+        ========================================== -->
+
+
+</body>
+
+</html>
+{/strip}

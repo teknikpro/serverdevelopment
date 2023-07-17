@@ -1,0 +1,118 @@
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="items item-w2">
+                   <div class="row">
+                   <div class="col-xs-12">
+                       <h4 class="option-title text-green text-uppercase ">{$namaaksi} </h4>
+
+                   </div>
+                   <div class="clearfix"></div>
+               </div>
+               <!-- /.row -->
+               </div>
+                <!-- /.items item-w2 -->
+            </div>
+        </div>
+        
+        
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default e-squared">
+            <div class="panel-body">
+            
+            
+            {if $subaksi eq 'detail'}
+            
+            <div class="box-content">
+    <div class="large-content">
+        <div class="title-headline">
+            <span>{$detailnama}</span>
+        </div><br clear="all" />
+         <div class="content-info">
+         	<span>Digelar mulai {$detailtanggal} | Jumlah Materi: {$detailmateri} Materi</span>
+         </div>
+
+        {if $detailgambar neq ''}
+        <div class="thumbDetail">
+            <img src="{$detailgambar}" alt="{$detailnama}" class="img-responsive" />
+        </div>
+        {/if}
+        <div class="ringkas">{$detailringkas}</div>
+        <p>{$detaillengkap}</p><br clear="all" />
+         <div class="content-info">
+         	<h2>Daftar Materi</h2>
+         </div>
+	<br clear="all" />
+    {foreach from=$daftarmateri key=id item=a}
+    	<div class="materi-item">
+    		<h3>Materi {$a.no} : <strong>{$a.nama}</strong></h3>
+            {$a.ringkas}
+            <hr />
+        </div>
+    {/foreach}
+    </div>
+    
+    <center> <a href="{$linkjoin}" class="btn btn-lg btn-warning m-5">Ikuti Training Ini</a></center>
+     
+    </div>
+
+    
+</div>
+
+{else}
+
+            {if $jml_post eq '0'}
+                <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                     Saat ini adna tidak mempunyai satupun postingan blog, silahkan mulailah untuk menulis sesuatu dan share sebanyak mungkin
+                     ke sosial media yang anda miliki.
+               </div>
+                <div class="clearfix"></div>
+            {else}
+            {foreach from=$datadetail key=id item=i name=list}
+
+                <div class="items item-content">
+                <div class="media">
+                   <div class="col-md-3">
+                   <a href="{$i.link}" style="margin:10px; float:left">
+                        <img src="{$i.gambar}" alt="" class="img-responsive">
+                    </a>
+                   </div>
+                   <div class="col-md-9">
+                    <div class="media-body">
+                      <h2 style="margin-top: 0px;"> {$i.nama}</h2>
+                        <p>
+                            {$i.ringkas}
+                            <br /><span class="date">
+                        </p>
+                        
+                       <em> Jumlah Materi: {$i.jmlmateri} materi</em>
+                    </span>
+                    <br clear="all" />
+                        <a href="{$i.linkdetail}" class="btn btn btn-warning m-5">Ikuti Training</a>
+                        &nbsp;
+                        <a href="{$i.linkjoin}" class="btn btn btn-warning m-5">Informasi Training</a>
+                    </div>
+                  </div>
+                </div>
+  </div>
+                <!-- /.items -->
+
+            {/foreach}
+            {/if}
+              
+                         <!-- /.col-xs-12 -->
+           		<ul class="pagination m-0 ml-15">
+                  {foreach from=$stringpage key=pageid item=a}
+                    <li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+                  {/foreach}
+                </ul>
+           </div>
+
+
+
+{/if}
+                </div>
+           </div>
+</div>

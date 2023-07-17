@@ -1,0 +1,175 @@
+{if $kanal eq 'profile'}
+<div class="col-xs-12">
+{else}
+<div class="col-xs-8">
+{/if}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div >
+            	<div class="items item-update item-w2">
+                    <form class="form-horizontal" action="{$fulldomain}/member/add-post" method="post" enctype="multipart/form-data" role="form">
+                    <div class="update-form">
+                        <input type="hidden" name="flogin" id="flogin" value="0" />
+                        <input type="hidden" name="tousername" value="{$nama}" />
+                           <div class="form-group m-0">
+                                <textarea name="isi" cols="5" rows="5" spellcheck="false" placeholder="Tulis Sapaan Anda .." class="form-control"></textarea> 
+                                <a href="{$fulldomain}/member" class="btn btn-default tooltips"  id="btn-browse" data-original-title="Tambah foto" data-placement="top">
+                                    <i class="icon-camera"></i>
+                                </a>
+                                <input type="file" id="filePhoto" name="filePhoto" class="upload hidden" />
+                                <button class="btn btn-success pull-right btn-noflat" type="submit">Kirim Sapa</button>
+    
+                            </div>
+                    </div>
+                    <!-- /.update-form -->
+                    
+                    <div class="update-share">
+                        <span>
+                            <!--<a href="#">(?)</a>--> &nbsp;Share to
+                        </span>
+    
+                        <!--<span class="pull-right">
+                        <input type="checkbox" name="google-plus">
+                        <a href="#" class="social-icon google-plus tooltips" data-original-title="Google Plus" data-placement="right"><i class="icon-google-plus"></i></a>
+                        </span>-->
+    
+                        <span class="pull-right">
+                        <input type="checkbox" name="sharefb" value="1">
+                        <a href="{$fulldomain}/member" class="social-icon twitter tooltips" data-original-title="Twitter" data-placement="bottom"><i class="icon-twitter"></i></a>
+                        </span>
+    
+    
+                        <span class="pull-right">
+                        <input type="checkbox" name="sharetw" value="1">
+                        <a href="{$fulldomain}/member" class="social-icon facebook tooltips" data-original-title="Facebook" data-placement="left"><i class="icon-facebook"></i></a>
+                        </span>
+    
+                    </div>
+                    <!-- /.update-share -->  
+                    
+                    </form>
+                 </div>                                          
+                                            
+                     {if $tot eq '0'}
+                    <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                          Anda belum mempunyai sapaan
+
+                    </div>                          
+                        <br clear="all" /><br clear="all" />
+                    {else}
+                    {foreach from=$datadetail key=u item=s}
+                     <div class="items item-stream item-w2">
+                        {if $s.type eq 'photo'}
+                        type photo
+                        {/if}
+                     
+                        {if $s.jenis eq 'photo'}
+                        <div {if $aksi neq 'readmedia'}class="media-photo"{/if}>
+                        
+                            <img class="img-responsive" src="{$s.gambar}" {if $aksi eq 'readmedia'}width="960"{else}width="650px"{/if}  alt="">
+                        </div>
+                        {/if}
+                        
+                        
+                        <div class="media">
+                            <a href="#" class="pull-left">
+                                <img src="{$s.avatar}" width="63" alt="{$a.fullName}" class="img-responsive">
+                            </a>
+                            <div class="media-body" style="min-height:63px;">
+                            <span class="author grey"><a href="{$s.profileurl}">{$s.namalengkap}</a>{if $s.tonamalengkap neq ''}<a href="{$s.toprofileurl}"><strong> &gt; {$s.tonamalengkap}</strong></a>{/if}</span>
+                            <p>
+                            {$s.isi}
+                            </p>
+                            </div>
+                            {if $login eq '1'}
+                                <div class="media-footer  pb-0">
+                                <span class="created">{$s.tgltampil}</span>
+                                {if $s.unlike eq 'salah'}<span class="like">&bull;  <a href="{$fulldomain}/member/like-post/{$s.mediaid}">Suka</a></span>
+                                    {elseif $s.unlike eq 'benar'}<span class="like">&bull;  <a href="{$fulldomain}/member/unlike-post/{$s.mediaid}">Tidak Suka</a></span>
+                                {/if}
+                                <span class="comment">
+                                {if $s.hapusposting eq '1'}&bull;{/if}
+                                {if $s.jmlkomen neq '0'}<a href="{$fulldomain}/member/post/{$s.mediaid}/{$kanal}">Komentar ({$s.jmlkomen})</a>{else}<a href="{$fulldomain}/member/post/{$s.mediaid}/{$kanal}">({$s.jmlkomen}) komentar</a>{/if}
+                                
+                                </span>
+                                {if $s.hapusposting eq '1'}<span class="like" style="margin-right:10px;"><a href="{$fulldomain}/member/delpost/{$s.mediaid}"> Hapus</a></span>{/if}
+                                {if $datakomen}
+								<div class="media-comment" {if $aksi eq 'readmedia' and $kanal eq 'profile'} style="width:970px;"{/if} >
+                                 {foreach from=$datakomen[$s.mediaid] key=id item=i}
+                                    <div class="media media-subcomment">
+                                        <a href="{$i.urlprofile}" class="pull-left">
+                                            <img src="{$i.gambar}" alt="{$i.nama}" width="55">
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="media-heading"><a href="{$i.urlprofile}">{$i.nama}</a></div>
+                                            <p>{$i.komentar} </p>
+                                            <div class="media-date">{$i.tgltampil1} {if $i.hapus eq '1'}<a href="{$fulldomain}/member/delkomenmedia/{$s.mediaid}/{$i.id}">Delete<!--<button type="button" class="close" data-dismiss="alert" data-id="{$i.id}" data-mediaid="{$i.id}"><span aria-hidden="true">&times;</span><span class="sr-only">Delete</span></button>--></a>{/if}</div>
+                                        </div>
+                                        
+                                    </div>
+                                  {/foreach}
+
+                                </div>
+                                {/if}
+                                <div class="media-comment-form" {if $aksi eq 'readmedia' and $kanal eq 'profile'} style="width:970px;"{/if} >
+                                <form action="{$fulldomain}/member/add-komenmedia" class="form-horizontal" method="post" id="form{$s.mediaid}" name="form{$s.mediaid}">
+                                    <input type="hidden" name="halaman" value="{$subaksi}" />
+                                    <input type="hidden" name="mediaid" value="{$s.mediaid}" />
+                                    <input type="hidden" name="postUser" value="{$s.username}" />
+                                    {if $kanal eq $userName_prof and $userName_prof neq $userName}
+                                        <input type="hidden" name="postUrl" value="{$userName_prof}" />
+                                    {/if}
+                                    <input type="hidden" name="post" value="post" />
+                                    <input type="hidden" name="postid2" value="{$subaksi}" />
+                                    
+                                    <div class="form-group m-0">                                     
+                                        <textarea placeholder="Tulis komentar .."  name="komentar"  class="form-control" onkeypress="return getKey({$s.mediaid});" spellcheck="false" onBlur="sblur({$s.mediaid})" onFocus="return sfocus({$s.mediaid})" id="s{$s.mediaid}"  rows="2" cols="5" id="" name="update-text"></textarea>
+                                    </div>
+                                </form>
+                                </div>
+                                <!-- /.media-comment -->
+                                        
+
+                                
+                            </div>
+                            {/if}
+                        </div>
+                    </div> 
+                    {/foreach}
+                    </div>
+                    
+                    <div class="clearfix"></div>
+                    {if $kanal eq 'profile'}
+                        <div class="col-xs-12">
+                            <ul class="pager">
+                              {foreach from=$stringpage key=pageid item=a}
+                                  {if $a.link neq ''}
+                                      <li><a href="{$a.link}">{$a.nama}</a></li>
+                                  {else}
+                                      <li class="active"><a href="javascript:void(0)">{$a.nama}</a></li>
+                                  {/if}
+                              {/foreach}
+                              </ul>
+                        </div>
+                    {else}
+                          <!--<ul class="pagination m-0">
+                          {foreach from=$stringpage key=pageid item=a}
+            
+                              {if $a.link neq ''}
+                              <li><a href="{$a.link}">{$a.nama}</a></li>
+                              {else}
+                              <li class="active"><a href="javascript:void(0)">{$a.nama}</a></li>
+                              {/if}
+                          {/foreach}
+                          </ul>-->
+                    {/if}
+                    
+                    
+                    {/if}
+        </div>
+    </div>
+</div>
+
+

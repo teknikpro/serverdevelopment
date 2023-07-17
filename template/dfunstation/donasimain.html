@@ -1,0 +1,114 @@
+{include file="`$lokasitemplate`komponen/home/header2.html"}
+<div class="topkanal">
+	<div class="container">
+    	<div class="topkanal-inner">
+           <div class="topkanal-inner-1"><span>{$rubrik}</span></div>
+          
+        </div>
+    </div>
+</div>
+<div id="header-kanal">
+	 <div class="container">
+            <div class="row">
+					<span>&nbsp;</span>
+			</div>
+	 </div>
+</div>
+<div class="insight">
+    <div class="container">
+        <div class="col-md-12 boxcontent">
+            <div class="box-content">
+            	<div class="col-md-6">
+                <div class="large-content">
+                    <div class="title-headline">
+                        <span>{$detailnama}</span>
+                    </div><br clear="all" />
+            
+                    {if $detailgambar neq ''}
+                    <div class="thumbDetail">
+                        <img src="{$detailgambar}" alt="{$detailnama}" class="img-responsive" />
+                    </div>
+                    {/if}
+                    <div class="ringkas">{$detailringkas}</div>
+                    <p>{$detaillengkap}</p>
+            
+                    <br clear="all" />
+                    <div class="bg-divider"></div>
+                    
+                </div>
+                </div>
+                <div class="col-md-6">
+                	<div class="col-md-11 pull-right">
+                	<div class="panel panel-default">
+                    	<div class="panel-heading"><strong>Kirimkan Donasi Main</strong></div>
+                    	<div class="panel-body">
+                        	{if $login neq '1'}
+                            	Untuk mengirimkan donasi main, anda harus terlebih dahulu terdaftar sebagai
+                                anggota kami. Anda dapat mendaftar dengan mudah dan tanpa biaya. Bila anda
+                                sudah menjadi anggota kami silahkan login untuk memulai berdonasi main<br /><br />
+                                <a href="{$fulldomain}/user" class="btn btn-lg btn-warning">Login</a>
+                                <a href="{$fulldomain}/user/daftar" class="btn btn-lg btn-warning">Daftar Jadi Anggota</a>
+                            {else}
+                        
+                            {literal}
+					<script type="text/javascript">
+                    function simpan()
+                    {
+                        var email_check = new RegExp(/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/i);
+                        var email       = $("#email").val();
+                        
+                        if ($("#nama").val() == "")
+                        {
+                            alert("{/literal}Nama Mainan anda masih kosong, silahkan isi terlebih dahulu{literal}")
+                            $("#nama").focus();
+                            return false
+                        }
+                        else if ($("#nama").val().length < 3)
+                        {
+                            alert("{/literal}Nama Lengkap anda terlalu pendek , silahkan isi terlebih dahulu{literal}")
+                            $("#nama").focus();
+                            return false
+                        }
+                        else if ($("#ringkas").val() == "")
+                        {
+                            alert("{/literal}Keterangan donasi masih kosong, silahkan isi terlebih dahullu{literal}")
+                            $("#ringkas").focus();
+                            return false   
+                        }
+						else if ($("#kata").val() == "")
+                        {
+                            alert("{/literal}Masukan terlebih dahulu anti spam dikotak yang disediakan{literal}")
+                            $("#kata").focus();
+                            return false   
+                        }
+                    }	
+                    </script>
+                    {/literal}
+                    
+                    {if $berhasil eq '1'}<div class="alert alert-success"><p class="text-success">{$pesanhasil}</p></div><br /><br />{/if}
+                    {if $berhasil eq '0'}<div class="alert alert-danger"><p class="text-danger">{$pesanhasil}</p></div><br /><br />{/if}
+					
+                    {if $pesanhasil eq ''}
+                    	Silahkan isi dengan lengkap beberapa kotak isian yang ada dibawah ini
+                            untuk mengirimkan donasi main anda.<br />
+                        <form class="form-contact1" style="height:auto;" method="post" enctype="multipart/form-data" action="" onsubmit="return simpan();">
+                            <input type="hidden" name="action" value="savedonasi" />
+                            <br />Nama Mainan<br /><input type="text" name="nama" id="nama" placeholder="Tulis  nama mainan donasi anda"  class="form-control"/>
+                             <br clear="all" />Keterangan Ringkas<br />
+                            <textarea placeholder="Tuliskan keterangan singkat tentang mainan anda" name="ringkas" id="ringkas"   class="form-control" rows="10"></textarea>
+                            <br clear="all" />File Dokumentasi Mainan (Doc/PDF Format) <br /><input type="file" name="file" id="file"   class="form-control" placeholder="Tulis  Nama lengkap anda" /><br />
+                           <input type="submit" value="Kirimkan Donasi" class="btn btn-lg btn-warning pull-left" />
+                        </form>
+                            {/if}
+                            <br />
+                    {/if}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+			</div>
+        </div>
+    </div>
+</div>
+<br clear="all" />
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

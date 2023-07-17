@@ -1,0 +1,118 @@
+{include file="`$lokasitemplate`komponen/home/header2.html"}
+<div class="wisata-read mt-0" style="height:auto; min-height:100px">
+	<img src="{$detailgambar}" style="width:100%; height:auto" />  
+</div> 
+{include file="`$lokasitemplate`komponen/home/aboutmenu.html"}
+
+<div class="container">
+<div class="col-md-6">
+    <div class="box-about">
+ 		
+        <div class="title-headline">
+            <span>{$detailnama}</span>
+        </div>
+        <br clear="all" />
+        <div class="detailcontent">{$detaillengkap}</div>
+        <br clear="all" />
+        <hr />
+         <div id="share"></div>
+
+        <script src="{$lokasiwebtemplate}js/jssocials.min.js"></script>
+        <script>
+            $("#share").jsSocials({
+                shares: ["facebook","twitter","googleplus", "linkedin", "whatsapp"]
+            });
+        </script>
+ </div> 
+</div>
+
+
+<div class="col-md-6">
+        	<div class="box-content">
+                <div class="bg-divider" style="margin:12px 0;"></div>
+            	<div class="side-contact">
+                       Untuk informasi lebih lengkap anda dapat menggunakan form dibawah ini untuk menghubungi
+                       kami segera.
+                    
+                    {literal}
+					<script type="text/javascript">
+                    function simpan()
+                    {
+                        var email_check = new RegExp(/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/i);
+                        var email       = $("#email").val();
+                        
+                        if ($("#nama").val() == "")
+                        {
+                            alert("{/literal}Nama Lengkap anda masih kosong, silahkan isi terlebih dahulu{literal}")
+                            $("#nama").focus();
+                            return false
+                        }
+                        else if ($("#nama").val().length < 3)
+                        {
+                            alert("{/literal}Nama Lengkap anda terlalu pendek , silahkan isi terlebih dahulu{literal}")
+                            $("#nama").focus();
+                            return false
+                        }
+                        else if (email == "")
+                        {
+                            alert("{/literal}Email anda salah penulisan atau kosong, silahkan ulangi kembali{literal}")
+                            $("#email").focus();
+                            return false   
+                        }
+                        else if (!email_check.test(email))
+                        {
+                            alert("{/literal}Email anda salah penulisan atau kosong, silahkan ulangi kembali{literal}")
+                            $("#email").focus();
+                            return false   
+                        }
+						 else if ($("#handphone").val() == "")
+                        {
+                            alert("{/literal}Mohon untuk menuliskan nomor handphone{literal}")
+                            $("#handphone").focus();
+                            return false   
+                        }
+                        else if ($("#judul").val() == "")
+                        {
+                            alert("{/literal}Judul pesan anda kepada kami masih kosong{literal}")
+                            $("#subject").focus();
+                            return false   
+                        }
+                        else if ($("#pesan").val() == "")
+                        {
+                            alert("{/literal}Isi pesan anda kepada kami masih kosong, silahkan isi terlebih dahullu{literal}")
+                            $("#pesan").focus();
+                            return false   
+                        }
+						 else if ($("#kata").val() == "")
+                        {
+                            alert("{/literal}Masukan terlebih dahulu anti spam dikotak yang disediakan{literal}")
+                            $("#kata").focus();
+                            return false   
+                        }
+                    }	
+                    </script>
+                    {/literal}
+                    
+                    {if $msg neq ''}<div class="btn-warn bg-success"><p class="text-success">{$msg}</p></div>{/if}
+                    {if $error neq ''}<div class="btn-warn bg-danger"><p class="text-danger">{$error}</p></div>{/if}
+                    <br />
+                    <form class="form-contact1" style="height:auto;" method="post" action="{$fulldomain}/menjadi-mitra" onsubmit="return simpan();">
+                    	<input type="hidden" name="save" value="1" />
+                        <br />Nama Lengkap<br /><input type="text" name="nama" id="nama" placeholder="Tulis  Nama lengkap anda"   class="form-control"/>
+                    	<br />Alamat Email<br /><input type="text" name="email" id="email" placeholder="Tulis Email anda"   class="form-control"/>
+                        <br />Nomor Handphone<br /><input type="text" name="handphone" id="handphone" placeholder="Tulis Nomor Handphone"  class="form-control" />
+                        <br />Judul Pesan<br /><input type="text" name="judul" id="judul" placeholder="Judul Pesan"   class="form-control"/>
+                        <br />Isi Pesan<br />
+                        <textarea placeholder="Tuliskan pesan anda untuk kami" name="pesan" id="pesan"  rows="10" class="form-control"></textarea>
+                        <img src="{$fullwebsite}/librari/securimage/securimage_show.php" />  <input type="text" name="kata" id="kata"  class="form-control" placeholder="Masukan kata pada gambar diatas" />
+                        <br /><input type="submit" value="Kirim" class="btn btn-warning btn-lg" />
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+
+</div> 
+ 
+ <br clear="all" /><br clear="all" />
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

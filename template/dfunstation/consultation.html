@@ -1,0 +1,30 @@
+{strip}
+{include file="`$lokasitemplate`komponen/home/header-template.html"}
+
+<!-- banner -->
+<div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <h1 class="tag-fs">
+          SAHABAT
+          <br>
+          KELUARGA
+          <br>
+          ANDA
+        </h1>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <img class="img-fluid" src="https://www.serverdevelopment2020.my.id/template/dfunstation/newtemplate/assets/img/keluarga.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+<!-- akhir banner -->
+
+{if $aksi eq 'profile'}
+    {include file="`$lokasitemplate`komponen/$kanal/$kanal.read.html"}
+{else}
+    {include file="`$lokasitemplate`komponen/$kanal/$kanal.list.html"}
+{/if}
+
+{/strip}

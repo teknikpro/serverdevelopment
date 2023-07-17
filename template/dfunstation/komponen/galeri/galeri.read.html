@@ -1,0 +1,39 @@
+<div class="box-content">
+    <div class="large-content">
+
+        {if $detailgambar neq ''}
+        <div class="thumbDetail">
+            <img src="{$detailgambar}" alt="{$detailnama}" class="img-responsive" />
+        </div>
+        {/if}
+        <div class="title-headline">
+            <span>{$detailnama}</span>
+        </div><br clear="all" />
+         <div class="content-info">
+         	<span>{if $detailcreator neq ''}Oleh {$detailcreator} | {/if} {$detailtanggal} | {$detailviews} Views</span>
+         </div>
+
+        <p>{$detailringkas}</p>
+     <div class="bg-divider"></div>
+    {foreach from=$terkait key=id item=a}
+      <div class="col-md-3">
+     <div class="galeri-lain" >
+        <div class="galeri-lain-isi" >
+                <a href="{$a.link}" class="judul1"><img src="{$a.gambar}" alt="{$a.nama}" class="img-responsive" border="0" /></a>
+        </div>
+    </div>
+    </div>
+    {/foreach}
+
+        <br clear="all" />
+       <div id="share"></div> 
+               <div class="bg-divider"></div>
+        
+      <br clear="all" /></div><br clear="all" />
+        {include file="`$lokasitemplate`/komponen/home/komentar.html"}
+      
+
+       	
+    
+</div>
+

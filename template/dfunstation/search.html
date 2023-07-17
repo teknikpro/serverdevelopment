@@ -1,0 +1,70 @@
+{include file="`$lokasitemplate`komponen/home/header.html"}
+<div class="topkanal">
+	<div class="container">
+    	<div class="topkanal-inner">
+           <div class="topkanal-inner-1"><span>{$rubrik}</span></div>
+        </div>
+    </div>
+</div>
+<div id="header-kanal">
+	 <div class="container">
+            <div class="row">
+					<span>&nbsp;</span>
+			</div>
+	 </div>
+</div>
+<div class="insight">
+    <div class="container">
+         {if $tot > 0}
+         <br />
+         Ditemukan {$tot} hasil pencarian untuk kata kunci <strong>{$q}</strong>. Anda berada di halaman {$hlm} dari total {$hlm_tot} halaman.
+         <br />
+         {else}
+          <br /> <br /> <br />
+          <center>
+          Tidak ditemukan data apapun untuk pencarian dengan kata kunci <strong>{$q}</strong>.<br /> Silahkan coba mencari
+         dengan menggunakan kata kunci yang lain.
+         </center>
+          <br /> <br /> <br />
+         {/if}
+                    
+         <div class="insight-headline">
+         
+         
+        {foreach from=$datadetail key=id item=ch}
+        
+            <div class="list-content">
+                <div class="list-content-isi">
+                {if $ch.gambar neq ''}
+                <div class="thumbNews">
+                    <a href="{$ch.url}"><img src="{$ch.gambar}" alt="{$ch.nama}" class="img-responsive" /></a>
+                </div>
+                {/if}
+                <div style="color:#CC0000">{$ch.namasec}</div>
+                <a class="list-link " href="{$ch.url}">{$ch.nama}</a>
+                <br />
+                <p>{$ch.ringkas}</p>
+                </div>
+            </div>
+        {/foreach}
+        </div>
+        {if $tot > 0}
+        <div class="paginate pull-right">
+            <ul class="pagination">
+                {foreach from=$stringpage key=pageid item=a}
+                    {if $a.link neq ''}
+                        <li><a href="{$a.link}">{$a.nama}</a></li>
+                    {else}
+                        <li><a href="javascript:void(0)">{$a.nama}</a></li>
+                    {/if}
+                {/foreach}
+            </ul>
+        </div>
+        {/if}
+
+              
+                
+                
+    </div>
+</div>
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

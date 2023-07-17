@@ -1,0 +1,29 @@
+    <form method="post" class="form-horizontal" role="form"  name="profile" enctype="multipart/form-data" action="{$fulldomain}/konsultan/setting/notifikasiemail">
+    <div class="form-group">
+        <label class="col-sm-4 control-label">Kirim pemberitahuan Aktifitas kepada Anda? </label>
+        <div class="col-sm-4">
+           <input type="radio" class="i-checks" value="0" name="pvnotif" {if $pvnotif eq '0'} checked="checked"{/if}> Notifikasi dan Email
+        </div>
+         <div class="col-sm-4">
+           <input type="radio" class="i-checks" value="1" name="pvnotif" {if $pvnotif eq '1'} checked="checked"{/if}> Notifikasi Saja
+        </div>
+    </div>
+                                              
+                                              
+    <div class="form-group">
+        <label class="col-sm-4 control-label"> Kirim pemberitahuan tambah teman kepada Anda?</label>
+        <div class="col-sm-4">
+           <input type="radio" class="i-checks" name="pvfriend" value="0" {if $pvfriend eq '0'} checked="checked"{/if}> Notifikasi dan Email
+        </div>
+         <div class="col-sm-4">
+           <input type="radio" class="i-checks" name="pvfriend" value="1" {if $pvfriend eq '1'} checked="checked"{/if}> Notifikasi Saja
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-offset-4 col-xs-9">
+            <input type="submit" class="btn btn-success" name="submit" value="Simpan Keamanan dan Privasi" />
+        </div>
+      </div>
+
+    </form>

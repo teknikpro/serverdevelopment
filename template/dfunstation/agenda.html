@@ -1,0 +1,58 @@
+{include file="`$lokasitemplate`komponen/home/header2.html"}
+<div class="topkanal">
+	<div class="container">
+    	<div class="topkanal-inner">
+           <div class="topkanal-inner-1"><span>{$rubrik}</span></div>
+        </div>
+    </div>
+</div>
+<div id="header-kanal">
+	 <div class="container">
+            <div class="row">
+					<span>&nbsp;</span>
+			</div>
+	 </div>
+</div>
+<div class="insight mt-10">
+    <div class="container">
+            
+                {if $aksi eq 'read'}
+                    <div class="col-md-8 boxcontent">
+                    {include file="`$lokasitemplate`komponen/$kanal/agenda.read.html"}
+                    </div>
+                {else if $aksi eq 'date'}
+                     <div class="col-md-8 mt-10">
+                     {include file="`$lokasitemplate`komponen/$kanal/agenda.date.html"}
+                     </div>
+                {else}
+                    <div class="col-md-8">
+                    {include file="`$lokasitemplate`komponen/$kanal/agenda.list.html"}
+                    </div>
+                {/if}
+               
+               
+              <div class="col-md-4 ">
+                              
+                 <div class="box-kanan">
+                    <div class="box-kanan-judul">
+                        <span>Agenda Terdekat</span>
+                    </div>
+                    <div class="box-kanan-isi">
+                         {foreach from=$agendasamping key=slideid item=b}
+                               <div class="agenda-item">
+                                <div class="col-md-2"><span class="fal fa-calendar" style="font-size:40px;"></span></div>
+                                <div class="col-md-9">
+                                    <a href="{$b.link}"><strong>{$b.nama}</strong></a><br />
+                                    <span class="tgl">{$b.tanggal}</span><br />
+                                    <p>{$b.ringkas} </p>
+                                </div>
+                            </div>
+                        {/foreach}
+                    </div>
+                </div>
+            </div>
+
+               
+    </div>
+</div>
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

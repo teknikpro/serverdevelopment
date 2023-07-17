@@ -1,0 +1,153 @@
+{strip}
+{include file="`$lokasitemplate`komponen/home/header_simposium.html"}
+{include file="`$lokasitemplate`komponen/simposium/banner.html"}
+{include file="`$lokasitemplate`komponen/simposium/simpo-menu.html"}
+{if $aksi eq 'list' or $aksi eq ''}
+
+
+{else}
+
+<div id="header-kanal">
+    <div class="container">
+        <div class="row">
+            <span>&nbsp;</span>
+        </div>
+    </div>
+</div>
+
+{/if}
+
+{if $aksi eq 'konsultan'}
+
+<br clear="all" />
+<section id="berita" class="homeBerita1">
+    <div class="container">
+        <div class="col-md-8">
+            <div class="homeartikel">
+                {if !$datadetail}
+                <center>{$sahabat}</center>
+                {else}
+                {foreach from=$datadetail key=id item=ch}
+                <div class="list-blog">
+                    <div class="col-md-4">
+                        <div class="list-blog-isi">
+                            {if $ch.avatar neq ''}
+                            <div class="list-blog-img">
+                                <a href="{$ch.link}"><img src="{$ch.avatar}" alt="{$ch.nama}"
+                                        class="img-responsive" /></a>
+                            </div>
+                            {/if}
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="list-blog-isi"> <a class="list-link" href="{$ch.url}">{$ch.nama}</a>
+                            <br />
+                            <span><em>{$ch.sec}</em></span>
+                            <br />
+                            <strong>{$ch.hargarp}</strong>
+                            <p>{$ch.ringkas}</p>
+
+                            {if $ch.online}
+                            <a class="btn btn-success" href="{$ch.url}">Online</a>
+                            {else}
+                            <a class="btn btn-danger" href="{$ch.url}">Offline</a>
+                            {/if}
+
+                            <a class="btn btn-info" href="{$ch.url}">Profile</a>
+                        </div>
+                    </div>
+                </div>
+                {/foreach}
+                {/if}
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+    </div>
+</section>
+
+
+{else if $aksi eq 'profile'}
+
+
+<br clear="all" />
+<section id="berita" class="homeBerita1">
+    <div class="container">
+        <div class="col-md-8">
+            <div class="homeartikel">
+                {foreach from=$datadetail key=id item=ch}
+                <div class="list-blog">
+                    <div class="col-md-4">
+                        <div class="list-blog-isi">
+                            {if $ch.avatar neq ''}
+                            <div class="list-blog-img">
+                                <img src="{$ch.avatar}" alt="{$ch.nama}" class="img-responsive" />
+                            </div>
+                            {/if}
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="list-blog-isi"> <span class="list-link">{$ch.nama}</span>
+                            <br />
+                            <span><em>{$ch.judulsimposium}</em></span>
+                            <br /><br />
+                            <p>{$ch.ringkas}</p>
+                        </div>
+                    </div>
+                </div>
+                {/foreach}
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+    </div>
+</section>
+{else}
+
+
+<br clear="all" />
+<section id="berita" class="homeBerita1">
+
+    <div class="container">
+        <div class="col-md-4">
+            <div class="homevideo-title">Moderator</div>
+            <div class="homeartikel">
+                {if $datadepankonsultan }
+                {foreach from=$datadepankonsultan key=id item=ch}
+                <div class="list-konsultan-kanan">
+                    <div class="col-xs-4">
+                        {if $ch.avatar neq ''}
+                        <div class="list-konsultan-kanan-img">
+                            <a href="{$ch.url}"><img src="{$ch.avatar}" alt="{$ch.nama}" class="img-responsive" /></a>
+                        </div>
+                        {/if}
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="list-konsultan-kanan-isi"> <a href="{$ch.url}"><strong>{$ch.nama}</strong></a>
+                            <p>{$ch.judulsimposium}</p>
+                        </div>
+                    </div>
+                </div>
+                {/foreach}
+                {else}
+                <strong>Moderator Masih Kosong</strong>
+                {/if}
+            </div>
+        </div>
+        <div class="col-md-8"></div>
+    </div>
+    </div>
+
+</section>
+
+{/if}
+
+<br clear="all" />
+
+
+
+
+{include file="`$lokasitemplate`/komponen/home/footer_simposium.html"}
+{/strip}

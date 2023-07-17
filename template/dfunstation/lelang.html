@@ -1,0 +1,28 @@
+{include file="`$lokasitemplate`komponen/home/header_simposium.html"}
+<div style="border: 1px solid #7155ed;;">
+
+</div>
+<!-- <hr style="color:#7155ed;"> -->
+<div class="insight">
+    <div class="container">
+        <br clear="all" />
+        {if $aksi eq 'read'}
+
+        <div class="col-md-12">
+            {include file="`$lokasitemplate`komponen/$kanal/$kanal.detail.html"}
+        </div>
+        {else if $aksi eq 'tags'}
+        {include file="`$lokasitemplate`komponen/$kanal/$kanal.tag.html"}
+        {else}
+        <div class="col-md-12">
+            {include file="`$lokasitemplate`komponen/$kanal/$kanal.list.html"}
+        </div>
+        {/if}
+
+
+    </div>
+
+</div>
+</div>
+</div> <br clear="all" />
+{include file="`$lokasitemplate`/komponen/home/footer_simposium.html"}

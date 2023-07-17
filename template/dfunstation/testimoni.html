@@ -1,0 +1,19 @@
+{include file="`$lokasitemplate`komponen/home/header.html"}
+<div class="kanalabout">
+	<div class="container">
+            <span>{$rubrik}</span>
+             <p>
+Apa kata mereka yang telah datang dan berkunjung atau bekerjasama dengan {$title}. Beberapa mitra dan pelanggan 
+mengungkapkan testimoni mereka.</p>
+    </div>
+</div>
+{include file="`$lokasitemplate`komponen/home/aboutmenu.html"}
+<div class="insight">
+    <div class="container">
+            
+        <div class="col-md-12">
+        {include file="`$lokasitemplate`komponen/$kanal/testimoni.list.html"}
+        </div>
+    </div>
+</div>
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

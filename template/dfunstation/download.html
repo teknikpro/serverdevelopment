@@ -1,0 +1,45 @@
+{include file="`$lokasitemplate`komponen/home/header.html"}
+<div class="topkanal">
+	<div class="container">
+    	<div class="topkanal-inner">
+           <div class="topkanal-inner-1"><span>{$rubrik}</span></div>
+        </div>
+    </div>
+</div>
+<div id="header-kanal">
+	 <div class="container">
+            <div class="row">
+					<span>&nbsp;</span>
+			</div>
+	 </div>
+</div>
+
+<div class="insight">
+    <div class="container">
+            <div class="col-md-3 mt-10" >
+                 
+                 <div class="box-kanan w95" >
+                    {foreach from=$section key=id item=a}
+                    <div class="trending-item">
+                        <div class="trending-item-no" style="width:5px"></div>
+                        <div class="trending-item-nama"><a href="{$a.urlmenu}">{$a.nama}</a></div>
+                    </div>
+                    {/foreach}
+                </div> 
+            </div>
+            
+                {if $aksi eq 'read'}
+                    <div class="col-md-9">
+                    	<div class="box-content">{include file="`$lokasitemplate`komponen/$kanal/$kanal.read.html"}</div>
+                    </div>
+                {else}
+                    <div class="col-md-9">
+                    <div class="box-content">{include file="`$lokasitemplate`komponen/$kanal/$kanal.list.html"}</div>
+                    </div>
+                {/if}
+                
+            
+        </div>
+    </div>
+</div>
+{include file="`$lokasitemplate`/komponen/home/footer.html"}

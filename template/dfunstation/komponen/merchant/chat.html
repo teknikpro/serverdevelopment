@@ -1,0 +1,291 @@
+    <div class="row">
+            <div class="col-xs-12">
+                <div class="items item-w2">
+                   <div class="row">
+                   <div class="col-xs-6">
+                       <h4 class="option-title text-green text-uppercase">Konsultasi Saya
+                       </h4>
+
+                   </div>
+                  
+                   <div class="clearfix"></div>
+               </div>
+               <!-- /.row -->
+               </div>
+                <!-- /.items item-w2 -->
+            </div>
+        </div>
+
+{if $subaksi eq 'start'}
+
+	<div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default e-squared">
+                <div class="panel-body">
+                
+                	<p id="name-area"></p>
+    
+                    <div id="chat-wrap">
+                    <div class="chat">
+                        <ul id="chat-area">
+                            <div class="loading"><center><img src="{$lokasiwebtemplate}images/loading.svg" /><br><b>Mohon menunggu</b><br>sedang menyiapkan halaman</center></div>
+                        </ul>
+                    </div>
+                    <div class="chat-input">
+                        <a href="#" data-toggle="modal" data-target="#reservationModal" class="podcast" ><i class="fal fa-microphone"></i></a>
+                        <input type="text" id="sendie" maxlength= "500">
+                        <input type="hidden" value="{$chatid}" id="chatid" />
+                       
+                   </div>
+                    </div>
+
+                {literal}
+				</div>
+                
+				<script>
+				var instanse = false;
+				var state;
+				var mes;
+				var file;
+				var name = "adisumaryadi";
+				var chatid = {/literal}{$chatid}{literal}
+
+				localStorage.lastchatid = 0;
+			
+			
+				function Chat () {
+					this.update = updateChat;
+					this.send = sendChat;
+					this.getState = getStateOfChat;
+				}
+				//gets the state of the chat
+				function getStateOfChat() {
+					if(!instanse){
+						instanse = true;
+						$.ajax({
+							type: "POST",
+							crossDomain: true,
+							cache: false,
+							url: "https://www.dfunstation.com/konsultan/chat/stream/"+chatid+"/"+{/literal}{$userid}{literal}+"/?callback=?",
+							data: {'function': 'getState', 'file': file},
+							success: function(data) {state = data.state;instanse = false;}
+						});
+					}	
+				}
+				
+				//Updates the chat
+				function updateChat() {
+					if(!instanse){
+						instanse = true;
+						$.ajax({
+							type: "POST",
+							crossDomain: true,
+							cache: false,
+							url: "https://www.dfunstation.com/konsultan/chat/stream/"+chatid+"/"+{/literal}{$userid}{literal}+"/"+localStorage.lastchatid+"/?callback=?",
+							data: {'function': 'update','state': state,'file': file},
+							success: function(data) {
+								if(data.text)
+								{
+									if(localStorage.lastchatid==0){ $(".loading").remove(); }
+									
+									for (var i = 0; i < data.text.length; i++) {
+										var datax = data.text[i];
+										var ids = datax.id;
+										var pesan = datax.pesan;
+										$('#chat-area').append($(""+ pesan +""));
+                                        var audio = new Audio('http://dfunstation.com/uploads/notify.mp3');
+						audio.play();
+										localStorage.lastchatid = ids;
+	
+										/* var finish = datax.finish;
+										if(finish>0)
+										{
+											slide("chat-finish.html?action=read&chatid="+chatid);
+										}	*/								
+										
+									}	
+								}
+								if(data.text.length>0)   $("#chat-area").animate({ scrollTop: 20000000 }, "slow");
+								//document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
+								instanse = false;
+								state = data.state;
+							}
+						});
+					}
+					else {
+						setTimeout(updateChat, 3000);
+					}
+				}
+				
+				//send the message
+				function sendChat(message, nickname) { 
+					updateChat();
+					console.log("sendChat");
+					$.ajax({
+						type: "POST",
+						crossDomain: true,
+						cache: false,
+						url: "https://www.dfunstation.com/konsultan/chat/stream/"+chatid+"/"+{/literal}{$userid}{literal}+"/?callback=?",
+						data: {'function': 'send','message': message,'nickname': nickname,'file': file},
+						success: function(data){
+							updateChat();
+						}
+					});
+				}
+				
+				
+				 // kick off chat
+			  var chat =  new Chat();
+			
+			  $(function() {
+			  
+				 chat.getState(); 
+				 
+				 // watch textarea for key presses
+				 $("#sendie").keydown(function(event) {  
+				 
+					 var key = event.which;  
+			   
+					 //all keys including return.  
+					 if (key >= 33) {
+					   
+						 var maxLength = $(this).attr("maxlength");  
+						 var length = this.value.length;  
+						 
+						 // don't allow new content if length is maxed out
+						 if (length >= maxLength) {  
+							 event.preventDefault();  
+						 }  
+					 }  
+				 });
+				 // watch textarea for release of key press
+				 $('#sendie').keyup(function(e) {  
+					if (e.keyCode == 13) { 
+						  var text = $(this).val();
+						  var maxLength = $(this).attr("maxlength");  
+						  var length = text.length; 
+						   
+						  // send 
+						  if (length <= maxLength + 1) { 
+							
+							chat.send(text, name);  
+							$(this).val("");
+						  } else {
+							$(this).val(text.substring(0, maxLength));
+						  }  
+					}
+				 });
+			  });
+			  
+			
+				setInterval('chat.update()', 3000);
+			
+				chat.update();
+			  </script>
+              {/literal}
+  
+    </div>
+    </div>
+</div>
+
+  <div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="reservationModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-12 p-5">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <small>CLOSE </small><span aria-hidden="true">&times;</span>
+                </button>
+             
+                
+                 <div class="p-10">
+                 <br clear="all" />
+                 <center>
+                 	
+                 	<div id="controls">
+                      Silahkan tombol record untuk memulai merekam<br />
+                      pesan suara.<br clear="all" /><br clear="all" />
+                     <button id="recordButton">Record</button>
+                     <button id="pauseButton" disabled>Pause</button>
+                     <button id="stopButton" disabled>Stop</button>
+                    </div>
+                    <div id="formats"></div>
+                    <br clear="all" />
+                    <ul id="recordingsList"></ul>
+                    <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+                    <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+                    <script src="{$lokasiwebtemplate}lib/recorder/js/app.js"></script>
+                
+              </div>
+              </center>
+              
+              	</div>
+                
+                
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+{else}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default e-squared">
+                <div class="panel-body">
+
+            {if !$datadetail}
+                <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                <center>
+                Saat ini tidak ada member yang berkonsultasi dengan anda.<br />Anda akan mendapatkan pemberitahun melalui aplikasi
+                bila ada chat konsultasi masuk.
+				</center>
+               </div>
+                <div class="clearfix"></div>
+            {else}
+            {foreach from=$datadetail key=id item=i name=list}
+
+                <div class="items item-content">
+                	<div class="media">
+                    <div class="col-md-9">
+                    <a href="{$i.user.url}"  class="avatar">
+                        <img src="{$i.user.avatar}" alt="" class="img-responsive">
+                    </a>
+                        <h4>{$i.user.userfullname} </h4>
+                        <p>
+                         <small class="tanggal">{$i.tanggal} | {if $i.finish eq '1'}<span class="label label-danger">Selesai</span> {else}<span class="label label-success">Active</span>{/if}</small><br />
+                         Silahkan klik button masuk chat untuk
+                         memulai percakapan<br />
+                        
+                        </p>
+                   
+                    </div>
+                    
+                    <div class="col-md-2"><br /><a href="{$i.link}" class="btn btn-default pull-right">Masuk Chat   {if $i.jmlnoread > 0 } <span class="label label-danger">{$i.jmlnoread}</span>{/if}</a>
+                    </div>
+                    </div>
+                </div>
+            {/foreach}
+            {/if}
+                </div>
+              
+
+           </div>
+          {if $datadetail}
+           <!-- /.col-xs-12 -->
+           		<ul class="pagination m-0 ml-15">
+                  {foreach from=$stringpage key=pageid item=a}
+                    <li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+                  {/foreach}
+                </ul>
+           {/if}
+           </div>
+
+</div>
+</div>
+</div>
+
+{/if}

@@ -1,0 +1,115 @@
+                       {if $kanal eq 'profile'}
+                       <div class="col-xs-12">
+                       {else}
+                       <div class="col-xs-8">
+                       {/if}
+                       
+                           {if $kanal neq 'profile'}
+                       		<div class="row">
+                       			<div class="col-xs-12">
+                       				<div class="items item-w2">
+			                           <div class="row">
+		                               <div class="col-xs-7">
+		                                   <h4 class="option-title text-green text-uppercase">Rekomendasi Konten</h4>
+		                               </div>
+		                               
+		                               <div class="col-xs-4">
+		                                   <div class="btn-group pull-right">
+		                                      <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">All Updates <span class="caret"></span></button>
+		                                      <ul role="menu" class="dropdown-menu">
+                                                <li><a href="{$fulldomain}/member/listpost">Teman Saja</a></li>
+                                                <li><a href="{$fulldomain}/member/stream">Semua Member</a></li>
+		                                      </ul>
+		                                    </div>
+		                                    <span class="pull-right btn-txt">View</span>
+		                               </div>
+		                               <!-- /.col-xs-4 -->
+		                               <div class="clearfix"></div>
+		                           </div>
+		                           <!-- /.row -->
+		                           </div>
+		                            <!-- /.items item-w2 -->
+                       			</div>
+                       		</div>
+                            {/if}
+                       		<div class="row">
+                       			<div class="col-xs-12">
+                       				<div id="masonry-e">
+                           
+                            {if $tot eq '0'}
+                            <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                  Anda belum mempunyai sapaan
+
+                           </div>                          
+                                <br clear="all" /><br clear="all" />
+                            {else}
+                             <!--Update Status-->
+                               {foreach from=$datapost key=u item=s}
+                             <div class="items item-stream">
+                             	{if $s.type eq 'photo'}
+                                type photo
+                                {/if}
+                             
+                                {if $s.mcontent neq ''}
+                                <div class="media-photo">
+                                    <img class="img-responsive" src="{$s.urlcontent}" alt="">
+                                    <a class="btn btn-sm btn-warning" href="{$s.urlartikel}">{$s.mjenis}</a>
+                                </div>
+                                {/if}
+                                
+                                 {if $s.mjenis eq 'youtube'}
+                                   {if $aksi eq 'post'}
+                           			youtube post
+                                    {else}
+                                    youtube bukan post
+                                  {/if}       	
+                                {/if}
+                                
+                                {if $s.type eq 'links'}
+                                link
+                                {/if}
+                                <div class="media">
+                                    <a href="{$s.urlartikel}" class="pull-left">
+                                        <img src="{$s.avatar}" width="63" alt="{$a.fullName}" class="img-responsive">
+                                    </a>
+                                    <div class="media-body" style="min-height:63px;">
+                                    <span class="author grey"><a href="{$s.urlartikel}">{$s.namalengkap}</a>{if $s.tonamalengkap neq ''}<a href="{$s.toprofileurl}"><strong> &gt; {$s.tonamalengkap}</strong></a>{/if}</span>
+                                    <p>
+                                    {$s.isi}
+                                    </p>
+                                    </div>
+                                    {if $login eq '1'}
+                                        <div class="media-footer">
+                                        <span class="created">{$s.tgltampil}</span>
+                                        <span class="comment">&bull; Views ({$s.jmlkomen})</span>
+                                        
+                                    </div>
+                                    {/if}
+                                </div>
+                            </div> 
+                            {/foreach}
+                            <!-- /.items -->
+                            {/if}
+
+
+           
+                            </div>
+                               <!-- /.col-xs-12 -->
+                              	<ul class="pagination m-0 ml-15">
+                                  {foreach from=$stringpage key=pageid item=a}
+                                    <li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+                                  {/foreach}
+                                </ul>
+                           <!-- /#mainsory-e -->
+                       			</div>
+                       		</div>
+                       </div>
+                       <!-- /.col-xs-12 -->
+                   </div>
+                   <!-- /.row -->
+               </div>
+               <!-- /.container -->
+            </div>
+            <!-- /#isotope-element -->
+

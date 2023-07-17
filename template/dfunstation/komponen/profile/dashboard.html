@@ -1,0 +1,222 @@
+        <div class="col-xs-12">
+                {if $login eq '1'}
+                
+                {if $aksi neq 'post'}
+                
+               
+                
+ 
+                 {/if}
+                 
+                 {/if}
+                 
+                  <div class="row">
+                    <div class="col-xs-12">
+                        <div class="items item-w2">
+                           <div class="row">
+                           <div class="col-xs-12">
+                               <h4 class="option-title text-green text-uppercase">Status Update</h4>              
+                           </div>
+                          
+                           <div class="clearfix"></div>
+                       </div>
+                       <!-- /.row -->
+                       </div>
+                        <!-- /.items item-w2 -->
+                    </div>
+                </div>
+    
+    
+                 <div id="timeline" role="main">
+
+
+                     {if $tot eq '0'}
+                    <div class="items alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                          Saat ini anda belum punya status apapun yang di kirim di {$title}. Buatlah status
+                          pertama kali anda disini segera.
+
+                    </div>
+                        <br clear="all" /><br clear="all" />
+                    {else}
+                   	<div class="stream-container">
+                        <div class="stream">
+                            <ol class="stream-items">
+                            {foreach from=$datapost key=u item=s}
+                             <li class="stream-item">
+                                <div class="sapaan">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <a href="{$s.profileurl}" class="sapa-img">
+                                        <img src="{$s.avatar}" width="63" alt="{$a.fullName}">
+                                    </a>
+                                    <a href="{$s.profileurl}"><strong>{$s.namalengkap}</strong></a> {if $s.tonamalengkap neq ''}&nbsp; <i class="fal fa-chevron-right text-green"></i> &nbsp;<a href="{$s.toprofileurl}">{$s.tonamalengkap}</a>{/if}<br />
+                                    <small class="text-muted">{$s.tgltampil}</small>
+                                    
+                                    <span class="sapa-header">
+                                         <div class="dropdown">
+                                          <a href="#" class="btn pull-right dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="fal fa-ellipsis-h"></span>
+                                          </a>
+                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            {if $s.hapusposting eq '1'}<a class="dropdown-item" href="{$fulldomain}/user/delpost/{$s.postid}/{$kanal}">Hapus postingan</a>{/if}
+                                            <a href="{$fulldomain}/user/post/{$s.postid}/{$kanal}">Lihat Selengkapnya</a>
+                                            </div>
+                                            </div>
+                                   </span>
+                                            
+                                    </div>
+                                    <!-- /.col-xs-2 -->
+                                    <div class="col-md-12 pl-0 pr-0">
+                                        <div class="stream-item-content">
+                                            <p>
+                                                {$s.isi}
+                                            </p>
+                                        </div>
+                                        <!-- /.stream-item-content -->
+                                        
+                                        {if $s.mjenis eq 'photo'}
+                                        <div class="stream-item-media">
+                                            <div class="stream-media-preview">
+                                                <a class="stream-media-img" href="{$fulldomain}/user/post/{$s.postid}/{$kanal}">
+                                                    <img src="{$s.mcontent}" alt="Photo">
+                                                </a>
+                                            </div>
+                                            <!-- /.stream-media-preview -->
+                                        </div>
+                                        <!-- /.stream-media -->
+                                        {/if}
+                                        <div class="stream-item-action">
+                                            <ul class="list-inline">
+                                                <!--<li><a class="tooltips" data-placement="top" data-original-title="reply" href="#"><i class="fal fa-reply"></i></a></li>-->
+                                                <li> 
+                                                	{if $s.unlike eq 'salah'}<a class="tooltips" data-placement="top" data-original-title="Suka" href="{$fulldomain}/user/like-post/{$s.postid}">
+                                                    {elseif $s.unlike eq 'benar'}<a class="tooltips" data-placement="top" data-original-title="Batalkan Suka" href="{$fulldomain}/user/unlike-post/{$s.postid}">{/if}
+                                                    <i class="fal fa-star"></i> <span>{$s.jmlLike}</span></a>
+                                               	</li>
+                                                <li><a class="tooltips show-conversation" data-placement="top" data-original-title="comment" href="#"><i class="fal fa-comment"></i> <span>{$s.jmlkomen}</span></a></li>
+                                                <li class="pull-right"><a href="{$fulldomain}/user/post/{$s.postid}/{$kanal}">selengkapnya</a></li>
+                                            </ul>
+                                            <!-- /.list-inline -->
+                                        </div>
+                                        <!-- /.stream-item-action -->
+
+                                        <div class="stream-item-footer">
+                                        </div>
+                                        <!-- /.stream-item-footer -->
+                                    </div>
+                                    <!-- /.col-xs-10 -->
+                                </div>
+                                <!-- /.row -->
+                                </div>
+                                <!-- /.sapaan -->
+                                <ol class="expanded-conversation">
+                                   
+                                    {foreach from=$datakomen[$s.postid] key=id item=i}
+                                    <!-- /.inline-reply-sapabox -->
+                                    <li class="simple-sapa-container">
+                                    <div class="row">
+                                        <div class="col-md-1 col-xs-2">
+                                            <a href="{$i.urlprofile}" class="inline-reply-user-image">
+                                                <img src="{$i.gambar}" alt="{$i.nama}">
+                                            </a>
+                                        </div>
+                                        <!-- /.col-xs-1 -->
+                                        <div class="col-md-11 col-xs-10">
+                                            <div class="stream-item-header">
+                                                <a href="{$i.urlprofile}"><strong>{$i.nama}</strong></a><br class="visible-xs" /> <i class="fal fa-time"></i> <small>{$i.tgltampil1}
+                                                {if $i.hapus eq '1'}<a  href="{$fulldomain}/user/delkomen/{$s.postid}/{$i.id}"  title="Delete"> | hapus</a>{/if} </small>
+                                            </div>
+                                            <!-- /.stream-item-header -->
+                                            <div class="stream-item-content">
+                                                <p class="komentar-item">
+                                                    {$i.komentar}
+                                                </p>
+                                            </div>
+                                            <!-- /.stream-item-content -->
+
+                                           
+
+                                            <div class="stream-item-footer">
+                                            </div>
+                                            <!-- /.stream-item-footer -->
+                                        </div>
+                                        <!-- /.col-xs-11 -->
+                                    </div>
+                                    <!-- /.row -->
+                                    </li>
+                                    <!-- /.simple-sapa-container -->
+                                    {/foreach}
+                                    
+                                     <li class="inline-reply-sapabox">
+                                    <div class="row">
+                                        <div class="col-xs-1">
+                                            <div class="arrow-up"></div>
+                                            <a href="{$fulldomain}/{$username}" class="inline-reply-user-image">
+                                                <img src="{$linkphoto}" alt="{$FullNameuser}">
+                                            </a>
+                                        </div>
+                                        <!-- /.col-xs-1 -->
+                                        <div class="col-xs-11">
+                                            <form action="{$fulldomain}/user/add-komen" name="form{$s.postid}" method="post" id="form{$s.postid}" class="form-inline" role="form">
+                                            	<input type="hidden" name="halaman" value="{$subaksi}" />
+                                                <input type="hidden" name="postid" value="{$s.postid}" />
+                                                <input type="hidden" name="postUser" value="{$s.username}" />
+                                                {if $kanal eq $userName_prof and $userName_prof neq $userName}
+                                                    <input type="hidden" name="postUrl" value="{$userName_prof}" />
+                                                {/if}
+                                                <input type="hidden" name="post" value="post" />
+                                                <input type="hidden" name="postid2" value="{$subaksi}" />
+                                                <div class="form-group">
+                                                    <textarea name="komentar" onkeypress="return getKey({$s.postid});" spellcheck="false" onBlur="sblur({$s.postid})"  placeholder="Tulis Komentar" onFocus="return sfocus({$s.postid})" id="s{$s.postid}" class="form-control"></textarea>
+                                                </div>
+                                                <!-- /.form-group -->
+                                            </form>
+                                            <!-- /.form-inline -->
+                                        </div>
+                                        <!-- /.col-xs-11 -->
+                                    </div>
+                                    <!-- /.row -->
+                                    </li>
+
+
+                                  
+                                </ol>
+                                <!-- /.expanded-conversation -->
+                            </li>
+                            <!-- /.stream-item -->
+                            {/foreach}
+                    		</ol>
+                            <!-- /.stream-items -->
+                        </div>
+                        <!-- /.stream -->
+                    </div>
+                    <!-- /.stream-container -->
+					<br clear="all" />
+                    <div class="clearfix"></div>
+                    {if $kanal eq 'profile'}
+                        <div class="col-xs-12">
+                            <ul class="pager">
+                              {foreach from=$stringpage key=pageid item=a}
+                                  {if $a.link neq ''}
+                                      <li ><a href="{$a.link}">{$a.nama}</a></li>
+                                  {else}
+                                      <li class="active"><a href="javascript:void(0)">{$a.nama}</a></li>
+                                  {/if}
+                              {/foreach}
+                              </ul>
+                        </div>
+                    {else}
+                          	<ul class="pagination m-0 ml-15">
+                              {foreach from=$stringpage key=pageid item=a}
+                                <li class="{$a.class}"><a href="{$a.link}">{$a.nama}</a></li>
+                              {/foreach}
+                            </ul>
+                    {/if}
+
+
+                    {/if}
+        </div>
+    </div>
+</div>
+

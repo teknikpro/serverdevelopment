@@ -1,0 +1,222 @@
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="items item-w2">
+                   <div class="row">
+                   <div class="col-xs-12">
+                       <h4 class="option-title text-green text-uppercase">{$namaaksi}</h4>
+                   </div>
+                   <div class="clearfix"></div>
+               </div>
+               <!-- /.row -->
+               </div>
+                <!-- /.items item-w2 -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default e-squared">
+                    <div class="panel-body">
+                    {if $berhasil neq ''}
+                     <div class="alert {if $berhasil eq '1'}  alert-success {else} alert-danger{/if} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                             {$pesanhasil}.
+                             {if $berhasil eq '0'}
+                                 <ul>
+                                 {foreach from=$pesan key=id item=a}
+                                    <li>{$a.pesan}</li>
+                                 {/foreach}
+                                 </ul>
+                             {/if}
+                    </div>
+                    {/if}
+              
+{if $subaksi eq 'avatar'}
+	{include file="`$lokasitemplate`komponen/mitra/setting.avatar.html"}
+{elseif $subaksi eq 'gantipassword'}
+	{include file="`$lokasitemplate`komponen/mitra/gantipassword.html"}
+{elseif $subaksi eq 'profile'}
+	{include file="`$lokasitemplate`komponen/mitra/setting.profile.html"}
+{elseif $subaksi eq 'tampilan'}
+	{include file="`$lokasitemplate`komponen/mitra/setting.tampilan.html"}
+{elseif $subaksi eq 'privacy'}
+	{include file="`$lokasitemplate`komponen/mitra/setting.privacy.html"}
+{elseif $subaksi eq 'notifikasiemail'}
+	{include file="`$lokasitemplate`komponen/mitra/setting.notifikasiemail.html"}
+{elseif $subaksi eq 'syncs'}
+	{include file="`$lokasitemplate`komponen/mitra/syncs.html"}
+{else}
+
+						<script src="{$fulldomain}/librari/ajax/ajax_kota.js.php"></script>
+                        <script src="{$fulldomain}/librari/ajax/ajax_kec.js.php"></script>
+                        <form class="form-horizontal" role="form" method="post" name="profile" enctype="multipart/form-data" action="{$fulldomain}/mitra/setting">
+
+                          <div class="form-group">
+                            <label for="inputNama3" class="col-sm-3 control-label">Nama Lengkap</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" id="inputNama3" value="{$userfullname}" name="userfullname"  placeholder="Nama Lengkap">
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="inputgender" class="col-sm-3 control-label">Jenis Kelamin</label>
+                            <div class="col-sm-4">
+                               <input type="radio" class="i-checks" name="usergender" value="laki-laki" {if $usergender eq 'laki-laki'}checked{/if} > Laki-laki
+                            </div>
+                             <div class="col-sm-4">
+                               <input type="radio" class="i-checks" name="usergender" value="perempuan" {if $usergender eq 'perempuan'}checked{/if}> Perempuan
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="dob" class="col-sm-3 control-label">Tanggal Lahir</label>
+                            <div class="col-sm-3">
+                             <select name="date" class="form-control">
+                              <option value="00" selected>--Hari--</option>
+                              {html_options values=$dateloop output=$dateloop selected=$dateselected}
+                              </select>
+                            </div>
+                            <div class="col-xs-3">
+                              <select name="month" class="form-control">
+                              <option value="00" selected>--Bulan--</option>
+                              {html_options values=$monthloop output=$monthloop selected=$monthselected}
+                              </select>
+                            </div>
+                            <div class="col-xs-3">
+                            <select name="year" class="form-control">
+                              <option value="00" selected>--Tahun--</option>
+                              {html_options values=$yearloop  output=$yearloop selected=$yearselected}
+                            </select>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="Status" class="col-sm-3 control-label">Status</label>
+                            <div class="col-sm-9">
+                            <select name="marriagestatusid" class="form-control">
+                            <option value="belum menikah" {if $marriagestatusid eq 'belum menikah'}selected{/if}>belum menikah</option>
+                            <option value="menikah" {if $marriagestatusid eq 'menikah'}selected{/if}>menikah</option>
+                            <option value="duda" {if $marriagestatusid eq 'duda'}selected{/if}>duda</option>
+                            <option value="janda" {if $marriagestatusid eq 'janda'}selected{/if}>janda</option>
+                            </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="Profesi" class="col-sm-3 control-label">Profesi {$profesiid}</label>
+                            <div class="col-sm-9">
+                            <select name="profesiid" class="form-control">
+                            {foreach from=$dataprofesi key=id item=q}
+                            <option value="{$q.id}" {if $profesiid == $q.id}selected{/if} >{$q.profesi}</option>
+                            {/foreach}
+                            </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="Alamat" class="col-sm-3 control-label">Alamat</label>
+                            <div class="col-sm-9">
+                             <textarea name="useraddress" id="address" cols="30" rows="5" class="form-control">{$useraddress}</textarea>
+                            </div>
+                          </div>
+                      
+                          <div class="form-group">
+                            <label for="KodePos" class="col-sm-3 control-label">Kode Pos</label>
+                            <div class="col-sm-9">
+                              <input type="text" name="userpostcode" value="{$userpostcode}" class="form-control">
+                            </div>
+                          </div>
+                            <div class="form-group">
+                            <label for="Negara" class="col-sm-3 control-label">Negara</label>
+                            <div class="col-sm-9">
+                            <select name="negaraid" class="form-control">
+                            {foreach from=$datanegara key=id item=n}
+                            <option value="{$n.id}" {if $negaraid == $n.id}selected{/if} >{$n.namanegara}</option>
+                            {/foreach}
+                            </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="KodePos" class="col-sm-3 control-label">Propinsi</label>
+                            <div class="col-sm-9">
+                            <select name="propinsiid" class="form-control" onchange="getKota(this.value);" required>
+                            {foreach from=$datapropinsi key=id item=u}
+                            <option value="{$u.id}" {if $propinsiid == $u.id}selected{/if} >{$u.namapropinsi}</option>
+                            {/foreach}
+                            </select>
+                            </div>
+                          </div>
+                           <div class="form-group">
+                            <label for="dob" class="col-sm-3 control-label">Kota / Kabupaten</label>
+                            <div class="col-sm-7">
+                             <select name="kotaid" id="kotaid" class="form-control"  required  onchange="getKec(this.value);" >
+                              <option value=""> -- Pilih Kota -- </option>
+                            {foreach from=$datakota key=kotaid item=a}
+                            <option value="{$a.kotaid}" {if $a.kotaid eq $kotaids} selected="selected" {/if}>{$a.nama}</option>
+                            {/foreach}
+                              </select>
+                            </div>
+                          </div>
+                           <div class="form-group">
+                            <label for="dob" class="col-sm-3 control-label">Kecamatan</label>
+                            <div class="col-sm-7">
+                             <select name="kecid" id="kecid" class="form-control"  required >
+                              <option value=""> -- Pilih Kecamatan -- </option>
+                            {foreach from=$datakecamatan key=keci item=a}
+                            <option value="{$a.kecid}" {if $a.kecid eq $kecid} selected="selected" {/if}>{$a.nama}</option>
+                            {/foreach}
+                              </select>
+                            </div>
+                          </div>
+                        
+                          <div class="form-group">
+                            <label for="Telephone" class="col-sm-3 control-label">Telephone</label>
+                            <div class="col-sm-9">
+                            <input type="text" name="userphone" value="{$userphone}" class="form-control" /> <i>Contoh : +6222 664 1234</i>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="Handphone" class="col-sm-3 control-label">Handphone</label>
+                            <div class="col-sm-9">
+                             <input type="text" name="userphonegsm" value="{$userphonegsm}" class="form-control"/><i>Contoh : 08123456789</i>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="website" class="col-sm-3 control-label">Website</label>
+                            <div class="col-sm-9">
+                            <input type="text" name="userhomepage" value="{$userhomepage}" class="form-control"/>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="Email" class="col-sm-3 control-label">Email</label>
+                            <div class="col-sm-9">
+                            <input type="text" name="useremail" value="{$useremail}" class="form-control"/>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="Facebook" class="col-sm-3 control-label">Facebook</label>
+                            <div class="col-sm-9">
+                           <input type="text" name="fbid" value="{$fbid}" class="form-control"/><i>Contoh : https://www.facebook.com/username</i>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="Twitter" class="col-sm-3 control-label">Twitter</label>
+                            <div class="col-sm-9">
+                           <input type="text" name="twitterid" value="{$twitterid}" class="form-control"/><i>Contoh : https://www.twitter.com/username</i>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="col-xs-offset-3 col-xs-9">
+                              <button type="submit" class="btn btn-success">Simpan</button>
+                            </div>
+                          </div>
+                        </form>
+{/if}
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel .panel-default -->
+            </div>
+            <!-- /.col-xs-12 -->
+        </div>
+        <!-- /.row -->
+
